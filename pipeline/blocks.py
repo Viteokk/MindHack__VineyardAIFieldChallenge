@@ -6,6 +6,9 @@ Rules (official annotation rules):
   - canopies / inter-rows take the block they lie in; waste takes the block within 10 m, else empty
 
 Method (all in UTM metres):
+  ends   : rows and inter-rows stop at the roads and at the imagery edge first (pipeline.row_ends): a row is cut where
+           it crosses a passage on bare ground (a track), bare row ends on a road are removed, pieces beyond a road
+           that are not on vines are dropped, inter-rows follow their rows.
   blocks : strips of +-1.4 m around every row axis, grown by 2.5 m (so gaps < 5 m join), minus the organiser
            passages (roads) -> connected components, numbered north-west first.
   rows   : two segments of the same block are the same physical row if they are nearly parallel (< 6 deg), their
@@ -37,6 +40,7 @@ STRIP = 1.4          # half-width of the planting strip around a row axis (m) ~ 
 JOIN = 2.5           # grow strips by this much: plantings < 5 m apart merge
 WASTE_DIST = 10.0    # waste gets a vineyard_id if within this distance of a block
 ANG_MAX = 6.0        # deg, max angle between two segments of one row (per-tile fits differ by up to ~4 deg)
+ANG_TOUCH, TOUCH = 12.0, 1.5  # ... up to 12 deg when the facing ends touch (< 1.5 m): short corner pieces fit badly
 D0, DK = 0.5, 0.02   # facing-end offset tolerance: D0 + DK * gap (m)
 GAP_MAX = 60.0       # max along-row gap bridged between two segments (one missing tile)
 MIN_ROWS = 3         # a vineyard needs >= 3 rows (garden rule); smaller blocks are fragments / false positives
@@ -72,6 +76,48 @@ def build_blocks(segments: list[LineString], passages) -> list[Polygon]:
     return polys
 
 
+def tight_outlines(blocks: list[Polygon], segments: list[LineString]) -> list:
+    """Block outlines for display and areas: the row strips with gaps < 5 m closed (dilate then erode by JOIN), so an
+    outline ends half a row spacing past the outermost rows and at the row ends instead of 2.5 m beyond them."""
+    strips = unary_union([s.buffer(STRIP, cap_style="flat") for s in segments])
+    closed = strips.buffer(JOIN).buffer(-JOIN)
+    out = []
+    for b in blocks:
+        g = make_valid(b.intersection(closed))
+        polys = [x for x in getattr(g, "geoms", [g]) if x.geom_type in ("Polygon", "MultiPolygon") and not x.is_empty]
+        out.append(unary_union(polys) if polys else b)
+    return out
+
+
+def row_lines_utm(data: dict[str, list[dict]], tiles_dir: Path) -> list[LineString]:
+    out = []
+    for name, objs in data.items():
+        rows = [o for o in objs if o["label"] == "row" and len(o["points"]) > 1]
+        if rows:
+            p = tiles_dir / name
+            t = open_tile(p if p.exists() else C.EXAMPLES / "images" / name)
+            out += [LineString(t.px_to_utm(o["points"])) for o in rows]
+    return out
+
+
+def _between(i: int, j: int, a: np.ndarray, b: np.ndarray, u: np.ndarray) -> bool:
+    """Is some other segment on row i's axis inside the gap between segments i and j?"""
+    ui = u[i]
+    ni = np.array([-ui[1], ui[0]])
+    ti = sorted(((a[i] - a[i]) @ ui, (b[i] - a[i]) @ ui))
+    tj = sorted(((a[j] - a[i]) @ ui, (b[j] - a[i]) @ ui))
+    lo, hi = (ti[1], tj[0]) if tj[0] >= ti[1] else (tj[1], ti[0])
+    if hi - lo <= 0.2:
+        return False
+    ta = (a - a[i]) @ ui
+    tb = (b - a[i]) @ ui
+    mid = (np.minimum(ta, tb) + np.maximum(ta, tb)) / 2
+    lat = np.maximum(np.abs((a - a[i]) @ ni), np.abs((b - a[i]) @ ni))
+    inside = (mid > lo) & (mid < hi) & (lat <= D0 + 0.3)
+    inside[[i, j]] = False
+    return bool(inside.any())
+
+
 def link_rows(segs: list[LineString], tiles: list[str]) -> list[int]:
     """Chain id per segment; segments of one physical row across tiles share an id."""
     n = len(segs)
@@ -89,7 +135,7 @@ def link_rows(segs: list[LineString], tiles: list[str]) -> list[int]:
     cand = []
     for i in range(n):
         cosang = np.abs(u @ u[i])
-        ok = (cosang >= math.cos(math.radians(ANG_MAX))) & (tid != tid[i])
+        ok = (cosang >= math.cos(math.radians(ANG_TOUCH))) & (tid != tid[i])
         ok[i] = False
         js = np.flatnonzero(ok)
         if not len(js):
@@ -100,10 +146,13 @@ def link_rows(segs: list[LineString], tiles: list[str]) -> list[int]:
         ia, ib = sorted(((a[i] * u[i]).sum(), (b[i] * u[i]).sum()))
         gap = np.maximum(pa - ib, ia - pb)                 # > 0: disjoint along the row
         keep = (gap > -2.0) & (gap < GAP_MAX)
+        keep &= (cosang[js] >= math.cos(math.radians(ANG_MAX))) | (gap < TOUCH)   # ends that touch: up to ANG_TOUCH
         js, gap, pa = js[keep], gap[keep], pa[keep]
         for j, g, pj in zip(js, gap, pa):
             if j < i:
                 continue
+            if g > TOUCH and _between(i, j, a, b, u):
+                continue                                   # another segment of this row lies in the gap: link to it
             # facing ends: the end of i nearest to j and the end of j nearest to i
             ends_i = (a[i], b[i])
             ends_j = (a[j], b[j])
@@ -252,6 +301,7 @@ def outlines(data: dict[str, list[dict]], tiles_dir: Path) -> dict:
     feats = []
     for vid in sorted(segs):
         g = unary_union(build_blocks(segs[vid], passages) or [s.buffer(STRIP, cap_style="flat") for s in segs[vid]])
+        g = tight_outlines([g], segs[vid])[0]
         feats.append({"type": "Feature", "properties": {"vineyard_id": vid, "area_m2": round(g.area, 1)},
                       "geometry": mapping(g)})
     return {"type": "FeatureCollection", "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32635"}},
@@ -264,6 +314,7 @@ def main() -> None:
     ap.add_argument("--out", default=str(C.OUT / "pre_global.xml"))
     ap.add_argument("--tiles", default=str(C.TILES))
     ap.add_argument("--geojson", default=str(C.OUT / "blocks.geojson"))
+    ap.add_argument("--no-ends", action="store_true", help="keep the detector's row ends (skip pipeline.row_ends)")
     ap.add_argument("--outlines-only", action="store_true",
                     help="keep the annotated IDs, only write the block outlines (--geojson) for them")
     a = ap.parse_args()
@@ -273,6 +324,11 @@ def main() -> None:
         Path(a.geojson).write_text(json.dumps(fc))
         print(f"{len(fc['features'])} block outlines from the annotated IDs -> {a.geojson}")
         return
+    if not a.no_ends:
+        from pipeline.row_ends import tidy
+        passages = load_passages()
+        data, st = tidy(data, Path(a.tiles), passages, build_blocks(row_lines_utm(data, Path(a.tiles)), passages))
+        print("row ends: " + ", ".join(f"{k} {v:,.0f}" for k, v in sorted(st.items())))
     dropped = 0
     for _ in range(3):                                   # drop fragment blocks, then rebuild without them
         new, blocks, bid, n_rows, rpb, row_vid = assign(data, Path(a.tiles))
@@ -283,10 +339,11 @@ def main() -> None:
         data = {n: [o for k, o in enumerate(objs) if row_vid.get((n, k)) not in small] for n, objs in data.items()}
     write_cvat(new, a.out)
     print(f"dropped {dropped} fragment blocks with < {MIN_ROWS} rows")
+    shown = tight_outlines(blocks, row_lines_utm(data, Path(a.tiles)))
     fc = {"type": "FeatureCollection",
           "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32635"}},
           "features": [{"type": "Feature", "properties": {"vineyard_id": b, "area_m2": round(p.area, 1)},
-                        "geometry": mapping(p)} for b, p in zip(bid, blocks)]}
+                        "geometry": mapping(p)} for b, p in zip(bid, shown)]}
     Path(a.geojson).write_text(json.dumps(fc))
     print(f"{len(blocks)} blocks, {n_rows} rows -> {a.out}  (block outlines: {a.geojson})")
 
