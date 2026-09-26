@@ -1,0 +1,21 @@
+# VinePlan in one command per job. The challenge package (01_tiles ... 05_examples) is expected in the parent folder,
+# or set VINEYARD_RAW=/path/to/package. The repository is mounted, so every output lands in this checkout.
+services:
+  pipeline:                      # tiles -> detection, IDs, targets, routes, validation, measurements, Marcaj ZIPs, web data
+    build: .
+    image: vineplan
+    volumes: [".:/app", "${VINEYARD_RAW:-..}:/raw:ro"]
+    command: sh -c "python scripts/setup_data.py && python -m pipeline.run --all"
+  sunday:                        # corrected Marcaj export -> final deliverables:  docker compose run --rm sunday EXPORT.zip
+    image: vineplan
+    volumes: [".:/app", "${VINEYARD_RAW:-..}:/raw:ro"]
+    entrypoint: ["python", "scripts/sunday.py"]
+  qa:                            # integration tests (boundaries, edge cases, rules, performance) -> QA_REPORT.md
+    image: vineplan
+    volumes: [".:/app", "${VINEYARD_RAW:-..}:/raw:ro"]
+    command: sh -c "python scripts/setup_data.py && python -m pipeline.qa --perf"
+  web:                           # web map + live API (route recompute, analysis of an uploaded tile)
+    image: vineplan
+    volumes: [".:/app"]
+    ports: ["127.0.0.1:8000:8000"]
+    command: python -m pipeline.serve --host 0.0.0.0 --port 8000

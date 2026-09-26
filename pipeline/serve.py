@@ -16,7 +16,7 @@
                              published web/data/compliance.json with the demo registry is left as it is)
 
 Usage:  python -m pipeline.serve [--port 8000] [--weights runs/vineyard/multi11/weights/best.pt] [--device cpu]
-Binds to 127.0.0.1 only. Nothing here changes route.geojson / measurements.csv: live results go to out/live/.
+Binds to 127.0.0.1 unless --host is given (in Docker: --host 0.0.0.0, published on the host as 127.0.0.1:8000). Nothing here changes route.geojson / measurements.csv: live results go to out/live/.
 """
 from __future__ import annotations
 
@@ -225,14 +225,18 @@ class Handler(SimpleHTTPRequestHandler):
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", type=int, default=8000)
-    ap.add_argument("--weights", default=str(C.ROOT / "runs/vineyard/multi11/weights/best.pt"))
+    ap.add_argument("--host", default="127.0.0.1", help="interface to bind (0.0.0.0 inside a container)")
+    # the trained run on this laptop, else the released weights (repo root, or baked into the Docker image)
+    found = [p for p in (C.ROOT / "runs/vineyard/multi11/weights/best.pt", C.ROOT / "yolo11n-seg-vineyard-waste.pt",
+                         Path("/opt/vineplan/yolo11n-seg-vineyard-waste.pt")) if p.exists()]
+    ap.add_argument("--weights", default=str(found[0]) if found else "")
     ap.add_argument("--device", default="cpu", help="cpu | mps (use cpu while a training run holds the GPU)")
     a = ap.parse_args()
-    STATE["weights"] = a.weights if Path(a.weights).exists() else None
+    STATE["weights"] = a.weights if a.weights and Path(a.weights).exists() else None
     STATE["device"] = a.device
     LIVE.mkdir(parents=True, exist_ok=True)
-    srv = ThreadingHTTPServer(("127.0.0.1", a.port), partial(Handler, directory=str(WEB)))
-    print(f"http://127.0.0.1:{a.port}  (web/ + API; model: {STATE['weights'] or 'none, classical only'})", flush=True)
+    srv = ThreadingHTTPServer((a.host, a.port), partial(Handler, directory=str(WEB)))
+    print(f"http://{a.host}:{a.port}  (web/ + API; model: {STATE['weights'] or 'none, classical only'})", flush=True)
     srv.serve_forever()
 
 

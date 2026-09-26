@@ -16,6 +16,8 @@ GeoTIFF 2048×2048 px, 2,5 cm/px, EPSG:32635
    │     → benzi inter-rând → atribute (regular / disrupted, bare_soil / vegetation / mixed)
    │     → filtre: vie vs livadă / pădure, zone forbidden
    │
+   ├─► CAPETELE RÂNDURILOR: tăiate la drumurile care despart două blocuri și la marginea imaginii; bucățile rămase
+   │     dincolo de drum în tufe / curți / arături eliminate; inter-rândurile tăiate după rândurile lor
    ├─► BLOCURI + ID-uri globale: rânduri legate peste marginile tile-urilor → vineyard_id, row_id
    ├─► EXPORT CVAT 1.1 → Marcaj (pre-adnotări) → corectură umană → export
    ├─► ȚINTE: goluri în rânduri ≥ 3 m + centrele deșeurilor
