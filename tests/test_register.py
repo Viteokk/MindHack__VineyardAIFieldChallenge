@@ -16,6 +16,8 @@ from pipeline.compliance import row_spacing  # noqa: E402
 from pipeline.register import PARCELS, WEB, load_fc, measure  # noqa: E402
 
 
+@unittest.skipUnless((C.OUT / "blocks.geojson").exists() and (WEB / "register.geojson").exists(),
+                     "needs the pipeline outputs (out/blocks.geojson, web/data/register.geojson): run the pipeline first")
 class RegisterTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
