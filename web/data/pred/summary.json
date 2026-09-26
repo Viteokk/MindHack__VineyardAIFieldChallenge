@@ -1,5 +1,5 @@
 {
- "blocks": 42,
+ "blocks": 47,
  "block_ids": [
   "V01",
   "V02",
@@ -42,15 +42,20 @@
   "V39",
   "V40",
   "V41",
-  "V42"
+  "V42",
+  "V43",
+  "V44",
+  "V45",
+  "V46",
+  "V47"
  ],
  "rows": 691,
- "total_row_length_m": 49489.78,
- "canopy_area_m2": 14089.85,
- "canopy_area_ha": 1.409,
- "interrow_area_m2": 98707.25,
- "interrow_area_ha": 9.8707,
- "canopy_count": 13645,
+ "total_row_length_m": 45663.94,
+ "canopy_area_m2": 13540.04,
+ "canopy_area_ha": 1.354,
+ "interrow_area_m2": 86946.05,
+ "interrow_area_ha": 8.6946,
+ "canopy_count": 13454,
  "waste_count": 11,
  "row_lengths": [
   {
@@ -66,22 +71,27 @@
   {
    "row_id": "V01-R03",
    "vineyard_id": "V01",
-   "length_m": 21.15
+   "length_m": 7.7
   },
   {
    "row_id": "V01-R04",
    "vineyard_id": "V01",
-   "length_m": 12.65
+   "length_m": 21.15
   },
   {
    "row_id": "V01-R05",
    "vineyard_id": "V01",
-   "length_m": 4.25
+   "length_m": 12.65
   },
   {
    "row_id": "V01-R06",
    "vineyard_id": "V01",
-   "length_m": 24.45
+   "length_m": 15.05
+  },
+  {
+   "row_id": "V01-R07",
+   "vineyard_id": "V01",
+   "length_m": 4.25
   },
   {
    "row_id": "V02-R01",
@@ -146,7 +156,7 @@
   {
    "row_id": "V02-R13",
    "vineyard_id": "V02",
-   "length_m": 55.15
+   "length_m": 47.3
   },
   {
    "row_id": "V02-R14",
@@ -156,7 +166,7 @@
   {
    "row_id": "V02-R15",
    "vineyard_id": "V02",
-   "length_m": 55.25
+   "length_m": 49.5
   },
   {
    "row_id": "V02-R16",
@@ -211,12 +221,12 @@
   {
    "row_id": "V02-R26",
    "vineyard_id": "V02",
-   "length_m": 2.12
+   "length_m": 182.83
   },
   {
    "row_id": "V02-R27",
    "vineyard_id": "V02",
-   "length_m": 180.7
+   "length_m": 55.47
   },
   {
    "row_id": "V02-R28",
@@ -226,1052 +236,962 @@
   {
    "row_id": "V02-R29",
    "vineyard_id": "V02",
-   "length_m": 55.47
+   "length_m": 171.3
   },
   {
    "row_id": "V02-R30",
    "vineyard_id": "V02",
-   "length_m": 171.3
+   "length_m": 55.57
   },
   {
    "row_id": "V02-R31",
    "vineyard_id": "V02",
-   "length_m": 55.57
+   "length_m": 55.58
   },
   {
    "row_id": "V02-R32",
    "vineyard_id": "V02",
-   "length_m": 55.58
+   "length_m": 166.58
   },
   {
    "row_id": "V02-R33",
    "vineyard_id": "V02",
-   "length_m": 166.58
+   "length_m": 166.28
   },
   {
    "row_id": "V02-R34",
    "vineyard_id": "V02",
-   "length_m": 166.28
+   "length_m": 165.91
   },
   {
    "row_id": "V02-R35",
    "vineyard_id": "V02",
-   "length_m": 165.91
+   "length_m": 171.68
   },
   {
    "row_id": "V02-R36",
    "vineyard_id": "V02",
-   "length_m": 171.68
+   "length_m": 177.68
   },
   {
    "row_id": "V02-R37",
    "vineyard_id": "V02",
-   "length_m": 177.68
+   "length_m": 185.12
   },
   {
    "row_id": "V02-R38",
    "vineyard_id": "V02",
-   "length_m": 185.12
+   "length_m": 191.45
   },
   {
    "row_id": "V02-R39",
    "vineyard_id": "V02",
-   "length_m": 190.6
+   "length_m": 191.92
   },
   {
    "row_id": "V02-R40",
    "vineyard_id": "V02",
-   "length_m": 3.25
+   "length_m": 190.81
   },
   {
    "row_id": "V02-R41",
    "vineyard_id": "V02",
-   "length_m": 199.1
+   "length_m": 189.36
   },
   {
    "row_id": "V02-R42",
    "vineyard_id": "V02",
-   "length_m": 203.47
+   "length_m": 188.78
   },
   {
    "row_id": "V02-R43",
    "vineyard_id": "V02",
-   "length_m": 200.81
+   "length_m": 188.0
   },
   {
    "row_id": "V02-R44",
    "vineyard_id": "V02",
-   "length_m": 195.93
+   "length_m": 186.86
   },
   {
    "row_id": "V02-R45",
    "vineyard_id": "V02",
-   "length_m": 199.01
+   "length_m": 185.01
   },
   {
    "row_id": "V02-R46",
    "vineyard_id": "V02",
-   "length_m": 200.99
+   "length_m": 183.67
   },
   {
    "row_id": "V02-R47",
    "vineyard_id": "V02",
-   "length_m": 203.96
+   "length_m": 183.83
   },
   {
    "row_id": "V02-R48",
    "vineyard_id": "V02",
-   "length_m": 4.68
+   "length_m": 179.44
   },
   {
    "row_id": "V02-R49",
    "vineyard_id": "V02",
-   "length_m": 196.54
+   "length_m": 183.4
   },
   {
    "row_id": "V02-R50",
    "vineyard_id": "V02",
-   "length_m": 199.96
+   "length_m": 182.03
   },
   {
    "row_id": "V02-R51",
    "vineyard_id": "V02",
-   "length_m": 194.28
+   "length_m": 182.32
   },
   {
    "row_id": "V02-R52",
    "vineyard_id": "V02",
-   "length_m": 197.0
+   "length_m": 182.26
   },
   {
    "row_id": "V02-R53",
    "vineyard_id": "V02",
-   "length_m": 194.22
+   "length_m": 182.0
   },
   {
    "row_id": "V02-R54",
    "vineyard_id": "V02",
-   "length_m": 193.24
+   "length_m": 178.66
   },
   {
    "row_id": "V02-R55",
    "vineyard_id": "V02",
-   "length_m": 191.63
+   "length_m": 162.72
   },
   {
    "row_id": "V02-R56",
    "vineyard_id": "V02",
-   "length_m": 190.12
+   "length_m": 176.2
   },
   {
    "row_id": "V02-R57",
    "vineyard_id": "V02",
-   "length_m": 188.9
+   "length_m": 182.88
   },
   {
    "row_id": "V02-R58",
    "vineyard_id": "V02",
-   "length_m": 171.97
+   "length_m": 183.24
   },
   {
    "row_id": "V02-R59",
    "vineyard_id": "V02",
-   "length_m": 184.93
+   "length_m": 181.34
   },
   {
    "row_id": "V02-R60",
    "vineyard_id": "V02",
-   "length_m": 185.49
+   "length_m": 180.77
   },
   {
    "row_id": "V02-R61",
    "vineyard_id": "V02",
-   "length_m": 183.24
+   "length_m": 178.64
   },
   {
    "row_id": "V02-R62",
    "vineyard_id": "V02",
-   "length_m": 181.34
+   "length_m": 136.42
   },
   {
    "row_id": "V02-R63",
    "vineyard_id": "V02",
-   "length_m": 180.77
+   "length_m": 178.24
   },
   {
    "row_id": "V02-R64",
    "vineyard_id": "V02",
-   "length_m": 178.64
+   "length_m": 175.54
   },
   {
    "row_id": "V02-R65",
    "vineyard_id": "V02",
-   "length_m": 136.42
+   "length_m": 1.8
   },
   {
    "row_id": "V02-R66",
    "vineyard_id": "V02",
-   "length_m": 178.24
+   "length_m": 174.77
   },
   {
    "row_id": "V02-R67",
    "vineyard_id": "V02",
-   "length_m": 175.54
+   "length_m": 174.84
   },
   {
    "row_id": "V02-R68",
    "vineyard_id": "V02",
-   "length_m": 1.8
+   "length_m": 175.16
   },
   {
    "row_id": "V02-R69",
    "vineyard_id": "V02",
-   "length_m": 166.2
+   "length_m": 167.45
   },
   {
    "row_id": "V02-R70",
    "vineyard_id": "V02",
-   "length_m": 8.56
+   "length_m": 164.79
   },
   {
    "row_id": "V02-R71",
    "vineyard_id": "V02",
-   "length_m": 174.84
+   "length_m": 154.23
   },
   {
    "row_id": "V02-R72",
    "vineyard_id": "V02",
-   "length_m": 175.16
+   "length_m": 153.89
   },
   {
    "row_id": "V02-R73",
    "vineyard_id": "V02",
-   "length_m": 167.45
+   "length_m": 103.27
   },
   {
    "row_id": "V02-R74",
    "vineyard_id": "V02",
-   "length_m": 164.79
+   "length_m": 52.12
   },
   {
    "row_id": "V02-R75",
    "vineyard_id": "V02",
-   "length_m": 154.23
+   "length_m": 8.87
   },
   {
    "row_id": "V02-R76",
    "vineyard_id": "V02",
-   "length_m": 153.89
+   "length_m": 143.78
   },
   {
    "row_id": "V02-R77",
    "vineyard_id": "V02",
-   "length_m": 2.12
-  },
-  {
-   "row_id": "V02-R78",
-   "vineyard_id": "V02",
-   "length_m": 153.28
-  },
-  {
-   "row_id": "V02-R79",
-   "vineyard_id": "V02",
-   "length_m": 8.87
-  },
-  {
-   "row_id": "V02-R80",
-   "vineyard_id": "V02",
-   "length_m": 143.78
-  },
-  {
-   "row_id": "V02-R81",
-   "vineyard_id": "V02",
    "length_m": 11.45
   },
   {
-   "row_id": "V02-R82",
+   "row_id": "V02-R78",
    "vineyard_id": "V02",
    "length_m": 134.14
   },
   {
    "row_id": "V03-R01",
    "vineyard_id": "V03",
-   "length_m": 16.32
+   "length_m": 6.69
   },
   {
    "row_id": "V03-R02",
    "vineyard_id": "V03",
-   "length_m": 11.28
+   "length_m": 2.38
   },
   {
    "row_id": "V03-R03",
    "vineyard_id": "V03",
-   "length_m": 5.83
-  },
-  {
-   "row_id": "V03-R04",
-   "vineyard_id": "V03",
-   "length_m": 17.89
-  },
-  {
-   "row_id": "V03-R05",
-   "vineyard_id": "V03",
-   "length_m": 24.51
-  },
-  {
-   "row_id": "V03-R06",
-   "vineyard_id": "V03",
-   "length_m": 4.15
+   "length_m": 24.45
   },
   {
    "row_id": "V04-R01",
    "vineyard_id": "V04",
-   "length_m": 23.55
+   "length_m": 42.7
   },
   {
    "row_id": "V04-R02",
    "vineyard_id": "V04",
-   "length_m": 62.37
+   "length_m": 19.36
   },
   {
    "row_id": "V04-R03",
    "vineyard_id": "V04",
-   "length_m": 19.36
+   "length_m": 36.13
   },
   {
    "row_id": "V04-R04",
    "vineyard_id": "V04",
-   "length_m": 54.23
+   "length_m": 32.48
   },
   {
    "row_id": "V04-R05",
    "vineyard_id": "V04",
-   "length_m": 49.72
+   "length_m": 57.78
   },
   {
    "row_id": "V04-R06",
    "vineyard_id": "V04",
-   "length_m": 34.37
+   "length_m": 39.03
   },
   {
    "row_id": "V04-R07",
    "vineyard_id": "V04",
-   "length_m": 23.41
+   "length_m": 40.94
   },
   {
    "row_id": "V04-R08",
    "vineyard_id": "V04",
-   "length_m": 52.33
+   "length_m": 36.48
   },
   {
    "row_id": "V04-R09",
    "vineyard_id": "V04",
-   "length_m": 40.94
+   "length_m": 47.37
   },
   {
    "row_id": "V04-R10",
    "vineyard_id": "V04",
-   "length_m": 46.22
+   "length_m": 88.01
   },
   {
    "row_id": "V04-R11",
    "vineyard_id": "V04",
-   "length_m": 47.37
+   "length_m": 7.75
   },
   {
    "row_id": "V04-R12",
    "vineyard_id": "V04",
-   "length_m": 93.4
+   "length_m": 86.05
   },
   {
    "row_id": "V04-R13",
    "vineyard_id": "V04",
-   "length_m": 7.75
+   "length_m": 75.59
   },
   {
    "row_id": "V04-R14",
    "vineyard_id": "V04",
-   "length_m": 86.05
+   "length_m": 101.63
   },
   {
    "row_id": "V04-R15",
    "vineyard_id": "V04",
-   "length_m": 75.59
+   "length_m": 99.1
   },
   {
    "row_id": "V04-R16",
    "vineyard_id": "V04",
-   "length_m": 28.4
+   "length_m": 5.63
   },
   {
    "row_id": "V04-R17",
    "vineyard_id": "V04",
-   "length_m": 73.23
+   "length_m": 86.01
   },
   {
    "row_id": "V04-R18",
    "vineyard_id": "V04",
-   "length_m": 19.59
+   "length_m": 7.28
   },
   {
    "row_id": "V04-R19",
    "vineyard_id": "V04",
-   "length_m": 79.52
+   "length_m": 115.87
   },
   {
    "row_id": "V04-R20",
    "vineyard_id": "V04",
-   "length_m": 5.63
+   "length_m": 112.27
   },
   {
    "row_id": "V04-R21",
    "vineyard_id": "V04",
-   "length_m": 86.01
+   "length_m": 91.12
   },
   {
    "row_id": "V04-R22",
    "vineyard_id": "V04",
-   "length_m": 7.28
+   "length_m": 107.32
   },
   {
    "row_id": "V04-R23",
    "vineyard_id": "V04",
-   "length_m": 1.09
+   "length_m": 108.8
   },
   {
    "row_id": "V04-R24",
    "vineyard_id": "V04",
-   "length_m": 92.65
+   "length_m": 108.77
   },
   {
    "row_id": "V04-R25",
    "vineyard_id": "V04",
-   "length_m": 99.75
+   "length_m": 106.94
   },
   {
    "row_id": "V04-R26",
    "vineyard_id": "V04",
-   "length_m": 105.85
+   "length_m": 107.88
   },
   {
    "row_id": "V04-R27",
    "vineyard_id": "V04",
-   "length_m": 127.64
+   "length_m": 108.28
   },
   {
    "row_id": "V04-R28",
    "vineyard_id": "V04",
-   "length_m": 118.67
+   "length_m": 108.16
   },
   {
    "row_id": "V04-R29",
    "vineyard_id": "V04",
-   "length_m": 135.1
+   "length_m": 101.03
   },
   {
    "row_id": "V04-R30",
    "vineyard_id": "V04",
-   "length_m": 128.16
+   "length_m": 106.03
   },
   {
    "row_id": "V04-R31",
    "vineyard_id": "V04",
-   "length_m": 131.42
+   "length_m": 107.92
   },
   {
    "row_id": "V04-R32",
    "vineyard_id": "V04",
-   "length_m": 130.35
+   "length_m": 105.97
   },
   {
    "row_id": "V04-R33",
    "vineyard_id": "V04",
-   "length_m": 128.26
+   "length_m": 105.57
   },
   {
    "row_id": "V04-R34",
    "vineyard_id": "V04",
-   "length_m": 119.23
+   "length_m": 104.89
   },
   {
    "row_id": "V04-R35",
    "vineyard_id": "V04",
-   "length_m": 122.47
+   "length_m": 111.52
   },
   {
    "row_id": "V04-R36",
    "vineyard_id": "V04",
-   "length_m": 122.68
+   "length_m": 109.36
   },
   {
    "row_id": "V04-R37",
    "vineyard_id": "V04",
-   "length_m": 122.52
+   "length_m": 102.97
   },
   {
    "row_id": "V04-R38",
    "vineyard_id": "V04",
-   "length_m": 122.56
+   "length_m": 3.16
   },
   {
    "row_id": "V04-R39",
    "vineyard_id": "V04",
-   "length_m": 117.88
+   "length_m": 105.68
   },
   {
    "row_id": "V04-R40",
    "vineyard_id": "V04",
-   "length_m": 111.52
+   "length_m": 103.49
   },
   {
    "row_id": "V04-R41",
    "vineyard_id": "V04",
-   "length_m": 103.96
+   "length_m": 101.22
   },
   {
    "row_id": "V04-R42",
    "vineyard_id": "V04",
-   "length_m": 93.08
+   "length_m": 99.41
   },
   {
    "row_id": "V04-R43",
    "vineyard_id": "V04",
-   "length_m": 3.52
+   "length_m": 97.36
   },
   {
    "row_id": "V04-R44",
    "vineyard_id": "V04",
-   "length_m": 122.49
+   "length_m": 95.29
   },
   {
    "row_id": "V04-R45",
    "vineyard_id": "V04",
-   "length_m": 122.35
+   "length_m": 61.35
   },
   {
    "row_id": "V04-R46",
    "vineyard_id": "V04",
-   "length_m": 122.23
+   "length_m": 90.66
   },
   {
    "row_id": "V04-R47",
    "vineyard_id": "V04",
-   "length_m": 122.54
+   "length_m": 88.97
   },
   {
    "row_id": "V04-R48",
    "vineyard_id": "V04",
-   "length_m": 122.76
+   "length_m": 87.34
   },
   {
    "row_id": "V04-R49",
    "vineyard_id": "V04",
-   "length_m": 120.14
+   "length_m": 87.04
   },
   {
    "row_id": "V04-R50",
    "vineyard_id": "V04",
-   "length_m": 2.59
+   "length_m": 84.07
   },
   {
    "row_id": "V04-R51",
    "vineyard_id": "V04",
-   "length_m": 61.35
+   "length_m": 54.03
   },
   {
    "row_id": "V04-R52",
    "vineyard_id": "V04",
-   "length_m": 109.18
-  },
-  {
-   "row_id": "V04-R53",
-   "vineyard_id": "V04",
-   "length_m": 107.32
-  },
-  {
-   "row_id": "V04-R54",
-   "vineyard_id": "V04",
-   "length_m": 94.09
-  },
-  {
-   "row_id": "V04-R55",
-   "vineyard_id": "V04",
-   "length_m": 87.04
-  },
-  {
-   "row_id": "V04-R56",
-   "vineyard_id": "V04",
-   "length_m": 84.07
-  },
-  {
-   "row_id": "V04-R57",
-   "vineyard_id": "V04",
-   "length_m": 54.03
-  },
-  {
-   "row_id": "V04-R58",
-   "vineyard_id": "V04",
    "length_m": 34.62
   },
   {
-   "row_id": "V04-R59",
+   "row_id": "V04-R53",
    "vineyard_id": "V04",
    "length_m": 2.08
   },
   {
    "row_id": "V05-R01",
    "vineyard_id": "V05",
-   "length_m": 53.59
+   "length_m": 7.55
   },
   {
    "row_id": "V05-R02",
    "vineyard_id": "V05",
-   "length_m": 53.6
+   "length_m": 3.55
   },
   {
    "row_id": "V05-R03",
    "vineyard_id": "V05",
-   "length_m": 53.6
-  },
-  {
-   "row_id": "V05-R04",
-   "vineyard_id": "V05",
-   "length_m": 53.58
-  },
-  {
-   "row_id": "V05-R05",
-   "vineyard_id": "V05",
-   "length_m": 53.52
-  },
-  {
-   "row_id": "V05-R06",
-   "vineyard_id": "V05",
-   "length_m": 53.55
-  },
-  {
-   "row_id": "V05-R07",
-   "vineyard_id": "V05",
-   "length_m": 53.57
-  },
-  {
-   "row_id": "V05-R08",
-   "vineyard_id": "V05",
-   "length_m": 49.3
-  },
-  {
-   "row_id": "V05-R09",
-   "vineyard_id": "V05",
-   "length_m": 1.3
-  },
-  {
-   "row_id": "V05-R10",
-   "vineyard_id": "V05",
-   "length_m": 2.88
-  },
-  {
-   "row_id": "V05-R11",
-   "vineyard_id": "V05",
-   "length_m": 4.62
+   "length_m": 7.22
   },
   {
    "row_id": "V06-R01",
    "vineyard_id": "V06",
-   "length_m": 1.57
+   "length_m": 53.59
   },
   {
    "row_id": "V06-R02",
    "vineyard_id": "V06",
-   "length_m": 28.0
+   "length_m": 53.6
   },
   {
    "row_id": "V06-R03",
    "vineyard_id": "V06",
-   "length_m": 7.73
+   "length_m": 53.6
   },
   {
    "row_id": "V06-R04",
    "vineyard_id": "V06",
-   "length_m": 26.89
+   "length_m": 53.58
   },
   {
    "row_id": "V06-R05",
    "vineyard_id": "V06",
-   "length_m": 25.44
+   "length_m": 53.52
   },
   {
    "row_id": "V06-R06",
    "vineyard_id": "V06",
-   "length_m": 21.39
+   "length_m": 53.55
   },
   {
    "row_id": "V06-R07",
    "vineyard_id": "V06",
-   "length_m": 24.42
+   "length_m": 53.57
   },
   {
    "row_id": "V06-R08",
    "vineyard_id": "V06",
-   "length_m": 35.29
+   "length_m": 49.3
   },
   {
    "row_id": "V06-R09",
    "vineyard_id": "V06",
-   "length_m": 40.81
+   "length_m": 1.3
   },
   {
    "row_id": "V06-R10",
    "vineyard_id": "V06",
-   "length_m": 46.1
+   "length_m": 2.88
   },
   {
    "row_id": "V06-R11",
    "vineyard_id": "V06",
-   "length_m": 51.35
-  },
-  {
-   "row_id": "V06-R12",
-   "vineyard_id": "V06",
-   "length_m": 46.32
-  },
-  {
-   "row_id": "V06-R13",
-   "vineyard_id": "V06",
-   "length_m": 56.87
-  },
-  {
-   "row_id": "V06-R14",
-   "vineyard_id": "V06",
-   "length_m": 98.98
-  },
-  {
-   "row_id": "V06-R15",
-   "vineyard_id": "V06",
-   "length_m": 84.93
-  },
-  {
-   "row_id": "V06-R16",
-   "vineyard_id": "V06",
-   "length_m": 87.95
-  },
-  {
-   "row_id": "V06-R17",
-   "vineyard_id": "V06",
-   "length_m": 81.69
-  },
-  {
-   "row_id": "V06-R18",
-   "vineyard_id": "V06",
-   "length_m": 76.8
-  },
-  {
-   "row_id": "V06-R19",
-   "vineyard_id": "V06",
-   "length_m": 71.19
-  },
-  {
-   "row_id": "V06-R20",
-   "vineyard_id": "V06",
-   "length_m": 66.14
-  },
-  {
-   "row_id": "V06-R21",
-   "vineyard_id": "V06",
-   "length_m": 60.11
+   "length_m": 4.62
   },
   {
    "row_id": "V07-R01",
    "vineyard_id": "V07",
-   "length_m": 29.46
+   "length_m": 1.57
   },
   {
    "row_id": "V07-R02",
    "vineyard_id": "V07",
-   "length_m": 57.84
+   "length_m": 28.0
   },
   {
    "row_id": "V07-R03",
    "vineyard_id": "V07",
-   "length_m": 57.85
+   "length_m": 7.73
   },
   {
    "row_id": "V07-R04",
    "vineyard_id": "V07",
-   "length_m": 57.46
+   "length_m": 26.89
   },
   {
    "row_id": "V07-R05",
    "vineyard_id": "V07",
-   "length_m": 52.2
+   "length_m": 25.44
   },
   {
    "row_id": "V07-R06",
    "vineyard_id": "V07",
-   "length_m": 7.17
+   "length_m": 21.39
   },
   {
    "row_id": "V07-R07",
    "vineyard_id": "V07",
-   "length_m": 22.66
+   "length_m": 24.42
   },
   {
    "row_id": "V07-R08",
    "vineyard_id": "V07",
-   "length_m": 13.01
+   "length_m": 35.29
   },
   {
    "row_id": "V07-R09",
    "vineyard_id": "V07",
-   "length_m": 33.08
+   "length_m": 62.12
+  },
+  {
+   "row_id": "V07-R10",
+   "vineyard_id": "V07",
+   "length_m": 68.8
+  },
+  {
+   "row_id": "V07-R11",
+   "vineyard_id": "V07",
+   "length_m": 75.25
+  },
+  {
+   "row_id": "V07-R12",
+   "vineyard_id": "V07",
+   "length_m": 81.47
+  },
+  {
+   "row_id": "V07-R13",
+   "vineyard_id": "V07",
+   "length_m": 25.4
+  },
+  {
+   "row_id": "V07-R14",
+   "vineyard_id": "V07",
+   "length_m": 84.77
+  },
+  {
+   "row_id": "V07-R15",
+   "vineyard_id": "V07",
+   "length_m": 84.93
+  },
+  {
+   "row_id": "V07-R16",
+   "vineyard_id": "V07",
+   "length_m": 85.19
+  },
+  {
+   "row_id": "V07-R17",
+   "vineyard_id": "V07",
+   "length_m": 81.69
+  },
+  {
+   "row_id": "V07-R18",
+   "vineyard_id": "V07",
+   "length_m": 76.8
+  },
+  {
+   "row_id": "V07-R19",
+   "vineyard_id": "V07",
+   "length_m": 71.19
+  },
+  {
+   "row_id": "V07-R20",
+   "vineyard_id": "V07",
+   "length_m": 66.14
+  },
+  {
+   "row_id": "V07-R21",
+   "vineyard_id": "V07",
+   "length_m": 60.11
   },
   {
    "row_id": "V08-R01",
    "vineyard_id": "V08",
-   "length_m": 8.54
+   "length_m": 29.46
   },
   {
    "row_id": "V08-R02",
    "vineyard_id": "V08",
-   "length_m": 28.82
+   "length_m": 7.17
   },
   {
    "row_id": "V08-R03",
    "vineyard_id": "V08",
-   "length_m": 34.18
+   "length_m": 22.66
   },
   {
    "row_id": "V08-R04",
    "vineyard_id": "V08",
-   "length_m": 48.91
+   "length_m": 9.81
   },
   {
    "row_id": "V08-R05",
    "vineyard_id": "V08",
-   "length_m": 52.75
+   "length_m": 13.01
   },
   {
    "row_id": "V08-R06",
    "vineyard_id": "V08",
-   "length_m": 52.77
-  },
-  {
-   "row_id": "V08-R07",
-   "vineyard_id": "V08",
-   "length_m": 52.72
-  },
-  {
-   "row_id": "V08-R08",
-   "vineyard_id": "V08",
-   "length_m": 52.75
-  },
-  {
-   "row_id": "V08-R09",
-   "vineyard_id": "V08",
-   "length_m": 52.75
-  },
-  {
-   "row_id": "V08-R10",
-   "vineyard_id": "V08",
-   "length_m": 52.73
-  },
-  {
-   "row_id": "V08-R11",
-   "vineyard_id": "V08",
-   "length_m": 52.72
-  },
-  {
-   "row_id": "V08-R12",
-   "vineyard_id": "V08",
-   "length_m": 52.75
-  },
-  {
-   "row_id": "V08-R13",
-   "vineyard_id": "V08",
-   "length_m": 52.75
-  },
-  {
-   "row_id": "V08-R14",
-   "vineyard_id": "V08",
-   "length_m": 52.75
-  },
-  {
-   "row_id": "V08-R15",
-   "vineyard_id": "V08",
-   "length_m": 52.77
+   "length_m": 21.08
   },
   {
    "row_id": "V09-R01",
    "vineyard_id": "V09",
-   "length_m": 57.47
+   "length_m": 8.54
   },
   {
    "row_id": "V09-R02",
    "vineyard_id": "V09",
-   "length_m": 1.18
+   "length_m": 28.82
   },
   {
    "row_id": "V09-R03",
    "vineyard_id": "V09",
-   "length_m": 96.64
+   "length_m": 34.18
   },
   {
    "row_id": "V09-R04",
    "vineyard_id": "V09",
-   "length_m": 91.32
+   "length_m": 48.91
   },
   {
    "row_id": "V09-R05",
    "vineyard_id": "V09",
-   "length_m": 3.07
+   "length_m": 52.75
   },
   {
    "row_id": "V09-R06",
    "vineyard_id": "V09",
-   "length_m": 1.4
+   "length_m": 52.77
   },
   {
    "row_id": "V09-R07",
    "vineyard_id": "V09",
-   "length_m": 27.78
+   "length_m": 52.72
   },
   {
    "row_id": "V09-R08",
    "vineyard_id": "V09",
-   "length_m": 1.55
+   "length_m": 52.75
   },
   {
    "row_id": "V09-R09",
    "vineyard_id": "V09",
-   "length_m": 1.63
+   "length_m": 52.75
   },
   {
    "row_id": "V09-R10",
    "vineyard_id": "V09",
-   "length_m": 107.43
+   "length_m": 52.73
   },
   {
    "row_id": "V09-R11",
    "vineyard_id": "V09",
-   "length_m": 105.25
+   "length_m": 52.72
   },
   {
    "row_id": "V09-R12",
    "vineyard_id": "V09",
-   "length_m": 2.9
+   "length_m": 52.75
   },
   {
    "row_id": "V09-R13",
    "vineyard_id": "V09",
-   "length_m": 10.05
+   "length_m": 52.75
   },
   {
    "row_id": "V09-R14",
    "vineyard_id": "V09",
-   "length_m": 2.57
+   "length_m": 52.75
   },
   {
    "row_id": "V09-R15",
    "vineyard_id": "V09",
-   "length_m": 2.55
-  },
-  {
-   "row_id": "V09-R16",
-   "vineyard_id": "V09",
-   "length_m": 37.54
-  },
-  {
-   "row_id": "V09-R17",
-   "vineyard_id": "V09",
-   "length_m": 57.91
-  },
-  {
-   "row_id": "V09-R18",
-   "vineyard_id": "V09",
-   "length_m": 70.89
-  },
-  {
-   "row_id": "V09-R19",
-   "vineyard_id": "V09",
-   "length_m": 58.3
-  },
-  {
-   "row_id": "V09-R20",
-   "vineyard_id": "V09",
-   "length_m": 58.14
-  },
-  {
-   "row_id": "V09-R21",
-   "vineyard_id": "V09",
-   "length_m": 58.16
+   "length_m": 52.77
   },
   {
    "row_id": "V10-R01",
    "vineyard_id": "V10",
-   "length_m": 52.75
+   "length_m": 57.47
   },
   {
    "row_id": "V10-R02",
    "vineyard_id": "V10",
-   "length_m": 49.47
+   "length_m": 1.18
   },
   {
    "row_id": "V10-R03",
    "vineyard_id": "V10",
-   "length_m": 39.8
+   "length_m": 96.64
   },
   {
    "row_id": "V10-R04",
    "vineyard_id": "V10",
-   "length_m": 24.7
+   "length_m": 91.32
   },
   {
    "row_id": "V10-R05",
    "vineyard_id": "V10",
-   "length_m": 14.9
+   "length_m": 3.07
+  },
+  {
+   "row_id": "V10-R06",
+   "vineyard_id": "V10",
+   "length_m": 1.4
+  },
+  {
+   "row_id": "V10-R07",
+   "vineyard_id": "V10",
+   "length_m": 27.78
+  },
+  {
+   "row_id": "V10-R08",
+   "vineyard_id": "V10",
+   "length_m": 1.55
+  },
+  {
+   "row_id": "V10-R09",
+   "vineyard_id": "V10",
+   "length_m": 1.63
+  },
+  {
+   "row_id": "V10-R10",
+   "vineyard_id": "V10",
+   "length_m": 88.08
+  },
+  {
+   "row_id": "V10-R11",
+   "vineyard_id": "V10",
+   "length_m": 90.55
+  },
+  {
+   "row_id": "V10-R12",
+   "vineyard_id": "V10",
+   "length_m": 2.9
+  },
+  {
+   "row_id": "V10-R13",
+   "vineyard_id": "V10",
+   "length_m": 10.05
+  },
+  {
+   "row_id": "V10-R14",
+   "vineyard_id": "V10",
+   "length_m": 2.57
+  },
+  {
+   "row_id": "V10-R15",
+   "vineyard_id": "V10",
+   "length_m": 2.55
+  },
+  {
+   "row_id": "V10-R16",
+   "vineyard_id": "V10",
+   "length_m": 37.54
+  },
+  {
+   "row_id": "V10-R17",
+   "vineyard_id": "V10",
+   "length_m": 44.78
+  },
+  {
+   "row_id": "V10-R18",
+   "vineyard_id": "V10",
+   "length_m": 58.42
+  },
+  {
+   "row_id": "V10-R19",
+   "vineyard_id": "V10",
+   "length_m": 46.19
+  },
+  {
+   "row_id": "V10-R20",
+   "vineyard_id": "V10",
+   "length_m": 46.68
+  },
+  {
+   "row_id": "V10-R21",
+   "vineyard_id": "V10",
+   "length_m": 47.34
   },
   {
    "row_id": "V11-R01",
    "vineyard_id": "V11",
-   "length_m": 33.47
+   "length_m": 52.75
   },
   {
    "row_id": "V11-R02",
    "vineyard_id": "V11",
-   "length_m": 26.5
+   "length_m": 49.47
   },
   {
    "row_id": "V11-R03",
    "vineyard_id": "V11",
-   "length_m": 11.93
+   "length_m": 39.8
   },
   {
    "row_id": "V11-R04",
    "vineyard_id": "V11",
-   "length_m": 3.6
+   "length_m": 24.7
+  },
+  {
+   "row_id": "V11-R05",
+   "vineyard_id": "V11",
+   "length_m": 14.9
   },
   {
    "row_id": "V12-R01",
    "vineyard_id": "V12",
-   "length_m": 40.83
+   "length_m": 33.47
   },
   {
    "row_id": "V12-R02",
    "vineyard_id": "V12",
-   "length_m": 46.23
+   "length_m": 26.5
   },
   {
    "row_id": "V12-R03",
    "vineyard_id": "V12",
-   "length_m": 51.7
+   "length_m": 11.93
   },
   {
    "row_id": "V12-R04",
    "vineyard_id": "V12",
-   "length_m": 64.1
-  },
-  {
-   "row_id": "V12-R05",
-   "vineyard_id": "V12",
-   "length_m": 62.52
+   "length_m": 3.6
   },
   {
    "row_id": "V13-R01",
@@ -1291,287 +1211,282 @@
   {
    "row_id": "V14-R01",
    "vineyard_id": "V14",
-   "length_m": 90.48
+   "length_m": 79.38
   },
   {
    "row_id": "V14-R02",
    "vineyard_id": "V14",
-   "length_m": 123.16
+   "length_m": 97.8
   },
   {
    "row_id": "V14-R03",
    "vineyard_id": "V14",
-   "length_m": 129.01
+   "length_m": 98.44
   },
   {
    "row_id": "V14-R04",
    "vineyard_id": "V14",
-   "length_m": 129.59
+   "length_m": 98.92
   },
   {
    "row_id": "V14-R05",
    "vineyard_id": "V14",
-   "length_m": 128.96
+   "length_m": 97.26
   },
   {
    "row_id": "V14-R06",
    "vineyard_id": "V14",
-   "length_m": 126.98
+   "length_m": 96.4
   },
   {
    "row_id": "V14-R07",
    "vineyard_id": "V14",
-   "length_m": 2.0
+   "length_m": 98.46
   },
   {
    "row_id": "V14-R08",
    "vineyard_id": "V14",
-   "length_m": 129.41
+   "length_m": 98.49
   },
   {
    "row_id": "V14-R09",
    "vineyard_id": "V14",
-   "length_m": 129.15
+   "length_m": 98.0
   },
   {
    "row_id": "V14-R10",
    "vineyard_id": "V14",
-   "length_m": 128.91
+   "length_m": 97.94
   },
   {
    "row_id": "V14-R11",
    "vineyard_id": "V14",
-   "length_m": 128.05
+   "length_m": 97.94
   },
   {
    "row_id": "V14-R12",
    "vineyard_id": "V14",
-   "length_m": 122.22
+   "length_m": 98.04
   },
   {
    "row_id": "V14-R13",
    "vineyard_id": "V14",
-   "length_m": 116.69
+   "length_m": 97.7
   },
   {
    "row_id": "V14-R14",
    "vineyard_id": "V14",
-   "length_m": 104.15
+   "length_m": 99.63
   },
   {
    "row_id": "V14-R15",
    "vineyard_id": "V14",
-   "length_m": 99.7
+   "length_m": 99.1
   },
   {
    "row_id": "V14-R16",
    "vineyard_id": "V14",
-   "length_m": 99.1
+   "length_m": 93.51
   },
   {
    "row_id": "V14-R17",
    "vineyard_id": "V14",
-   "length_m": 93.51
+   "length_m": 99.63
   },
   {
    "row_id": "V14-R18",
    "vineyard_id": "V14",
-   "length_m": 87.8
+   "length_m": 100.1
   },
   {
    "row_id": "V14-R19",
    "vineyard_id": "V14",
-   "length_m": 82.77
+   "length_m": 97.94
   },
   {
    "row_id": "V14-R20",
    "vineyard_id": "V14",
-   "length_m": 76.94
+   "length_m": 96.89
   },
   {
    "row_id": "V14-R21",
    "vineyard_id": "V14",
-   "length_m": 128.89
+   "length_m": 97.73
   },
   {
    "row_id": "V14-R22",
    "vineyard_id": "V14",
-   "length_m": 128.02
+   "length_m": 98.29
   },
   {
    "row_id": "V14-R23",
    "vineyard_id": "V14",
-   "length_m": 128.79
+   "length_m": 98.72
   },
   {
    "row_id": "V14-R24",
    "vineyard_id": "V14",
-   "length_m": 128.42
+   "length_m": 99.79
   },
   {
    "row_id": "V14-R25",
    "vineyard_id": "V14",
-   "length_m": 64.39
+   "length_m": 98.54
   },
   {
    "row_id": "V14-R26",
    "vineyard_id": "V14",
-   "length_m": 64.52
+   "length_m": 99.17
   },
   {
    "row_id": "V14-R27",
    "vineyard_id": "V14",
-   "length_m": 120.97
+   "length_m": 97.75
   },
   {
    "row_id": "V14-R28",
    "vineyard_id": "V14",
-   "length_m": 115.05
+   "length_m": 99.75
   },
   {
    "row_id": "V14-R29",
    "vineyard_id": "V14",
-   "length_m": 109.24
+   "length_m": 98.53
   },
   {
    "row_id": "V14-R30",
    "vineyard_id": "V14",
-   "length_m": 103.73
+   "length_m": 98.46
   },
   {
    "row_id": "V14-R31",
    "vineyard_id": "V14",
-   "length_m": 97.96
+   "length_m": 98.25
   },
   {
    "row_id": "V14-R32",
    "vineyard_id": "V14",
-   "length_m": 92.15
+   "length_m": 82.88
   },
   {
    "row_id": "V14-R33",
    "vineyard_id": "V14",
-   "length_m": 84.66
+   "length_m": 16.64
   },
   {
    "row_id": "V14-R34",
    "vineyard_id": "V14",
-   "length_m": 1.14
+   "length_m": 97.8
   },
   {
    "row_id": "V14-R35",
    "vineyard_id": "V14",
-   "length_m": 85.3
+   "length_m": 75.56
   },
   {
    "row_id": "V14-R36",
    "vineyard_id": "V14",
-   "length_m": 75.56
+   "length_m": 18.02
   },
   {
    "row_id": "V14-R37",
    "vineyard_id": "V14",
-   "length_m": 10.32
+   "length_m": 88.95
   },
   {
    "row_id": "V14-R38",
    "vineyard_id": "V14",
-   "length_m": 85.75
+   "length_m": 63.84
   },
   {
    "row_id": "V14-R39",
    "vineyard_id": "V14",
-   "length_m": 63.84
+   "length_m": 22.09
   },
   {
    "row_id": "V14-R40",
    "vineyard_id": "V14",
-   "length_m": 22.26
+   "length_m": 56.52
   },
   {
    "row_id": "V14-R41",
    "vineyard_id": "V14",
-   "length_m": 56.52
+   "length_m": 29.0
   },
   {
    "row_id": "V14-R42",
    "vineyard_id": "V14",
-   "length_m": 36.1
+   "length_m": 64.78
   },
   {
    "row_id": "V14-R43",
    "vineyard_id": "V14",
-   "length_m": 64.78
+   "length_m": 22.9
   },
   {
    "row_id": "V14-R44",
    "vineyard_id": "V14",
-   "length_m": 37.6
+   "length_m": 88.65
   },
   {
    "row_id": "V14-R45",
    "vineyard_id": "V14",
-   "length_m": 107.47
+   "length_m": 89.51
   },
   {
    "row_id": "V14-R46",
    "vineyard_id": "V14",
-   "length_m": 112.85
+   "length_m": 90.5
   },
   {
    "row_id": "V14-R47",
    "vineyard_id": "V14",
-   "length_m": 118.27
+   "length_m": 91.83
   },
   {
    "row_id": "V14-R48",
    "vineyard_id": "V14",
-   "length_m": 123.66
+   "length_m": 92.79
   },
   {
    "row_id": "V14-R49",
    "vineyard_id": "V14",
-   "length_m": 64.09
+   "length_m": 93.82
   },
   {
    "row_id": "V14-R50",
    "vineyard_id": "V14",
-   "length_m": 128.07
+   "length_m": 95.42
   },
   {
    "row_id": "V14-R51",
    "vineyard_id": "V14",
-   "length_m": 128.54
+   "length_m": 96.37
   },
   {
    "row_id": "V14-R52",
    "vineyard_id": "V14",
-   "length_m": 128.25
+   "length_m": 93.76
   },
   {
    "row_id": "V14-R53",
    "vineyard_id": "V14",
-   "length_m": 124.46
+   "length_m": 81.3
   },
   {
    "row_id": "V14-R54",
    "vineyard_id": "V14",
-   "length_m": 111.42
+   "length_m": 73.43
   },
   {
    "row_id": "V14-R55",
    "vineyard_id": "V14",
-   "length_m": 53.32
+   "length_m": 63.08
   },
   {
    "row_id": "V14-R56",
    "vineyard_id": "V14",
-   "length_m": 46.88
-  },
-  {
-   "row_id": "V14-R57",
-   "vineyard_id": "V14",
-   "length_m": 57.84
+   "length_m": 68.84
   },
   {
    "row_id": "V15-R01",
@@ -1586,92 +1501,92 @@
   {
    "row_id": "V15-R03",
    "vineyard_id": "V15",
-   "length_m": 78.21
+   "length_m": 87.57
   },
   {
    "row_id": "V15-R04",
    "vineyard_id": "V15",
-   "length_m": 83.87
+   "length_m": 97.04
   },
   {
    "row_id": "V15-R05",
    "vineyard_id": "V15",
-   "length_m": 89.59
+   "length_m": 102.46
   },
   {
    "row_id": "V15-R06",
    "vineyard_id": "V15",
-   "length_m": 94.9
+   "length_m": 106.5
   },
   {
    "row_id": "V15-R07",
    "vineyard_id": "V15",
-   "length_m": 100.72
+   "length_m": 110.8
   },
   {
    "row_id": "V15-R08",
    "vineyard_id": "V15",
-   "length_m": 106.35
+   "length_m": 112.91
   },
   {
    "row_id": "V15-R09",
    "vineyard_id": "V15",
-   "length_m": 105.29
+   "length_m": 111.85
   },
   {
    "row_id": "V15-R10",
    "vineyard_id": "V15",
-   "length_m": 118.19
+   "length_m": 111.26
   },
   {
    "row_id": "V15-R11",
    "vineyard_id": "V15",
-   "length_m": 124.04
+   "length_m": 112.54
   },
   {
    "row_id": "V15-R12",
    "vineyard_id": "V15",
-   "length_m": 128.7
+   "length_m": 112.07
   },
   {
    "row_id": "V15-R13",
    "vineyard_id": "V15",
-   "length_m": 129.03
+   "length_m": 111.82
   },
   {
    "row_id": "V15-R14",
    "vineyard_id": "V15",
-   "length_m": 128.74
+   "length_m": 106.64
   },
   {
    "row_id": "V15-R15",
    "vineyard_id": "V15",
-   "length_m": 129.33
+   "length_m": 106.35
   },
   {
    "row_id": "V15-R16",
    "vineyard_id": "V15",
-   "length_m": 129.32
+   "length_m": 107.88
   },
   {
    "row_id": "V15-R17",
    "vineyard_id": "V15",
-   "length_m": 128.71
+   "length_m": 108.23
   },
   {
    "row_id": "V15-R18",
    "vineyard_id": "V15",
-   "length_m": 129.25
+   "length_m": 105.63
   },
   {
    "row_id": "V15-R19",
    "vineyard_id": "V15",
-   "length_m": 64.43
+   "length_m": 45.55
   },
   {
    "row_id": "V15-R20",
    "vineyard_id": "V15",
-   "length_m": 38.79
+   "length_m": 20.8
   },
   {
    "row_id": "V15-R21",
@@ -1681,87 +1596,87 @@
   {
    "row_id": "V15-R22",
    "vineyard_id": "V15",
-   "length_m": 111.77
+   "length_m": 104.97
   },
   {
    "row_id": "V15-R23",
    "vineyard_id": "V15",
-   "length_m": 128.87
+   "length_m": 106.14
   },
   {
    "row_id": "V15-R24",
    "vineyard_id": "V15",
-   "length_m": 129.18
+   "length_m": 107.03
   },
   {
    "row_id": "V15-R25",
    "vineyard_id": "V15",
-   "length_m": 115.09
+   "length_m": 106.49
   },
   {
    "row_id": "V15-R26",
    "vineyard_id": "V15",
-   "length_m": 120.75
+   "length_m": 109.85
   },
   {
    "row_id": "V15-R27",
    "vineyard_id": "V15",
-   "length_m": 126.4
+   "length_m": 105.8
   },
   {
    "row_id": "V15-R28",
    "vineyard_id": "V15",
-   "length_m": 128.92
+   "length_m": 105.52
   },
   {
    "row_id": "V15-R29",
    "vineyard_id": "V15",
-   "length_m": 129.04
+   "length_m": 105.65
   },
   {
    "row_id": "V15-R30",
    "vineyard_id": "V15",
-   "length_m": 129.33
+   "length_m": 105.97
   },
   {
    "row_id": "V15-R31",
    "vineyard_id": "V15",
-   "length_m": 128.88
+   "length_m": 106.22
   },
   {
    "row_id": "V15-R32",
    "vineyard_id": "V15",
-   "length_m": 128.9
+   "length_m": 111.1
   },
   {
    "row_id": "V15-R33",
    "vineyard_id": "V15",
-   "length_m": 128.76
+   "length_m": 109.37
   },
   {
    "row_id": "V15-R34",
    "vineyard_id": "V15",
-   "length_m": 128.99
+   "length_m": 108.34
   },
   {
    "row_id": "V15-R35",
    "vineyard_id": "V15",
-   "length_m": 124.58
+   "length_m": 107.28
   },
   {
    "row_id": "V15-R36",
    "vineyard_id": "V15",
-   "length_m": 118.55
+   "length_m": 106.25
   },
   {
    "row_id": "V15-R37",
    "vineyard_id": "V15",
-   "length_m": 112.76
+   "length_m": 105.46
   },
   {
    "row_id": "V15-R38",
    "vineyard_id": "V15",
-   "length_m": 106.77
+   "length_m": 105.4
   },
   {
    "row_id": "V15-R39",
@@ -1771,1742 +1686,1832 @@
   {
    "row_id": "V15-R40",
    "vineyard_id": "V15",
-   "length_m": 55.83
+   "length_m": 3.0
   },
   {
    "row_id": "V15-R41",
    "vineyard_id": "V15",
-   "length_m": 33.3
+   "length_m": 3.2
   },
   {
    "row_id": "V15-R42",
    "vineyard_id": "V15",
-   "length_m": 85.25
+   "length_m": 55.83
   },
   {
    "row_id": "V15-R43",
    "vineyard_id": "V15",
-   "length_m": 84.61
+   "length_m": 49.0
   },
   {
    "row_id": "V15-R44",
    "vineyard_id": "V15",
-   "length_m": 84.32
+   "length_m": 105.46
   },
   {
    "row_id": "V15-R45",
    "vineyard_id": "V15",
-   "length_m": 84.16
+   "length_m": 106.26
   },
   {
    "row_id": "V15-R46",
    "vineyard_id": "V15",
-   "length_m": 148.71
+   "length_m": 106.78
   },
   {
    "row_id": "V15-R47",
    "vineyard_id": "V15",
-   "length_m": 64.29
+   "length_m": 105.02
   },
   {
    "row_id": "V15-R48",
    "vineyard_id": "V15",
-   "length_m": 64.47
+   "length_m": 104.26
   },
   {
    "row_id": "V15-R49",
    "vineyard_id": "V15",
-   "length_m": 64.34
+   "length_m": 106.04
   },
   {
    "row_id": "V15-R50",
    "vineyard_id": "V15",
-   "length_m": 64.19
+   "length_m": 106.1
   },
   {
    "row_id": "V15-R51",
    "vineyard_id": "V15",
-   "length_m": 64.03
+   "length_m": 105.23
   },
   {
    "row_id": "V15-R52",
    "vineyard_id": "V15",
-   "length_m": 113.01
+   "length_m": 106.19
   },
   {
    "row_id": "V15-R53",
    "vineyard_id": "V15",
-   "length_m": 106.8
+   "length_m": 105.65
   },
   {
    "row_id": "V15-R54",
    "vineyard_id": "V15",
-   "length_m": 101.58
+   "length_m": 106.41
   },
   {
    "row_id": "V15-R55",
    "vineyard_id": "V15",
-   "length_m": 95.54
+   "length_m": 105.8
   },
   {
    "row_id": "V15-R56",
    "vineyard_id": "V15",
-   "length_m": 5.9
+   "length_m": 107.08
+  },
+  {
+   "row_id": "V15-R57",
+   "vineyard_id": "V15",
+   "length_m": 116.44
+  },
+  {
+   "row_id": "V15-R58",
+   "vineyard_id": "V15",
+   "length_m": 28.2
   },
   {
    "row_id": "V16-R01",
    "vineyard_id": "V16",
-   "length_m": 64.25
+   "length_m": 13.44
   },
   {
    "row_id": "V16-R02",
    "vineyard_id": "V16",
-   "length_m": 58.1
+   "length_m": 16.95
   },
   {
    "row_id": "V16-R03",
    "vineyard_id": "V16",
-   "length_m": 64.02
-  },
-  {
-   "row_id": "V16-R04",
-   "vineyard_id": "V16",
-   "length_m": 64.15
-  },
-  {
-   "row_id": "V16-R05",
-   "vineyard_id": "V16",
-   "length_m": 128.85
-  },
-  {
-   "row_id": "V16-R06",
-   "vineyard_id": "V16",
-   "length_m": 126.91
-  },
-  {
-   "row_id": "V16-R07",
-   "vineyard_id": "V16",
-   "length_m": 119.62
-  },
-  {
-   "row_id": "V16-R08",
-   "vineyard_id": "V16",
-   "length_m": 10.47
-  },
-  {
-   "row_id": "V16-R09",
-   "vineyard_id": "V16",
-   "length_m": 113.58
-  },
-  {
-   "row_id": "V16-R10",
-   "vineyard_id": "V16",
-   "length_m": 107.67
-  },
-  {
-   "row_id": "V16-R11",
-   "vineyard_id": "V16",
-   "length_m": 101.32
-  },
-  {
-   "row_id": "V16-R12",
-   "vineyard_id": "V16",
    "length_m": 9.42
-  },
-  {
-   "row_id": "V16-R13",
-   "vineyard_id": "V16",
-   "length_m": 95.17
-  },
-  {
-   "row_id": "V16-R14",
-   "vineyard_id": "V16",
-   "length_m": 128.41
-  },
-  {
-   "row_id": "V16-R15",
-   "vineyard_id": "V16",
-   "length_m": 128.24
-  },
-  {
-   "row_id": "V16-R16",
-   "vineyard_id": "V16",
-   "length_m": 128.18
-  },
-  {
-   "row_id": "V16-R17",
-   "vineyard_id": "V16",
-   "length_m": 128.21
-  },
-  {
-   "row_id": "V16-R18",
-   "vineyard_id": "V16",
-   "length_m": 127.92
-  },
-  {
-   "row_id": "V16-R19",
-   "vineyard_id": "V16",
-   "length_m": 172.02
-  },
-  {
-   "row_id": "V16-R20",
-   "vineyard_id": "V16",
-   "length_m": 52.44
-  },
-  {
-   "row_id": "V16-R21",
-   "vineyard_id": "V16",
-   "length_m": 122.16
-  },
-  {
-   "row_id": "V16-R22",
-   "vineyard_id": "V16",
-   "length_m": 121.62
-  },
-  {
-   "row_id": "V16-R23",
-   "vineyard_id": "V16",
-   "length_m": 142.51
-  },
-  {
-   "row_id": "V16-R24",
-   "vineyard_id": "V16",
-   "length_m": 35.4
-  },
-  {
-   "row_id": "V16-R25",
-   "vineyard_id": "V16",
-   "length_m": 136.26
-  },
-  {
-   "row_id": "V16-R26",
-   "vineyard_id": "V16",
-   "length_m": 129.95
-  },
-  {
-   "row_id": "V16-R27",
-   "vineyard_id": "V16",
-   "length_m": 108.31
-  },
-  {
-   "row_id": "V16-R28",
-   "vineyard_id": "V16",
-   "length_m": 94.24
-  },
-  {
-   "row_id": "V16-R29",
-   "vineyard_id": "V16",
-   "length_m": 99.63
-  },
-  {
-   "row_id": "V16-R30",
-   "vineyard_id": "V16",
-   "length_m": 99.76
-  },
-  {
-   "row_id": "V16-R31",
-   "vineyard_id": "V16",
-   "length_m": 111.04
-  },
-  {
-   "row_id": "V16-R32",
-   "vineyard_id": "V16",
-   "length_m": 116.71
-  },
-  {
-   "row_id": "V16-R33",
-   "vineyard_id": "V16",
-   "length_m": 122.88
-  },
-  {
-   "row_id": "V16-R34",
-   "vineyard_id": "V16",
-   "length_m": 128.55
-  },
-  {
-   "row_id": "V16-R35",
-   "vineyard_id": "V16",
-   "length_m": 128.47
-  },
-  {
-   "row_id": "V16-R36",
-   "vineyard_id": "V16",
-   "length_m": 123.84
-  },
-  {
-   "row_id": "V16-R37",
-   "vineyard_id": "V16",
-   "length_m": 128.29
-  },
-  {
-   "row_id": "V16-R38",
-   "vineyard_id": "V16",
-   "length_m": 61.51
-  },
-  {
-   "row_id": "V16-R39",
-   "vineyard_id": "V16",
-   "length_m": 64.3
-  },
-  {
-   "row_id": "V16-R40",
-   "vineyard_id": "V16",
-   "length_m": 55.32
-  },
-  {
-   "row_id": "V16-R41",
-   "vineyard_id": "V16",
-   "length_m": 64.51
-  },
-  {
-   "row_id": "V16-R42",
-   "vineyard_id": "V16",
-   "length_m": 60.32
-  },
-  {
-   "row_id": "V16-R43",
-   "vineyard_id": "V16",
-   "length_m": 48.31
-  },
-  {
-   "row_id": "V16-R44",
-   "vineyard_id": "V16",
-   "length_m": 42.78
-  },
-  {
-   "row_id": "V16-R45",
-   "vineyard_id": "V16",
-   "length_m": 42.86
-  },
-  {
-   "row_id": "V16-R46",
-   "vineyard_id": "V16",
-   "length_m": 64.41
-  },
-  {
-   "row_id": "V16-R47",
-   "vineyard_id": "V16",
-   "length_m": 64.36
-  },
-  {
-   "row_id": "V16-R48",
-   "vineyard_id": "V16",
-   "length_m": 64.39
-  },
-  {
-   "row_id": "V16-R49",
-   "vineyard_id": "V16",
-   "length_m": 64.23
-  },
-  {
-   "row_id": "V16-R50",
-   "vineyard_id": "V16",
-   "length_m": 64.38
-  },
-  {
-   "row_id": "V16-R51",
-   "vineyard_id": "V16",
-   "length_m": 64.2
-  },
-  {
-   "row_id": "V16-R52",
-   "vineyard_id": "V16",
-   "length_m": 63.93
-  },
-  {
-   "row_id": "V16-R53",
-   "vineyard_id": "V16",
-   "length_m": 64.28
-  },
-  {
-   "row_id": "V16-R54",
-   "vineyard_id": "V16",
-   "length_m": 64.43
-  },
-  {
-   "row_id": "V16-R55",
-   "vineyard_id": "V16",
-   "length_m": 64.27
   },
   {
    "row_id": "V17-R01",
    "vineyard_id": "V17",
-   "length_m": 64.67
+   "length_m": 64.25
   },
   {
    "row_id": "V17-R02",
    "vineyard_id": "V17",
-   "length_m": 3.1
+   "length_m": 58.1
   },
   {
    "row_id": "V17-R03",
    "vineyard_id": "V17",
-   "length_m": 18.48
+   "length_m": 64.02
   },
   {
    "row_id": "V17-R04",
    "vineyard_id": "V17",
-   "length_m": 25.27
+   "length_m": 64.15
   },
   {
    "row_id": "V17-R05",
    "vineyard_id": "V17",
-   "length_m": 56.86
+   "length_m": 128.85
   },
   {
    "row_id": "V17-R06",
    "vineyard_id": "V17",
-   "length_m": 96.68
+   "length_m": 126.91
   },
   {
    "row_id": "V17-R07",
    "vineyard_id": "V17",
-   "length_m": 158.66
+   "length_m": 119.62
   },
   {
    "row_id": "V17-R08",
    "vineyard_id": "V17",
-   "length_m": 165.97
+   "length_m": 10.47
   },
   {
    "row_id": "V17-R09",
    "vineyard_id": "V17",
-   "length_m": 168.41
+   "length_m": 113.58
   },
   {
    "row_id": "V17-R10",
    "vineyard_id": "V17",
-   "length_m": 175.66
+   "length_m": 107.67
   },
   {
    "row_id": "V17-R11",
    "vineyard_id": "V17",
-   "length_m": 127.59
+   "length_m": 101.32
+  },
+  {
+   "row_id": "V17-R12",
+   "vineyard_id": "V17",
+   "length_m": 95.17
+  },
+  {
+   "row_id": "V17-R13",
+   "vineyard_id": "V17",
+   "length_m": 128.41
+  },
+  {
+   "row_id": "V17-R14",
+   "vineyard_id": "V17",
+   "length_m": 128.24
+  },
+  {
+   "row_id": "V17-R15",
+   "vineyard_id": "V17",
+   "length_m": 128.18
+  },
+  {
+   "row_id": "V17-R16",
+   "vineyard_id": "V17",
+   "length_m": 128.21
+  },
+  {
+   "row_id": "V17-R17",
+   "vineyard_id": "V17",
+   "length_m": 127.92
+  },
+  {
+   "row_id": "V17-R18",
+   "vineyard_id": "V17",
+   "length_m": 14.89
+  },
+  {
+   "row_id": "V17-R19",
+   "vineyard_id": "V17",
+   "length_m": 172.02
+  },
+  {
+   "row_id": "V17-R20",
+   "vineyard_id": "V17",
+   "length_m": 52.44
+  },
+  {
+   "row_id": "V17-R21",
+   "vineyard_id": "V17",
+   "length_m": 133.89
+  },
+  {
+   "row_id": "V17-R22",
+   "vineyard_id": "V17",
+   "length_m": 132.57
+  },
+  {
+   "row_id": "V17-R23",
+   "vineyard_id": "V17",
+   "length_m": 137.81
+  },
+  {
+   "row_id": "V17-R24",
+   "vineyard_id": "V17",
+   "length_m": 35.4
+  },
+  {
+   "row_id": "V17-R25",
+   "vineyard_id": "V17",
+   "length_m": 136.26
+  },
+  {
+   "row_id": "V17-R26",
+   "vineyard_id": "V17",
+   "length_m": 134.65
+  },
+  {
+   "row_id": "V17-R27",
+   "vineyard_id": "V17",
+   "length_m": 114.6
+  },
+  {
+   "row_id": "V17-R28",
+   "vineyard_id": "V17",
+   "length_m": 99.43
+  },
+  {
+   "row_id": "V17-R29",
+   "vineyard_id": "V17",
+   "length_m": 103.79
+  },
+  {
+   "row_id": "V17-R30",
+   "vineyard_id": "V17",
+   "length_m": 102.02
+  },
+  {
+   "row_id": "V17-R31",
+   "vineyard_id": "V17",
+   "length_m": 101.19
+  },
+  {
+   "row_id": "V17-R32",
+   "vineyard_id": "V17",
+   "length_m": 102.24
+  },
+  {
+   "row_id": "V17-R33",
+   "vineyard_id": "V17",
+   "length_m": 103.41
+  },
+  {
+   "row_id": "V17-R34",
+   "vineyard_id": "V17",
+   "length_m": 101.53
+  },
+  {
+   "row_id": "V17-R35",
+   "vineyard_id": "V17",
+   "length_m": 101.56
+  },
+  {
+   "row_id": "V17-R36",
+   "vineyard_id": "V17",
+   "length_m": 101.91
+  },
+  {
+   "row_id": "V17-R37",
+   "vineyard_id": "V17",
+   "length_m": 102.49
+  },
+  {
+   "row_id": "V17-R38",
+   "vineyard_id": "V17",
+   "length_m": 61.51
+  },
+  {
+   "row_id": "V17-R39",
+   "vineyard_id": "V17",
+   "length_m": 56.1
+  },
+  {
+   "row_id": "V17-R40",
+   "vineyard_id": "V17",
+   "length_m": 46.02
+  },
+  {
+   "row_id": "V17-R41",
+   "vineyard_id": "V17",
+   "length_m": 54.91
+  },
+  {
+   "row_id": "V17-R42",
+   "vineyard_id": "V17",
+   "length_m": 53.92
+  },
+  {
+   "row_id": "V17-R43",
+   "vineyard_id": "V17",
+   "length_m": 46.78
+  },
+  {
+   "row_id": "V17-R44",
+   "vineyard_id": "V17",
+   "length_m": 45.04
+  },
+  {
+   "row_id": "V17-R45",
+   "vineyard_id": "V17",
+   "length_m": 50.31
+  },
+  {
+   "row_id": "V17-R46",
+   "vineyard_id": "V17",
+   "length_m": 49.01
+  },
+  {
+   "row_id": "V17-R47",
+   "vineyard_id": "V17",
+   "length_m": 47.86
+  },
+  {
+   "row_id": "V17-R48",
+   "vineyard_id": "V17",
+   "length_m": 47.19
+  },
+  {
+   "row_id": "V17-R49",
+   "vineyard_id": "V17",
+   "length_m": 45.33
+  },
+  {
+   "row_id": "V17-R50",
+   "vineyard_id": "V17",
+   "length_m": 44.38
+  },
+  {
+   "row_id": "V17-R51",
+   "vineyard_id": "V17",
+   "length_m": 43.2
+  },
+  {
+   "row_id": "V17-R52",
+   "vineyard_id": "V17",
+   "length_m": 39.13
+  },
+  {
+   "row_id": "V17-R53",
+   "vineyard_id": "V17",
+   "length_m": 41.08
+  },
+  {
+   "row_id": "V17-R54",
+   "vineyard_id": "V17",
+   "length_m": 39.53
+  },
+  {
+   "row_id": "V17-R55",
+   "vineyard_id": "V17",
+   "length_m": 38.37
   },
   {
    "row_id": "V18-R01",
    "vineyard_id": "V18",
-   "length_m": 65.05
+   "length_m": 64.67
   },
   {
    "row_id": "V18-R02",
    "vineyard_id": "V18",
-   "length_m": 56.45
+   "length_m": 3.1
   },
   {
    "row_id": "V18-R03",
    "vineyard_id": "V18",
-   "length_m": 65.21
+   "length_m": 18.48
   },
   {
    "row_id": "V18-R04",
    "vineyard_id": "V18",
-   "length_m": 39.63
+   "length_m": 25.27
+  },
+  {
+   "row_id": "V18-R05",
+   "vineyard_id": "V18",
+   "length_m": 56.86
+  },
+  {
+   "row_id": "V18-R06",
+   "vineyard_id": "V18",
+   "length_m": 96.68
+  },
+  {
+   "row_id": "V18-R07",
+   "vineyard_id": "V18",
+   "length_m": 139.96
+  },
+  {
+   "row_id": "V18-R08",
+   "vineyard_id": "V18",
+   "length_m": 150.68
+  },
+  {
+   "row_id": "V18-R09",
+   "vineyard_id": "V18",
+   "length_m": 160.65
+  },
+  {
+   "row_id": "V18-R10",
+   "vineyard_id": "V18",
+   "length_m": 169.77
+  },
+  {
+   "row_id": "V18-R11",
+   "vineyard_id": "V18",
+   "length_m": 127.59
   },
   {
    "row_id": "V19-R01",
    "vineyard_id": "V19",
-   "length_m": 47.51
+   "length_m": 112.95
   },
   {
    "row_id": "V19-R02",
    "vineyard_id": "V19",
-   "length_m": 48.43
+   "length_m": 45.4
   },
   {
    "row_id": "V19-R03",
    "vineyard_id": "V19",
-   "length_m": 52.7
+   "length_m": 65.21
   },
   {
    "row_id": "V19-R04",
    "vineyard_id": "V19",
-   "length_m": 52.7
-  },
-  {
-   "row_id": "V19-R05",
-   "vineyard_id": "V19",
-   "length_m": 36.35
-  },
-  {
-   "row_id": "V19-R06",
-   "vineyard_id": "V19",
-   "length_m": 28.77
-  },
-  {
-   "row_id": "V19-R07",
-   "vineyard_id": "V19",
-   "length_m": 16.94
-  },
-  {
-   "row_id": "V19-R08",
-   "vineyard_id": "V19",
-   "length_m": 57.36
-  },
-  {
-   "row_id": "V19-R09",
-   "vineyard_id": "V19",
-   "length_m": 57.02
+   "length_m": 39.63
   },
   {
    "row_id": "V20-R01",
    "vineyard_id": "V20",
-   "length_m": 12.1
+   "length_m": 2.1
   },
   {
    "row_id": "V20-R02",
    "vineyard_id": "V20",
-   "length_m": 21.0
+   "length_m": 7.75
   },
   {
    "row_id": "V20-R03",
    "vineyard_id": "V20",
-   "length_m": 9.5
+   "length_m": 15.9
   },
   {
    "row_id": "V21-R01",
    "vineyard_id": "V21",
-   "length_m": 62.48
+   "length_m": 47.51
   },
   {
    "row_id": "V21-R02",
    "vineyard_id": "V21",
-   "length_m": 61.59
+   "length_m": 48.43
   },
   {
    "row_id": "V21-R03",
    "vineyard_id": "V21",
-   "length_m": 61.77
+   "length_m": 44.2
   },
   {
    "row_id": "V21-R04",
    "vineyard_id": "V21",
-   "length_m": 62.42
+   "length_m": 37.9
   },
   {
    "row_id": "V21-R05",
    "vineyard_id": "V21",
-   "length_m": 62.45
+   "length_m": 36.35
   },
   {
    "row_id": "V21-R06",
    "vineyard_id": "V21",
-   "length_m": 62.43
+   "length_m": 28.77
   },
   {
    "row_id": "V21-R07",
    "vineyard_id": "V21",
-   "length_m": 62.54
+   "length_m": 16.94
   },
   {
    "row_id": "V21-R08",
    "vineyard_id": "V21",
-   "length_m": 16.64
+   "length_m": 10.19
   },
   {
    "row_id": "V21-R09",
    "vineyard_id": "V21",
-   "length_m": 62.58
+   "length_m": 2.09
   },
   {
    "row_id": "V21-R10",
    "vineyard_id": "V21",
-   "length_m": 62.99
+   "length_m": 8.25
   },
   {
    "row_id": "V21-R11",
    "vineyard_id": "V21",
-   "length_m": 5.53
-  },
-  {
-   "row_id": "V21-R12",
-   "vineyard_id": "V21",
-   "length_m": 61.85
+   "length_m": 57.36
   },
   {
    "row_id": "V22-R01",
    "vineyard_id": "V22",
-   "length_m": 41.04
+   "length_m": 12.1
   },
   {
    "row_id": "V22-R02",
    "vineyard_id": "V22",
-   "length_m": 106.6
+   "length_m": 21.0
   },
   {
    "row_id": "V22-R03",
    "vineyard_id": "V22",
-   "length_m": 113.0
-  },
-  {
-   "row_id": "V22-R04",
-   "vineyard_id": "V22",
-   "length_m": 114.49
-  },
-  {
-   "row_id": "V22-R05",
-   "vineyard_id": "V22",
-   "length_m": 107.47
-  },
-  {
-   "row_id": "V22-R06",
-   "vineyard_id": "V22",
-   "length_m": 101.12
-  },
-  {
-   "row_id": "V22-R07",
-   "vineyard_id": "V22",
-   "length_m": 94.67
-  },
-  {
-   "row_id": "V22-R08",
-   "vineyard_id": "V22",
-   "length_m": 21.7
+   "length_m": 9.5
   },
   {
    "row_id": "V23-R01",
    "vineyard_id": "V23",
-   "length_m": 35.23
+   "length_m": 51.6
   },
   {
    "row_id": "V23-R02",
    "vineyard_id": "V23",
-   "length_m": 37.99
+   "length_m": 53.39
   },
   {
    "row_id": "V23-R03",
    "vineyard_id": "V23",
-   "length_m": 40.21
+   "length_m": 55.9
   },
   {
    "row_id": "V23-R04",
    "vineyard_id": "V23",
-   "length_m": 1.15
+   "length_m": 62.42
   },
   {
    "row_id": "V23-R05",
    "vineyard_id": "V23",
-   "length_m": 39.32
+   "length_m": 62.45
   },
   {
    "row_id": "V23-R06",
    "vineyard_id": "V23",
-   "length_m": 36.27
+   "length_m": 58.7
   },
   {
    "row_id": "V23-R07",
    "vineyard_id": "V23",
-   "length_m": 34.3
+   "length_m": 57.34
   },
   {
    "row_id": "V23-R08",
    "vineyard_id": "V23",
-   "length_m": 52.55
+   "length_m": 16.64
   },
   {
    "row_id": "V23-R09",
    "vineyard_id": "V23",
-   "length_m": 27.35
+   "length_m": 52.48
   },
   {
    "row_id": "V23-R10",
    "vineyard_id": "V23",
-   "length_m": 25.1
+   "length_m": 47.99
   },
   {
    "row_id": "V23-R11",
    "vineyard_id": "V23",
-   "length_m": 23.95
+   "length_m": 5.53
+  },
+  {
+   "row_id": "V23-R12",
+   "vineyard_id": "V23",
+   "length_m": 49.36
   },
   {
    "row_id": "V24-R01",
    "vineyard_id": "V24",
-   "length_m": 88.27
+   "length_m": 41.04
   },
   {
    "row_id": "V24-R02",
    "vineyard_id": "V24",
-   "length_m": 85.52
+   "length_m": 80.49
   },
   {
    "row_id": "V24-R03",
    "vineyard_id": "V24",
-   "length_m": 79.25
+   "length_m": 91.58
   },
   {
    "row_id": "V24-R04",
    "vineyard_id": "V24",
-   "length_m": 73.84
+   "length_m": 97.89
   },
   {
    "row_id": "V24-R05",
    "vineyard_id": "V24",
-   "length_m": 6.95
+   "length_m": 95.75
+  },
+  {
+   "row_id": "V24-R06",
+   "vineyard_id": "V24",
+   "length_m": 94.13
+  },
+  {
+   "row_id": "V24-R07",
+   "vineyard_id": "V24",
+   "length_m": 94.67
+  },
+  {
+   "row_id": "V24-R08",
+   "vineyard_id": "V24",
+   "length_m": 21.7
   },
   {
    "row_id": "V25-R01",
    "vineyard_id": "V25",
-   "length_m": 69.19
+   "length_m": 35.23
   },
   {
    "row_id": "V25-R02",
    "vineyard_id": "V25",
-   "length_m": 69.87
+   "length_m": 37.99
   },
   {
    "row_id": "V25-R03",
    "vineyard_id": "V25",
-   "length_m": 66.6
+   "length_m": 40.21
+  },
+  {
+   "row_id": "V25-R04",
+   "vineyard_id": "V25",
+   "length_m": 1.15
+  },
+  {
+   "row_id": "V25-R05",
+   "vineyard_id": "V25",
+   "length_m": 39.32
+  },
+  {
+   "row_id": "V25-R06",
+   "vineyard_id": "V25",
+   "length_m": 36.27
+  },
+  {
+   "row_id": "V25-R07",
+   "vineyard_id": "V25",
+   "length_m": 34.3
+  },
+  {
+   "row_id": "V25-R08",
+   "vineyard_id": "V25",
+   "length_m": 43.55
+  },
+  {
+   "row_id": "V25-R09",
+   "vineyard_id": "V25",
+   "length_m": 27.35
+  },
+  {
+   "row_id": "V25-R10",
+   "vineyard_id": "V25",
+   "length_m": 25.1
+  },
+  {
+   "row_id": "V25-R11",
+   "vineyard_id": "V25",
+   "length_m": 23.95
   },
   {
    "row_id": "V26-R01",
    "vineyard_id": "V26",
-   "length_m": 50.81
+   "length_m": 88.27
   },
   {
    "row_id": "V26-R02",
    "vineyard_id": "V26",
-   "length_m": 56.15
+   "length_m": 85.52
   },
   {
    "row_id": "V26-R03",
    "vineyard_id": "V26",
-   "length_m": 55.56
+   "length_m": 79.25
   },
   {
    "row_id": "V26-R04",
    "vineyard_id": "V26",
-   "length_m": 57.65
+   "length_m": 73.84
   },
   {
    "row_id": "V26-R05",
    "vineyard_id": "V26",
-   "length_m": 55.8
-  },
-  {
-   "row_id": "V26-R06",
-   "vineyard_id": "V26",
-   "length_m": 62.77
-  },
-  {
-   "row_id": "V26-R07",
-   "vineyard_id": "V26",
-   "length_m": 64.25
-  },
-  {
-   "row_id": "V26-R08",
-   "vineyard_id": "V26",
-   "length_m": 7.92
-  },
-  {
-   "row_id": "V26-R09",
-   "vineyard_id": "V26",
-   "length_m": 13.55
-  },
-  {
-   "row_id": "V26-R10",
-   "vineyard_id": "V26",
-   "length_m": 17.96
-  },
-  {
-   "row_id": "V26-R11",
-   "vineyard_id": "V26",
-   "length_m": 22.02
+   "length_m": 6.95
   },
   {
    "row_id": "V27-R01",
    "vineyard_id": "V27",
-   "length_m": 32.1
+   "length_m": 39.99
   },
   {
    "row_id": "V27-R02",
    "vineyard_id": "V27",
-   "length_m": 35.22
+   "length_m": 39.07
   },
   {
    "row_id": "V27-R03",
    "vineyard_id": "V27",
-   "length_m": 38.51
-  },
-  {
-   "row_id": "V27-R04",
-   "vineyard_id": "V27",
-   "length_m": 42.03
-  },
-  {
-   "row_id": "V27-R05",
-   "vineyard_id": "V27",
-   "length_m": 40.11
-  },
-  {
-   "row_id": "V27-R06",
-   "vineyard_id": "V27",
-   "length_m": 46.98
-  },
-  {
-   "row_id": "V27-R07",
-   "vineyard_id": "V27",
-   "length_m": 48.86
+   "length_m": 37.0
   },
   {
    "row_id": "V28-R01",
    "vineyard_id": "V28",
-   "length_m": 45.37
+   "length_m": 41.21
   },
   {
    "row_id": "V28-R02",
    "vineyard_id": "V28",
-   "length_m": 40.81
+   "length_m": 43.23
   },
   {
    "row_id": "V28-R03",
    "vineyard_id": "V28",
-   "length_m": 34.63
+   "length_m": 45.44
   },
   {
    "row_id": "V28-R04",
    "vineyard_id": "V28",
-   "length_m": 84.05
+   "length_m": 47.54
   },
   {
    "row_id": "V28-R05",
    "vineyard_id": "V28",
-   "length_m": 24.35
+   "length_m": 44.82
   },
   {
    "row_id": "V28-R06",
    "vineyard_id": "V28",
-   "length_m": 52.43
+   "length_m": 51.76
   },
   {
    "row_id": "V28-R07",
    "vineyard_id": "V28",
-   "length_m": 19.62
+   "length_m": 50.66
   },
   {
    "row_id": "V28-R08",
    "vineyard_id": "V28",
-   "length_m": 64.1
+   "length_m": 7.92
   },
   {
    "row_id": "V28-R09",
    "vineyard_id": "V28",
-   "length_m": 15.6
+   "length_m": 13.55
   },
   {
    "row_id": "V28-R10",
    "vineyard_id": "V28",
-   "length_m": 64.18
+   "length_m": 17.96
   },
   {
    "row_id": "V28-R11",
    "vineyard_id": "V28",
-   "length_m": 69.41
+   "length_m": 22.02
   },
   {
    "row_id": "V29-R01",
    "vineyard_id": "V29",
-   "length_m": 47.25
+   "length_m": 45.37
   },
   {
    "row_id": "V29-R02",
    "vineyard_id": "V29",
-   "length_m": 42.4
+   "length_m": 40.81
   },
   {
    "row_id": "V29-R03",
    "vineyard_id": "V29",
-   "length_m": 36.57
+   "length_m": 34.63
   },
   {
    "row_id": "V29-R04",
    "vineyard_id": "V29",
-   "length_m": 31.0
+   "length_m": 29.47
+  },
+  {
+   "row_id": "V29-R05",
+   "vineyard_id": "V29",
+   "length_m": 24.35
+  },
+  {
+   "row_id": "V29-R06",
+   "vineyard_id": "V29",
+   "length_m": 19.62
+  },
+  {
+   "row_id": "V29-R07",
+   "vineyard_id": "V29",
+   "length_m": 15.6
+  },
+  {
+   "row_id": "V29-R08",
+   "vineyard_id": "V29",
+   "length_m": 5.28
   },
   {
    "row_id": "V30-R01",
    "vineyard_id": "V30",
-   "length_m": 60.07
+   "length_m": 32.1
   },
   {
    "row_id": "V30-R02",
    "vineyard_id": "V30",
-   "length_m": 63.93
+   "length_m": 35.22
   },
   {
    "row_id": "V30-R03",
    "vineyard_id": "V30",
-   "length_m": 66.45
+   "length_m": 38.51
   },
   {
    "row_id": "V30-R04",
    "vineyard_id": "V30",
-   "length_m": 66.81
+   "length_m": 42.03
   },
   {
    "row_id": "V30-R05",
    "vineyard_id": "V30",
-   "length_m": 66.51
+   "length_m": 40.11
   },
   {
    "row_id": "V30-R06",
    "vineyard_id": "V30",
-   "length_m": 66.66
+   "length_m": 46.98
   },
   {
    "row_id": "V30-R07",
    "vineyard_id": "V30",
-   "length_m": 66.29
-  },
-  {
-   "row_id": "V30-R08",
-   "vineyard_id": "V30",
-   "length_m": 65.79
+   "length_m": 48.86
   },
   {
    "row_id": "V31-R01",
    "vineyard_id": "V31",
-   "length_m": 11.23
+   "length_m": 47.25
   },
   {
    "row_id": "V31-R02",
    "vineyard_id": "V31",
-   "length_m": 5.23
+   "length_m": 42.4
   },
   {
    "row_id": "V31-R03",
    "vineyard_id": "V31",
-   "length_m": 5.94
+   "length_m": 36.57
   },
   {
    "row_id": "V31-R04",
    "vineyard_id": "V31",
-   "length_m": 12.31
-  },
-  {
-   "row_id": "V31-R05",
-   "vineyard_id": "V31",
-   "length_m": 18.83
-  },
-  {
-   "row_id": "V31-R06",
-   "vineyard_id": "V31",
-   "length_m": 24.99
-  },
-  {
-   "row_id": "V31-R07",
-   "vineyard_id": "V31",
-   "length_m": 31.09
-  },
-  {
-   "row_id": "V31-R08",
-   "vineyard_id": "V31",
-   "length_m": 37.3
-  },
-  {
-   "row_id": "V31-R09",
-   "vineyard_id": "V31",
-   "length_m": 43.64
-  },
-  {
-   "row_id": "V31-R10",
-   "vineyard_id": "V31",
-   "length_m": 2.82
-  },
-  {
-   "row_id": "V31-R11",
-   "vineyard_id": "V31",
-   "length_m": 2.8
-  },
-  {
-   "row_id": "V31-R12",
-   "vineyard_id": "V31",
-   "length_m": 2.75
-  },
-  {
-   "row_id": "V31-R13",
-   "vineyard_id": "V31",
-   "length_m": 2.75
-  },
-  {
-   "row_id": "V31-R14",
-   "vineyard_id": "V31",
-   "length_m": 60.26
-  },
-  {
-   "row_id": "V31-R15",
-   "vineyard_id": "V31",
-   "length_m": 65.85
-  },
-  {
-   "row_id": "V31-R16",
-   "vineyard_id": "V31",
-   "length_m": 3.79
-  },
-  {
-   "row_id": "V31-R17",
-   "vineyard_id": "V31",
-   "length_m": 65.95
+   "length_m": 31.0
   },
   {
    "row_id": "V32-R01",
    "vineyard_id": "V32",
-   "length_m": 58.33
+   "length_m": 52.55
   },
   {
    "row_id": "V32-R02",
    "vineyard_id": "V32",
-   "length_m": 109.56
+   "length_m": 69.08
   },
   {
    "row_id": "V32-R03",
    "vineyard_id": "V32",
-   "length_m": 117.19
+   "length_m": 58.2
   },
   {
    "row_id": "V32-R04",
    "vineyard_id": "V32",
-   "length_m": 123.38
+   "length_m": 22.07
   },
   {
    "row_id": "V32-R05",
    "vineyard_id": "V32",
-   "length_m": 129.07
+   "length_m": 83.97
   },
   {
    "row_id": "V32-R06",
    "vineyard_id": "V32",
-   "length_m": 4.42
+   "length_m": 84.01
   },
   {
    "row_id": "V32-R07",
    "vineyard_id": "V32",
-   "length_m": 124.45
+   "length_m": 85.09
+  },
+  {
+   "row_id": "V32-R08",
+   "vineyard_id": "V32",
+   "length_m": 66.29
+  },
+  {
+   "row_id": "V32-R09",
+   "vineyard_id": "V32",
+   "length_m": 65.79
   },
   {
    "row_id": "V33-R01",
    "vineyard_id": "V33",
-   "length_m": 120.86
+   "length_m": 11.23
   },
   {
    "row_id": "V33-R02",
    "vineyard_id": "V33",
-   "length_m": 2.72
+   "length_m": 5.23
   },
   {
    "row_id": "V33-R03",
    "vineyard_id": "V33",
-   "length_m": 83.02
+   "length_m": 5.94
   },
   {
    "row_id": "V33-R04",
    "vineyard_id": "V33",
-   "length_m": 64.89
+   "length_m": 12.31
   },
   {
    "row_id": "V33-R05",
    "vineyard_id": "V33",
-   "length_m": 100.99
+   "length_m": 18.83
   },
   {
    "row_id": "V33-R06",
    "vineyard_id": "V33",
-   "length_m": 7.19
+   "length_m": 24.99
   },
   {
    "row_id": "V33-R07",
    "vineyard_id": "V33",
-   "length_m": 20.14
+   "length_m": 31.09
   },
   {
    "row_id": "V33-R08",
    "vineyard_id": "V33",
-   "length_m": 7.2
+   "length_m": 37.3
   },
   {
    "row_id": "V33-R09",
    "vineyard_id": "V33",
-   "length_m": 1.18
+   "length_m": 43.64
   },
   {
    "row_id": "V33-R10",
    "vineyard_id": "V33",
-   "length_m": 11.7
+   "length_m": 2.82
+  },
+  {
+   "row_id": "V33-R11",
+   "vineyard_id": "V33",
+   "length_m": 2.8
+  },
+  {
+   "row_id": "V33-R12",
+   "vineyard_id": "V33",
+   "length_m": 2.75
+  },
+  {
+   "row_id": "V33-R13",
+   "vineyard_id": "V33",
+   "length_m": 2.75
+  },
+  {
+   "row_id": "V33-R14",
+   "vineyard_id": "V33",
+   "length_m": 60.26
+  },
+  {
+   "row_id": "V33-R15",
+   "vineyard_id": "V33",
+   "length_m": 65.85
+  },
+  {
+   "row_id": "V33-R16",
+   "vineyard_id": "V33",
+   "length_m": 3.79
+  },
+  {
+   "row_id": "V33-R17",
+   "vineyard_id": "V33",
+   "length_m": 65.95
   },
   {
    "row_id": "V34-R01",
    "vineyard_id": "V34",
-   "length_m": 66.48
+   "length_m": 36.64
   },
   {
    "row_id": "V34-R02",
    "vineyard_id": "V34",
-   "length_m": 62.01
+   "length_m": 59.04
   },
   {
    "row_id": "V34-R03",
    "vineyard_id": "V34",
-   "length_m": 56.46
+   "length_m": 69.9
   },
   {
    "row_id": "V34-R04",
    "vineyard_id": "V34",
-   "length_m": 51.59
+   "length_m": 76.69
   },
   {
    "row_id": "V34-R05",
    "vineyard_id": "V34",
-   "length_m": 66.73
+   "length_m": 78.0
   },
   {
    "row_id": "V34-R06",
    "vineyard_id": "V34",
-   "length_m": 66.74
-  },
-  {
-   "row_id": "V34-R07",
-   "vineyard_id": "V34",
-   "length_m": 64.7
-  },
-  {
-   "row_id": "V34-R08",
-   "vineyard_id": "V34",
-   "length_m": 12.75
-  },
-  {
-   "row_id": "V34-R09",
-   "vineyard_id": "V34",
-   "length_m": 10.52
-  },
-  {
-   "row_id": "V34-R10",
-   "vineyard_id": "V34",
-   "length_m": 5.97
-  },
-  {
-   "row_id": "V34-R11",
-   "vineyard_id": "V34",
-   "length_m": 3.65
-  },
-  {
-   "row_id": "V34-R12",
-   "vineyard_id": "V34",
-   "length_m": 48.13
-  },
-  {
-   "row_id": "V34-R13",
-   "vineyard_id": "V34",
-   "length_m": 53.77
-  },
-  {
-   "row_id": "V34-R14",
-   "vineyard_id": "V34",
-   "length_m": 59.65
-  },
-  {
-   "row_id": "V34-R15",
-   "vineyard_id": "V34",
-   "length_m": 65.13
-  },
-  {
-   "row_id": "V34-R16",
-   "vineyard_id": "V34",
-   "length_m": 63.73
-  },
-  {
-   "row_id": "V34-R17",
-   "vineyard_id": "V34",
-   "length_m": 76.26
-  },
-  {
-   "row_id": "V34-R18",
-   "vineyard_id": "V34",
-   "length_m": 72.65
-  },
-  {
-   "row_id": "V34-R19",
-   "vineyard_id": "V34",
-   "length_m": 77.95
-  },
-  {
-   "row_id": "V34-R20",
-   "vineyard_id": "V34",
-   "length_m": 54.42
+   "length_m": 83.06
   },
   {
    "row_id": "V35-R01",
    "vineyard_id": "V35",
-   "length_m": 27.4
+   "length_m": 85.05
   },
   {
    "row_id": "V35-R02",
    "vineyard_id": "V35",
-   "length_m": 17.09
+   "length_m": 2.72
   },
   {
    "row_id": "V35-R03",
    "vineyard_id": "V35",
-   "length_m": 19.39
+   "length_m": 62.44
+  },
+  {
+   "row_id": "V35-R04",
+   "vineyard_id": "V35",
+   "length_m": 64.89
+  },
+  {
+   "row_id": "V35-R05",
+   "vineyard_id": "V35",
+   "length_m": 87.01
+  },
+  {
+   "row_id": "V35-R06",
+   "vineyard_id": "V35",
+   "length_m": 7.19
+  },
+  {
+   "row_id": "V35-R07",
+   "vineyard_id": "V35",
+   "length_m": 20.14
+  },
+  {
+   "row_id": "V35-R08",
+   "vineyard_id": "V35",
+   "length_m": 7.2
+  },
+  {
+   "row_id": "V35-R09",
+   "vineyard_id": "V35",
+   "length_m": 1.18
+  },
+  {
+   "row_id": "V35-R10",
+   "vineyard_id": "V35",
+   "length_m": 11.7
   },
   {
    "row_id": "V36-R01",
    "vineyard_id": "V36",
-   "length_m": 59.4
+   "length_m": 35.77
   },
   {
    "row_id": "V36-R02",
    "vineyard_id": "V36",
-   "length_m": 53.43
+   "length_m": 31.16
   },
   {
    "row_id": "V36-R03",
    "vineyard_id": "V36",
-   "length_m": 48.58
+   "length_m": 31.51
   },
   {
    "row_id": "V36-R04",
    "vineyard_id": "V36",
-   "length_m": 43.65
+   "length_m": 33.88
   },
   {
    "row_id": "V36-R05",
    "vineyard_id": "V36",
-   "length_m": 37.95
+   "length_m": 10.52
   },
   {
    "row_id": "V36-R06",
    "vineyard_id": "V36",
-   "length_m": 11.93
+   "length_m": 35.03
   },
   {
    "row_id": "V36-R07",
    "vineyard_id": "V36",
-   "length_m": 21.62
+   "length_m": 5.97
   },
   {
    "row_id": "V36-R08",
    "vineyard_id": "V36",
-   "length_m": 17.0
+   "length_m": 36.11
   },
   {
    "row_id": "V36-R09",
    "vineyard_id": "V36",
-   "length_m": 11.45
+   "length_m": 3.65
+  },
+  {
+   "row_id": "V36-R10",
+   "vineyard_id": "V36",
+   "length_m": 35.04
+  },
+  {
+   "row_id": "V36-R11",
+   "vineyard_id": "V36",
+   "length_m": 30.17
+  },
+  {
+   "row_id": "V36-R12",
+   "vineyard_id": "V36",
+   "length_m": 35.9
+  },
+  {
+   "row_id": "V36-R13",
+   "vineyard_id": "V36",
+   "length_m": 59.65
+  },
+  {
+   "row_id": "V36-R14",
+   "vineyard_id": "V36",
+   "length_m": 65.13
+  },
+  {
+   "row_id": "V36-R15",
+   "vineyard_id": "V36",
+   "length_m": 63.73
+  },
+  {
+   "row_id": "V36-R16",
+   "vineyard_id": "V36",
+   "length_m": 76.26
+  },
+  {
+   "row_id": "V36-R17",
+   "vineyard_id": "V36",
+   "length_m": 72.65
+  },
+  {
+   "row_id": "V36-R18",
+   "vineyard_id": "V36",
+   "length_m": 77.95
+  },
+  {
+   "row_id": "V36-R19",
+   "vineyard_id": "V36",
+   "length_m": 54.42
+  },
+  {
+   "row_id": "V36-R20",
+   "vineyard_id": "V36",
+   "length_m": 2.11
   },
   {
    "row_id": "V37-R01",
    "vineyard_id": "V37",
-   "length_m": 10.89
+   "length_m": 25.3
   },
   {
    "row_id": "V37-R02",
    "vineyard_id": "V37",
-   "length_m": 17.86
+   "length_m": 7.4
   },
   {
    "row_id": "V37-R03",
    "vineyard_id": "V37",
-   "length_m": 29.26
+   "length_m": 14.8
+  },
+  {
+   "row_id": "V37-R04",
+   "vineyard_id": "V37",
+   "length_m": 14.12
   },
   {
    "row_id": "V38-R01",
    "vineyard_id": "V38",
-   "length_m": 4.13
+   "length_m": 59.4
   },
   {
    "row_id": "V38-R02",
    "vineyard_id": "V38",
-   "length_m": 16.09
+   "length_m": 53.43
   },
   {
    "row_id": "V38-R03",
    "vineyard_id": "V38",
-   "length_m": 22.74
+   "length_m": 48.58
   },
   {
    "row_id": "V38-R04",
    "vineyard_id": "V38",
-   "length_m": 34.55
+   "length_m": 43.65
   },
   {
    "row_id": "V38-R05",
    "vineyard_id": "V38",
-   "length_m": 42.83
+   "length_m": 37.95
   },
   {
    "row_id": "V38-R06",
    "vineyard_id": "V38",
-   "length_m": 47.96
+   "length_m": 11.93
   },
   {
    "row_id": "V38-R07",
    "vineyard_id": "V38",
-   "length_m": 48.87
+   "length_m": 21.62
   },
   {
    "row_id": "V38-R08",
    "vineyard_id": "V38",
-   "length_m": 59.12
+   "length_m": 17.0
   },
   {
    "row_id": "V38-R09",
    "vineyard_id": "V38",
-   "length_m": 62.5
-  },
-  {
-   "row_id": "V38-R10",
-   "vineyard_id": "V38",
-   "length_m": 4.67
-  },
-  {
-   "row_id": "V38-R11",
-   "vineyard_id": "V38",
-   "length_m": 62.64
-  },
-  {
-   "row_id": "V38-R12",
-   "vineyard_id": "V38",
-   "length_m": 10.37
-  },
-  {
-   "row_id": "V38-R13",
-   "vineyard_id": "V38",
-   "length_m": 62.6
-  },
-  {
-   "row_id": "V38-R14",
-   "vineyard_id": "V38",
-   "length_m": 58.13
-  },
-  {
-   "row_id": "V38-R15",
-   "vineyard_id": "V38",
-   "length_m": 56.15
-  },
-  {
-   "row_id": "V38-R16",
-   "vineyard_id": "V38",
-   "length_m": 55.4
-  },
-  {
-   "row_id": "V38-R17",
-   "vineyard_id": "V38",
-   "length_m": 42.45
-  },
-  {
-   "row_id": "V38-R18",
-   "vineyard_id": "V38",
-   "length_m": 36.71
-  },
-  {
-   "row_id": "V38-R19",
-   "vineyard_id": "V38",
-   "length_m": 4.53
-  },
-  {
-   "row_id": "V38-R20",
-   "vineyard_id": "V38",
-   "length_m": 30.85
-  },
-  {
-   "row_id": "V38-R21",
-   "vineyard_id": "V38",
-   "length_m": 58.13
-  },
-  {
-   "row_id": "V38-R22",
-   "vineyard_id": "V38",
-   "length_m": 36.95
-  },
-  {
-   "row_id": "V38-R23",
-   "vineyard_id": "V38",
-   "length_m": 52.57
-  },
-  {
-   "row_id": "V38-R24",
-   "vineyard_id": "V38",
-   "length_m": 55.6
-  },
-  {
-   "row_id": "V38-R25",
-   "vineyard_id": "V38",
-   "length_m": 59.37
-  },
-  {
-   "row_id": "V38-R26",
-   "vineyard_id": "V38",
-   "length_m": 60.09
-  },
-  {
-   "row_id": "V38-R27",
-   "vineyard_id": "V38",
-   "length_m": 60.39
-  },
-  {
-   "row_id": "V38-R28",
-   "vineyard_id": "V38",
-   "length_m": 60.38
-  },
-  {
-   "row_id": "V38-R29",
-   "vineyard_id": "V38",
-   "length_m": 60.46
-  },
-  {
-   "row_id": "V38-R30",
-   "vineyard_id": "V38",
-   "length_m": 59.94
+   "length_m": 11.45
   },
   {
    "row_id": "V39-R01",
    "vineyard_id": "V39",
-   "length_m": 103.07
+   "length_m": 10.89
   },
   {
    "row_id": "V39-R02",
    "vineyard_id": "V39",
-   "length_m": 106.46
+   "length_m": 17.86
   },
   {
    "row_id": "V39-R03",
    "vineyard_id": "V39",
-   "length_m": 94.61
-  },
-  {
-   "row_id": "V39-R04",
-   "vineyard_id": "V39",
-   "length_m": 13.86
-  },
-  {
-   "row_id": "V39-R05",
-   "vineyard_id": "V39",
-   "length_m": 80.83
-  },
-  {
-   "row_id": "V39-R06",
-   "vineyard_id": "V39",
-   "length_m": 112.53
-  },
-  {
-   "row_id": "V39-R07",
-   "vineyard_id": "V39",
-   "length_m": 92.48
-  },
-  {
-   "row_id": "V39-R08",
-   "vineyard_id": "V39",
-   "length_m": 94.73
-  },
-  {
-   "row_id": "V39-R09",
-   "vineyard_id": "V39",
-   "length_m": 94.76
-  },
-  {
-   "row_id": "V39-R10",
-   "vineyard_id": "V39",
-   "length_m": 94.71
-  },
-  {
-   "row_id": "V39-R11",
-   "vineyard_id": "V39",
-   "length_m": 94.78
-  },
-  {
-   "row_id": "V39-R12",
-   "vineyard_id": "V39",
-   "length_m": 95.18
-  },
-  {
-   "row_id": "V39-R13",
-   "vineyard_id": "V39",
-   "length_m": 89.49
-  },
-  {
-   "row_id": "V39-R14",
-   "vineyard_id": "V39",
-   "length_m": 75.23
-  },
-  {
-   "row_id": "V39-R15",
-   "vineyard_id": "V39",
-   "length_m": 78.04
+   "length_m": 29.26
   },
   {
    "row_id": "V40-R01",
    "vineyard_id": "V40",
-   "length_m": 32.82
+   "length_m": 3.45
   },
   {
    "row_id": "V40-R02",
    "vineyard_id": "V40",
-   "length_m": 37.5
+   "length_m": 4.72
   },
   {
    "row_id": "V40-R03",
    "vineyard_id": "V40",
-   "length_m": 41.5
-  },
-  {
-   "row_id": "V40-R04",
-   "vineyard_id": "V40",
-   "length_m": 46.56
-  },
-  {
-   "row_id": "V40-R05",
-   "vineyard_id": "V40",
-   "length_m": 42.1
-  },
-  {
-   "row_id": "V40-R06",
-   "vineyard_id": "V40",
-   "length_m": 48.0
-  },
-  {
-   "row_id": "V40-R07",
-   "vineyard_id": "V40",
-   "length_m": 13.42
-  },
-  {
-   "row_id": "V40-R08",
-   "vineyard_id": "V40",
-   "length_m": 2.57
+   "length_m": 6.05
   },
   {
    "row_id": "V41-R01",
    "vineyard_id": "V41",
-   "length_m": 7.47
+   "length_m": 4.13
   },
   {
    "row_id": "V41-R02",
    "vineyard_id": "V41",
-   "length_m": 12.2
+   "length_m": 16.09
   },
   {
    "row_id": "V41-R03",
    "vineyard_id": "V41",
-   "length_m": 19.03
+   "length_m": 22.74
   },
   {
    "row_id": "V41-R04",
    "vineyard_id": "V41",
-   "length_m": 61.11
+   "length_m": 34.55
   },
   {
    "row_id": "V41-R05",
    "vineyard_id": "V41",
-   "length_m": 60.96
+   "length_m": 42.83
   },
   {
    "row_id": "V41-R06",
    "vineyard_id": "V41",
-   "length_m": 61.76
+   "length_m": 47.96
   },
   {
    "row_id": "V41-R07",
    "vineyard_id": "V41",
-   "length_m": 28.97
+   "length_m": 48.87
   },
   {
    "row_id": "V41-R08",
    "vineyard_id": "V41",
-   "length_m": 61.12
+   "length_m": 59.12
   },
   {
    "row_id": "V41-R09",
    "vineyard_id": "V41",
-   "length_m": 31.22
+   "length_m": 62.5
   },
   {
    "row_id": "V41-R10",
    "vineyard_id": "V41",
-   "length_m": 93.42
+   "length_m": 4.67
   },
   {
    "row_id": "V41-R11",
    "vineyard_id": "V41",
-   "length_m": 97.64
+   "length_m": 59.37
   },
   {
    "row_id": "V41-R12",
    "vineyard_id": "V41",
-   "length_m": 37.39
+   "length_m": 10.37
   },
   {
    "row_id": "V41-R13",
    "vineyard_id": "V41",
-   "length_m": 30.09
+   "length_m": 56.39
   },
   {
    "row_id": "V41-R14",
    "vineyard_id": "V41",
-   "length_m": 35.26
+   "length_m": 53.66
   },
   {
    "row_id": "V41-R15",
    "vineyard_id": "V41",
-   "length_m": 34.05
+   "length_m": 50.98
   },
   {
    "row_id": "V41-R16",
    "vineyard_id": "V41",
-   "length_m": 36.47
+   "length_m": 48.22
   },
   {
    "row_id": "V41-R17",
    "vineyard_id": "V41",
-   "length_m": 35.72
+   "length_m": 42.45
   },
   {
    "row_id": "V41-R18",
    "vineyard_id": "V41",
-   "length_m": 18.82
+   "length_m": 36.71
   },
   {
    "row_id": "V41-R19",
    "vineyard_id": "V41",
-   "length_m": 13.72
+   "length_m": 4.53
   },
   {
    "row_id": "V41-R20",
    "vineyard_id": "V41",
-   "length_m": 12.65
+   "length_m": 30.85
   },
   {
    "row_id": "V41-R21",
    "vineyard_id": "V41",
-   "length_m": 8.14
+   "length_m": 47.03
   },
   {
    "row_id": "V41-R22",
    "vineyard_id": "V41",
-   "length_m": 4.9
+   "length_m": 36.95
+  },
+  {
+   "row_id": "V41-R23",
+   "vineyard_id": "V41",
+   "length_m": 43.44
+  },
+  {
+   "row_id": "V41-R24",
+   "vineyard_id": "V41",
+   "length_m": 48.53
+  },
+  {
+   "row_id": "V41-R25",
+   "vineyard_id": "V41",
+   "length_m": 49.39
+  },
+  {
+   "row_id": "V41-R26",
+   "vineyard_id": "V41",
+   "length_m": 60.09
+  },
+  {
+   "row_id": "V41-R27",
+   "vineyard_id": "V41",
+   "length_m": 60.39
+  },
+  {
+   "row_id": "V41-R28",
+   "vineyard_id": "V41",
+   "length_m": 60.38
+  },
+  {
+   "row_id": "V41-R29",
+   "vineyard_id": "V41",
+   "length_m": 63.28
+  },
+  {
+   "row_id": "V41-R30",
+   "vineyard_id": "V41",
+   "length_m": 59.94
   },
   {
    "row_id": "V42-R01",
    "vineyard_id": "V42",
-   "length_m": 2.4
+   "length_m": 84.73
   },
   {
    "row_id": "V42-R02",
    "vineyard_id": "V42",
-   "length_m": 63.83
+   "length_m": 86.57
   },
   {
    "row_id": "V42-R03",
    "vineyard_id": "V42",
-   "length_m": 121.69
+   "length_m": 87.71
   },
   {
    "row_id": "V42-R04",
    "vineyard_id": "V42",
-   "length_m": 118.9
+   "length_m": 71.72
   },
   {
    "row_id": "V42-R05",
    "vineyard_id": "V42",
-   "length_m": 116.13
+   "length_m": 91.6
   },
   {
    "row_id": "V42-R06",
    "vineyard_id": "V42",
-   "length_m": 113.23
+   "length_m": 79.05
   },
   {
    "row_id": "V42-R07",
    "vineyard_id": "V42",
-   "length_m": 110.48
+   "length_m": 82.21
   },
   {
    "row_id": "V42-R08",
    "vineyard_id": "V42",
-   "length_m": 107.94
+   "length_m": 85.71
   },
   {
    "row_id": "V42-R09",
    "vineyard_id": "V42",
-   "length_m": 90.48
+   "length_m": 88.95
   },
   {
    "row_id": "V42-R10",
    "vineyard_id": "V42",
-   "length_m": 88.28
+   "length_m": 94.78
   },
   {
    "row_id": "V42-R11",
    "vineyard_id": "V42",
-   "length_m": 85.51
+   "length_m": 88.87
   },
   {
    "row_id": "V42-R12",
    "vineyard_id": "V42",
-   "length_m": 81.04
+   "length_m": 80.48
   },
   {
    "row_id": "V42-R13",
    "vineyard_id": "V42",
-   "length_m": 81.11
+   "length_m": 75.23
   },
   {
    "row_id": "V42-R14",
    "vineyard_id": "V42",
+   "length_m": 78.04
+  },
+  {
+   "row_id": "V43-R01",
+   "vineyard_id": "V43",
+   "length_m": 20.52
+  },
+  {
+   "row_id": "V43-R02",
+   "vineyard_id": "V43",
+   "length_m": 22.28
+  },
+  {
+   "row_id": "V43-R03",
+   "vineyard_id": "V43",
+   "length_m": 23.72
+  },
+  {
+   "row_id": "V43-R04",
+   "vineyard_id": "V43",
+   "length_m": 25.67
+  },
+  {
+   "row_id": "V43-R05",
+   "vineyard_id": "V43",
+   "length_m": 27.45
+  },
+  {
+   "row_id": "V43-R06",
+   "vineyard_id": "V43",
+   "length_m": 26.97
+  },
+  {
+   "row_id": "V43-R07",
+   "vineyard_id": "V43",
+   "length_m": 13.42
+  },
+  {
+   "row_id": "V43-R08",
+   "vineyard_id": "V43",
+   "length_m": 2.57
+  },
+  {
+   "row_id": "V44-R01",
+   "vineyard_id": "V44",
+   "length_m": 7.47
+  },
+  {
+   "row_id": "V44-R02",
+   "vineyard_id": "V44",
+   "length_m": 12.2
+  },
+  {
+   "row_id": "V44-R03",
+   "vineyard_id": "V44",
+   "length_m": 19.03
+  },
+  {
+   "row_id": "V44-R04",
+   "vineyard_id": "V44",
+   "length_m": 61.11
+  },
+  {
+   "row_id": "V44-R05",
+   "vineyard_id": "V44",
+   "length_m": 60.96
+  },
+  {
+   "row_id": "V44-R06",
+   "vineyard_id": "V44",
+   "length_m": 61.76
+  },
+  {
+   "row_id": "V45-R01",
+   "vineyard_id": "V45",
+   "length_m": 23.89
+  },
+  {
+   "row_id": "V45-R02",
+   "vineyard_id": "V45",
+   "length_m": 61.12
+  },
+  {
+   "row_id": "V45-R03",
+   "vineyard_id": "V45",
+   "length_m": 26.24
+  },
+  {
+   "row_id": "V45-R04",
+   "vineyard_id": "V45",
+   "length_m": 88.5
+  },
+  {
+   "row_id": "V45-R05",
+   "vineyard_id": "V45",
+   "length_m": 87.03
+  },
+  {
+   "row_id": "V45-R06",
+   "vineyard_id": "V45",
+   "length_m": 37.39
+  },
+  {
+   "row_id": "V45-R07",
+   "vineyard_id": "V45",
+   "length_m": 30.09
+  },
+  {
+   "row_id": "V45-R08",
+   "vineyard_id": "V45",
+   "length_m": 35.26
+  },
+  {
+   "row_id": "V45-R09",
+   "vineyard_id": "V45",
+   "length_m": 34.05
+  },
+  {
+   "row_id": "V45-R10",
+   "vineyard_id": "V45",
+   "length_m": 36.47
+  },
+  {
+   "row_id": "V45-R11",
+   "vineyard_id": "V45",
+   "length_m": 35.72
+  },
+  {
+   "row_id": "V45-R12",
+   "vineyard_id": "V45",
+   "length_m": 18.82
+  },
+  {
+   "row_id": "V45-R13",
+   "vineyard_id": "V45",
+   "length_m": 13.72
+  },
+  {
+   "row_id": "V45-R14",
+   "vineyard_id": "V45",
+   "length_m": 12.65
+  },
+  {
+   "row_id": "V45-R15",
+   "vineyard_id": "V45",
+   "length_m": 8.14
+  },
+  {
+   "row_id": "V45-R16",
+   "vineyard_id": "V45",
+   "length_m": 4.9
+  },
+  {
+   "row_id": "V46-R01",
+   "vineyard_id": "V46",
+   "length_m": 3.29
+  },
+  {
+   "row_id": "V46-R02",
+   "vineyard_id": "V46",
+   "length_m": 2.4
+  },
+  {
+   "row_id": "V46-R03",
+   "vineyard_id": "V46",
+   "length_m": 1.79
+  },
+  {
+   "row_id": "V46-R04",
+   "vineyard_id": "V46",
+   "length_m": 50.26
+  },
+  {
+   "row_id": "V46-R05",
+   "vineyard_id": "V46",
+   "length_m": 96.64
+  },
+  {
+   "row_id": "V46-R06",
+   "vineyard_id": "V46",
+   "length_m": 96.64
+  },
+  {
+   "row_id": "V46-R07",
+   "vineyard_id": "V46",
+   "length_m": 96.67
+  },
+  {
+   "row_id": "V46-R08",
+   "vineyard_id": "V46",
+   "length_m": 96.42
+  },
+  {
+   "row_id": "V46-R09",
+   "vineyard_id": "V46",
+   "length_m": 96.53
+  },
+  {
+   "row_id": "V46-R10",
+   "vineyard_id": "V46",
+   "length_m": 98.35
+  },
+  {
+   "row_id": "V46-R11",
+   "vineyard_id": "V46",
+   "length_m": 90.48
+  },
+  {
+   "row_id": "V46-R12",
+   "vineyard_id": "V46",
+   "length_m": 88.28
+  },
+  {
+   "row_id": "V46-R13",
+   "vineyard_id": "V46",
+   "length_m": 85.51
+  },
+  {
+   "row_id": "V46-R14",
+   "vineyard_id": "V46",
+   "length_m": 81.04
+  },
+  {
+   "row_id": "V46-R15",
+   "vineyard_id": "V46",
+   "length_m": 81.11
+  },
+  {
+   "row_id": "V46-R16",
+   "vineyard_id": "V46",
    "length_m": 82.71
   },
   {
-   "row_id": "V42-R15",
-   "vineyard_id": "V42",
+   "row_id": "V46-R17",
+   "vineyard_id": "V46",
    "length_m": 83.01
   },
   {
-   "row_id": "V42-R16",
-   "vineyard_id": "V42",
-   "length_m": 82.71
+   "row_id": "V46-R18",
+   "vineyard_id": "V46",
+   "length_m": 79.53
   },
   {
-   "row_id": "V42-R17",
-   "vineyard_id": "V42",
-   "length_m": 89.69
+   "row_id": "V46-R19",
+   "vineyard_id": "V46",
+   "length_m": 86.19
   },
   {
-   "row_id": "V42-R18",
-   "vineyard_id": "V42",
-   "length_m": 90.11
+   "row_id": "V46-R20",
+   "vineyard_id": "V46",
+   "length_m": 80.19
   },
   {
-   "row_id": "V42-R19",
-   "vineyard_id": "V42",
-   "length_m": 92.4
+   "row_id": "V46-R21",
+   "vineyard_id": "V46",
+   "length_m": 86.43
   },
   {
-   "row_id": "V42-R20",
-   "vineyard_id": "V42",
+   "row_id": "V46-R22",
+   "vineyard_id": "V46",
    "length_m": 61.62
   },
   {
-   "row_id": "V42-R21",
-   "vineyard_id": "V42",
+   "row_id": "V46-R23",
+   "vineyard_id": "V46",
    "length_m": 62.48
   },
   {
-   "row_id": "V42-R22",
-   "vineyard_id": "V42",
+   "row_id": "V46-R24",
+   "vineyard_id": "V46",
    "length_m": 53.7
   },
   {
-   "row_id": "V42-R23",
-   "vineyard_id": "V42",
+   "row_id": "V46-R25",
+   "vineyard_id": "V46",
    "length_m": 24.02
   },
   {
-   "row_id": "V42-R24",
-   "vineyard_id": "V42",
+   "row_id": "V46-R26",
+   "vineyard_id": "V46",
    "length_m": 27.23
   },
   {
-   "row_id": "V42-R25",
-   "vineyard_id": "V42",
+   "row_id": "V46-R27",
+   "vineyard_id": "V46",
    "length_m": 12.9
+  },
+  {
+   "row_id": "V47-R01",
+   "vineyard_id": "V47",
+   "length_m": 9.8
+  },
+  {
+   "row_id": "V47-R02",
+   "vineyard_id": "V47",
+   "length_m": 9.2
+  },
+  {
+   "row_id": "V47-R03",
+   "vineyard_id": "V47",
+   "length_m": 8.46
+  },
+  {
+   "row_id": "V47-R04",
+   "vineyard_id": "V47",
+   "length_m": 7.88
+  },
+  {
+   "row_id": "V47-R05",
+   "vineyard_id": "V47",
+   "length_m": 7.11
+  },
+  {
+   "row_id": "V47-R06",
+   "vineyard_id": "V47",
+   "length_m": 6.59
   }
  ],
  "tiles_with_objects": 89,
