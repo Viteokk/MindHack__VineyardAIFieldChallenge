@@ -1,14 +1,20 @@
 {
  "valid": true,
- "length_m": 0.2,
+ "length_m": 919.9,
  "start_m": 0.0,
  "end_m": 0.0,
- "outside_m": 0.0,
- "outside_share": 0.0,
+ "outside_m": 10.5,
+ "outside_share": 0.01143,
  "canopy_m": 0.0,
  "forbidden_m": 0.0,
  "row_crossings": 0,
- "targets": 0,
- "visited": 0,
- "not_visited": []
+ "targets": 6,
+ "visited": 1,
+ "not_visited": [
+  "W002",
+  "W003",
+  "W004",
+  "W006",
+  "W008"
+ ]
 }

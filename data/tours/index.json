@@ -3,18 +3,18 @@
  "hours": 6.0,
  "budget_m": 24000.0,
  "days": 1,
- "targets_full_tour": 573,
- "targets_visited": 573,
+ "targets_full_tour": 464,
+ "targets_visited": 461,
  "tours": [
   {
    "day": 1,
    "route": "data/tours/tour_1.geojson",
    "targets": "data/tours/targets_1.geojson",
-   "length_m": 22441.6,
-   "minutes": 337,
-   "targets_total": 573,
-   "targets_visited": 573,
-   "outside_share": 0.014
+   "length_m": 18736.4,
+   "minutes": 281,
+   "targets_total": 464,
+   "targets_visited": 461,
+   "outside_share": 0.0169
   }
  ]
 }
