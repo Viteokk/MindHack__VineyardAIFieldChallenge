@@ -141,8 +141,6 @@ class SmoothTest(unittest.TestCase):
         self.assertEqual(R.pull(9, lambda i, j: j <= 4 or i >= 4), [0, 4, 8])
 
 
-if __name__ == "__main__":
-    unittest.main()
 
 
 class TileEdgeSeams(unittest.TestCase):
@@ -166,3 +164,26 @@ class TileEdgeSeams(unittest.TestCase):
         _, axes = R.row_walls([("R1", "t1", LineString([(0, 0), (19.7, 0)]))], NO_ROAD, tb)
         self.assertFalse(axes.intersects(LineString([(21, -2), (21, 2)])), "a headland inside the tile stays open")
 
+
+
+class SideAwareStops(unittest.TestCase):
+    """A gap on a row is seen from either neighbouring inter-row: the stop goes to the inter-row shared by most gaps."""
+
+    def test_gaps_on_two_rows_share_the_inter_row_between_them(self):
+        from shapely.geometry import box
+        from pipeline.route import side_points
+        # rows at y = 0, 2.6, 5.2 (x 0..50); inter-rows between them, 0.3 m from each axis
+        inter = [box(0, 0.3, 50, 2.3), box(0, 2.9, 50, 4.9), box(0, -2.3, 50, -0.3), box(0, 5.5, 50, 7.5)]
+        feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [10.0, 2.6]}, "properties": {"type": "gap"}},
+                 {"type": "Feature", "geometry": {"type": "Point", "coordinates": [30.0, 5.2]}, "properties": {"type": "gap"}},
+                 {"type": "Feature", "geometry": {"type": "Point", "coordinates": [40.0, 1.0]}, "properties": {"type": "waste"}}]
+        pts = side_points(feats, inter, None)
+        self.assertEqual(set(pts), {0, 1})                  # waste keeps its own anchor
+        self.assertTrue(2.9 <= pts[0][1] <= 4.9 and 2.9 <= pts[1][1] <= 4.9)   # both in the inter-row between the rows
+        for k in (0, 1):
+            x, y = feats[k]["geometry"]["coordinates"]
+            self.assertLessEqual(((pts[k][0] - x) ** 2 + (pts[k][1] - y) ** 2) ** 0.5, 1.9)
+
+
+if __name__ == "__main__":
+    unittest.main()

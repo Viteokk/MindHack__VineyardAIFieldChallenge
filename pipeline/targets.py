@@ -67,8 +67,10 @@ def row_gaps(segs, canopies, min_gap: float):
     return out
 
 
-REACH = 1.6             # a target is inspectable if an inter-row / passage lies within this distance
-                        # (the walker must pass within 2 m while staying on inter-rows and passages)
+REACH = 2.5             # a gap is inspectable if an inter-row / passage lies within this distance (the walker passes
+                        # within 2 m; the last 0.5 m is a step off the inter-row, paid from the outside budget)
+REACH_WASTE = 25.0      # waste lies anywhere around the vineyards (rules 3): collecting it is worth a short walk off the
+                        # inter-rows / passages; the route's 2 % outside budget decides which pieces fit
 
 
 def build(layers, min_gap: float):
@@ -112,7 +114,8 @@ def build(layers, min_gap: float):
         walk = unary_union([walk] + [shape(f["geometry"]) for f in json.loads(pas.read_text())["features"]])
     n_t = n_w = 0
     for f in feats:                                       # IDs: T0001 inspection, W001 waste
-        f["properties"]["reachable"] = bool(walk.distance(Point(f["geometry"]["coordinates"])) <= REACH)
+        reach = REACH_WASTE if f["properties"]["type"] == "waste" else REACH
+        f["properties"]["reachable"] = bool(walk.distance(Point(f["geometry"]["coordinates"])) <= reach)
         if f["properties"]["type"] == "waste":
             n_w += 1
             f["properties"]["id"] = f"W{n_w:03d}"

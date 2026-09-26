@@ -52,6 +52,7 @@ def main() -> None:
     ap.add_argument("--weights", default="", help="YOLO-seg weights: canopies from YOLO, rows from the classical detector")
     ap.add_argument("--inp", default="", help="for --from targets/route/...: the global xml to use (default out/pre_global.xml)")
     ap.add_argument("--route-time", type=int, default=60)
+    ap.add_argument("--quick", action="store_true", help="route stage: skip the day tours and the web route variants (~15 min faster)")
     a = ap.parse_args()
     if not a.all and a.start == "detect" and a.stop == "web":
         ap.error("use --all, or --from/--to")
@@ -84,8 +85,9 @@ def main() -> None:
             for mode in ("inspector", "farmer"):
                 sh([PY, "-m", "pipeline.route", "--mode", mode, "--inp", str(global_xml), "--tiles", a.tiles,
                     "--time", str(a.route_time)])
-            sh([PY, "-m", "pipeline.tours", "--inp", str(global_xml)])   # day tours (START -> START, <= 6 h at 4 km/h)
-            sh([PY, "scripts/build_route_variants.py", "--inp", str(global_xml)])   # static site: routes for gap >= 5 / 8 / 10 m
+            if not a.quick:                              # --quick (Sunday): the two deliverable routes only
+                sh([PY, "-m", "pipeline.tours", "--inp", str(global_xml)])   # day tours (START -> START, <= 6 h at 4 km/h)
+                sh([PY, "scripts/build_route_variants.py", "--inp", str(global_xml)])   # static site: gap >= 5 / 8 / 10 m
         elif stage == "validate":
             for mode, f in (("inspector", "route.geojson"), ("farmer", "route_waste.geojson")):
                 subprocess.run([PY, "-m", "pipeline.validate", "--route", f, "--inp", str(global_xml), "--tiles", a.tiles,

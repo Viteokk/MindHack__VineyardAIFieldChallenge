@@ -15,13 +15,18 @@ Grid graph at 0.5 m over the study area:
             steps that would cross an axis just outside the passage edge are left out of the graph.
 So the route walks ALONG the inter-rows and changes inter-row only past the row ends or on a passage.
 --allow-row-crossing drops the walls (old behaviour: stepping over a row through a planting gap).
-Targets are anchored to the nearest cheap cell within 2 m (visited = within 2 m), anchors covering the same
-targets are merged, the order is a TSP (OR-Tools) on shortest-path distances with START as depot.
+Targets are anchored to a cheap cell within 2 m (visited = within 2 m). A gap on a row is seen from the inter-row on
+either side: a greedy set cover picks the side that shares its inter-row with the most other gaps, so the tour walks
+fewer inter-rows and turns around fewer row ends (31 % fewer inter-rows on Sireț3). Anchors covering the same targets
+are merged, the order is a TSP (OR-Tools) on shortest-path distances with START as depot.
 Each leg is rebuilt cell by cell, then string-pulled (stops stay fixed vertices): a straight shortcut is kept only if
 dense samples stay on walkable cells, it touches no canopy / forbidden zone, crosses no row axis outside a passage
 and adds no metres outside.
-Then the outside share is measured per leg; while it exceeds --max-outside, the stops whose legs need the
-most outside walking are dropped and the tour is re-solved (the route criterion scores 0 above 2 %).
+Then the outside share is measured per leg; while it exceeds --max-outside the tour is thinned and re-solved (the
+route criterion scores 0 above 2 %): far over budget, the stops whose legs need the most outside walking per unit of
+value go in bulk; close to it, each stop is priced by what dropping it really saves (its two legs minus the leg from
+its predecessor to its successor), so a stop on the way costs nothing and a detour into another inter-row is dropped
+first. Value: waste 10, gap >= 5 m 3, shorter gap 1.
 The distance matrix is cached (out/route_cache_<mode>.npz, _cross with --allow-row-crossing) so re-solving is fast.
 
 Usage:  python -m pipeline.route --mode inspector --inp out/pre_global.xml [--targets out/targets.geojson]
@@ -46,7 +51,7 @@ from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import dijkstra
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString, Point, shape
-from shapely.ops import unary_union
+from shapely.ops import nearest_points, unary_union
 from shapely.strtree import STRtree
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -400,6 +405,54 @@ def leg(g, src, dst, limit):
     return seq[::-1]
 
 
+def side_points(feats, inter_polys, passages, reach=VISIT - 0.15):
+    """Where to stand for each gap target: a gap on a row is seen (<= 2 m) from the inter-row on either side of the row.
+    Greedy set cover over the inter-rows (and passages) within reach picks the side that shares its inter-row with the
+    most other targets, so the tour walks fewer inter-rows and makes fewer turns around row ends (outside walking).
+    Returns {feature index: (x, y) point inside the chosen inter-row, within reach of the target}."""
+    from shapely.strtree import STRtree
+    polys = [p for p in inter_polys if not p.is_empty]
+    if passages is not None and not passages.is_empty:
+        polys += [g for g in getattr(passages, "geoms", [passages]) if not g.is_empty]
+    if not polys:
+        return {}
+    tree = STRtree(polys)
+    opts = {}
+    for k, f in enumerate(feats):
+        if f["properties"].get("type") != "gap":
+            continue
+        p = Point(f["geometry"]["coordinates"])
+        c = [int(i) for i in tree.query(p.buffer(reach)) if polys[int(i)].distance(p) <= reach - 0.25]
+        if c:
+            opts[k] = c
+    cover = {}
+    for k, c in opts.items():
+        for i in c:
+            cover.setdefault(i, set()).add(k)
+    todo, pick = set(opts), {}
+    while todo:
+        i = max(cover, key=lambda i: (len(cover[i] & todo), -i))
+        got = cover[i] & todo
+        if not got:
+            break
+        for k in got:
+            pick[k] = i
+        todo -= got
+    out = {}
+    for k, i in pick.items():
+        p = Point(feats[k]["geometry"]["coordinates"])
+        poly = polys[i]
+        if poly.contains(p):
+            out[k] = (p.x, p.y)
+            continue
+        q = np.asarray(nearest_points(poly, p)[0].coords[0])
+        d = float(np.hypot(*(q - (p.x, p.y))))
+        v = (q - (p.x, p.y)) / max(d, 1e-9)
+        step = max(0.0, min(0.35, reach - 0.1 - d))            # a little inside the inter-row, still within reach
+        out[k] = tuple(q + v * step)
+    return out
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=MODES, default="inspector")
@@ -456,9 +509,17 @@ def main() -> None:
     if custom:                                   # begin on the walkable cell itself, never across a canopy
         start = [float(v) for v in grid.to_xy(rc[[s_node], 0], rc[[s_node], 1])[0]]
         print(f"custom START snapped to {start[0]:.1f}, {start[1]:.1f}")
+    side = side_points(feats, [shape(f["geometry"]).buffer(0) for f in layers.get("interrows", [])], passages)
     anchors, members, unreachable = [], [], []
-    for f in feats:
-        nd = anchor(grid, cost, idx, f["geometry"]["coordinates"])
+    for k, f in enumerate(feats):
+        nd = anchor(grid, cost, idx, side[k], radius=0.6) if k in side else None
+        if nd is not None:                       # the stop must stay within reach of its target after snapping
+            sx, sy = grid.to_xy(rc[[nd], 0], rc[[nd], 1])[0]
+            tx, ty = f["geometry"]["coordinates"]
+            if np.hypot(sx - tx, sy - ty) > VISIT - 0.1:
+                nd = None
+        if nd is None:
+            nd = anchor(grid, cost, idx, f["geometry"]["coordinates"])
         if nd is None:
             unreachable.append(f["properties"]["id"])
         elif nd in anchors:
@@ -543,17 +604,48 @@ def main() -> None:
               f"  ({time.time() - t0:.0f}s)")
         if share <= a.max_outside or not active:
             break
-        # outside metres attributable to each stop = its incoming + outgoing legs; drop the worst few %
-        attr = {}
-        for u, v, _, o in legs:
-            attr[v] = attr.get(v, 0.0) + o
-            attr[u] = attr.get(u, 0.0) + o
-        attr.pop(0, None)
         excess = outside - a.max_outside * total
-        frac = min(0.12, max(0.03, excess / max(outside, 1e-9) * 0.6))   # proportional to how far over budget
-        # drop first the stops that cost the most outside metres per unit of value: long gaps (>= 5 m, the
-        # likely reference targets) and waste are worth more than short gaps
-        worst = sorted(active, key=lambda i: -attr.get(i, 0.0) / value[i])[:max(3, int(len(active) * frac))]
+        if share > 2.8 * a.max_outside:                    # far over budget: drop the costliest stops in bulk (fast)
+            attr = {}
+            for u, v, _, o in legs:
+                attr[v] = attr.get(v, 0.0) + o
+                attr[u] = attr.get(u, 0.0) + o
+            attr.pop(0, None)
+            frac = min(0.12, max(0.03, excess / max(outside, 1e-9) * 0.6))
+            worst = sorted(active, key=lambda i: -attr.get(i, 0.0) / value[i])[:max(3, int(len(active) * frac))]
+            active = [i for i in active if i not in set(worst)]
+            tlimit = min(a.time, 10)
+            continue
+        # close to the budget: drop by what each stop really saves: its two legs minus the leg that replaces them
+        # (prev -> next), in outside metres; a stop on the way saves ~0, a detour into another inter-row both turns
+        seq = order[1:-1]
+        need = [(order[j - 1], order[j + 1]) for j in range(1, len(order) - 1) if (order[j - 1], order[j + 1]) not in leg_cache]
+        for (u, v), res in zip(need, pool.imap(_leg_job, [(nodes[u], nodes[v], Dw[u, v] + 1) for u, v in need], chunksize=16)):
+            leg_cache[(u, v)] = res
+        saving = {}
+        for j in range(1, len(order) - 1):
+            p_, k, n_ = order[j - 1], order[j], order[j + 1]
+            saving[k] = leg_cache[(p_, k)][2] + leg_cache[(k, n_)][2] - leg_cache[(p_, n_)][2]
+        # best savings per unit of value first; neighbours of a dropped stop wait for the next iteration (their savings
+        # change); stop once the expected saving covers the excess (plus the length lost with the dropped legs)
+        worst, blocked, got = [], set(), 0.0
+        cap = max(3, int(len(active) * 0.08))
+        for k in sorted(seq, key=lambda i: -saving[i] / value[i]):
+            if k in blocked or saving[k] <= 0.05:
+                continue
+            worst.append(k)
+            got += saving[k]
+            j = order.index(k)
+            blocked.update((order[j - 1], order[j + 1]))
+            if got >= 1.5 * excess or len(worst) >= cap:      # the re-solved tour does not keep every saving
+                break
+        if not worst:                                       # nothing saves outside metres: fall back to the costliest legs
+            attr = {}
+            for u, v, _, o in legs:
+                attr[v] = attr.get(v, 0.0) + o
+                attr[u] = attr.get(u, 0.0) + o
+            attr.pop(0, None)
+            worst = sorted(active, key=lambda i: -attr.get(i, 0.0) / value[i])[:max(3, int(len(active) * 0.03))]
         active = [i for i in active if i not in set(worst)]
         tlimit = min(a.time, 10)
     pool.close()

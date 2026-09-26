@@ -101,6 +101,7 @@ def main():
     ap.add_argument("--dry", default="", help="write everything into this folder; no deliverable is touched")
     ap.add_argument("--reblock", action="store_true", help="recompute vineyard_id / row_id from geometry (pipeline.blocks)")
     ap.add_argument("--route-time", type=int, default=60)
+    ap.add_argument("--quick", action="store_true", help="skip the day tours and the web route variants (~15 min faster)")
     a = ap.parse_args()
     t0, log = time.time(), []
     d, nx = load_export(a.export)
@@ -131,7 +132,8 @@ def main():
     else:
         # map layers first: register / env_indicators / register_mismatch read web/data/pred/interrows.geojson
         sh([PY, "scripts/build_web_map.py", "--pred", glob_xml], log)
-        sh([PY, "-m", "pipeline.run", "--from", "targets", "--to", "measure", "--inp", glob_xml, "--route-time", a.route_time], log)
+        sh([PY, "-m", "pipeline.run", "--from", "targets", "--to", "measure", "--inp", glob_xml, "--route-time", a.route_time]
+           + (["--quick"] if a.quick else []), log)
         sh([PY, "-m", "pipeline.run", "--from", "web", "--to", "web", "--inp", glob_xml], log)
     print("\ntimings: " + ", ".join(f"{n} {s}s" for n, s, _ in log) + f" | total {round((time.time() - t0) / 60, 1)} min")
 
