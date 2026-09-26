@@ -7,64 +7,85 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500&display=swap">
 <style>
-:root{color-scheme:light;--ink:#15201A;--muted:#5C6A62;--line:#DCE2DE;--field:#F6F8F7;--blue:#0046AE;--yellow:#FFD200;--red:#CC092F;--c:var(--blue)}
+/* same visual language as the landing: dark ground, glass cards, white primary button, flag accents */
+:root{color-scheme:dark;--bg:#0B0F0D;--surface:#131A16;--field:#0E1411;--line:rgba(255,255,255,.12);--line2:rgba(255,255,255,.22);--ink:#FFFFFF;--soft:#D5DCD7;--muted:#9FAAA3;
+  --blue:#0046AE;--blue-ink:#7FA8F0;--yellow:#FFD200;--red:#CC092F;--red-ink:#FF8A9C;--leaf:#4ADE80;--c:var(--blue-ink)}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{height:100%}
-body{margin:0;min-height:100%;background:#1B221E url('data/hires/siret3_r021_c012.webp') center/cover fixed;color:#fff;font:16px/1.5 'Geist',system-ui,sans-serif;display:flex;flex-direction:column;padding-inline:16px}
-body::before{content:'';position:fixed;inset:0;background:rgba(10,14,12,.82);z-index:0}
+body{margin:0;min-height:100%;background:var(--bg) url('data/hires/siret3_r021_c012.webp') center/cover fixed;color:var(--ink);font:16px/1.5 'Geist',system-ui,sans-serif;display:flex;flex-direction:column;padding-inline:20px;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(90deg,rgba(10,14,12,.96) 0%,rgba(10,14,12,.86) 55%,rgba(10,14,12,.72) 100%);z-index:0}
 body > *{position:relative;z-index:1}
-header{padding-block:22px;display:flex;justify-content:space-between;align-items:center;max-width:1100px;width:100%;margin:0 auto}
 a{color:inherit}
-.logo{font-weight:700;font-size:18px;text-decoration:none}
-header a.back{color:#9FAAA3;font-size:14px}
+header{padding-block:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;max-width:1180px;width:100%;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;text-decoration:none}
+.logo i{width:30px;height:30px;border-radius:9px;background:var(--leaf);color:#052312;display:grid;place-items:center}
+header nav{display:flex;align-items:center;gap:14px}
+header a.back{color:var(--soft);font-size:14px;text-decoration:none}
+header a.back:hover{color:#fff}
+.lang{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--muted);font:600 12px/1 'Geist',sans-serif;padding:9px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:rgba(255,255,255,.14);color:#fff}
 main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding-block:8px 48px}
-.ribbon{display:flex;width:120px;height:6px}.ribbon i{flex:1}.ribbon i:nth-child(1){background:var(--blue)}.ribbon i:nth-child(2){background:var(--yellow)}.ribbon i:nth-child(3){background:var(--red)}
-.card{width:min(440px,100%);background:#fff;color:var(--ink);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:18px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
-h1{font:800 26px/1.1 'Bricolage Grotesque','Geist',sans-serif;margin:0;letter-spacing:-.01em}
+.ribbon{display:flex;width:150px;height:7px}.ribbon i{flex:1}.ribbon i:nth-child(1){background:var(--blue)}.ribbon i:nth-child(2){background:var(--yellow)}.ribbon i:nth-child(3){background:var(--red)}
+.card,.modal{background:rgba(19,26,22,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--ink);border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.card{width:min(460px,100%);padding:28px;display:flex;flex-direction:column;gap:18px}
+h1{font:800 30px/1.05 'Bricolage Grotesque','Geist',sans-serif;margin:0;letter-spacing:-.02em}
 fieldset{border:0;margin:0;padding:0;min-width:0}
-legend{font-size:14px;font-weight:600;margin-bottom:8px;padding:0}
+legend{font-size:13px;font-weight:600;margin-bottom:8px;padding:0;color:var(--soft)}
 .roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.role{position:relative;display:flex;align-items:center;gap:10px;padding:12px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
+.role{position:relative;display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
 .role input{position:absolute;opacity:0;pointer-events:none}
 .role svg{flex-shrink:0}
-.role b{display:block;color:var(--ink);font-size:15px}
+.role b{display:block;color:#fff;font-size:15px}
 .role small{font-size:12px;line-height:1.3;display:block}
-.role.insp{--rc:var(--blue)}.role.admin{--rc:var(--red)}
-.role:has(input:checked){border-color:var(--rc);background:color-mix(in srgb,var(--rc) 7%,#fff);color:var(--rc)}
-.role:has(input:focus-visible){outline:3px solid var(--yellow);outline-offset:2px}
-.f{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
-.f input{width:100%;min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--field);padding:0 14px;font:500 16px 'Geist',sans-serif;color:var(--ink)}
-.f input:focus{outline:none;border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 18%,transparent);background:#fff}
+.role.insp{--rc:var(--blue-ink)}.role.admin{--rc:var(--red-ink)}
+.role:has(input:checked){border-color:var(--rc);background:color-mix(in srgb,var(--rc) 12%,transparent);color:var(--rc)}
+.role:has(input:focus-visible){outline:2px solid var(--yellow);outline-offset:2px}
+.f{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:var(--soft)}
+.f input,.f select{width:100%;min-height:48px;border:1px solid var(--line2);border-radius:12px;background:var(--field);padding:0 14px;font:500 16px 'Geist',sans-serif;color:#fff}
+.f input::placeholder{color:#6B756F}
+.f input:focus,.f select:focus{outline:none;border-color:var(--yellow);box-shadow:0 0 0 3px rgba(255,210,0,.18)}
 .pw{position:relative;display:block}
 .pw input{padding-right:52px}
 .pw button{position:absolute;right:4px;top:4px;width:40px;height:40px;border:0;border-radius:10px;background:none;color:var(--muted);cursor:pointer;display:grid;place-items:center}
-.pw button:hover{background:var(--field);color:var(--ink)}
-.err{margin:0;color:var(--red);font-size:14px;font-weight:500}
-.err.info{color:var(--muted)}
-.go{min-height:50px;border:0;border-radius:12px;background:var(--c);color:#fff;font:600 16px 'Geist',sans-serif;cursor:pointer;transition:background .15s}
-.go:hover{filter:brightness(1.08)}
-.go:focus-visible,.mpass:focus-visible,.linkbtn:focus-visible,.demo button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
-.linkbtn{align-self:center;border:0;background:none;color:var(--c);font:600 14px 'Geist',sans-serif;cursor:pointer;padding:4px}
-.demo{background:var(--field);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
-.demo code{font:500 13px 'Geist Mono',ui-monospace,monospace;color:var(--ink);overflow-wrap:anywhere}
-.demo button{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 10px;font:600 13px 'Geist',sans-serif;color:var(--ink);cursor:pointer}
+.pw button:hover{background:rgba(255,255,255,.07);color:#fff}
+.err{margin:0;color:var(--red-ink);font-size:14px;font-weight:500}
+.err.info{color:var(--soft)}
+.go{min-height:50px;border:0;border-radius:12px;background:#fff;color:#0B0F0D;font:600 16px 'Geist',sans-serif;cursor:pointer;transition:background .15s}
+.go:hover{background:#E9EFE9}
+.go:focus-visible,.mpass:focus-visible,.linkbtn:focus-visible,.tabs button:focus-visible,.x:focus-visible,.lang button:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.linkbtn{align-self:center;border:0;background:none;color:var(--yellow);font:600 14px 'Geist',sans-serif;cursor:pointer;padding:4px}
+.linkbtn:hover{text-decoration:underline}
 .or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px}.or::before,.or::after{content:'';flex:1;height:1px;background:var(--line)}
-.mpass{display:flex;align-items:center;justify-content:center;gap:10px;min-height:50px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:600 16px 'Geist',sans-serif;text-decoration:none}
-.mpass:hover{background:var(--field)}
+.mpass{display:flex;align-items:center;justify-content:center;gap:10px;min-height:50px;border:1px solid var(--line2);border-radius:12px;background:transparent;color:#fff;font:600 16px 'Geist',sans-serif;text-decoration:none}
+.mpass:hover{background:rgba(255,255,255,.06)}
 .sim{align-self:center;font-size:13px;color:var(--muted)}
-.lang{display:flex;border:1px solid rgba(255,255,255,.2);border-radius:10px;overflow:hidden}.lang button{background:none;border:0;color:#9FAAA3;font:600 12px/1 'Geist',sans-serif;padding:8px 9px;cursor:pointer}.lang button[aria-pressed="true"]{background:rgba(255,255,255,.16);color:#fff}
-header nav{display:flex;align-items:center;gap:14px}
-.note{color:#9FAAA3;font-size:13px;margin:0;text-align:center;max-width:440px;text-wrap:balance}
-@media (max-width:420px){.card{padding:22px 18px}.role{padding:10px;gap:8px}.role svg{width:22px;height:22px}}
+.card-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.reg{font-size:14px;padding:0}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.tabs button{min-height:40px;border:0;border-radius:9px;background:none;color:var(--muted);font:600 14px 'Geist',sans-serif;cursor:pointer}
+.tabs button[aria-selected="true"]{background:rgba(255,255,255,.14);color:#fff}
+.veil{position:fixed;inset:0;z-index:50;background:rgba(4,6,5,.72);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{width:min(460px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:24px;display:flex;flex-direction:column;gap:14px}
+.modal > div:not(.m-h){display:flex;flex-direction:column;gap:14px}
+.m-h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.m-h h2{font:800 24px/1.1 'Bricolage Grotesque','Geist',sans-serif;margin:0;letter-spacing:-.02em}
+.x{width:36px;height:36px;border:0;border-radius:10px;background:none;font-size:22px;line-height:1;color:var(--muted);cursor:pointer}.x:hover{background:rgba(255,255,255,.08);color:#fff}
+.m-p{margin:0;color:var(--soft);font-size:14px}
+.m-note{margin:0;color:var(--muted);font-size:12px;text-align:center}
+.okmsg{margin:0;padding:12px 14px;border-radius:12px;background:rgba(74,222,128,.12);color:var(--leaf);font-size:14px;font-weight:500}
+.note{color:var(--muted);font-size:13px;margin:0;text-align:center;max-width:460px;text-wrap:balance}
+@media (max-width:420px){.card,.modal{padding:22px 18px}.role{padding:10px;gap:8px}.role svg{width:22px;height:22px}header nav .back{display:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header><a class="logo" href="index.html">VinePlan</a><nav><div class="lang" role="group" aria-label="Limba / Язык / Language"><button type="button" data-lang="ro">RO</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></div><a class="back" href="index.html" data-i="back">Înapoi</a></nav></header>
+<header><a class="logo" href="index.html"><i aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 20V9M10 20V4M15 20V9M20 20V4"/></svg></i>VinePlan</a><nav><div class="lang" role="group" aria-label="Limba / Язык / Language"><button type="button" data-lang="ro">RO</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button></div><a class="back" href="index.html" data-i="back">Înapoi</a></nav></header>
 <main>
   <div class="ribbon" aria-hidden="true"><i></i><i></i><i></i></div>
   <form class="card" id="f" novalidate>
-    <h1 data-i="h1">Autentificare</h1>
+    <div class="card-h"><h1 data-i="h1">Autentificare</h1><button class="linkbtn reg" type="button" id="reg-open" data-i="reg">Înregistrează-te</button></div>
     <fieldset>
       <legend data-i="as">Intru în calitate de</legend>
       <div class="roles">
@@ -76,7 +97,9 @@ header nav{display:flex;align-items:center;gap:14px}
           <span><b data-i="r_admin">Administrator</b><small data-i="r_admin_s">Exploatația viticolă</small></span></label>
       </div>
     </fieldset>
-    <label class="f"><span data-i="email">Poșta electronică</span><input type="email" id="email" name="email" autocomplete="username" placeholder="nume@exemplu.md" required></label>
+    <div class="tabs" role="tablist" aria-label="Mod de autentificare"><button type="button" role="tab" data-tab="email" aria-selected="true" data-i="t_email">Email</button><button type="button" role="tab" data-tab="phone" aria-selected="false" data-i="t_phone">Telefon</button></div>
+    <label class="f" id="f-email"><span data-i="email">Poșta electronică</span><input type="email" id="email" name="email" autocomplete="username" placeholder="nume@exemplu.md" required></label>
+    <label class="f" id="f-phone" hidden><span data-i="phone">Număr de telefon</span><input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+373 6X XXX XXX"></label>
     <label class="f"><span data-i="pw">Parolă</span><span class="pw"><input type="password" id="pw" name="password" autocomplete="current-password" placeholder="Parolă" required><button type="button" id="eye" aria-label="Arată parola" aria-pressed="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></span></label>
     <p class="err" id="err" role="alert" hidden></p>
     <button class="go" type="submit" id="go" data-i="go">Intră</button>
@@ -85,25 +108,55 @@ header nav{display:flex;align-items:center;gap:14px}
     <a class="mpass" href="https://mpass.gov.md/login/saml" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg><span data-i="mpass">Intră cu MPass</span></a>
     <a class="sim" href="mpass.html?return=app.html" data-i="sim">Simulare MPass pentru demo</a>
   </form>
+  <div class="veil" id="m-reset" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="rs-h">
+    <div class="m-h"><h2 id="rs-h" data-i="rs_h">Resetează parola</h2><button type="button" class="x" data-close aria-label="Închide">×</button></div>
+    <div id="rs-1">
+      <p class="m-p" data-i="rs_p">Îți trimitem un link de resetare pe e-mail sau un cod prin SMS.</p>
+      <div class="tabs" role="tablist"><button type="button" role="tab" data-rtab="email" aria-selected="true" data-i="t_email2">Email</button><button type="button" role="tab" data-rtab="phone" aria-selected="false" data-i="t_phone2">Telefon</button></div>
+      <label class="f"><span id="rs-lab">Poșta electronică</span><input id="rs-id" autocomplete="off"></label>
+      <button class="go" type="button" id="rs-send" data-i="rs_send">Trimite</button>
+    </div>
+    <div id="rs-2" hidden>
+      <p class="m-p" id="rs-sent"></p>
+      <label class="f"><span data-i="rs_code">Codul primit</span><input id="rs-code" inputmode="numeric" autocomplete="one-time-code" value="482913"></label>
+      <label class="f"><span data-i="rs_new">Parola nouă</span><input id="rs-new" type="password" autocomplete="new-password" value="demo2026"></label>
+      <button class="go" type="button" id="rs-save" data-i="rs_save">Salvează parola</button>
+    </div>
+    <div id="rs-3" hidden><p class="okmsg" data-i="rs_done">Parola a fost schimbată. Te poți autentifica.</p><button class="go" type="button" data-close data-i="back_login">Înapoi la autentificare</button></div>
+    <p class="m-note" data-i="m_demo">Demo: nimic nu pleacă din browser.</p>
+  </div></div>
+  <div class="veil" id="m-reg" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="rg-h">
+    <div class="m-h"><h2 id="rg-h" data-i="rg_h">Cont nou</h2><button type="button" class="x" data-close aria-label="Închide">×</button></div>
+    <div id="rg-1">
+      <label class="f"><span data-i="rg_name">Nume și prenume</span><input id="rg-name" autocomplete="name" value="Ion Moraru"></label>
+      <label class="f"><span data-i="rg_role">Rol</span><select id="rg-role"><option value="inspector" data-i="o_insp">Inspector (AIPA, ONVV)</option><option value="fermier" data-i="o_admin">Administrator (exploatație viticolă)</option></select></label>
+      <label class="f"><span data-i="email2">Poșta electronică</span><input id="rg-email" type="email" autocomplete="email" value="ion.moraru@exemplu.md"></label>
+      <label class="f"><span data-i="phone2">Număr de telefon</span><input id="rg-phone" type="tel" autocomplete="tel" value="+373 69 123 456"></label>
+      <label class="f"><span data-i="pw2">Parolă</span><input id="rg-pw" type="password" autocomplete="new-password" value="demo2026"></label>
+      <button class="go" type="button" id="rg-send" data-i="rg_send">Creează contul</button>
+    </div>
+    <div id="rg-2" hidden><p class="okmsg" data-i="rg_done">Cererea de cont a fost înregistrată. În demo intri cu contul gata completat al rolului.</p><button class="go" type="button" data-close data-i="back_login2">Înapoi la autentificare</button></div>
+    <p class="m-note" data-i="m_demo2">Demo: nimic nu pleacă din browser.</p>
+  </div></div>
   <p class="note" data-i="note">MVP demonstrativ: contul demo al rolului e deja completat; parola nu pleacă din browser și nu se salvează. Revenirea din MPass cere înregistrarea platformei la Agenția de Guvernare Electronică.</p>
 </main>
 <script>
 /* demo accounts only: checked in the browser, nothing is sent, the password is never stored */
 const ACCOUNTS = {
-  inspector: {email: 'inspector@fieldplanner.demo', name: 'Inspector demo', org: 'AIPA Strășeni', label: 'Inspector'},
-  fermier: {email: 'administrator@fieldplanner.demo', name: 'Administrator demo', org: 'Vie Sireți SRL', label: 'Administrator'}};
+  inspector: {email: 'inspector@fieldplanner.demo', phone: '+373 69 000 101', name: 'Inspector demo', org: 'AIPA Strășeni', label: 'Inspector'},
+  fermier: {email: 'administrator@fieldplanner.demo', phone: '+373 69 000 202', name: 'Administrator demo', org: 'Vie Sireți SRL', label: 'Administrator'}};
 const I18N = {
-  ru: {back: 'Назад', h1: 'Вход', as: 'Вхожу как', r_insp: 'Инспектор', r_admin: 'Администратор', r_admin_s: 'Виноградарское хозяйство', email: 'Электронная почта', pw: 'Пароль', go: 'Войти',
+  ru: {reg: 'Регистрация', t_email: 'Email', t_phone: 'Телефон', t_email2: 'Email', t_phone2: 'Телефон', phone: 'Номер телефона', phone2: 'Номер телефона', email2: 'Электронная почта', pw2: 'Пароль', rs_h: 'Сброс пароля', rs_p: 'Мы отправим ссылку для сброса на e-mail или код по SMS.', rs_send: 'Отправить', rs_code: 'Полученный код', rs_new: 'Новый пароль', rs_save: 'Сохранить пароль', rs_done: 'Пароль изменён. Можно войти.', back_login: 'Назад ко входу', back_login2: 'Назад ко входу', m_demo: 'Демо: ничего не покидает браузер.', m_demo2: 'Демо: ничего не покидает браузер.', rg_h: 'Новый аккаунт', rg_name: 'Имя и фамилия', rg_role: 'Роль', o_insp: 'Инспектор (AIPA, ONVV)', o_admin: 'Администратор (виноградарское хозяйство)', rg_send: 'Создать аккаунт', rg_done: 'Заявка на аккаунт зарегистрирована. В демо войдите с уже заполненным аккаунтом роли.', rs_sent_email: 'Мы отправили ссылку и код для сброса на {x}.', rs_sent_phone: 'Мы отправили код по SMS на {x}.', e_phone: 'Номер телефона или пароль не совпадают с демо-аккаунтом.', close: 'Закрыть', via_phone: 'телефон', back: 'Назад', h1: 'Вход', as: 'Вхожу как', r_insp: 'Инспектор', r_admin: 'Администратор', r_admin_s: 'Виноградарское хозяйство', email: 'Электронная почта', pw: 'Пароль', go: 'Войти',
        forgot: 'Забыли пароль?', or: 'или', mpass: 'Войти через MPass', sim: 'Симуляция MPass для демо',
        note: 'Демонстрационная версия (MVP): демо-аккаунт роли уже заполнен; пароль не покидает браузер и не сохраняется. Возврат из MPass требует регистрации платформы в Агентстве электронного управления.',
        e_empty: 'Заполните электронную почту и пароль.', e_bad: 'Почта или пароль не совпадают с демо-аккаунтом.', e_role: 'У этого аккаунта нет роли «{r}». Выберите «{o}» вверху.',
        e_forgot: 'В демо нет сброса пароля. Аккаунт: {e}, пароль {p}.', show: 'Показать пароль', hide: 'Скрыть пароль', title: 'Вход · VinePlan', L_inspector: 'Инспектор', L_fermier: 'Администратор'},
-  en: {back: 'Back', h1: 'Sign in', as: 'Signing in as', r_insp: 'Inspector', r_admin: 'Administrator', r_admin_s: 'Vineyard holding', email: 'Email', pw: 'Password', go: 'Sign in',
+  en: {reg: 'Sign up', t_email: 'Email', t_phone: 'Phone', t_email2: 'Email', t_phone2: 'Phone', phone: 'Phone number', phone2: 'Phone number', email2: 'Email', pw2: 'Password', rs_h: 'Reset your password', rs_p: 'We will send a reset link by e-mail or a code by SMS.', rs_send: 'Send', rs_code: 'Code received', rs_new: 'New password', rs_save: 'Save password', rs_done: 'Your password has been changed. You can sign in.', back_login: 'Back to sign in', back_login2: 'Back to sign in', m_demo: 'Demo: nothing leaves the browser.', m_demo2: 'Demo: nothing leaves the browser.', rg_h: 'New account', rg_name: 'Full name', rg_role: 'Role', o_insp: 'Inspector (AIPA, ONVV)', o_admin: 'Manager (vineyard holding)', rg_send: 'Create account', rg_done: 'Your account request has been registered. In the demo, sign in with the role\'s prefilled account.', rs_sent_email: 'We sent a reset link and code to {x}.', rs_sent_phone: 'We sent an SMS code to {x}.', e_phone: 'The phone number or password does not match a demo account.', close: 'Close', via_phone: 'phone', back: 'Back', h1: 'Sign in', as: 'Signing in as', r_insp: 'Inspector', r_admin: 'Administrator', r_admin_s: 'Vineyard holding', email: 'Email', pw: 'Password', go: 'Sign in',
        forgot: 'Forgot your password?', or: 'or', mpass: 'Sign in with MPass', sim: 'MPass simulation for the demo',
        note: "Demo version (MVP): the role's demo account is already filled in; the password never leaves the browser and is not stored. Returning from MPass requires registering the platform with the E-Government Agency.",
        e_empty: 'Enter your email and password.', e_bad: 'The email or password does not match a demo account.', e_role: 'This account does not have the “{r}” role. Choose “{o}” above.',
        e_forgot: 'There is no password reset in the demo. Account: {e}, password {p}.', show: 'Show password', hide: 'Hide password', title: 'Sign in · VinePlan', L_inspector: 'Inspector', L_fermier: 'Administrator'},
-  ro: {e_empty: 'Completează poșta electronică și parola.', e_bad: 'Poșta sau parola nu se potrivesc cu un cont demo.', e_role: 'Acest cont nu are rolul {r}. Alege „{o}” sus.',
+  ro: {rs_sent_email: 'Am trimis un link și un cod de resetare la {x}.', rs_sent_phone: 'Am trimis un cod prin SMS la {x}.', e_phone: 'Numărul de telefon sau parola nu se potrivesc cu un cont demo.', close: 'Închide', e_empty: 'Completează poșta electronică și parola.', e_bad: 'Poșta sau parola nu se potrivesc cu un cont demo.', e_role: 'Acest cont nu are rolul {r}. Alege „{o}” sus.',
        e_forgot: 'În demo nu există resetare. Cont: {e}, parola {p}.', show: 'Arată parola', hide: 'Ascunde parola', title: 'Autentificare · VinePlan', L_inspector: 'Inspector', L_fermier: 'Administrator'}};
 const I18N_RO = {};
 document.querySelectorAll('[data-i]').forEach(el => { I18N_RO[el.dataset.i] = el.innerHTML; });
@@ -116,33 +169,59 @@ function applyLang(l) {
   document.querySelectorAll('[data-i]').forEach(el => { const v = LANG === 'ro' ? I18N_RO[el.dataset.i] : I18N[LANG][el.dataset.i]; if (v != null) el.innerHTML = v; });
   document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === LANG));
   document.getElementById('pw').placeholder = LANG === 'ro' ? 'Parolă' : I18N[LANG].pw;
+  const rl = document.getElementById('rs-lab'); if (rl) rl.textContent = t(typeof RT === 'undefined' || RT === 'email' ? 'email' : 'phone');
+  document.querySelectorAll('.x').forEach(x => x.setAttribute('aria-label', t('close')));
   const eye = document.getElementById('eye'); eye.setAttribute('aria-label', t(eye.getAttribute('aria-pressed') === 'true' ? 'hide' : 'show'));
 }
 document.addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) { applyLang(b.dataset.lang); document.getElementById('err').hidden = true; } });
 const DEMO_PW = 'demo2026';
 const $ = s => document.querySelector(s), f = $('#f'), err = $('#err');
 const role = () => f.role.value;
-const COLORS = {inspector: 'var(--blue)', fermier: 'var(--red)'};
+let TAB = 'email';
+const digits = s => String(s || '').replace(/\D/g, '');
+const COLORS = {inspector: 'var(--blue-ink)', fermier: 'var(--red-ink)'};
 const say = (m, info) => { err.textContent = m; err.classList.toggle('info', !!info); err.hidden = false; };
 function syncRole() {
   const a = ACCOUNTS[role()];
   document.documentElement.style.setProperty('--c', COLORS[role()]);
-  f.email.value = a.email; f.password.value = DEMO_PW;      // demo: the role's account is prefilled
+  f.email.value = a.email; f.phone.value = a.phone; f.password.value = DEMO_PW;      // demo: the role's account is prefilled
   err.hidden = true;
 }
 f.addEventListener('change', e => { if (e.target.name === 'role') syncRole(); });
 $('#eye').addEventListener('click', e => { const b = e.currentTarget, on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', t(on ? 'hide' : 'show')); f.password.type = on ? 'text' : 'password'; });
-$('#forgot').addEventListener('click', () => say(t('e_forgot', {e: ACCOUNTS[role()].email, p: DEMO_PW}), true));
+function setTab(k) {                          // e-mail or phone number, same demo password
+  TAB = k; document.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-selected', b.dataset.tab === k));
+  $('#f-email').hidden = k !== 'email'; $('#f-phone').hidden = k !== 'phone'; err.hidden = true;
+}
+document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+/* modals: password reset (link by e-mail or SMS code) and a new-account request; demo, nothing is sent */
+let RT = 'email';
+const openModal = id => { const m = $(id); m.hidden = false; m.querySelector('input,select,button:not(.x)')?.focus(); };
+const closeModals = () => document.querySelectorAll('.veil').forEach(m => { m.hidden = true; });
+function resetTab(k) {
+  RT = k; document.querySelectorAll('[data-rtab]').forEach(b => b.setAttribute('aria-selected', b.dataset.rtab === k));
+  $('#rs-lab').textContent = t(k === 'email' ? 'email' : 'phone'); $('#rs-id').type = k === 'email' ? 'email' : 'tel';
+  $('#rs-id').value = ACCOUNTS[role()][k];
+}
+$('#forgot').addEventListener('click', () => { ['#rs-1', '#rs-2', '#rs-3'].forEach((s, i) => { $(s).hidden = i > 0; }); resetTab(TAB); openModal('#m-reset'); });
+document.querySelectorAll('[data-rtab]').forEach(b => b.addEventListener('click', () => resetTab(b.dataset.rtab)));
+$('#rs-send').addEventListener('click', () => { $('#rs-sent').textContent = t(RT === 'email' ? 'rs_sent_email' : 'rs_sent_phone', {x: $('#rs-id').value}); $('#rs-1').hidden = true; $('#rs-2').hidden = false; $('#rs-code').focus(); });
+$('#rs-save').addEventListener('click', () => { $('#rs-2').hidden = true; $('#rs-3').hidden = false; });
+$('#reg-open').addEventListener('click', () => { $('#rg-1').hidden = false; $('#rg-2').hidden = true; $('#rg-role').value = role(); openModal('#m-reg'); });
+$('#rg-send').addEventListener('click', () => { $('#rg-1').hidden = true; $('#rg-2').hidden = false; });
+document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', closeModals));
+document.querySelectorAll('.veil').forEach(v => v.addEventListener('click', e => { if (e.target === v) closeModals(); }));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModals(); });
 f.addEventListener('submit', e => {
   e.preventDefault();
-  const email = f.email.value.trim().toLowerCase(), pw = f.password.value;
-  if (!email || !pw) return say(t('e_empty'));
-  const owner = Object.keys(ACCOUNTS).find(k => ACCOUNTS[k].email === email);
-  if (!owner || pw !== DEMO_PW) { return say(t('e_bad')); }
+  const email = f.email.value.trim().toLowerCase(), phone = digits(f.phone.value), pw = f.password.value;
+  if ((TAB === 'email' ? !email : !phone) || !pw) return say(t('e_empty'));
+  const owner = Object.keys(ACCOUNTS).find(k => TAB === 'email' ? ACCOUNTS[k].email === email : digits(ACCOUNTS[k].phone) === phone);
+  if (!owner || pw !== DEMO_PW) { return say(t(TAB === 'email' ? 'e_bad' : 'e_phone')); }
   if (owner !== role()) return say(t('e_role', {r: t('L_' + role()), o: t('L_' + owner)}));
   const a = ACCOUNTS[owner];
   try {
-    localStorage.setItem('fpm.session', JSON.stringify({role: owner, name: a.name, org: a.org, email: a.email, via: 'parola-demo', at: new Date().toISOString()}));
+    localStorage.setItem('fpm.session', JSON.stringify({role: owner, name: a.name, org: a.org, email: a.email, phone: a.phone, via: TAB === 'phone' ? 'telefon-demo' : 'parola-demo', at: new Date().toISOString()}));
     localStorage.setItem('fpm.role', JSON.stringify(owner));
   } catch (x) {}
   location.href = 'app.html#' + owner;
