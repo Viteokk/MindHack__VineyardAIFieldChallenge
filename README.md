@@ -377,6 +377,29 @@ The site detects the API and switches to live computation:
   detector and the AI model return canopies, rows, inter-rows and waste on the map with counts and areas
   (~4 s per 2048 px tile on CPU).
 
+## Back-office (administration, demo)
+
+`web/admin.html` (sign-in role **Back-office**, account `backoffice@fieldplanner.demo`): the administration side of the platform, in the
+style of the government back-offices (MAIA → AIPA → territorial subdivisions, ONVV). Modules:
+
+- **Subsidy applications**: list with search, filters, column choice, CSV; each application goes through *Depunere → Verificare
+  administrativă → Control pe teren → Evaluare → Decizie → Plată*, has an assigned inspector (AIPA Strășeni), the drone's declared vs
+  measured comparison and checks for its block, the inspection report, and an **activity panel** (who viewed or changed what, before →
+  after). Actions: assign the inspector, next stage, eligible amount, decision, note.
+- **Beneficiaries** (the holdings that apply), **Organisations** (hierarchy, address), **Platform users** (roles per module,
+  permissions, sign-in and activity tab with module / date filters), **Roles and permissions** (create a role or a permission, MPass-only
+  roles), **Reports** (applications, field inspections per inspector, beneficiaries, register, users; indicator panel or table, CSV).
+- The inspector keeps working in the portal (`app.html`); what they do there (block card, inspection report, checked targets, route)
+  is logged in the browser and shows up in the application of the same block and in the inspector's activity.
+
+All people, IDNP / IDNO, phones, e-mails, beneficiaries, applications and activity are **synthetic** (`scripts/build_backoffice_demo.py`
+→ `web/data/backoffice.json`, IPs from the RFC 5737 documentation ranges); the institution names are real. Changes made in the
+back-office stay in the viewer's browser ("Resetează datele demo" restores the data).
+
+**Accessibility:** WCAG 2.1 A/AA and best practices checked with axe-core on the landing, the sign-in page, the portal views of both
+roles and the back-office, desktop and phone: 0 violations (QA check W13). Skip links, visible focus, labelled controls and landmarks,
+keyboard-reachable tables, AA contrast in both themes.
+
 ## Paid APIs / LLMs
 
 None in the processing pipeline. Development assisted by Claude Code.

@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Back-office · VinePlan</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2315803D'/%3E%3Cpath d='M10 22V13M16 22V9M22 22v-6' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F3F5F4;--surface:#FFFFFF;--surface2:#F7F9F8;--ink:#101713;--muted:#5A655F;--faint:#8A948E;--line:#E2E7E4;--hover:#EEF2F0;
+  --accent:#15803D;--accent-ink:#FFFFFF;--accent-soft:#E7F4EC;--link:#166534;--danger:#B42318;--danger-soft:#FDECEA;--warn:#B54708;--warn-soft:#FEF0DC;
+  --ok:#067647;--ok-soft:#E3F6EA;--blue:#1D4ED8;--blue-soft:#E8EEFD;--shadow:0 1px 2px rgba(16,23,19,.05),0 10px 30px rgba(16,23,19,.07);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B0F0D;--surface:#131A16;--surface2:#18211C;--ink:#EDF2EE;--muted:#9BA69F;--faint:#76807A;
+  --line:#26302A;--hover:#1C2621;--accent:#22C55E;--accent-ink:#052E14;--accent-soft:#12301E;--link:#4ADE80;--danger:#F97066;--danger-soft:#3A1715;
+  --warn:#FDB022;--warn-soft:#3A2A0C;--ok:#47CD89;--ok-soft:#0F2E1D;--blue:#84ADFF;--blue-soft:#172448;--shadow:0 10px 30px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B0F0D;--surface:#131A16;--surface2:#18211C;--ink:#EDF2EE;--muted:#9BA69F;--faint:#76807A;--line:#26302A;--hover:#1C2621;
+  --accent:#22C55E;--accent-ink:#052E14;--accent-soft:#12301E;--link:#4ADE80;--danger:#F97066;--danger-soft:#3A1715;--warn:#FDB022;--warn-soft:#3A2A0C;
+  --ok:#47CD89;--ok-soft:#0F2E1D;--blue:#84ADFF;--blue-soft:#172448;--shadow:0 10px 30px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 'Geist',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+button,input,select,textarea{font:inherit;color:inherit}
+h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h2{font-size:19px;margin:0;letter-spacing:-.01em}
+h3{font-size:15px;margin:0}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-size:.92em}
+.num{font-variant-numeric:tabular-nums}
+.nowrap{white-space:nowrap}
+.muted{color:var(--muted)}
+[hidden]{display:none!important}
+/* top bar */
+.top{position:sticky;top:0;z-index:40;height:64px;display:flex;align-items:center;gap:14px;padding:0 20px;padding-top:env(safe-area-inset-top,0px);background:var(--surface);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand i{width:32px;height:32px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:#fff}
+.brand small{font-weight:600;font-size:12px;color:var(--muted);padding:3px 8px;border:1px solid var(--line);border-radius:999px;margin-left:4px}
+.demo-chip{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);padding:4px 8px;border-radius:6px}
+.grow{flex:1}
+.langs{display:flex;gap:2px}
+.langs button{border:0;background:none;padding:8px;border-radius:8px;font-weight:600;font-size:14px;color:var(--muted);cursor:pointer;min-width:36px;min-height:36px}
+.langs button[aria-pressed="true"]{color:var(--blue)}
+.icon-btn{position:relative;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:10px;border:0;background:none;color:var(--ink);cursor:pointer}
+.icon-btn:hover{background:var(--hover)}
+.badge-n{position:absolute;top:3px;right:1px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--danger);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.me{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;flex:none}
+.burger{display:none}
+/* shell */
+.shell{display:flex;align-items:flex-start}
+.side{position:sticky;top:64px;flex:none;width:264px;height:calc(100vh - 64px);overflow:auto;background:var(--surface);border-right:1px solid var(--line);padding:12px 12px 24px;display:flex;flex-direction:column;gap:2px}
+.side .col{align-self:flex-end;margin-bottom:6px}
+.side h4{margin:18px 10px 6px;font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.01em}
+.nav{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:var(--ink);font-weight:600;font-size:15px;min-height:44px}
+.nav:hover{background:var(--hover);text-decoration:none}
+.nav[aria-current="page"]{background:var(--accent-soft);color:var(--link)}
+.nav svg{flex:none}
+.nav .cnt{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted)}
+.side .sep{height:1px;background:var(--line);margin:12px 6px}
+.side.mini{width:72px}.side.mini .lbl,.side.mini h4,.side.mini .cnt{display:none}.side.mini .nav{justify-content:center;padding:10px}
+main{flex:1;min-width:0;padding:28px 32px 64px;max-width:1440px}
+/* page parts */
+.page-h{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--hover);text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.danger{color:var(--danger)}
+.btn.ghost{border-color:transparent;background:none}
+.btn.sm{min-height:34px;padding:0 12px;font-size:13px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.search{position:relative;flex:1 1 320px;max-width:560px}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search input{width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:0 12px 0 38px}
+.chip-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border:1px dashed var(--line);border-radius:10px;background:var(--surface);cursor:pointer;font-weight:600;font-size:14px}
+.chip-btn.on{border-style:solid;border-color:var(--accent);color:var(--link)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.card.pad{padding:24px}
+.tbl{overflow-x:auto;border-radius:16px;position:relative}   /* hidden screen-reader labels stay inside the scroll box */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:700;padding:14px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--surface2)}
+td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:var(--hover)}
+tbody tr:last-child td{border-bottom:0}
+td.cb,th.cb{width:44px;padding-right:0}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer}
+.dots{border:0;background:none;width:36px;height:36px;border-radius:8px;cursor:pointer;color:var(--muted);font-size:18px;line-height:1}
+.dots:hover{background:var(--hover)}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid var(--line);white-space:nowrap;background:var(--surface)}
+.pill i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.pill.ok{color:var(--ok)}.pill.warn{color:var(--warn)}.pill.bad{color:var(--danger)}.pill.off{color:var(--faint)}.pill.info{color:var(--blue)}
+.tag{display:inline-block;padding:3px 9px;border-radius:7px;font-size:12.5px;font-weight:600;background:var(--hover);color:var(--ink);margin:2px 4px 2px 0}
+.tag.perm{background:var(--blue-soft);color:var(--blue);border-radius:999px}
+.roles-cell b{display:block;font-size:13px;margin-top:2px}
+.pager{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:14px}
+.pager .pg{display:flex;align-items:center;gap:8px}
+.pager select{min-height:40px;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:0 10px}
+.pager button{width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer}
+.pager button[disabled]{opacity:.4;cursor:default}
+.selbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;margin-bottom:12px;border-radius:12px;background:var(--accent-soft);color:var(--link);font-weight:600;font-size:14px}
+/* popover / menu / modal */
+.pop{position:fixed;z-index:80;min-width:220px;max-width:340px;max-height:60vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px}
+.pop button,.pop label,.pop a{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border:0;background:none;border-radius:8px;text-align:left;cursor:pointer;font-size:14px;color:var(--ink)}
+.pop button:hover,.pop label:hover,.pop a:hover{background:var(--hover);text-decoration:none}
+.pop .ph{padding:8px 10px 4px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.veil{position:fixed;inset:0;z-index:90;background:rgba(10,14,12,.45);display:grid;place-items:center;padding:16px}
+.modal{width:min(520px,100%);background:var(--surface);border-radius:18px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+.modal .acts{display:flex;gap:10px;justify-content:flex-end}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:600;box-shadow:var(--shadow)}
+/* forms */
+.form-card{padding:28px}
+.form-card+.form-card{margin-top:16px}
+.form-card .sub{color:var(--muted);margin:4px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px 20px}
+.grid.two{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.f{display:flex;flex-direction:column;gap:7px;font-weight:600;font-size:14px;min-width:0}
+.f input,.f select,.f textarea{min-height:46px;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:0 12px;font-weight:400;width:100%}
+.f textarea{padding:10px 12px;min-height:90px}
+.f .ph-in{display:flex;gap:8px;align-items:center}
+.f .ph-in span{padding:10px 12px;border-radius:10px;background:var(--hover);font-weight:600}
+.f .err{color:var(--danger);font-weight:500;font-size:13px}
+.f.bad input,.f.bad select{border-color:var(--danger)}
+.f .ro{min-height:46px;display:flex;align-items:center;padding:0 12px;border-radius:10px;background:var(--surface2);border:1px dashed var(--line);font-weight:400;color:var(--muted)}
+.req{color:var(--danger)}
+.form-acts{display:flex;gap:12px;align-items:center;margin-top:22px}
+.rolebox{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;grid-column:1/-1}
+.rolebox fieldset{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0}
+.rolebox legend{font-weight:700;font-size:14px;padding:0 4px}
+.rolebox label{display:flex;gap:10px;align-items:flex-start;font-weight:500;padding:6px 0;cursor:pointer}
+.rolebox small{display:block;color:var(--muted);font-size:12px;font-weight:400}
+/* detail pages */
+.d-head{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+.d-head .back{width:44px;height:44px;border-radius:12px;border:0;background:none;cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+.d-head .back:hover{background:var(--hover)}
+.d-head .av{width:72px;height:72px;font-size:24px}
+.d-head .t{display:flex;flex-direction:column;gap:4px;min-width:0}
+.d-head .t .muted{font-size:15px}
+.d-head .acts{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:20px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:12px 16px;font-weight:600;font-size:15px;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tabs button[disabled]{opacity:.45;cursor:default}
+.tabs button.done{color:var(--ink)}
+dl.kv{display:grid;grid-template-columns:minmax(140px,260px) 1fr;gap:0;margin:0}
+dl.kv dt{font-weight:700;color:var(--muted);padding:12px 0;border-bottom:1px solid var(--line)}
+dl.kv dd{margin:0;padding:12px 0;border-bottom:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
+dl.kv dt:last-of-type,dl.kv dd:last-of-type{border-bottom:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-bottom:18px}
+.kpi{padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.kpi b{display:block;font-size:26px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi span{color:var(--muted);font-size:13.5px}
+.two-col{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:20px;align-items:start}
+.two-col.noact{grid-template-columns:minmax(0,1fr)}
+.stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+details.sec{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:0 24px}
+details.sec summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0;font-weight:700;font-size:18px}
+details.sec summary::-webkit-details-marker{display:none}
+details.sec summary::after{content:'';width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-right:4px;transition:transform .15s}
+details.sec[open] summary::after{transform:rotate(-135deg)}
+details.sec>div{padding-bottom:22px}
+details.sec.hl{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.chk{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.chk:last-child{border-bottom:0}
+.chk .i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px}
+.chk .i.pass{background:var(--ok-soft);color:var(--ok)}.chk .i.warn{background:var(--warn-soft);color:var(--warn)}.chk .i.fail{background:var(--danger-soft);color:var(--danger)}.chk .i.info{background:var(--blue-soft);color:var(--blue)}
+.chk small{display:block;color:var(--muted)}
+/* activity */
+.act-panel{position:sticky;top:84px;max-height:calc(100vh - 110px);overflow:auto;padding:20px}
+.act-h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.ev{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.ev:last-child{border-bottom:0}
+.ev .ic{color:var(--muted);padding-top:2px}
+.ev .who{font-weight:700}
+.ev .what{font-weight:600;color:var(--muted);margin-left:6px}
+.ev time{display:block;font-size:13px;color:var(--muted)}
+.ev .src{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);margin-left:6px}
+.ev .fld{margin-top:8px;font-weight:600;font-size:13.5px;color:var(--muted)}
+.ev .chg{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+.ev .b4{background:var(--danger-soft);color:var(--danger);padding:5px 10px;border-radius:7px;font-weight:600}
+.ev .af{background:var(--ok-soft);color:var(--ok);padding:5px 10px;border-radius:7px;font-weight:600}
+.ev .obj{margin-top:6px;font-weight:600}
+.ev .ev-o{display:block;margin-top:8px;font-weight:700;color:var(--link)}
+.ev span.ev-o{color:var(--ink)}
+.ev .ev-d{margin-top:4px}
+.ev .ev-m{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;font-size:13px;color:var(--muted)}
+.ev .ev-m span{color:var(--faint)}
+.flt{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.switch{display:inline-flex;align-items:center;gap:10px;font-weight:600;cursor:pointer;border:0;background:none;padding:6px}
+.switch i{width:44px;height:26px;border-radius:13px;background:var(--line);position:relative;transition:background .15s}
+.switch i::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .15s}
+.switch[aria-checked="true"] i{background:var(--blue)}
+.switch[aria-checked="true"] i::after{transform:translateX(18px)}
+.meta-row{display:flex;gap:28px;flex-wrap:wrap;margin:-6px 0 18px;color:var(--muted)}
+.meta-row b{color:var(--ink)}
+.stage-pill{display:inline-block;padding:6px 14px;border-radius:999px;background:var(--muted);color:var(--surface);font-weight:600;font-size:14px}
+/* charts */
+.chart{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:minmax(120px,220px) 1fr auto;gap:12px;align-items:center;font-size:14px}
+.bar .tr{height:14px;border-radius:7px;background:var(--hover);overflow:hidden;display:flex}
+.bar .tr i{display:block;height:100%}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;min-width:60px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.gate{max-width:520px;margin:12vh auto;padding:32px;text-align:center}
+.gate p{color:var(--muted)}
+.foot{margin-top:40px;color:var(--muted);font-size:12.5px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.skip{position:fixed;left:12px;top:-60px;z-index:200;background:var(--surface);color:var(--ink);border:2px solid var(--blue);font-weight:700;padding:10px 14px;border-radius:10px;transition:top .15s}.skip:focus{top:12px}
+@media (max-width:1100px){.two-col{grid-template-columns:minmax(0,1fr)}.act-panel{position:static;max-height:none}}
+@media (max-width:900px){
+  .burger{display:inline-grid}
+  .side{position:fixed;left:0;top:64px;bottom:0;height:auto;z-index:60;transform:translateX(-105%);transition:transform .2s;box-shadow:var(--shadow)}
+  .side.open{transform:none}.side .col{display:none}
+  main{padding:20px 16px 56px}
+  .me .nm,.brand small{display:none}
+  .top{padding:0 12px;gap:6px}
+  dl.kv{grid-template-columns:1fr}dl.kv dt{border-bottom:0;padding-bottom:0}
+  .bar{grid-template-columns:1fr 70px}.bar .lb{grid-column:1/-1}
+  h1{font-size:25px}
+}
+@media (max-width:520px){.demo-chip,.brand .bn{display:none}.langs button{min-width:30px;padding:6px}.top .icon-btn{width:36px}}
+</style>
+</head>
+<body>
+<button class="skip" type="button" data-act="skip">Salt la conținut</button>
+<header class="top">
+  <button class="icon-btn burger" type="button" data-act="side" aria-label="Meniu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="#/cereri" aria-label="VinePlan · Back-office"><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M7 18V11M12 18V7M17 18v-5"/></svg></i><span class="bn">VinePlan</span><small>Back-office</small></a>
+  <span class="demo-chip" id="demo-chip">Date demonstrative</span>
+  <span class="grow"></span>
+  <div class="langs" role="group" aria-label="Limba"><button type="button" data-lang="ro">Ro</button><button type="button" data-lang="ru">Ru</button><button type="button" data-lang="en">En</button></div>
+  <button class="icon-btn" type="button" data-act="bell" aria-label="Notificări"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 003.4 0"/></svg><span class="badge-n" id="bell-n" hidden></span></button>
+  <div class="me" id="me"></div>
+  <button class="icon-btn" type="button" data-act="logout" aria-label="Ieșire din cont" title="Ieșire din cont"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3M10 17l5-5-5-5M15 12H4"/></svg></button>
+</header>
+<div class="shell">
+  <nav class="side" id="side" aria-label="Secțiuni"></nav>
+  <main id="main" tabindex="-1"><p class="muted">Se încarcă…</p></main>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+'use strict';
+/* ============ basics ============ */
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const store = {get(k, f) { try { const v = localStorage.getItem('fpm.' + k); return v == null ? f : JSON.parse(v); } catch (e) { return f; } },
+               set(k, v) { try { localStorage.setItem('fpm.' + k, JSON.stringify(v)); } catch (e) {} }};
+let LANG = ['ro', 'ru', 'en'].includes(store.get('lang', 'ro')) ? store.get('lang', 'ro') : 'ro';
+const SESSION = store.get('session', null);
+{ const th = store.get('theme', null); if (th === 'dark' || th === 'light') document.documentElement.setAttribute('data-theme', th); }
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const LOC = () => LANG === 'ru' ? 'ru-RU' : LANG === 'en' ? 'en-GB' : 'ro-RO';
+const fmt = (n, d = 0) => n == null || n === '' || isNaN(n) ? '—' : Number(n).toLocaleString(LOC(), {minimumFractionDigits: d, maximumFractionDigits: d});
+const fdate = s => s ? new Date(s).toLocaleDateString(LOC(), {day: '2-digit', month: '2-digit', year: 'numeric'}) : '—';
+const fdt = s => s ? new Date(s).toLocaleString(LOC(), {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'}) : '—';
+const mask = s => s ? String(s).slice(0, 5) + '****' + String(s).slice(-4) : '—';
+const initials = s => String(s || '?').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+const COLORS = ['#0F766E', '#1D4ED8', '#7C3AED', '#B45309', '#BE123C', '#15803D', '#0369A1', '#4D7C0F'];
+const colorOf = s => COLORS[[...String(s)].reduce((a, c) => a + c.charCodeAt(0), 0) % COLORS.length];
+const today = () => new Date().toISOString().slice(0, 10);
+const nowIso = () => { const d = new Date(); d.setSeconds(0, 0); return new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 16); };
+function toast(m) { const t = $('#toast'); t.textContent = m; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => { t.hidden = true; }, 2600); }
+function download(name, text, type = 'text/csv') {
+  const url = URL.createObjectURL(new Blob(['﻿' + text], {type: type + ';charset=utf-8'}));
+  const a = Object.assign(document.createElement('a'), {href: url, download: name}); document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000); toast(t('Descărcat: {n}', {n: name}));
+}
+const csv = rows => rows.map(r => r.map(v => /[",;\n]/.test(String(v ?? '')) ? `"${String(v).replace(/"/g, '""')}"` : (v ?? '')).join(',')).join('\n');
+const IC = {
+  back: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
+  plus: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>',
+  search: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
+  cols: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
+  pen: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1 11-11a2.1 2.1 0 00-3-3L5 16l-1 4z"/></svg>',
+  eye: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  clip: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11l-8.5 8.5a5 5 0 01-7-7L14 4a3.3 3.3 0 014.7 4.7L10.2 17a1.7 1.7 0 01-2.4-2.4L15 7.5"/></svg>',
+  route: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a3.5 3.5 0 000-7H9a3.5 3.5 0 010-7h7"/></svg>',
+  note: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v12l-4 4H5z"/><path d="M15 20v-4h4M9 9h6M9 13h4"/></svg>',
+  new: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg>',
+  shield: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M4 4l16 16"/></svg>',
+  map: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>',
+  down: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>',
+};
+const NAVI = {
+  rapoarte: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  cereri: '<path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+  beneficiari: '<path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  organizatii: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1"/>',
+  utilizatori: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0M16 4.5a3.5 3.5 0 010 7M18 14a6 6 0 013.5 6"/>',
+  roluri: '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/>',
+  activitate: '<path d="M3 12h4l3 8 4-16 3 8h4"/>',
+  harta: '<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+  start: '<path d="M3 11l9-7 9 7M5 10v10h14V10"/>',
+};
+const nicon = k => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${NAVI[k]}</svg>`;
+
+/* ============ RO / RU / EN ============ */
+const TX = {
+  'Rapoarte': ['Отчёты', 'Reports'], 'Cereri de subvenție': ['Заявки на субсидии', 'Subsidy applications'], 'Beneficiari': ['Бенефициары', 'Beneficiaries'],
+  'Organizații': ['Организации', 'Organisations'], 'Utilizatori platformei': ['Пользователи платформы', 'Platform users'], 'Roluri și module': ['Роли и модули', 'Roles and modules'],
+  'Activitate': ['Активность', 'Activity'], 'Administrare': ['Администрирование', 'Administration'], 'Activitate operațională': ['Операционная деятельность', 'Operations'],
+  'Harta (portal)': ['Карта (портал)', 'Map (portal)'], 'Pagina principală': ['Главная страница', 'Home page'], 'Restrânge meniul': ['Свернуть меню', 'Collapse the menu'],
+  'Date demonstrative': ['Демонстрационные данные', 'Demonstration data'], 'Căutare': ['Поиск', 'Search'], 'Vizionare': ['Вид', 'View'], 'Export CSV': ['Экспорт CSV', 'Export CSV'],
+  'Stări': ['Статусы', 'Statuses'], 'Roluri': ['Роли', 'Roles'], 'Etape': ['Этапы', 'Stages'], 'Inspector': ['Инспектор', 'Inspector'], 'Rezultat': ['Результат', 'Result'],
+  'Tip': ['Тип', 'Type'], 'Forma': ['Форма', 'Form'], 'Conformitate': ['Соответствие', 'Compliance'], 'Statut': ['Статус', 'Status'], 'Total: {n}': ['Всего: {n}', 'Total: {n}'],
+  'Pagina {a} din {b}': ['Страница {a} из {b}', 'Page {a} of {b}'], 'Nicio înregistrare.': ['Нет записей.', 'No records.'], 'Adaugă organizație': ['Добавить организацию', 'Add organisation'],
+  'Adaugă utilizator': ['Добавить пользователя', 'Add user'], 'Adaugă beneficiar': ['Добавить бенефициара', 'Add beneficiary'], 'Vizualizare': ['Просмотр', 'View'], 'Editare': ['Редактирование', 'Edit'],
+  'Activare': ['Активация', 'Activate'], 'Dezactivare': ['Деактивация', 'Deactivate'], 'Deschide pe hartă': ['Открыть на карте', 'Open on the map'],
+  '{n} selectate': ['Выбрано: {n}', '{n} selected'], 'Anulează selecția': ['Снять выделение', 'Clear selection'],
+  'Titlu': ['Название', 'Title'], 'Descriere': ['Описание', 'Description'], 'Organizație părinte': ['Родительская организация', 'Parent organisation'], 'Raion/Municipiu': ['Район/муниципий', 'District/Municipality'],
+  'IDNP': ['IDNP', 'IDNP'], 'Nume': ['Имя', 'Name'], 'Email': ['Email', 'Email'], 'Telefon': ['Телефон', 'Phone'], 'Organizație': ['Организация', 'Organisation'],
+  'Denumire': ['Наименование', 'Name'], 'IDNO': ['IDNO', 'IDNO'], 'Localitatea': ['Населённый пункт', 'Locality'], 'Suprafață declarată (ha)': ['Заявленная площадь (га)', 'Declared area (ha)'],
+  'Parcele': ['Участки', 'Plots'], 'Cereri': ['Заявки', 'Applications'], 'Nr. cererii': ['№ заявки', 'Application no.'], 'Beneficiar': ['Бенефициар', 'Beneficiary'], 'Bloc': ['Квартал', 'Block'],
+  'Suma cerută (lei)': ['Запрошено (лей)', 'Requested (lei)'], 'Suma eligibilă (lei)': ['К выплате (лей)', 'Eligible (lei)'], 'Etapa': ['Этап', 'Stage'], 'Rezultat control': ['Результат проверки', 'Inspection result'],
+  'Depusă': ['Подана', 'Submitted'], 'nealocat': ['не назначен', 'not assigned'],
+  'Depunere': ['Подача', 'Submission'], 'Verificare administrativă': ['Административная проверка', 'Administrative check'], 'Control pe teren': ['Проверка на месте', 'Field inspection'],
+  'Evaluare': ['Оценка', 'Evaluation'], 'Decizie': ['Решение', 'Decision'], 'Plată': ['Выплата', 'Payment'],
+  'conform': ['соответствует', 'compliant'], 'de verificat': ['на проверку', 'to check'], 'neconform': ['не соответствует', 'non-compliant'], 'sub prag': ['ниже порога', 'below threshold'], 'fără bloc': ['без квартала', 'no block'],
+  'Activ': ['Активен', 'Active'], 'Inactiv': ['Неактивен', 'Inactive'], 'Blocat': ['Заблокирован', 'Blocked'], 'În așteptare': ['Ожидает', 'Pending'], 'Suspendat': ['Приостановлен', 'Suspended'],
+  'Aprobată': ['Одобрена', 'Approved'], 'Eligibilă parțial': ['Частично одобрена', 'Partly eligible'], 'Respinsă (neeligibilă)': ['Отклонена (не соответствует)', 'Rejected (not eligible)'],
+  'Creează organizație': ['Создать организацию', 'Create organisation'], 'Editează organizația': ['Редактировать организацию', 'Edit organisation'],
+  'Creează utilizator': ['Создать пользователя', 'Create user'], 'Editează utilizatorul': ['Редактировать пользователя', 'Edit user'],
+  'Creează beneficiar': ['Создать бенефициара', 'Create beneficiary'], 'Editează beneficiarul': ['Редактировать бенефициара', 'Edit beneficiary'],
+  'Informații despre organizație': ['Информация об организации', 'Organisation details'], 'Gestionați informațiile despre organizație': ['Управление информацией об организации', 'Manage the organisation details'],
+  'Informații personale': ['Личная информация', 'Personal details'], 'Gestionați informațiile personale': ['Управление личной информацией', 'Manage the personal details'],
+  'Organizație și roluri': ['Организация и роли', 'Organisation and roles'], 'Rolurile se acordă pe module; permisiunile fiecărui rol sunt afișate sub el.': ['Роли назначаются по модулям; права каждой роли показаны под ней.', 'Roles are granted per module; each role\'s permissions are shown under it.'],
+  'Date despre beneficiar': ['Данные бенефициара', 'Beneficiary details'], 'Exploatația viticolă care depune cereri de subvenție.': ['Виноградарское хозяйство, подающее заявки на субсидии.', 'The vineyard holding that applies for subsidies.'],
+  'Adresa': ['Адрес', 'Address'], 'Strada': ['Улица', 'Street'], 'Nr.': ['№', 'No.'], 'Apartament': ['Квартира', 'Apartment'], 'Salvare': ['Сохранить', 'Save'], 'Anulare': ['Отмена', 'Cancel'],
+  'Prenume': ['Имя', 'First name'], 'Titlu de muncă': ['Должность', 'Job title'], 'Data nașterii': ['Дата рождения', 'Date of birth'], 'Sex': ['Пол', 'Sex'], 'Masculin': ['Мужской', 'Male'], 'Feminin': ['Женский', 'Female'],
+  'Selectează…': ['Выберите…', 'Select…'], '— fără —': ['— нет —', '— none —'], 'Nume ierarhic': ['Иерархическое имя', 'Hierarchical name'],
+  'Forma organizatorico-juridică': ['Организационно-правовая форма', 'Legal form'], 'Cod exploatant (registru)': ['Код хозяйства (реестр)', 'Holding code (register)'], 'Reprezentant': ['Представитель', 'Representative'],
+  'Câmp obligatoriu': ['Обязательное поле', 'Required field'], 'IDNP-ul are 13 cifre': ['IDNP состоит из 13 цифр', 'The IDNP has 13 digits'], 'IDNO-ul are 13 cifre': ['IDNO состоит из 13 цифр', 'The IDNO has 13 digits'],
+  'Adresă de e-mail invalidă': ['Неверный адрес e-mail', 'Invalid e-mail address'], 'Numărul are 8 cifre după +373': ['Номер содержит 8 цифр после +373', 'The number has 8 digits after +373'],
+  'Verificați câmpurile marcate': ['Проверьте отмеченные поля', 'Check the marked fields'], 'Salvat': ['Сохранено', 'Saved'], 'Detalii': ['Детали', 'Details'],
+  'Module și accese': ['Модули и доступы', 'Modules and access'], 'Vizualizați modulele și accesul utilizatorului': ['Модули и доступы пользователя', 'The user\'s modules and access'],
+  'Niciun rol atribuit.': ['Роли не назначены.', 'No roles assigned.'], 'Utilizatorul nu are activitate înregistrată.': ['У пользователя нет зарегистрированной активности.', 'The user has no recorded activity.'],
+  'Cerere': ['Заявка', 'Application'], 'Acțiuni': ['Действия', 'Actions'], 'Documente': ['Документы', 'Documents'], 'Manager': ['Менеджер', 'Manager'],
+  'Detalii despre beneficiar': ['Данные о бенефициаре', 'Beneficiary details'], 'Blocul și parcelele': ['Квартал и участки', 'Block and plots'], 'Evaluare și decizie': ['Оценка и решение', 'Evaluation and decision'],
+  'Declarat (RVV / cerere)': ['Заявлено (RVV / заявка)', 'Declared (RVV / application)'], 'Măsurat (dronă)': ['Измерено (дрон)', 'Measured (drone)'],
+  'Alocă inspector': ['Назначить инспектора', 'Assign inspector'], 'Treci la etapa următoare': ['Перейти к следующему этапу', 'Move to the next stage'], 'Setează suma eligibilă': ['Указать сумму к выплате', 'Set the eligible amount'],
+  'Decizia': ['Решение', 'Decision'], 'Adaugă notă': ['Добавить заметку', 'Add a note'], 'Confirmă': ['Подтвердить', 'Confirm'], 'Notă': ['Заметка', 'Note'],
+  'Vizualizare_act': ['Просмотр', 'Viewed'], 'Modificare': ['Изменение', 'Change'], 'Atașament': ['Вложение', 'Attachment'], 'Traseu': ['Маршрут', 'Route'], 'Creare': ['Создание', 'Created'],
+  'Mai multe': ['Ещё', 'More'], 'Mai puține': ['Меньше', 'Less'], 'portal': ['портал', 'portal'], 'Fără activitate.': ['Нет активности.', 'No activity.'],
+  'Proces-verbal de control': ['Акт проверки', 'Inspection report'], 'Deschide blocul pe hartă': ['Открыть квартал на карте', 'Open the block on the map'],
+  'Verificări pe baza zborului UAV': ['Проверки по данным облёта БПЛА', 'Checks from the UAV flight'], 'Suma cerută': ['Запрошено', 'Requested'], 'Suma eligibilă': ['К выплате', 'Eligible'], 'Diferența': ['Разница', 'Difference'],
+  'Sugestie din măsurători: {v} lei': ['Предложение по измерениям: {v} лей', 'Suggested from the measurements: {v} lei'],
+  'Pentru control pe teren trebuie alocat un inspector': ['Для проверки на месте нужно назначить инспектора', 'A field inspection needs an assigned inspector'],
+  'Setați întâi suma eligibilă': ['Сначала укажите сумму к выплате', 'Set the eligible amount first'], 'Cererea e deja la ultima etapă': ['Заявка уже на последнем этапе', 'The application is already at the last stage'],
+  'Parcele cadastrale': ['Кадастровые участки', 'Cadastral plots'], 'Suprafață': ['Площадь', 'Area'], 'Densitate (butuci/ha)': ['Плотность (кустов/га)', 'Density (vines/ha)'],
+  'Distanță între rânduri': ['Расстояние между рядами', 'Row spacing'], 'Goluri / butuci lipsă': ['Пропуски / недостающие кусты', 'Gaps / missing vines'], 'Soi': ['Сорт', 'Variety'], 'Zona IGP': ['Зона IGP', 'PGI area'],
+  'Utilizatori asociați': ['Связанные пользователи', 'Linked users'], 'Suprafață declarată': ['Заявленная площадь', 'Declared area'], 'Suprafață măsurată': ['Измеренная площадь', 'Measured area'],
+  'Ultimul control': ['Последняя проверка', 'Last inspection'], 'An plantare': ['Год посадки', 'Planting year'], 'Diferență': ['Разница', 'Difference'],
+  'Panou de indicatori': ['Панель показателей', 'Indicator panel'], 'Tabel detaliat': ['Подробная таблица', 'Detailed table'], 'Panou': ['Панель', 'Dashboard'],
+  'Cereri și subvenții': ['Заявки и субсидии', 'Applications and subsidies'], 'Controale pe teren': ['Проверки на месте', 'Field inspections'], 'Registrul viticol': ['Реестр виноградников', 'Vineyard register'],
+  'Utilizatori': ['Пользователи', 'Users'], 'cereri': ['заявки', 'applications'], 'în lucru': ['в работе', 'in progress'], 'decise': ['решено', 'decided'],
+  'lei ceruți': ['лей запрошено', 'lei requested'], 'lei eligibili': ['лей к выплате', 'lei eligible'], 'Cereri pe etape': ['Заявки по этапам', 'Applications by stage'],
+  'Activitatea inspectorilor': ['Активность инспекторов', 'Inspector activity'], 'alocate': ['назначено', 'assigned'], 'controale finalizate': ['завершённых проверок', 'inspections done'],
+  'acțiuni înregistrate': ['зарегистрированных действий', 'recorded actions'], 'Beneficiari după conformitate': ['Бенефициары по соответствию', 'Beneficiaries by compliance'],
+  'Diferența declarat–măsurat pe parcele': ['Разница заявлено–измерено по участкам', 'Declared–measured difference by plot'], 'Utilizatori pe module': ['Пользователи по модулям', 'Users by module'],
+  'Modul': ['Модуль', 'Module'], 'Rol': ['Роль', 'Role'], 'Permisiuni': ['Права', 'Permissions'], 'Descărcat: {n}': ['Скачано: {n}', 'Downloaded: {n}'],
+  'Notificări': ['Уведомления', 'Notifications'], 'Nicio notificare.': ['Нет уведомлений.', 'No notifications.'],
+  'cereri așteaptă controlul pe teren': ['заявок ожидают проверки на месте', 'applications await a field inspection'], 'conturi în așteptare': ['аккаунтов ожидают', 'accounts pending'],
+  'acțiuni noi ale inspectorilor în portal': ['новых действий инспекторов в портале', 'new inspector actions in the portal'], 'cereri noi de verificat': ['новых заявок на проверку', 'new applications to check'],
+  'Acces restricționat': ['Доступ ограничен', 'Restricted access'], 'Back-office-ul este disponibil pentru rolul Administrator de sistem.': ['Бэк-офис доступен для роли «Системный администратор».', 'The back-office is available to the System administrator role.'],
+  'Autentificare': ['Вход', 'Sign in'], 'Ieșire din cont': ['Выйти из аккаунта', 'Sign out'], 'Resetează datele demo': ['Сбросить демо-данные', 'Reset the demo data'],
+  'Datele demo au fost resetate': ['Демо-данные сброшены', 'The demo data were reset'], 'Toate': ['Все', 'All'], 'Coloane': ['Столбцы', 'Columns'],
+  'Administrator de sistem': ['Системный администратор', 'System administrator'], 'Inspector alocat': ['Назначенный инспектор', 'Assigned inspector'],
+  'Rezultatul controlului pe teren apare după vizita inspectorului.': ['Результат проверки появится после визита инспектора.', 'The inspection result appears after the inspector\'s visit.'],
+  'Acțiunile inspectorilor din portal (hartă, proces-verbal, ținte verificate) apar aici în timp real, din acest browser.': ['Действия инспекторов в портале (карта, акт, проверенные цели) появляются здесь в реальном времени, из этого браузера.', 'Inspector actions in the portal (map, report, checked targets) appear here in real time, from this browser.'],
+  'Toată activitatea': ['Вся активность', 'All activity'], 'Utilizator': ['Пользователь', 'User'], 'Acțiune': ['Действие', 'Action'], 'Obiect': ['Объект', 'Object'], 'Data': ['Дата', 'Date'],
+  'Roluri și permisiuni': ['Роли и права', 'Roles and permissions'], 'Permisiuni': ['Права', 'Permissions'], 'Cheie': ['Ключ', 'Key'], 'Logare doar cu MPass': ['Вход только через MPass', 'Sign-in with MPass only'],
+  'Creează rol': ['Создать роль', 'Create role'], 'Editează rolul': ['Редактировать роль', 'Edit role'], 'Creează permisiune': ['Создать право', 'Create permission'], 'Editează permisiunea': ['Редактировать право', 'Edit permission'],
+  'Adaugă rol': ['Добавить роль', 'Add role'], 'Adaugă permisiune': ['Добавить право', 'Add permission'], 'Date rol': ['Данные роли', 'Role details'], 'Date permisiune': ['Данные права', 'Permission details'],
+  'Rolurile sunt folosite pentru a grupa permisiunile. Un utilizator poate avea mai multe roluri.': ['Роли группируют права. У пользователя может быть несколько ролей.', 'Roles group permissions. A user can have several roles.'],
+  'Permisiunile sunt folosite pentru a defini drepturile de acces. O permisiune poate fi asociată cu unul sau mai multe roluri.': ['Права определяют доступ. Право может входить в одну или несколько ролей.', 'Permissions define access rights. A permission can belong to one or more roles.'],
+  'Permisiunile incluse în acest rol.': ['Права, входящие в эту роль.', 'The permissions included in this role.'], 'Format: modul:nume (litere mici)': ['Формат: модуль:имя (строчные буквы)', 'Format: module:name (lower case)'],
+  'Cheia există deja': ['Такой ключ уже есть', 'This key already exists'], 'Da': ['Да', 'Yes'], 'Nu': ['Нет', 'No'], 'Global': ['Глобальное', 'Global'],
+  'Salt la conținut': ['Перейти к содержимому', 'Skip to content'], 'Dosarul cererii': ['Досье заявки', 'Application file'], 'depus': ['подан', 'submitted'], 'lipsă': ['отсутствует', 'missing'], 'în așteptare': ['ожидается', 'pending'],
+  'Documentele cerute de AIPA pentru măsura SP 2.5 (plată post-investiție).': ['Документы, которые AIPA требует по мере SP 2.5 (выплата после инвестиции).', 'The documents AIPA asks for under measure SP 2.5 (post-investment payment).'],
+  'Extras din Registrul vitivinicol': ['Выписка из Реестра виноградарства', 'Vine register extract'], 'Numerele cadastrale ale parcelelor': ['Кадастровые номера участков', 'Cadastral numbers of the plots'],
+  'Proiectul de înființare a plantației': ['Проект закладки насаждения', 'Planting project'], 'Certificatul de categorie biologică a materialului săditor': ['Сертификат биологической категории посадочного материала', 'Biological category certificate of the planting stock'],
+  'Certificatul de membru IGP / DOP': ['Сертификат члена IGP / DOP', 'PGI / PDO membership certificate'], 'Actul de recepție a plantației (prindere ≥ 90 %)': ['Акт приёмки насаждения (приживаемость ≥ 90 %)', 'Planting acceptance report (take ≥ 90 %)'],
+  'Sursă': ['Источник', 'Source'], 'back-office': ['бэк-офис', 'back-office'], 'demo': ['демо', 'demo'],
+  'Conectare': ['Вход', 'Sign-in'], 'Deconectare': ['Выход', 'Sign-out'], 'Export': ['Экспорт', 'Export'], 'Autentificare': ['Вход', 'Sign in'],
+  'De la': ['С', 'From'], 'Până la': ['По', 'To'], '— selectează —': ['— выберите —', '— select —'], 'Control conformitate (portal)': ['Контроль соответствия (портал)', 'Compliance control (portal)'],
+  'A modificat': ['Изменил(а)', 'Changed'], 'A vizualizat': ['Просмотрел(а)', 'Viewed'], 'A atașat': ['Приложил(а)', 'Attached'], 'A calculat': ['Рассчитал(а)', 'Computed'], 'A creat': ['Создал(а)', 'Created'],
+  'A adăugat o notă': ['Добавил(а) заметку', 'Added a note'], 'Rapoarte_m': ['Отчёты', 'Reports'], 'Back-office': ['Бэк-офис', 'Back-office'], 'Etapa_l': ['этап', 'stage'],
+};
+const t = (s, v) => { let x = LANG === 'ro' ? s : (TX[s] ? TX[s][LANG === 'ru' ? 0 : 1] : s); if (s === 'Vizualizare_act' && LANG === 'ro') x = 'Vizualizare'; if (v) for (const k in v) x = x.split('{' + k + '}').join(v[k]); return x; };
+
+/* ============ data ============ */
+let B = null, CMP = null;
+const OV = Object.assign({organizatii: {}, utilizatori: {}, beneficiari: {}, cereri: {}, roluri: {}, permisiuni: {}}, store.get('bo', {}));
+let BOACT = store.get('bo_activity', []);
+const coll = n => { const base = B[n].map(r => OV[n][r.id] || r); return base.concat(Object.values(OV[n]).filter(r => !B[n].some(b => b.id === r.id))); };
+const get = (n, id) => OV[n][id] || B[n].find(r => r.id === id) || null;
+const put = (n, rec) => { OV[n][rec.id] = rec; store.set('bo', OV); };
+const ME = () => coll('utilizatori').find(u => SESSION && u.email === SESSION.email) || get('utilizatori', 'USR-001');
+const uname = id => { const u = id && get('utilizatori', id); return u ? `${u.prenume} ${u.nume}` : ''; };
+const oname = id => { const o = id && get('organizatii', id); return o ? o.titlu : ''; };
+const bname = id => { const b = id && get('beneficiari', id); return b ? b.denumire : ''; };
+function shortUA() { const u = navigator.userAgent; const br = /Edg\/(\d+)/.exec(u) ? 'Edge ' + /Edg\/(\d+)/.exec(u)[1] : /Firefox\/(\d+)/.exec(u) ? 'Firefox ' + /Firefox\/(\d+)/.exec(u)[1] : /Chrome\/(\d+)/.exec(u) ? 'Chrome ' + /Chrome\/(\d+)/.exec(u)[1] : /Version\/(\d+).*Safari/.exec(u) ? 'Safari ' + /Version\/(\d+)/.exec(u)[1] : 'Browser';
+  const os = /Windows NT 10/.test(u) ? 'Windows' : /Android/.test(u) ? 'Android' : /iPhone|iPad/.test(u) ? 'iOS' : /Mac OS X/.test(u) ? 'macOS' : /Linux/.test(u) ? 'Linux' : ''; return os ? `${br} · ${os}` : br; }
+const AUTH = v => ({'mpass-demo': 'MPass', 'parola-demo': 'Parolă', 'telefon-demo': 'Telefon'})[v] || 'Parolă';
+const MODOF = id => /^CER-/.test(id) ? 'Cereri de subvenție' : /^USR-/.test(id) ? 'Utilizatori platformei' : /^BEN-/.test(id) ? 'Beneficiari' : /^ORG-/.test(id) ? 'Organizații' : /:/.test(id) ? 'Roluri și permisiuni' : 'Back-office';
+function logAct(obj, e) { BOACT.push({...e, obj, ts: nowIso(), user: ME().id, src: 'backoffice', module: MODOF(obj), ua: shortUA(), auth: AUTH(SESSION?.via)}); BOACT = BOACT.slice(-600); store.set('bo_activity', BOACT); }
+const portalAct = () => store.get('activity', []);
+const portalEv = e => ({...e, src: 'portal', module: 'Control conformitate (portal)', user: coll('utilizatori').find(u => u.email && u.email === e.email)?.id || null, by: e.user_name || ''});   // the portal logs the e-mail of the signed-in account
+const ROLE = {}; const PERM = {};
+const modName = id => B.modules.find(m => m.id === id)?.name || id;
+function roleIndex() { for (const k in ROLE) delete ROLE[k]; for (const r of coll('roluri')) ROLE[r.cheie] = {module: modName(r.modul), mid: r.modul, name: r.titlu, perms: r.permisiuni || []}; }
+const hasRole = (u, key) => (u.roluri || []).includes(key);
+const inspectors = () => coll('utilizatori').filter(u => hasRole(u, 'control:inspector') || hasRole(u, 'control:inspector_sef'));
+function activityOf(c) {            // an application: its history + back-office actions + the inspector's portal actions on its block
+  const a = (c.activitate || []).map(e => ({...e, src: 'demo'}));
+  const bo = BOACT.filter(e => e.obj === c.id);
+  const po = portalAct().filter(e => e.obj && (e.obj === c.vineyard_id || (c.parcele || []).includes(e.obj))).map(portalEv);
+  return a.concat(bo, po).sort((x, y) => String(y.ts).localeCompare(String(x.ts)));
+}
+function activityOfUser(u) {
+  const out = [];
+  for (const c of coll('cereri')) for (const e of c.activitate || []) if (e.user === u.id) out.push({...e, src: 'demo', obj: c.id});
+  for (const e of B.sesiuni || []) if (e.user === u.id) out.push({...e, src: 'demo'});
+  for (const e of BOACT) if (e.user === u.id) out.push(e);
+  for (const e of portalAct()) if (e.email && e.email === u.email) out.push(portalEv(e));
+  return out.sort((x, y) => String(y.ts).localeCompare(String(x.ts)));
+}
+
+/* ============ small UI helpers ============ */
+const STATUS_CLS = {Activ: 'ok', Inactiv: 'off', Blocat: 'bad', 'În așteptare': 'warn', Suspendat: 'bad'};
+const pill = (s, cls) => `<span class="pill ${cls || STATUS_CLS[s] || 'off'}"><i></i>${esc(t(s))}</span>`;
+const CONF = {neconform: ['neconform', 'bad'], verificare: ['de verificat', 'warn'], 'de verificat': ['de verificat', 'warn'], conform: ['conform', 'ok'], sub_prag: ['sub prag', 'off'], fara_bloc: ['fără bloc', 'off']};
+const conf = s => s ? pill(CONF[s]?.[0] || s, CONF[s]?.[1] || 'off') : '<span class="muted">—</span>';
+const STAGE_CLS = {Depunere: 'info', 'Verificare administrativă': 'info', 'Control pe teren': 'warn', Evaluare: 'warn', Decizie: 'ok', Plată: 'ok'};
+const stage = s => pill(s, STAGE_CLS[s]);
+const rolesCell = u => { const by = {}; for (const r of u.roluri || []) { const x = ROLE[r]; if (x) (by[x.module] = by[x.module] || []).push(x.name); }
+  return `<div class="roles-cell">${Object.entries(by).map(([m, rs]) => `<b>${esc(m)}:</b>${rs.map(r => `<span class="tag">${esc(r)}</span>`).join('')}`).join('') || '<span class="muted">—</span>'}</div>`; };
+function closePop() { $$('.pop').forEach(p => p.remove()); }
+function openPop(anchor, html, onClick) {
+  closePop(); const p = document.createElement('div'); p.className = 'pop'; p.innerHTML = html; document.body.appendChild(p);
+  const r = anchor.getBoundingClientRect(), w = p.offsetWidth, h = p.offsetHeight;
+  p.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.right - w)) + 'px';
+  p.style.top = (r.bottom + h + 8 > innerHeight ? Math.max(8, r.top - h - 6) : r.bottom + 6) + 'px';
+  p.addEventListener('click', e => { e.stopPropagation(); onClick && onClick(e, p); });
+  return p;
+}
+function modal(title, body, onOk, okLabel = 'Confirmă') {
+  const v = document.createElement('div'); v.className = 'veil';
+  v.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}"><h2>${esc(title)}</h2>${body}<div class="acts"><button class="btn" type="button" data-m="x">${t('Anulare')}</button><button class="btn primary" type="button" data-m="ok">${t(okLabel)}</button></div></div>`;
+  document.body.appendChild(v);
+  const close = () => v.remove();
+  v.addEventListener('click', e => { if (e.target === v || e.target.closest('[data-m="x"]')) close(); if (e.target.closest('[data-m="ok"]')) { if (onOk(v) !== false) close(); } });
+  setTimeout(() => v.querySelector('select,input,textarea,button[data-m="ok"]')?.focus(), 30);
+}
+document.addEventListener('click', e => { if (!e.target.closest('.pop') && !e.target.closest('[data-pop]')) closePop(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePop(); $$('.veil').forEach(v => v.remove()); } });
+
+/* ============ lists ============ */
+const LS = {};
+const lst = k => LS[k] || (LS[k] = {q: '', f: {}, page: 1, size: 10, hide: new Set(store.get('bo_hide_' + k, [])), sel: new Set()});
+const ETAPE = () => B.etape;
+const LISTS = {
+  cereri: {title: 'Cereri de subvenție', rows: () => coll('cereri'),
+    text: c => [c.id, bname(c.beneficiar), c.vineyard_id, uname(c.inspector), c.etapa].join(' '),
+    cols: [['id', 'Nr. cererii', c => `<b class="mono nowrap">${esc(c.id)}</b>`], ['ben', 'Beneficiar', c => esc(bname(c.beneficiar))], ['bloc', 'Bloc', c => esc(c.vineyard_id || '—')],
+      ['ceruta', 'Suma cerută (lei)', c => `<span class="num nowrap">${fmt(c.suma_ceruta_lei)}</span>`], ['elig', 'Suma eligibilă (lei)', c => `<span class="num nowrap">${fmt(c.suma_eligibila_lei)}</span>`],
+      ['etapa', 'Etapa', c => stage(c.etapa)], ['insp', 'Inspector', c => c.inspector ? esc(uname(c.inspector)) : `<span class="muted">${t('nealocat')}</span>`],
+      ['rez', 'Rezultat control', c => conf(c.rezultat_control)], ['dep', 'Depusă', c => `<span class="nowrap">${fdate(c.depusa)}</span>`]],
+    filters: [['etapa', 'Etape', () => ETAPE().map(s => [s, t(s)])], ['inspector', 'Inspector', () => inspectors().map(u => [u.id, `${u.prenume} ${u.nume}`])],
+      ['rezultat_control', 'Rezultat', () => ['conform', 'de verificat', 'neconform'].map(s => [s, t(s)])]],
+    open: c => '#cereri/' + c.id, csv: c => [c.id, bname(c.beneficiar), c.vineyard_id, c.suma_ceruta_lei, c.suma_eligibila_lei ?? '', c.etapa, uname(c.inspector), c.rezultat_control || '', c.depusa]},
+  beneficiari: {title: 'Beneficiari', add: 'Adaugă beneficiar', rows: () => coll('beneficiari'),
+    text: b => [b.denumire, b.idno, b.cod_exploatant, b.localitate, b.reprezentant].join(' '),
+    cols: [['den', 'Denumire', b => `<b>${esc(b.denumire)}</b>`], ['idno', 'IDNO', b => `<span class="mono nowrap">${mask(b.idno)}</span>`], ['forma', 'Forma', b => esc(b.forma)],
+      ['loc', 'Localitatea', b => esc(b.localitate)], ['sup', 'Suprafață declarată (ha)', b => `<span class="num">${fmt(b.suprafata_declarata_ha, 2)}</span>`],
+      ['parc', 'Parcele', b => `<span class="num">${(b.parcele || []).length}</span>`], ['cer', 'Cereri', b => `<span class="num">${coll('cereri').filter(c => c.beneficiar === b.id).length}</span>`],
+      ['conf', 'Conformitate', b => conf(b.conformitate)], ['st', 'Statut', b => pill(b.statut)]],
+    filters: [['forma', 'Forma', () => ['SRL', 'SA', 'GȚ', 'ÎI'].map(s => [s, s])], ['conformitate', 'Conformitate', () => Object.keys(CONF).filter(k => k !== 'de verificat').map(k => [k, t(CONF[k][0])])],
+      ['statut', 'Stări', () => ['Activ', 'Suspendat'].map(s => [s, t(s)])]],
+    open: b => '#beneficiari/' + b.id, csv: b => [b.id, b.denumire, b.forma, b.idno, b.cod_exploatant, b.localitate, b.suprafata_declarata_ha, (b.parcele || []).length, b.conformitate, b.statut]},
+  organizatii: {title: 'Organizații', add: 'Adaugă organizație', keepEdit: 1, rows: () => coll('organizatii'),
+    text: o => [o.titlu, o.descriere, oname(o.parinte), o.tip, o.raion].join(' '),
+    cols: [['titlu', 'Titlu', o => `<b>${esc(o.titlu)}</b>`], ['desc', 'Descriere', o => esc(o.descriere)], ['par', 'Organizație părinte', o => esc(oname(o.parinte) || '—')],
+      ['tip', 'Tip', o => esc(o.tip)], ['raion', 'Raion/Municipiu', o => esc(o.raion)], ['st', 'Statut', o => pill(o.statut)]],
+    filters: [['tip', 'Tip', () => [...new Set(coll('organizatii').map(o => o.tip))].map(s => [s, s])], ['statut', 'Stări', () => ['Activ', 'Inactiv'].map(s => [s, t(s)])]],
+    open: o => '#organizatii/' + o.id + '/editare', csv: o => [o.id, o.titlu, o.descriere, oname(o.parinte), o.tip, o.nume_ierarhic, o.raion, o.localitate, o.statut]},
+  roluri: {title: 'Roluri și permisiuni', add: 'Adaugă rol', tabs: 1, keepEdit: 1, noStatus: 1, rows: () => coll('roluri'),
+    text: r => [r.cheie, r.titlu, r.descriere, modName(r.modul), (r.permisiuni || []).join(' ')].join(' '),
+    cols: [['cheie', 'Cheie', r => `<span class="mono nowrap">${esc(r.cheie)}</span>`], ['titlu', 'Titlu', r => `<b>${esc(r.titlu)}</b>`], ['descr', 'Descriere', r => esc(r.descriere || '—')],
+      ['modul', 'Modul', r => `<span class="pill info">${esc(modName(r.modul))}</span>`], ['mpass', 'Logare doar cu MPass', r => r.mpass ? '✓' : '—'],
+      ['perm', 'Permisiuni', r => (r.permisiuni || []).map(x => `<span class="tag perm">${esc(x)}</span>`).join('')], ['n', 'Utilizatori', r => `<span class="num">${coll('utilizatori').filter(u => (u.roluri || []).includes(r.cheie)).length}</span>`]],
+    filters: [['modul', 'Modul', () => B.modules.map(m => [m.id, m.name])], ['mpass', 'MPass', () => [['true', t('Da')], ['false', t('Nu')]]]],
+    open: r => '#roluri/' + r.id + '/editare', csv: r => [r.cheie, r.titlu, r.descriere, modName(r.modul), r.mpass ? 'da' : 'nu', (r.permisiuni || []).join(' ')]},
+  permisiuni: {title: 'Roluri și permisiuni', add: 'Adaugă permisiune', tabs: 1, keepEdit: 1, noStatus: 1, rows: () => coll('permisiuni'),
+    text: p => [p.cheie, p.titlu, p.descriere, p.tip].join(' '),
+    cols: [['cheie', 'Cheie', p => `<span class="nowrap"><span class="mono">${esc(p.cheie)}</span> <span class="pill ${p.tip === 'Global' ? 'warn' : 'info'}" style="margin-left:4px">${t(p.tip)}</span></span>`],
+      ['titlu', 'Titlu', p => esc(p.titlu)], ['descr', 'Descriere', p => esc(p.descriere || '—')],
+      ['rol', 'Roluri', p => coll('roluri').filter(r => (r.permisiuni || []).includes(p.cheie)).map(r => `<span class="tag">${esc(r.titlu)}</span>`).join('') || '<span class="muted">—</span>']],
+    filters: [['tip', 'Tip', () => [['Modul', t('Modul')], ['Global', t('Global')]]]],
+    open: p => '#permisiuni/' + p.id + '/editare', csv: p => [p.cheie, p.titlu, p.descriere, p.tip, coll('roluri').filter(r => (r.permisiuni || []).includes(p.cheie)).map(r => r.titlu).join('; ')]},
+  utilizatori: {title: 'Utilizatori platformei', add: 'Adaugă utilizator', rows: () => coll('utilizatori'),
+    text: u => [u.prenume, u.nume, u.email, u.idnp, u.telefon, oname(u.organizatie), (u.roluri || []).map(r => ROLE[r]?.name).join(' ')].join(' '),
+    cols: [['idnp', 'IDNP', u => `<span class="mono nowrap">${mask(u.idnp)}</span>`], ['nume', 'Nume', u => `<b>${esc(u.prenume)} ${esc(u.nume)}</b>`], ['email', 'Email', u => `<a href="mailto:${esc(u.email)}" data-stop>${esc(u.email)}</a>`],
+      ['tel', 'Telefon', u => `<span class="num nowrap">${esc(u.telefon || '—')}</span>`], ['rol', 'Roluri', rolesCell], ['org', 'Organizație', u => esc(oname(u.organizatie) || bname(u.beneficiar) || '—')], ['st', 'Statut', u => pill(u.statut)]],
+    filters: [['rol', 'Roluri', () => Object.entries(ROLE).map(([k, r]) => [k, `${r.module}: ${r.name}`])], ['statut', 'Stări', () => ['Activ', 'Inactiv', 'Blocat', 'În așteptare'].map(s => [s, t(s)])]],
+    open: u => '#utilizatori/' + u.id, csv: u => [u.id, u.idnp, u.prenume, u.nume, u.email, u.telefon, (u.roluri || []).map(r => `${ROLE[r]?.module}: ${ROLE[r]?.name}`).join('; '), oname(u.organizatie), u.statut]},
+};
+function filtered(k) {
+  const L = LISTS[k], s = lst(k), q = s.q.trim().toLowerCase();
+  return L.rows().filter(r => (!q || L.text(r).toLowerCase().includes(q)) && Object.entries(s.f).every(([f, set]) => !set.size || (f === 'rol' ? (r.roluri || []).some(x => set.has(x)) : set.has(String(r[f])))));
+}
+function viewList(k) {
+  const L = LISTS[k], s = lst(k), rows = filtered(k), pages = Math.max(1, Math.ceil(rows.length / s.size));
+  s.page = Math.min(s.page, pages);
+  const slice = rows.slice((s.page - 1) * s.size, s.page * s.size), cols = L.cols.filter(c => !s.hide.has(c[0]));
+  const fbtn = ([f, label]) => { const n = s.f[f]?.size || 0; return `<button class="chip-btn ${n ? 'on' : ''}" type="button" data-pop="filter" data-f="${f}">${IC.plus}${t(label)}${n ? ` · ${n}` : ''}</button>`; };
+  $('#main').innerHTML = `${L.tabs ? `<div class="tabs" role="tablist">${[['roluri', 'Roluri'], ['permisiuni', 'Permisiuni']].map(([x, l]) => `<button type="button" role="tab" aria-selected="${x === k}" data-go="#${x}">${t(l)}</button>`).join('')}</div>` : ''}<div class="page-h"><h1>${t(L.title)}</h1>${L.add ? `<a class="btn primary" href="#/${k}/nou">${IC.plus}${t(L.add)}</a>` : ''}</div>
+    <div class="toolbar"><label class="search">${IC.search}<input type="search" id="q" value="${esc(s.q)}" placeholder="${t('Căutare')}" aria-label="${t('Căutare')}"></label>
+      ${L.filters.map(fbtn).join('')}<span class="grow"></span>
+      <button class="btn" type="button" data-act="csv">${IC.down}${t('Export CSV')}</button><button class="btn" type="button" data-pop="cols">${IC.cols}${t('Vizionare')}</button></div>
+    ${s.sel.size ? `<div class="selbar">${t('{n} selectate', {n: s.sel.size})}${k !== 'cereri' && !L.noStatus ? `<button class="btn sm" type="button" data-act="bulk-on">${t('Activare')}</button><button class="btn sm" type="button" data-act="bulk-off">${t('Dezactivare')}</button>` : ''}<button class="btn sm ghost" type="button" data-act="bulk-clear">${t('Anulează selecția')}</button></div>` : ''}
+    <div class="card tbl" tabindex="0"><table><thead><tr><th class="cb"><input type="checkbox" data-act="sel-all" aria-label="${t('Toate')}" ${slice.length && slice.every(r => s.sel.has(r.id)) ? 'checked' : ''}></th>${cols.map(c => `<th>${t(c[1])}</th>`).join('')}<th><span class="sr">${t('Acțiuni')}</span></th></tr></thead>
+      <tbody>${slice.map(r => `<tr data-open="${esc(L.open(r))}"><td class="cb"><input type="checkbox" data-sel="${esc(r.id)}" ${s.sel.has(r.id) ? 'checked' : ''} aria-label="${esc(r.id)}"></td>${cols.map(c => `<td>${c[2](r)}</td>`).join('')}<td><button class="dots" type="button" data-pop="row" data-id="${esc(r.id)}" aria-label="${t('Acțiuni')}">⋯</button></td></tr>`).join('') || `<tr><td colspan="${cols.length + 2}" class="muted">${t('Nicio înregistrare.')}</td></tr>`}</tbody></table></div>
+    <div class="pager"><span>${t('Total: {n}', {n: rows.length})}</span><div class="pg"><select id="size" aria-label="size">${[10, 25, 50].map(n => `<option ${n === s.size ? 'selected' : ''}>${n}</option>`).join('')}</select>
+      <span>${t('Pagina {a} din {b}', {a: s.page, b: pages})}</span>
+      <button type="button" data-pg="1" ${s.page <= 1 ? 'disabled' : ''} aria-label="«">«</button><button type="button" data-pg="${s.page - 1}" ${s.page <= 1 ? 'disabled' : ''} aria-label="‹">‹</button>
+      <button type="button" data-pg="${s.page + 1}" ${s.page >= pages ? 'disabled' : ''} aria-label="›">›</button><button type="button" data-pg="${pages}" ${s.page >= pages ? 'disabled' : ''} aria-label="»">»</button></div></div>
+    <p class="foot">${esc(B.about)}</p>`;
+  const q = $('#q'); q.addEventListener('input', () => { s.q = q.value; s.page = 1; const pos = q.selectionStart; viewList(k); const n = $('#q'); n.focus(); n.setSelectionRange(pos, pos); });
+  $('#size').addEventListener('change', e => { s.size = +e.target.value; s.page = 1; viewList(k); });
+  $('#main').onclick = e => {
+    const pg = e.target.closest('[data-pg]'); if (pg && !pg.disabled) { s.page = +pg.dataset.pg; return viewList(k); }
+    const sel = e.target.closest('[data-sel]'); if (sel) { e.stopPropagation(); sel.checked ? s.sel.add(sel.dataset.sel) : s.sel.delete(sel.dataset.sel); return viewList(k); }
+    if (e.target.closest('[data-act="sel-all"]')) { const on = e.target.checked; slice.forEach(r => on ? s.sel.add(r.id) : s.sel.delete(r.id)); return viewList(k); }
+    if (e.target.closest('[data-act="bulk-clear"]')) { s.sel.clear(); return viewList(k); }
+    const bulk = e.target.closest('[data-act="bulk-on"],[data-act="bulk-off"]');
+    if (bulk) { const on = bulk.dataset.act === 'bulk-on'; for (const id of s.sel) setStatus(k, id, on); s.sel.clear(); return viewList(k); }
+    if (e.target.closest('[data-act="csv"]')) return download(`${k}.csv`, csv([L.cols.map(c => t(c[1])), ...rows.map(L.csv)]));
+    const fb = e.target.closest('[data-pop="filter"]');
+    if (fb) { const [f, label, opts] = L.filters.find(x => x[0] === fb.dataset.f), set = s.f[f] || (s.f[f] = new Set());
+      return openPop(fb, `<div class="ph">${t(label)}</div>${opts().map(([v, l]) => `<label><input type="checkbox" value="${esc(v)}" ${set.has(v) ? 'checked' : ''}>${esc(l)}</label>`).join('')}`,
+        (ev) => { const cb = ev.target.closest('input'); if (!cb) return; cb.checked ? set.add(cb.value) : set.delete(cb.value); s.page = 1; const keep = fb.dataset.f; viewList(k); const nb = $(`[data-pop="filter"][data-f="${keep}"]`); if (nb) nb.click(); }); }
+    const cb = e.target.closest('[data-pop="cols"]');
+    if (cb) return openPop(cb, `<div class="ph">${t('Coloane')}</div>${L.cols.map(c => `<label><input type="checkbox" value="${c[0]}" ${s.hide.has(c[0]) ? '' : 'checked'}>${t(c[1])}</label>`).join('')}`,
+      (ev) => { const x = ev.target.closest('input'); if (!x) return; x.checked ? s.hide.delete(x.value) : s.hide.add(x.value); store.set('bo_hide_' + k, [...s.hide]); viewList(k); $('[data-pop="cols"]')?.click(); });
+    const rb = e.target.closest('[data-pop="row"]');
+    if (rb) { const r = L.rows().find(x => x.id === rb.dataset.id);
+      const items = L.keepEdit && L.noStatus ? [['edit', IC.pen, 'Editare']] : [['view', IC.eye, 'Vizualizare']]; if (k !== 'cereri' && !(L.keepEdit && L.noStatus)) items.push(['edit', IC.pen, 'Editare']); if (k !== 'cereri' && !L.noStatus) items.push(['toggle', IC.shield, r.statut === 'Activ' ? 'Dezactivare' : 'Activare']);
+      if (k === 'cereri' && r.vineyard_id) items.push(['map', IC.map, 'Deschide pe hartă']);
+      return openPop(rb, items.map(([a, ic, l]) => `<button type="button" data-a="${a}">${ic}${t(l)}</button>`).join(''), (ev) => {
+        const a = ev.target.closest('[data-a]')?.dataset.a; if (!a) return; closePop();
+        if (a === 'view') location.hash = L.open(r).replace('/editare', '');
+        if (a === 'edit') location.hash = `#${k}/${r.id}/editare`;
+        if (a === 'toggle') { setStatus(k, r.id, r.statut !== 'Activ'); viewList(k); }
+        if (a === 'map') location.href = 'app.html#' + r.vineyard_id;
+      }); }
+    if (e.target.closest('[data-stop]')) return;
+    const go = e.target.closest('[data-go]'); if (go) { location.hash = go.dataset.go; return; }
+    const tr = e.target.closest('tr[data-open]'); if (tr) location.hash = L.keepEdit ? tr.dataset.open : tr.dataset.open.replace('/editare', '');
+  };
+}
+function setStatus(k, id, on) {
+  const r = {...get(k, id)}; if (!r.id) return; const before = r.statut;
+  r.statut = on ? 'Activ' : (k === 'beneficiari' ? 'Suspendat' : 'Inactiv'); if (before === r.statut) return;
+  put(k, r); logAct(id, {action: 'modificare', field: 'Statut', before, after: r.statut}); toast(t('Salvat'));
+}
+
+/* ============ forms ============ */
+const TITLURI = ['Inspector', 'Inspector superior', 'Inspector principal', 'Șef subdiviziune', 'Specialist', 'Specialist principal', 'Consultant', 'Consultant principal', 'Șef direcție plăți', 'Specialist registru', 'Specialist în agricultură', 'Administrator de sistem', 'Administrator modul', 'Administrator exploatație'];
+const TIPURI = ['Autoritate centrală', 'Agenție', 'Subdiviziune', 'Subdiviziune teritorială', 'Autoritate locală', 'Operator platformă'];
+const FORME = [['SRL', 'Societate cu răspundere limitată'], ['SA', 'Societate pe acțiuni'], ['GȚ', 'Gospodărie țărănească (de fermier)'], ['ÎI', 'Întreprindere individuală']];
+const ADDR = [['raion', 'Raion/Municipiu', 'select', {opts: () => B.raioane.map(r => [r, r])}], ['localitate', 'Localitatea', 'text', {list: 'loc-list'}], ['strada', 'Strada', 'text'], ['nr', 'Nr.', 'text'], ['bloc', 'Bloc', 'text'], ['apartament', 'Apartament', 'text']];
+const FORMS = {
+  organizatii: {create: 'Creează organizație', edit: 'Editează organizația', prefix: 'ORG', sections: [
+    {title: 'Informații despre organizație', sub: 'Gestionați informațiile despre organizație', cls: 'two', fields: [['titlu', 'Titlu', 'text', {req: 1}], ['descriere', 'Descriere', 'text'],
+      ['parinte', 'Organizație părinte', 'select', {opts: (r) => coll('organizatii').filter(o => o.id !== r.id).map(o => [o.id, o.nume_ierarhic || o.titlu])}], ['tip', 'Tip', 'select', {opts: () => TIPURI.map(x => [x, x])}],
+      ['nume_ierarhic', 'Nume ierarhic', 'ro'], ['statut', 'Statut', 'select', {opts: () => [['Activ', t('Activ')], ['Inactiv', t('Inactiv')]]}]]},
+    {title: 'Adresa', fields: ADDR}]},
+  utilizatori: {create: 'Creează utilizator', edit: 'Editează utilizatorul', prefix: 'USR', sections: [
+    {title: 'Informații personale', sub: 'Gestionați informațiile personale', fields: [['prenume', 'Prenume', 'text', {req: 1}], ['nume', 'Nume', 'text', {req: 1}],
+      ['idnp', 'IDNP', 'text', {req: 1, re: /^\d{13}$/, msg: 'IDNP-ul are 13 cifre', mode: 'numeric'}], ['telefon', 'Telefon', 'tel'], ['email', 'Email', 'email', {req: 1}],
+      ['titlu', 'Titlu de muncă', 'select', {opts: () => TITLURI.map(x => [x, x])}], ['data_nasterii', 'Data nașterii', 'date'], ['sex', 'Sex', 'select', {opts: () => [['M', t('Masculin')], ['F', t('Feminin')]]}]]},
+    {title: 'Organizație și roluri', sub: 'Rolurile se acordă pe module; permisiunile fiecărui rol sunt afișate sub el.', fields: [
+      ['organizatie', 'Organizație', 'select', {opts: () => coll('organizatii').map(o => [o.id, o.nume_ierarhic || o.titlu])}], ['beneficiar', 'Beneficiar', 'select', {opts: () => coll('beneficiari').map(b => [b.id, b.denumire])}],
+      ['statut', 'Statut', 'select', {opts: () => ['Activ', 'Inactiv', 'Blocat', 'În așteptare'].map(s => [s, t(s)])}], ['roluri', 'Roluri', 'roles']]},
+    {title: 'Adresa', fields: ADDR}]},
+  roluri: {create: 'Creează rol', edit: 'Editează rolul', idFrom: 'cheie', back: '#roluri', sections: [
+    {title: 'Date rol', sub: 'Rolurile sunt folosite pentru a grupa permisiunile. Un utilizator poate avea mai multe roluri.', fields: [
+      ['cheie', 'Cheie', 'text', {req: 1, re: /^[a-z_]+:[a-z_]+$/, msg: 'Format: modul:nume (litere mici)', lock: 1, ph: 'control:inspector'}], ['titlu', 'Titlu', 'text', {req: 1}], ['descriere', 'Descriere', 'text'],
+      ['modul', 'Modul', 'select', {req: 1, opts: () => B.modules.map(m => [m.id, m.name])}], ['mpass', 'Logare doar cu MPass', 'checkbox']]},
+    {title: 'Permisiuni', sub: 'Permisiunile incluse în acest rol.', fields: [['permisiuni', 'Permisiuni', 'perms']]}]},
+  permisiuni: {create: 'Creează permisiune', edit: 'Editează permisiunea', idFrom: 'cheie', back: '#permisiuni', sections: [
+    {title: 'Date permisiune', sub: 'Permisiunile sunt folosite pentru a defini drepturile de acces. O permisiune poate fi asociată cu unul sau mai multe roluri.', fields: [
+      ['cheie', 'Cheie', 'text', {req: 1, re: /^[a-z_]+:[a-z_]+$/, msg: 'Format: modul:nume (litere mici)', lock: 1, ph: 'cereri:view'}], ['titlu', 'Titlu', 'text', {req: 1}], ['descriere', 'Descriere', 'text'],
+      ['tip', 'Tip', 'select', {req: 1, opts: () => [['Modul', t('Modul')], ['Global', t('Global')]]}]]}]},
+  beneficiari: {create: 'Creează beneficiar', edit: 'Editează beneficiarul', prefix: 'BEN', sections: [
+    {title: 'Date despre beneficiar', sub: 'Exploatația viticolă care depune cereri de subvenție.', fields: [['denumire', 'Denumire', 'text', {req: 1}],
+      ['forma', 'Forma organizatorico-juridică', 'select', {req: 1, opts: () => FORME.map(([k, v]) => [k, `${k} · ${v}`])}], ['idno', 'IDNO', 'text', {req: 1, re: /^\d{13}$/, msg: 'IDNO-ul are 13 cifre', mode: 'numeric'}],
+      ['cod_exploatant', 'Cod exploatant (registru)', 'text'], ['reprezentant', 'Reprezentant', 'text'], ['telefon', 'Telefon', 'tel'], ['email', 'Email', 'email'],
+      ['statut', 'Statut', 'select', {opts: () => [['Activ', t('Activ')], ['Suspendat', t('Suspendat')]]}]]},
+    {title: 'Adresa', fields: ADDR}]},
+};
+function field([k, label, type, o = {}], r) {
+  const v = r[k] ?? '', id = 'f-' + k, req = o.req ? ' <span class="req">*</span>' : '';
+  if (type === 'ro') return `<div class="f"><span>${t(label)}</span><div class="ro" id="${id}">${esc(v || '—')}</div></div>`;
+  if (type === 'roles') {
+    const has = new Set(r.roluri || []);
+    const mods = [...new Set(coll('roluri').map(x => x.modul))];
+    return `<div class="rolebox">${mods.map(mid => `<fieldset><legend>${esc(modName(mid))}</legend>${coll('roluri').filter(x => x.modul === mid).map(x =>
+      `<label><input type="checkbox" name="rol" value="${esc(x.cheie)}" ${has.has(x.cheie) ? 'checked' : ''}><span>${esc(x.titlu)}${x.mpass ? ' · MPass' : ''}<small>${(x.permisiuni || []).join(' · ')}</small></span></label>`).join('')}</fieldset>`).join('')}</div>`;
+  }
+  if (type === 'perms') {
+    const has = new Set(r.permisiuni || []);
+    return `<div class="rolebox">${['Modul', 'Global'].map(tp => `<fieldset><legend>${t(tp)}</legend>${coll('permisiuni').filter(x => x.tip === tp).map(x =>
+      `<label><input type="checkbox" name="perm" value="${esc(x.cheie)}" ${has.has(x.cheie) ? 'checked' : ''}><span><span class="mono">${esc(x.cheie)}</span><small>${esc(x.titlu)}</small></span></label>`).join('')}</fieldset>`).join('')}</div>`;
+  }
+  if (type === 'checkbox') return `<label class="f" data-k="${k}" style="flex-direction:row;align-items:center;gap:10px;grid-column:1/-1"><input type="checkbox" name="${k}" ${v ? 'checked' : ''} style="width:20px;height:20px;min-height:0"><span>${t(label)}</span><span class="err" hidden></span></label>`;
+  if (false) {
+  }
+  if (type === 'select') return `<label class="f" data-k="${k}"><span>${t(label)}${req}</span><select id="${id}" name="${k}"><option value="">${t(k === 'parinte' || k === 'beneficiar' || k === 'organizatie' ? '— fără —' : 'Selectează…')}</option>${o.opts(r).map(([val, l]) => `<option value="${esc(val)}" ${String(val) === String(v) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select><span class="err" hidden></span></label>`;
+  if (type === 'tel') { const d = String(v).replace(/\D/g, '').replace(/^373/, '');
+    return `<label class="f" data-k="${k}"><span>${t(label)}${req}</span><span class="ph-in"><span>+373</span><input id="${id}" name="${k}" type="tel" inputmode="tel" value="${esc(d)}" placeholder="69000101" maxlength="11"></span><span class="err" hidden></span></label>`; }
+  return `<label class="f" data-k="${k}"><span>${t(label)}${req}</span><input id="${id}" name="${k}" type="${type}" value="${esc(v)}" ${o.mode ? `inputmode="${o.mode}"` : ''} ${o.list ? `list="${o.list}"` : ''} ${o.lock && r.id ? 'readonly' : ''} placeholder="${o.ph ? esc(o.ph) : ''}" autocomplete="off"><span class="err" hidden></span></label>`;
+}
+function viewForm(k, id) {
+  const F = FORMS[k], isNew = id === 'nou', r = isNew ? (F.idFrom ? {tip: 'Modul', mpass: false, permisiuni: []} : {statut: 'Activ', raion: k === 'organizatii' ? '' : 'r-nul Strășeni'}) : get(k, id);
+  if (!r) return notFound();
+  const back = '#/' + (F.back || (isNew ? `#${k}` : (k === 'organizatii' ? `#${k}` : `#${k}/${id}`))).replace(/^#\/?/, '');
+  $('#main').innerHTML = `<div class="d-head"><a class="back" href="${back}" aria-label="${t('Anulare')}">${IC.back}</a><h1>${t(isNew ? F.create : F.edit)}</h1></div>
+    <form id="frm" novalidate>${F.sections.map(sec => `<section class="card form-card"><h2>${t(sec.title)}</h2>${sec.sub ? `<p class="sub">${t(sec.sub)}</p>` : '<div style="height:18px"></div>'}<div class="grid ${sec.cls || ''}">${sec.fields.map(f => field(f, r)).join('')}</div></section>`).join('')}
+    <datalist id="loc-list">${(B.localitati['r-nul Strășeni'] || []).map(l => `<option value="${esc(l)}">`).join('')}</datalist>
+    <div class="form-acts"><button class="btn primary" type="submit">${t('Salvare')}</button><a class="btn ghost" href="${back}">${t('Anulare')}</a></div></form>`;
+  const frm = $('#frm');
+  if (k === 'organizatii') frm.parinte.addEventListener('change', () => { const p = get('organizatii', frm.parinte.value); $('#f-nume_ierarhic').textContent = (p ? (p.nume_ierarhic || p.titlu) + ' / ' : '') + (frm.titlu.value || '…'); });
+  frm.addEventListener('submit', e => {
+    e.preventDefault(); let bad = 0; const val = {};
+    for (const sec of F.sections) for (const [key, label, type, o = {}] of sec.fields) {
+      if (type === 'ro') continue;
+      if (type === 'roles') { val.roluri = $$('input[name="rol"]:checked', frm).map(x => x.value); continue; }
+      if (type === 'perms') { val.permisiuni = $$('input[name="perm"]:checked', frm).map(x => x.value); continue; }
+      if (type === 'checkbox') { val[key] = frm.elements[key].checked; continue; }
+      const el = frm.elements[key]; let v = (el.value || '').trim(); const box = el.closest('.f'), er = box.querySelector('.err');
+      let msg = '';
+      if (o.req && !v) msg = 'Câmp obligatoriu';
+      else if (v && o.re && !o.re.test(v)) msg = o.msg;
+      else if (F.idFrom === key && isNew && get(k, v)) msg = 'Cheia există deja';
+      else if (v && type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) msg = 'Adresă de e-mail invalidă';
+      else if (v && type === 'tel') { const d = v.replace(/\D/g, ''); if (d.length !== 8) msg = 'Numărul are 8 cifre după +373'; else v = `+373 ${d.slice(0, 2)} ${d.slice(2, 5)} ${d.slice(5)}`; }
+      box.classList.toggle('bad', !!msg); er.hidden = !msg; er.textContent = msg ? t(msg) : ''; if (msg) bad++;
+      val[key] = v;
+    }
+    if (bad) { toast(t('Verificați câmpurile marcate')); frm.querySelector('.f.bad input,.f.bad select')?.focus(); return; }
+    const rec = {...r, ...val};
+    if (k === 'organizatii') { const p = get('organizatii', rec.parinte); rec.nume_ierarhic = (p ? (p.nume_ierarhic || p.titlu) + ' / ' : '') + rec.titlu; }
+    if (isNew && F.idFrom) { rec.id = rec[F.idFrom]; rec.demo = true; }
+    else if (isNew) { const nums = coll(k).map(x => +String(x.id).split('-')[1] || 0); rec.id = `${F.prefix}-${String(Math.max(0, ...nums) + 1).padStart(3, '0')}`; rec.creat = today(); rec.demo = true;
+      if (k === 'beneficiari') Object.assign(rec, {parcele: [], cereri: [], conformitate: 'fara_bloc', suprafata_declarata_ha: 0, suprafata_masurata_ha: 0}); }
+    const labels = {}; for (const sec of F.sections) for (const [key, label] of sec.fields) labels[key] = label;
+    const ch = isNew ? [] : Object.keys(val).filter(x => JSON.stringify(r[x] ?? '') !== JSON.stringify(rec[x] ?? '')).map(x => ({field: labels[x], before: x === 'roluri' ? (r.roluri || []).map(z => ROLE[z]?.name).join(', ') || '—' : (r[x] || '—'), after: x === 'roluri' ? (rec.roluri || []).map(z => ROLE[z]?.name).join(', ') || '—' : (rec[x] || '—')}));
+    put(k, rec);
+    if (isNew) logAct(rec.id, {action: 'creare', what: `${t(F.create)}: ${rec.titlu || rec.denumire || (rec.prenume + ' ' + rec.nume)}`});
+    if (F.idFrom) roleIndex();
+    for (const c of ch) logAct(rec.id, {action: 'modificare', ...c});
+    toast(t('Salvat')); location.hash = F.back || (k === 'organizatii' ? `#${k}` : `#${k}/${rec.id}`);
+  });
+}
+
+/* ============ detail: user ============ */
+const ACTS = {vizualizare: [IC.eye, 'Vizualizare_act'], modificare: [IC.pen, 'Modificare'], atasament: [IC.clip, 'Atașament'], traseu: [IC.route, 'Traseu'], creare: [IC.new, 'Creare'],
+  nota: [IC.note, 'Notă'], conectare: [IC.shield, 'Conectare'], deconectare: [IC.shield, 'Deconectare'], export: [IC.down, 'Export']};
+const DESC = {modificare: 'A modificat', vizualizare: 'A vizualizat', atasament: 'A atașat', traseu: 'A calculat', creare: 'A creat', nota: 'A adăugat o notă'};
+function evObj(e) {                                  // the object of the action, as a link
+  const o = e.obj;
+  if (e.title) return `<span class="ev-o">${esc(e.title)}</span>`;
+  if (!o) return '';
+  if (/^CER-/.test(o)) { const c = get('cereri', o); return `<a class="ev-o" href="#/cereri/${esc(o)}">${t('Cerere')} ${esc(o)}${c ? ' · ' + esc(t(e.stage || c.etapa)) : ''}</a>`; }
+  if (/^USR-/.test(o)) return `<a class="ev-o" href="#/utilizatori/${esc(o)}">${esc(uname(o) || o)}</a>`;
+  if (/^BEN-/.test(o)) return `<a class="ev-o" href="#/beneficiari/${esc(o)}">${esc(bname(o) || o)}</a>`;
+  if (/^ORG-/.test(o)) return `<a class="ev-o" href="#/organizatii/${esc(o)}/editare">${esc(oname(o) || o)}</a>`;
+  if (/^V\d+$/.test(o)) return `<a class="ev-o" href="app.html#${esc(o)}">${t('Bloc')} ${esc(o)}</a>`;
+  return `<span class="ev-o">${esc(o)}</span>`;
+}
+function evHtml(e, withObj) {
+  const who = e.user ? uname(e.user) : (e.by || '—'), A = ACTS[e.action] || [IC.pen, e.action];
+  const val = x => /^USR-\d+$/.test(String(x)) ? uname(x) : x;
+  const desc = e.what ? e.what : e.text ? e.text : e.field ? `${t(DESC[e.action] || 'A modificat')} ${t(e.field).toLowerCase()}` : '';
+  const meta = [e.module && t(e.module), e.ip, e.ua, e.auth].filter(Boolean);
+  return `<div class="ev"><span class="ic">${A[0]}</span><div><span class="who">${esc(who)}</span><span class="what">${t(A[1])}</span>${e.src && e.src !== 'demo' ? `<span class="src">${t(e.src)}</span>` : ''}<time>${fdt(e.ts)}</time>
+    ${withObj ? evObj(e) : ''}${desc ? `<div class="ev-d">${esc(desc)}</div>` : ''}
+    ${e.field ? `<div class="fld">${esc(t(e.field))}</div><div class="chg"><span class="b4">${esc(t(String(val(e.before))))}</span>→<span class="af">${esc(t(String(val(e.after))))}</span></div>` : ''}
+    ${meta.length ? `<div class="ev-m">${meta.map(esc).join('<span>·</span>')}</div>` : ''}</div></div>`;
+}
+function timeline(evs, withObj, limit = 8) {
+  if (!evs.length) return `<p class="muted">${t('Fără activitate.')}</p>`;
+  const more = evs.length > limit;
+  return `<div class="tl">${evs.slice(0, limit).map(e => evHtml(e, withObj)).join('')}</div>${more ? `<div class="tl-more" hidden>${evs.slice(limit).map(e => evHtml(e, withObj)).join('')}</div><button class="btn sm ghost" type="button" data-act="more" style="color:var(--link)">${t('Mai multe')} (${evs.length - limit})</button>` : ''}`;
+}
+function viewUser(id, tab) {
+  const u = get('utilizatori', id); if (!u) return notFound();
+  tab = tab || 'detalii';
+  const org = get('organizatii', u.organizatie), ben = get('beneficiari', u.beneficiar), roles = (u.roluri || []).map(r => ROLE[r]).filter(Boolean);
+  const body = tab === 'detalii' ? `<section class="card pad"><dl class="kv"><dt>${t('Nume')}</dt><dd>${esc(u.prenume)} ${esc(u.nume)}</dd><dt>${t('IDNP')}</dt><dd class="mono">${esc(u.idnp)}</dd>
+      <dt>${t('Email')}</dt><dd>${esc(u.email)}</dd><dt>${t('Telefon')}</dt><dd>${esc(u.telefon || '—')}</dd><dt>${t('Titlu de muncă')}</dt><dd>${esc(u.titlu || '—')}</dd>
+      <dt>${t('Data nașterii')}</dt><dd>${fdate(u.data_nasterii)}</dd><dt>${t('Adresa')}</dt><dd>${esc([u.raion, u.localitate, u.strada && (u.strada + ' ' + (u.nr || ''))].filter(Boolean).join(', ') || '—')}</dd></dl>
+      <p style="margin:18px 0 0"><a class="btn ghost" href="#/utilizatori/${u.id}/editare" style="color:var(--link)">${IC.pen}${t('Editare')}</a></p></section>
+    <section class="card pad" style="margin-top:16px"><h2>${t('Module și accese')}</h2><p class="muted" style="margin:4px 0 16px">${t('Vizualizați modulele și accesul utilizatorului')}</p>
+      ${roles.map(r => `<div style="padding:12px 0;border-top:1px solid var(--line)"><div style="font-weight:700">${esc(r.module)}</div><div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-top:4px"><span class="muted" style="margin-right:6px">${esc(r.name)}</span>${r.perms.map(p => `<span class="tag perm">${esc(p)}</span>`).join('')}</div></div>`).join('') || `<p class="muted">${t('Niciun rol atribuit.')}</p>`}</section>`
+    : tab === 'organizatii' ? `<section class="card pad"><dl class="kv">${org ? `<dt>${t('Organizație')}</dt><dd><a href="#/organizatii/${org.id}/editare">${esc(org.titlu)}</a></dd><dt>${t('Nume ierarhic')}</dt><dd>${esc(org.nume_ierarhic)}</dd><dt>${t('Tip')}</dt><dd>${esc(org.tip)}</dd><dt>${t('Raion/Municipiu')}</dt><dd>${esc(org.raion)}</dd>` : ''}
+      ${ben ? `<dt>${t('Beneficiar')}</dt><dd><a href="#/beneficiari/${ben.id}">${esc(ben.denumire)}</a></dd>` : ''}${!org && !ben ? `<dt>${t('Organizație')}</dt><dd>—</dd>` : ''}</dl></section>`
+    : userActivity(u);
+  $('#main').innerHTML = `<div class="d-head"><a class="back" href="#/utilizatori" aria-label="${t('Utilizatori platformei')}">${IC.back}</a><span class="av" style="background:${colorOf(u.email)}">${esc(initials(u.prenume + ' ' + u.nume))}</span>
+      <div class="t"><h1>${esc(u.prenume)} ${esc(u.nume)}</h1><span class="muted">${esc(u.email)}</span><span>${pill(u.statut)}</span></div>
+      <div class="acts"><button class="btn ghost" type="button" data-act="toggle-user">${IC.shield}${t(u.statut === 'Activ' ? 'Dezactivare' : 'Activare')}</button></div></div>
+    <div class="tabs" role="tablist">${[['detalii', 'Detalii'], ['organizatii', 'Organizații'], ['activitate', 'Activitate']].map(([k, l]) => `<button type="button" role="tab" aria-selected="${k === tab}" data-tab="${k}">${t(l)}</button>`).join('')}</div>${body}`;
+  for (const [sel, key] of [['#uf-mod', 'mod'], ['#uf-from', 'from'], ['#uf-to', 'to']]) $(sel)?.addEventListener('change', ev => { UF[key] = ev.target.value; viewUser(id, 'activitate'); });
+  $('#main').onclick = e => {
+    const tb = e.target.closest('[data-tab]'); if (tb) { location.hash = `#utilizatori/${id}/${tb.dataset.tab}`; return; }
+    if (e.target.closest('[data-act="toggle-user"]')) { setStatus('utilizatori', id, u.statut !== 'Activ'); return viewUser(id, tab); }
+    moreToggle(e);
+  };
+}
+let UF = {mod: '', from: '', to: ''};
+function userActivity(u) {
+  const all = activityOfUser(u), mods = [...new Set(all.map(e => e.module).filter(Boolean))];
+  const ev = all.filter(e => (!UF.mod || e.module === UF.mod) && (!UF.from || e.ts.slice(0, 10) >= UF.from) && (!UF.to || e.ts.slice(0, 10) <= UF.to));
+  return `<section class="card pad"><div class="flt"><label class="f"><span>${t('Modul')}</span><select id="uf-mod"><option value="">${t('— selectează —')}</option>${mods.map(m => `<option value="${esc(m)}" ${m === UF.mod ? 'selected' : ''}>${esc(t(m))}</option>`).join('')}</select></label>
+    <label class="f"><span>${t('De la')}</span><input type="date" id="uf-from" value="${UF.from}"></label><label class="f"><span>${t('Până la')}</span><input type="date" id="uf-to" value="${UF.to}"></label></div>
+    ${ev.length ? timeline(ev, true, 15) : `<p class="muted">${t('Utilizatorul nu are activitate înregistrată.')}</p>`}</section>`;
+}
+function moreToggle(e) { const b = e.target.closest('[data-act="more"]'); if (!b) return; const m = b.previousElementSibling; m.hidden = !m.hidden; b.textContent = t(m.hidden ? 'Mai multe' : 'Mai puține'); }
+
+/* ============ detail: beneficiary ============ */
+function viewBen(id) {
+  const b = get('beneficiari', id); if (!b) return notFound();
+  const cer = coll('cereri').filter(c => c.beneficiar === b.id), us = coll('utilizatori').filter(u => u.beneficiar === b.id);
+  const diff = b.suprafata_declarata_ha ? (b.suprafata_masurata_ha - b.suprafata_declarata_ha) / b.suprafata_declarata_ha * 100 : null;
+  const vid = (b.parcele || []).map(p => p.vineyard_id).find(Boolean);
+  $('#main').innerHTML = `<div class="d-head"><a class="back" href="#/beneficiari" aria-label="${t('Beneficiari')}">${IC.back}</a><span class="av" style="background:${colorOf(b.denumire)}">${esc(initials(b.denumire.replace(/^(GȚ|ÎI)\s+/, '')))}</span>
+      <div class="t"><h1>${esc(b.denumire)}</h1><span class="muted">${esc(b.forma_completa || b.forma)} · IDNO <span class="mono">${esc(b.idno)}</span></span><span style="display:flex;gap:8px;flex-wrap:wrap">${pill(b.statut)}${conf(b.conformitate)}</span></div>
+      <div class="acts">${vid ? `<a class="btn" href="app.html#${esc(vid)}">${IC.map}${t('Deschide pe hartă')}</a>` : ''}<a class="btn" href="#/beneficiari/${b.id}/editare">${IC.pen}${t('Editare')}</a></div></div>
+    <div class="kpis"><div class="kpi"><b>${fmt(b.suprafata_declarata_ha, 2)} ha</b><span>${t('Suprafață declarată')}</span></div><div class="kpi"><b>${fmt(b.suprafata_masurata_ha, 2)} ha</b><span>${t('Suprafață măsurată')}${diff != null ? ` · ${diff > 0 ? '+' : ''}${fmt(diff, 1)} %` : ''}</span></div>
+      <div class="kpi"><b>${(b.parcele || []).length}</b><span>${t('Parcele')}</span></div><div class="kpi"><b>${cer.length}</b><span>${t('Cereri')}</span></div></div>
+    <section class="card pad"><h2 style="margin-bottom:8px">${t('Date despre beneficiar')}</h2><dl class="kv"><dt>${t('Cod exploatant (registru)')}</dt><dd class="mono">${esc(b.cod_exploatant || '—')}</dd><dt>${t('Reprezentant')}</dt><dd>${esc(b.reprezentant || '—')}</dd>
+      <dt>${t('Telefon')}</dt><dd>${esc(b.telefon || '—')}</dd><dt>${t('Email')}</dt><dd>${esc(b.email || '—')}</dd><dt>${t('Adresa')}</dt><dd>${esc([b.raion, b.localitate, b.strada && (b.strada + ' ' + (b.nr || ''))].filter(Boolean).join(', '))}</dd>
+      ${us.length ? `<dt>${t('Utilizatori asociați')}</dt><dd>${us.map(u => `<a href="#/utilizatori/${u.id}">${esc(u.prenume)} ${esc(u.nume)}</a>`).join(', ')}</dd>` : ''}</dl></section>
+    <section class="card" style="margin-top:16px"><div style="padding:20px 24px 6px"><h2>${t('Parcele')}</h2></div><div class="tbl" tabindex="0"><table><thead><tr><th>Nr. cadastral</th><th>${t('Bloc')}</th><th>${t('Soi')}</th><th>${t('An plantare')}</th><th>${t('Suprafață declarată')}</th><th>${t('Suprafață măsurată')}</th><th>${t('Diferență')}</th><th>${t('Ultimul control')}</th></tr></thead>
+      <tbody>${(b.parcele || []).map(p => `<tr data-href="app.html#parcel=${esc(p.cad_nr)}"><td class="mono">${esc(p.cad_nr)}</td><td>${esc(p.vineyard_id || '—')}</td><td>${esc(p.soi || '—')}</td><td>${esc(p.an_plantare || '—')}</td><td class="num">${fmt(p.suprafata_declarata_ha, 3)} ha</td><td class="num">${fmt(p.suprafata_masurata_ha, 3)} ha</td>
+        <td class="num" style="color:${Math.abs(p.diferenta_pct || 0) > 20 ? 'var(--danger)' : Math.abs(p.diferenta_pct || 0) > 10 ? 'var(--warn)' : 'inherit'}">${p.diferenta_pct == null ? '—' : (p.diferenta_pct > 0 ? '+' : '') + fmt(p.diferenta_pct, 1) + ' %'}</td><td>${fdate(p.ultimul_control)}</td></tr>`).join('') || `<tr><td colspan="8" class="muted">${t('Nicio înregistrare.')}</td></tr>`}</tbody></table></div></section>
+    <section class="card" style="margin-top:16px"><div style="padding:20px 24px 6px"><h2>${t('Cereri de subvenție')}</h2></div><div class="tbl" tabindex="0"><table><thead><tr><th>${t('Nr. cererii')}</th><th>${t('Bloc')}</th><th>${t('Suma cerută (lei)')}</th><th>${t('Suma eligibilă (lei)')}</th><th>${t('Etapa')}</th><th>${t('Inspector')}</th><th>${t('Rezultat control')}</th></tr></thead>
+      <tbody>${cer.map(c => `<tr data-href="#/cereri/${c.id}"><td class="mono"><b>${c.id}</b></td><td>${esc(c.vineyard_id)}</td><td class="num">${fmt(c.suma_ceruta_lei)}</td><td class="num">${fmt(c.suma_eligibila_lei)}</td><td>${stage(c.etapa)}</td><td>${c.inspector ? esc(uname(c.inspector)) : `<span class="muted">${t('nealocat')}</span>`}</td><td>${conf(c.rezultat_control)}</td></tr>`).join('') || `<tr><td colspan="7" class="muted">${t('Nicio înregistrare.')}</td></tr>`}</tbody></table></div></section>`;
+  $('#main').onclick = e => { const tr = e.target.closest('tr[data-href]'); if (tr) { const h = tr.dataset.href; h.startsWith('#') ? (location.hash = h) : (location.href = h); } };
+}
+
+/* ============ detail: application (stages, inspector, activity) ============ */
+let ACT_ON = store.get('bo_act_on', true);
+const CKI = {pass: '✓', warn: '!', fail: '✕', info: 'i'};
+const RO_FIX = {'Actul de receptie a plantatiei in primul an de vegetatie (prindere >= 90 %)': 'Actul de recepție a plantației în primul an de vegetație (prindere ≥ 90 %)'};
+const roFix = x => RO_FIX[x] || x;
+function viewCerere(id) {
+  const c = get('cereri', id); if (!c) return notFound();
+  const b = get('beneficiari', c.beneficiar) || {}, blk = CMP?.blocks?.find(x => x.vineyard_id === c.vineyard_id), si = ETAPE().indexOf(c.etapa);
+  const m = blk?.measured || {}, r = blk?.registry || {}, e = blk?.eligibility;
+  const d = (v, f = x => x) => v == null || v === '' ? '<span class="muted">—</span>' : f(v);
+  const rows = blk ? [['Suprafață', d(r.declared_area_ha, v => fmt(v, 2) + ' ha'), `${fmt(m.area_ha, 2)} ha`], ['Densitate (butuci/ha)', d(r.declared_density, fmt), `${fmt(m.density_effective)}`],
+    ['Distanță între rânduri', '<span class="muted">—</span>', `${fmt(m.row_spacing_m, 2)} m`], ['Goluri / butuci lipsă', '<span class="muted">—</span>', `${fmt((m.gap_share || 0) * 100)} % · ~${fmt(m.missing_vines)}`],
+    ['Soi', d(r.variety), '<span class="muted">—</span>'], ['Zona IGP', d(r.igp), esc(CMP.criteria?.igp?.zone || '—')]] : [];
+  const tabs = ETAPE().map((s, i) => `<button type="button" role="tab" data-st="${i}" aria-selected="${i === si}" class="${i < si ? 'done' : ''}" ${i > si ? 'disabled' : ''}>${t(s)}</button>`).join('');
+  const act = ACT_ON ? `<aside class="card act-panel" aria-label="${t('Activitate')}">${timeline(activityOf(c), false, 8)}</aside>` : '';
+  $('#main').innerHTML = `<div class="page-h" style="margin-bottom:10px"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><a class="back btn ghost" href="#/cereri" aria-label="${t('Cereri de subvenție')}" style="padding:0 8px">${IC.back}</a><h1>${t('Cerere')} <span class="mono">${esc(c.id)}</span></h1><span class="stage-pill">${t(c.etapa)}${c.decizie ? ' · ' + t(c.decizie) : ''}</span></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn" type="button" data-pop="docs">${IC.clip}${t('Documente')}</button><button class="btn" type="button" data-pop="actions">${t('Acțiuni')}</button>
+      <button class="switch" type="button" role="switch" aria-checked="${ACT_ON}" data-act="act-toggle">${t('Activitate')}<i></i></button></div></div>
+    <div class="meta-row"><span>${t('Depusă')} <b>${fdate(c.depusa)}</b></span><span>${t('Beneficiar')} <b><a href="#/beneficiari/${esc(c.beneficiar)}">${esc(b.denumire || '—')}</a></b></span>
+      <span>${t('Inspector')} <b>${c.inspector ? `<a href="#/utilizatori/${esc(c.inspector)}">${esc(uname(c.inspector))}</a>` : t('nealocat')}</b></span><span>${t('Bloc')} <b>${esc(c.vineyard_id)}</b></span></div>
+    <div class="tabs" role="tablist">${tabs}</div>
+    <div class="two-col ${ACT_ON ? '' : 'noact'}"><div class="stack">
+      <details class="sec" data-sec="0,1"><summary>${t('Detalii despre beneficiar')}</summary><div><dl class="kv"><dt>${t('Denumire')}</dt><dd>${esc(b.denumire)}</dd><dt>${t('IDNO')}</dt><dd class="mono">${esc(b.idno)}</dd><dt>${t('Reprezentant')}</dt><dd>${esc(b.reprezentant)}</dd>
+        <dt>${t('Telefon')}</dt><dd>${esc(b.telefon)}</dd><dt>${t('Adresa')}</dt><dd>${esc([b.raion, b.localitate, b.strada && (b.strada + ' ' + (b.nr || ''))].filter(Boolean).join(', '))}</dd><dt>Măsura</dt><dd>${esc(c.masura_completa || c.masura)}</dd></dl></div></details>
+      <details class="sec" data-sec="0,1" ${si <= 1 ? 'open' : ''}><summary>${t('Dosarul cererii')} · ${(c.documente || []).filter(d => d[1] === 'depus').length}/${(c.documente || []).length}</summary><div>
+        <p class="muted" style="margin:0 0 6px">${t('Documentele cerute de AIPA pentru măsura SP 2.5 (plată post-investiție).')}</p>
+        ${(c.documente || []).map(([n, st]) => `<div class="chk"><span class="i ${st === 'depus' ? 'pass' : st === 'lipsă' ? 'fail' : 'warn'}">${st === 'depus' ? '✓' : st === 'lipsă' ? '✕' : '…'}</span><div><b>${esc(t(n))}</b><small>${esc(t(st))}</small></div></div>`).join('')}</div></details>
+      <details class="sec" data-sec="1,2" ${si === 2 ? 'open' : ''}><summary>${t('Blocul și parcelele')} · ${esc(c.vineyard_id)}</summary><div>
+        <p class="muted" style="margin:0 0 10px">${t('Parcele cadastrale')}: <span class="mono">${(c.parcele || []).map(esc).join(', ') || '—'}</span></p>
+        ${rows.length ? `<div class="tbl" tabindex="0"><table><thead><tr><th></th><th>${t('Declarat (RVV / cerere)')}</th><th>${t('Măsurat (dronă)')}</th></tr></thead><tbody>${rows.map(([k, a, mm]) => `<tr style="cursor:default"><th style="background:none">${t(k)}</th><td>${a}</td><td>${mm}</td></tr>`).join('')}</tbody></table></div>` : ''}
+        <p style="margin:14px 0 0"><a class="btn sm" href="app.html#${esc(c.vineyard_id)}">${IC.map}${t('Deschide blocul pe hartă')}</a></p></div></details>
+      <details class="sec" data-sec="2" ${si === 2 || si === 3 ? 'open' : ''}><summary>${t('Control pe teren')}</summary><div>
+        <dl class="kv"><dt>${t('Inspector alocat')}</dt><dd>${c.inspector ? `<a href="#/utilizatori/${esc(c.inspector)}">${esc(uname(c.inspector))}</a>` : `<span class="muted">${t('nealocat')}</span>`}</dd><dt>${t('Rezultat control')}</dt><dd>${c.rezultat_control ? conf(c.rezultat_control) : `<span class="muted">${t('Rezultatul controlului pe teren apare după vizita inspectorului.')}</span>`}</dd></dl>
+        ${blk ? `<h2 style="font-size:15px;margin:16px 0 4px">${t('Verificări pe baza zborului UAV')}</h2>${blk.checks.map(ck => `<div class="chk"><span class="i ${ck.status}">${CKI[ck.status]}</span><div><b>${esc(ck.label)}</b><small>${esc(String(ck.detail).replace(/Exploatant demo \d+/, b.denumire || '$&'))}${ck.rule ? ' · ' + esc(ck.rule) : ''}</small></div></div>`).join('')}` : ''}
+        <p style="margin:14px 0 0;display:flex;gap:8px;flex-wrap:wrap"><a class="btn sm" href="app.html#${esc(c.vineyard_id)}">${IC.clip}${t('Proces-verbal de control')}</a></p></div></details>
+      <details class="sec" data-sec="3,4,5" ${si >= 3 ? 'open' : ''}><summary>${t('Evaluare și decizie')}</summary><div>
+        <div class="kpis" style="margin:0"><div class="kpi"><b>${fmt(c.suma_ceruta_lei)} lei</b><span>${t('Suma cerută')}</span></div><div class="kpi"><b>${fmt(c.suma_eligibila_lei)}${c.suma_eligibila_lei != null ? ' lei' : ''}</b><span>${t('Suma eligibilă')}</span></div>
+          <div class="kpi"><b>${c.suma_eligibila_lei != null ? fmt(c.suma_eligibila_lei - c.suma_ceruta_lei) + ' lei' : '—'}</b><span>${t('Diferența')}</span></div><div class="kpi"><b style="font-size:18px">${c.decizie ? esc(t(c.decizie)) : '—'}</b><span>${t('Decizia')}</span></div></div>
+        ${e ? `<p class="muted" style="margin:12px 0 0">${t('Sugestie din măsurători: {v} lei', {v: fmt(e.eligible_lei)})} · ${esc(t(roFix(e.reception_doc || '')))}</p>` : ''}</div></details>
+    </div>${act}</div>`;
+  $('#main').onclick = ev => {
+    const st = ev.target.closest('[data-st]'); if (st && !st.disabled) { $$('details.sec').forEach(s => { const on = s.dataset.sec.split(',').includes(st.dataset.st); s.classList.toggle('hl', on); if (on) { s.open = true; s.scrollIntoView({behavior: 'smooth', block: 'start'}); } }); return; }
+    if (ev.target.closest('[data-act="act-toggle"]')) { ACT_ON = !ACT_ON; store.set('bo_act_on', ACT_ON); return viewCerere(id); }
+    moreToggle(ev);
+    const docs = ev.target.closest('[data-pop="docs"]');
+    if (docs) return openPop(docs, `<div class="ph">${t('Dosarul cererii')}</div>${(c.documente || []).map(([n, st]) => `<button type="button" data-a="doc">${st === 'depus' ? IC.clip : IC.note}${esc(t(n))}${st !== 'depus' ? ` · <b style="color:var(--${st === 'lipsă' ? 'danger' : 'warn'})">${esc(t(st))}</b>` : ''}</button>`).join('')}<a href="app.html#${esc(c.vineyard_id)}">${IC.clip}${t('Proces-verbal de control')} · ${esc(c.vineyard_id)}</a>`);
+    const ac = ev.target.closest('[data-pop="actions"]');
+    if (ac) return openPop(ac, [['assign', 'Alocă inspector'], ['next', 'Treci la etapa următoare'], ['sum', 'Setează suma eligibilă'], ['decide', 'Decizia'], ['note', 'Adaugă notă']].map(([a, l]) => `<button type="button" data-a="${a}">${t(l)}</button>`).join(''), (e2) => {
+      const a = e2.target.closest('[data-a]')?.dataset.a; if (!a) return; closePop(); cerAction(c, a);
+    });
+  };
+  logView(c);
+}
+function logView(c) { const last = BOACT.filter(e => e.obj === c.id && e.action === 'vizualizare' && e.user === ME().id).pop(); if (!last || Date.now() - new Date(last.ts).getTime() > 10 * 60e3) logAct(c.id, {action: 'vizualizare', what: 'Dosarul cererii'}); }
+function cerAction(c0, a) {
+  const c = {...c0, activitate: c0.activitate}; const i = ETAPE().indexOf(c.etapa);
+  const done = (msg) => { put('cereri', c); toast(msg || t('Salvat')); viewCerere(c.id); };
+  if (a === 'assign') return modal(t('Alocă inspector'), `<label class="f"><span>${t('Inspector')}</span><select id="m-insp">${inspectors().filter(u => u.statut === 'Activ').map(u => `<option value="${u.id}" ${u.id === c.inspector ? 'selected' : ''}>${esc(u.prenume)} ${esc(u.nume)} · ${esc(oname(u.organizatie))}</option>`).join('')}</select></label>`, v => {
+    const n = $('#m-insp', v).value; if (n === c.inspector) return; logAct(c.id, {action: 'modificare', field: 'Inspector alocat', before: c.inspector || '—', after: n}); c.inspector = n; done(); });
+  if (a === 'next') {
+    if (i >= ETAPE().length - 1) return toast(t('Cererea e deja la ultima etapă'));
+    const nx = ETAPE()[i + 1];
+    if (nx === 'Control pe teren' && !c.inspector) { toast(t('Pentru control pe teren trebuie alocat un inspector')); return cerAction(c0, 'assign'); }
+    if (nx === 'Decizie' && c.suma_eligibila_lei == null) { toast(t('Setați întâi suma eligibilă')); return cerAction(c0, 'sum'); }
+    if (nx === 'Evaluare' && !c.rezultat_control) { const blk = CMP?.blocks?.find(x => x.vineyard_id === c.vineyard_id); const res = {neconform: 'neconform', verificare: 'de verificat', conform: 'conform'}[blk?.status] || 'conform';
+      logAct(c.id, {action: 'modificare', field: 'Rezultat control', before: '—', after: res}); c.rezultat_control = res; }
+    logAct(c.id, {action: 'modificare', field: 'Etapa', before: c.etapa, after: nx}); c.etapa = nx; return done();
+  }
+  if (a === 'sum') { const blk = CMP?.blocks?.find(x => x.vineyard_id === c.vineyard_id), sug = blk?.eligibility?.eligible_lei;
+    return modal(t('Setează suma eligibilă'), `<label class="f"><span>${t('Suma eligibilă (lei)')}</span><input id="m-sum" type="number" min="0" step="100" value="${c.suma_eligibila_lei ?? sug ?? ''}"></label>${sug != null ? `<p class="muted" style="margin:0">${t('Sugestie din măsurători: {v} lei', {v: fmt(sug)})}</p>` : ''}`, v => {
+      const n = $('#m-sum', v).value; if (n === '' || +n < 0) return false; logAct(c.id, {action: 'modificare', field: 'Suma eligibilă (lei)', before: c.suma_eligibila_lei == null ? '—' : fmt(c.suma_eligibila_lei), after: fmt(+n)}); c.suma_eligibila_lei = +n; done(); }); }
+  if (a === 'decide') return modal(t('Decizia'), `<label class="f"><span>${t('Decizia')}</span><select id="m-dec">${['Aprobată', 'Eligibilă parțial', 'Respinsă (neeligibilă)'].map(s => `<option value="${s}" ${s === c.decizie ? 'selected' : ''}>${t(s)}</option>`).join('')}</select></label>`, v => {
+    const n = $('#m-dec', v).value; logAct(c.id, {action: 'modificare', field: 'Decizie', before: c.decizie || '—', after: n}); c.decizie = n; done(); });
+  if (a === 'note') return modal(t('Adaugă notă'), `<label class="f"><span>${t('Notă')}</span><textarea id="m-note" rows="4"></textarea></label>`, v => {
+    const n = $('#m-note', v).value.trim(); if (!n) return false; logAct(c.id, {action: 'nota', text: n}); done(); });
+}
+
+/* ============ reports ============ */
+function bars(items, max, color) {
+  max = max || Math.max(1, ...items.map(x => x[1]));
+  return `<div class="chart">${items.map(([l, v, c, lab]) => `<div class="bar"><span class="lb">${esc(l)}</span><span class="tr"><i style="width:${Math.max(0, v) / max * 100}%;background:${c || color || 'var(--accent)'}"></i></span><span class="v">${lab ?? fmt(v)}</span></div>`).join('')}</div>`;
+}
+let RT = 'cereri', RV = 'panou';
+function viewRap(tab) {
+  RT = tab || RT;
+  const C = coll('cereri'), BEN = coll('beneficiari'), U = coll('utilizatori');
+  const TABS = [['cereri', 'Cereri și subvenții'], ['control', 'Controale pe teren'], ['beneficiari', 'Beneficiari'], ['registru', 'Registrul viticol'], ['utilizatori', 'Utilizatori']];
+  let panel = '', table = [], title = '';
+  if (RT === 'cereri') {
+    const req = C.reduce((a, c) => a + (c.suma_ceruta_lei || 0), 0), el = C.reduce((a, c) => a + (c.suma_eligibila_lei || 0), 0), dec = C.filter(c => ['Decizie', 'Plată'].includes(c.etapa)).length;
+    title = 'Cereri pe etape';
+    panel = `<div class="kpis"><div class="kpi"><b>${C.length}</b><span>${t('cereri')}</span></div><div class="kpi"><b>${C.length - dec}</b><span>${t('în lucru')}</span></div><div class="kpi"><b>${dec}</b><span>${t('decise')}</span></div>
+      <div class="kpi"><b>${fmt(req)}</b><span>${t('lei ceruți')}</span></div><div class="kpi"><b>${fmt(el)}</b><span>${t('lei eligibili')}</span></div></div>
+      <section class="card pad"><h2 style="margin-bottom:14px">${t(title)}</h2>${bars(ETAPE().map(s => [t(s), C.filter(c => c.etapa === s).length, s === 'Control pe teren' || s === 'Evaluare' ? 'var(--warn)' : s === 'Decizie' || s === 'Plată' ? 'var(--ok)' : 'var(--blue)']))}</section>`;
+    table = [[t('Nr. cererii'), t('Beneficiar'), t('Bloc'), t('Etapa'), t('Inspector'), t('Suma cerută (lei)'), t('Suma eligibilă (lei)')], ...C.map(c => [c.id, bname(c.beneficiar), c.vineyard_id, t(c.etapa), uname(c.inspector) || '—', c.suma_ceruta_lei, c.suma_eligibila_lei ?? ''])];
+  } else if (RT === 'control') {
+    const ins = inspectors().map(u => { const mine = C.filter(c => c.inspector === u.id); return {u, n: mine.length, done: mine.filter(c => c.rezultat_control).length, nec: mine.filter(c => c.rezultat_control === 'neconform').length, acts: activityOfUser(u).filter(e => !['conectare', 'deconectare'].includes(e.action)).length}; }).filter(x => x.n || x.acts);
+    title = 'Activitatea inspectorilor';
+    const s = CMP?.summary?.status || {};
+    panel = `<div class="kpis"><div class="kpi"><b>${C.filter(c => c.etapa === 'Control pe teren').length}</b><span>${t('cereri așteaptă controlul pe teren')}</span></div><div class="kpi"><b>${s.neconform ?? '—'}</b><span>${t('neconform')} · ${t('Bloc')}</span></div>
+      <div class="kpi"><b>${s.verificare ?? '—'}</b><span>${t('de verificat')} · ${t('Bloc')}</span></div><div class="kpi"><b>${s.conform ?? '—'}</b><span>${t('conform')} · ${t('Bloc')}</span></div></div>
+      <section class="card pad"><h2 style="margin-bottom:14px">${t(title)}</h2>${bars(ins.map(x => [`${x.u.prenume} ${x.u.nume}`, x.n, 'var(--blue)', `${x.n} ${t('alocate')} · ${x.done} ✓`]))}
+      <div class="legend"><span><i style="background:var(--blue)"></i>${t('alocate')}</span><span>✓ ${t('controale finalizate')}</span></div></section>`;
+    table = [[t('Inspector'), t('Organizație'), t('alocate'), t('controale finalizate'), t('neconform'), t('acțiuni înregistrate')], ...ins.map(x => [`${x.u.prenume} ${x.u.nume}`, oname(x.u.organizatie), x.n, x.done, x.nec, x.acts])];
+  } else if (RT === 'beneficiari') {
+    title = 'Beneficiari după conformitate';
+    const k = ['neconform', 'verificare', 'conform', 'sub_prag', 'fara_bloc'];
+    panel = `<div class="kpis"><div class="kpi"><b>${BEN.length}</b><span>${t('Beneficiari')}</span></div>${['SRL', 'SA', 'GȚ', 'ÎI'].map(f => `<div class="kpi"><b>${BEN.filter(b => b.forma === f).length}</b><span>${f}</span></div>`).join('')}</div>
+      <section class="card pad"><h2 style="margin-bottom:14px">${t(title)}</h2>${bars(k.map(x => [t(CONF[x][0]), BEN.filter(b => b.conformitate === x).length, {bad: 'var(--danger)', warn: 'var(--warn)', ok: 'var(--ok)', off: 'var(--faint)'}[CONF[x][1]]]))}</section>`;
+    table = [[t('Denumire'), t('Forma'), t('Suprafață declarată'), t('Suprafață măsurată'), t('Parcele'), t('Conformitate')], ...BEN.map(b => [b.denumire, b.forma, b.suprafata_declarata_ha, b.suprafata_masurata_ha, (b.parcele || []).length, t(CONF[b.conformitate]?.[0] || b.conformitate)])];
+  } else if (RT === 'registru') {
+    const P = BEN.flatMap(b => (b.parcele || []).map(p => ({...p, ben: b.denumire}))), dec = P.reduce((a, p) => a + (p.suprafata_declarata_ha || 0), 0), mea = P.reduce((a, p) => a + (p.suprafata_masurata_ha || 0), 0);
+    title = 'Diferența declarat–măsurat pe parcele';
+    const S = P.filter(p => p.diferenta_pct != null).sort((a, b) => Math.abs(b.diferenta_pct) - Math.abs(a.diferenta_pct)).slice(0, 14);
+    panel = `<div class="kpis"><div class="kpi"><b>${P.length}</b><span>${t('Parcele')}</span></div><div class="kpi"><b>${fmt(dec, 2)} ha</b><span>${t('Suprafață declarată')}</span></div><div class="kpi"><b>${fmt(mea, 2)} ha</b><span>${t('Suprafață măsurată')}</span></div>
+      <div class="kpi"><b>${dec ? fmt((mea - dec) / dec * 100, 1) : '—'} %</b><span>${t('Diferență')}</span></div></div>
+      <section class="card pad"><h2 style="margin-bottom:14px">${t(title)}</h2>${bars(S.map(p => [`${p.cad_nr} · ${p.ben}`, Math.abs(p.diferenta_pct), Math.abs(p.diferenta_pct) > 20 ? 'var(--danger)' : Math.abs(p.diferenta_pct) > 10 ? 'var(--warn)' : 'var(--ok)', (p.diferenta_pct > 0 ? '+' : '') + fmt(p.diferenta_pct, 1) + ' %']), 100)}</section>`;
+    table = [['Nr. cadastral', t('Beneficiar'), t('Bloc'), t('Suprafață declarată'), t('Suprafață măsurată'), t('Diferență')], ...P.map(p => [p.cad_nr, p.ben, p.vineyard_id || '', p.suprafata_declarata_ha, p.suprafata_masurata_ha, p.diferenta_pct ?? ''])];
+  } else {
+    title = 'Utilizatori pe module';
+    const per = B.modules.map(m => [m.name, U.filter(u => (u.roluri || []).some(r => r.startsWith(m.id + ':'))).length]);
+    panel = `<div class="kpis"><div class="kpi"><b>${U.length}</b><span>${t('Utilizatori')}</span></div>${['Activ', 'Inactiv', 'Blocat', 'În așteptare'].map(s => `<div class="kpi"><b>${U.filter(u => u.statut === s).length}</b><span>${t(s)}</span></div>`).join('')}</div>
+      <section class="card pad"><h2 style="margin-bottom:14px">${t(title)}</h2>${bars(per, 0, 'var(--blue)')}</section>`;
+    table = [[t('Organizație'), t('Utilizatori')], ...coll('organizatii').map(o => [o.titlu, U.filter(u => u.organizatie === o.id).length]).filter(r => r[1])];
+  }
+  const tbl = `<section class="card"><div class="tbl" tabindex="0"><table><thead><tr>${table[0].map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${table.slice(1).map(r => `<tr style="cursor:default">${r.map(v => `<td class="${typeof v === 'number' ? 'num' : ''}">${typeof v === 'number' ? fmt(v, Number.isInteger(v) ? 0 : 2) : esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></section>`;
+  $('#main').innerHTML = `<div class="page-h"><h1>${t('Rapoarte')}</h1><button class="btn" type="button" data-act="rcsv">${IC.down}${t('Export CSV')}</button></div>
+    <div class="tabs" role="tablist">${TABS.map(([k, l]) => `<button type="button" role="tab" aria-selected="${k === RT}" data-rt="${k}">${t(l)}</button>`).join('')}</div>
+    <h2 style="font-size:26px;margin:4px 0 14px">${t(TABS.find(x => x[0] === RT)[1])}</h2>
+    <label class="f" style="max-width:320px;margin-bottom:16px"><span>${t('Panou')}</span><select id="rv"><option value="panou" ${RV === 'panou' ? 'selected' : ''}>${t('Panou de indicatori')}</option><option value="tabel" ${RV === 'tabel' ? 'selected' : ''}>${t('Tabel detaliat')}</option></select></label>
+    ${RV === 'panou' ? panel : tbl}<p class="foot">${esc(B.about)}</p>`;
+  $('#rv').addEventListener('change', e => { RV = e.target.value; viewRap(RT); });
+  $('#main').onclick = e => { const b = e.target.closest('[data-rt]'); if (b) location.hash = '#rapoarte/' + b.dataset.rt; if (e.target.closest('[data-act="rcsv"]')) download(`raport_${RT}.csv`, csv(table)); };
+}
+
+/* ============ roles, activity ============ */
+function notFound() { $('#main').innerHTML = `<div class="card pad"><h2>404</h2><p class="muted">${t('Nicio înregistrare.')}</p><a class="btn" href="#/cereri">${t('Cereri de subvenție')}</a></div>`; }
+
+/* ============ shell: nav, bell, language, routing ============ */
+function renderShell() {
+  const me = ME();
+  $('#me').innerHTML = `<span class="av" style="background:${colorOf(me.email)}">${esc(initials(me.prenume + ' ' + me.nume))}</span><span class="nm">${esc(me.prenume)} ${esc(me.nume)}</span>`;
+  const n = coll('cereri').filter(c => c.etapa === 'Control pe teren').length;
+  const item = (k, l, cnt) => `<a class="nav" href="#/${k}" data-nav="${k}">${nicon(k)}<span class="lbl">${t(l)}</span>${cnt ? `<span class="cnt">${cnt}</span>` : ''}</a>`;
+  $('#side').innerHTML = `<button class="icon-btn col" type="button" data-act="mini" aria-label="${t('Restrânge meniul')}" title="${t('Restrânge meniul')}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4v16M20 12H9M13 7l-5 5 5 5"/></svg></button>
+    ${item('cereri', 'Cereri de subvenție', n)}${item('beneficiari', 'Beneficiari')}${item('rapoarte', 'Rapoarte')}
+    <h4>${t('Administrare')}</h4>${item('organizatii', 'Organizații')}${item('utilizatori', 'Utilizatori platformei')}${item('roluri', 'Roluri și permisiuni')}
+    <div class="sep"></div><a class="nav" href="app.html">${nicon('harta')}<span class="lbl">${t('Harta (portal)')}</span></a><a class="nav" href="index.html">${nicon('start')}<span class="lbl">${t('Pagina principală')}</span></a>
+    <button class="nav" type="button" data-act="reset" style="border:0;background:none;cursor:pointer;color:var(--muted);font-weight:500;font-size:13px">${t('Resetează datele demo')}</button>`;
+  $('#side').classList.toggle('mini', !!store.get('bo_mini', false));
+  $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === LANG));
+  $('#demo-chip').textContent = t('Date demonstrative');
+  const notes = bellItems(), cnt = notes.reduce((a, x) => a + x[0], 0);
+  $('#bell-n').hidden = !cnt; $('#bell-n').textContent = cnt > 99 ? '99+' : cnt;
+  document.documentElement.lang = LANG;
+}
+function bellItems() {
+  const C = coll('cereri'), U = coll('utilizatori'), seen = store.get('bo_seen', '');
+  return [[C.filter(c => c.etapa === 'Control pe teren').length, 'cereri așteaptă controlul pe teren', '#cereri'], [C.filter(c => ['Depunere', 'Verificare administrativă'].includes(c.etapa)).length, 'cereri noi de verificat', '#cereri'],
+    [U.filter(u => u.statut === 'În așteptare').length, 'conturi în așteptare', '#utilizatori'],
+    [portalAct().filter(e => e.ts > seen).length, 'acțiuni noi ale inspectorilor în portal', (() => { const last = portalAct().filter(e => e.ts > seen).pop(), u = last && U.find(x => x.email === last.email); return u ? `#utilizatori/${u.id}/activitate` : '#utilizatori'; })()]].filter(x => x[0]);
+}
+function route() {
+  closePop(); $$('.veil').forEach(v => v.remove()); $('#side').classList.remove('open');
+  if (!SESSION || SESSION.role !== 'sysadmin') return gate();
+  const [mod, id, sub] = decodeURIComponent(location.hash.replace(/^#\/?/, '') || 'cereri').split('/');
+  renderShell();
+  roleIndex();
+  $$('[data-nav]').forEach(a => a.dataset.nav === (mod === 'permisiuni' ? 'roluri' : mod) ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+  if (mod === 'rapoarte') viewRap(id);
+  else if (mod === 'activitate') { location.replace('#utilizatori'); return; }
+  else if (LISTS[mod] && !id) viewList(mod);
+  else if (FORMS[mod] && (id === 'nou' || sub === 'editare')) viewForm(mod, id);
+  else if (mod === 'utilizatori') { viewUser(id, sub); if (sub === 'activitate') { store.set('bo_seen', nowIso()); renderShell(); } }
+  else if (mod === 'beneficiari') viewBen(id);
+  else if (mod === 'cereri') viewCerere(id);
+  else if (mod === 'organizatii') viewForm(mod, id);
+  else notFound();
+  window.scrollTo(0, 0);
+  document.title = `${t({cereri: 'Cereri de subvenție', beneficiari: 'Beneficiari', rapoarte: 'Rapoarte', organizatii: 'Organizații', utilizatori: 'Utilizatori platformei', roluri: 'Roluri și permisiuni', permisiuni: 'Roluri și permisiuni'}[mod] || 'Back-office')} · VinePlan`;
+}
+function gate() {
+  $('#side').hidden = true; $('#me').innerHTML = '';
+  $('#main').innerHTML = `<div class="card gate"><h1 style="font-size:26px">${t('Acces restricționat')}</h1><p>${t('Back-office-ul este disponibil pentru rolul Administrator de sistem.')}</p><a class="btn primary" href="login.html#backoffice">${t('Autentificare')}</a></div>`;
+}
+document.addEventListener('click', e => {
+  const l = e.target.closest('[data-lang]'); if (l) { LANG = l.dataset.lang; store.set('lang', LANG); return route(); }
+  if (e.target.closest('[data-act="skip"]')) return $('#main').focus();
+  if (e.target.closest('[data-act="side"]')) return $('#side').classList.toggle('open');
+  if (e.target.closest('[data-act="mini"]')) { store.set('bo_mini', !store.get('bo_mini', false)); return $('#side').classList.toggle('mini'); }
+  if (e.target.closest('[data-act="logout"]')) { try { localStorage.removeItem('fpm.session'); localStorage.removeItem('fpm.role'); } catch (x) {} location.href = 'index.html'; return; }
+  if (e.target.closest('[data-act="reset"]')) { for (const k of Object.keys(OV)) OV[k] = {}; store.set('bo', OV); BOACT = []; store.set('bo_activity', []); toast(t('Datele demo au fost resetate')); return route(); }
+  const bell = e.target.closest('[data-act="bell"]');
+  if (bell) { const it = bellItems(); bell.setAttribute('data-pop', '1');
+    return openPop(bell, `<div class="ph">${t('Notificări')}</div>${it.map(([n, l, h]) => `<a href="${h.replace(/^#\/?/, '#/')}"><b class="num" style="min-width:24px">${n}</b>${t(l)}</a>`).join('') || `<p class="muted" style="padding:8px 10px;margin:0">${t('Nicio notificare.')}</p>`}`); }
+});
+window.addEventListener('hashchange', route);
+window.addEventListener('storage', e => { if (e.key === 'fpm.activity' && /^#\/?(cereri\/|utilizatori\/)/.test(location.hash)) route(); });   // the portal logged an action in another tab
+Promise.all([fetch('data/backoffice.json').then(r => r.json()), fetch('data/compliance.json').then(r => r.ok ? r.json() : null).catch(() => null)]).then(([b, c]) => {
+  B = b; CMP = c; roleIndex(); route();
+}).catch(err => { $('#main').innerHTML = `<div class="card pad"><h2>Eroare</h2><p class="muted">${esc(err.message)}</p></div>`; });
+</script>
+</body>
+</html>

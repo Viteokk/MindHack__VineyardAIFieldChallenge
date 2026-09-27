@@ -395,6 +395,85 @@ def register(check, res, grade, evid: Path):
                    "districts, the imagery of the flown area preloaded, then a 3 s flight drawn sharp at every frame. "
                    "Links to a zone, parcel or block open straight on it; reduced motion skips it; a touch stops it.")
 
+    @check("W12", "web", "Back-office: every module opens without errors on phone, tablet and desktop; the inspector's portal actions reach the activity log")
+    @web_or_skip
+    def w12(w):
+        admin = "localStorage.setItem('fpm.session', JSON.stringify({role: 'sysadmin', name: 'Administrator de sistem demo', email: 'backoffice@fieldplanner.demo'}));"
+        views = ["cereri", "cereri/CER-2026-001", "beneficiari", "beneficiari/BEN-001", "organizatii", "organizatii/nou", "utilizatori",
+                 "utilizatori/USR-002", "utilizatori/USR-002/activitate", "utilizatori/nou", "rapoarte", "rapoarte/control", "roluri", "roluri/nou",
+                 "permisiuni", "permisiuni/nou"]
+        n0, issues = len(w.errors), []
+        for dev in DEVICES:
+            ctx, pg = w.page(dev, session=False, init=admin)
+            for v in views:
+                pg.goto(w.base + "admin.html#" + v, wait_until="load")
+                pg.wait_for_timeout(350)
+                o = pg.evaluate(OVERFLOW_JS)
+                if o["scroll"] > 1:
+                    issues.append(f"{dev} {v}: scroll +{o['scroll']} px")
+                if not pg.query_selector("h1"):
+                    issues.append(f"{dev} {v}: no page title")
+            ctx.close()
+        # the inspector opens a block card in the portal; the back-office shows it in the application of that block
+        portal = ("localStorage.setItem('fpm.activity', JSON.stringify([{action: 'vizualizare', obj: 'V02', what: 'Fișa de conformitate · bloc V02', "
+                  "ts: '2026-09-27T10:00', email: 'inspector@fieldplanner.demo', user_name: 'Inspector demo', role: 'inspector'}]));")
+        ctx, pg = w.page(session=False, init=admin + portal)
+        pg.goto(w.base + "admin.html#cereri/CER-2026-001", wait_until="load")
+        pg.wait_for_timeout(500)
+        act = pg.inner_text(".act-panel") if pg.query_selector(".act-panel") else ""
+        linked = "Inspector demo" in act and "portal" in act.lower()
+        ctx.close()
+        ctx, pg = w.page(session=False)
+        pg.goto(w.base + "admin.html#cereri", wait_until="load")
+        pg.wait_for_timeout(400)
+        gated = bool(pg.query_selector(".gate"))
+        ctx.close()
+        errs = w.errors[n0:]
+        ok = not errs and not issues and linked and gated
+        return res("PASS" if ok else "FAIL", f"{len(views)} views × 3 devices: {len(issues)} layout issues, {len(errs)} JS errors; portal activity in the "
+                   f"application {'✓' if linked else '✗'}; without the back-office role the page is closed {'✓' if gated else '✗'}",
+                   "0 · 0 · ✓ · ✓", "admin.html: applications (stages, assigned inspector, activity), beneficiaries, organisations, platform users "
+                   "(roles per module, permissions, activity), reports, roles. The portal logs the inspector's actions in the browser "
+                   "(fpm.activity); the back-office shows them next to the application of the same block.", (issues + errs)[:6])
+
+    @check("W13", "web", "Accessibility (WCAG 2.1 A/AA + best practices, axe-core): landing, sign-in, portal views of both roles and the back-office, desktop and phone")
+    @web_or_skip
+    def w13(w):
+        import urllib.request
+        axe = C.OUT / "cache" / "axe.min.js"
+        if not axe.exists():
+            try:
+                axe.parent.mkdir(parents=True, exist_ok=True)
+                urllib.request.urlretrieve("https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js", axe)
+            except Exception as ex:
+                return res("WARN", f"not run: axe-core not available ({type(ex).__name__})", "0 violations", "Needs axe-core 4.10.2 (downloaded once into out/cache).")
+        role = lambda r, n, e: f"localStorage.setItem('fpm.session', JSON.stringify({{role: '{r}', name: '{n}', email: '{e}', via: 'parola-demo'}}));"
+        insp, ferm, adm = role("inspector", "Inspector demo", "inspector@fieldplanner.demo"), role("fermier", "Administrator demo", "administrator@fieldplanner.demo"), \
+            role("sysadmin", "Administrator de sistem demo", "backoffice@fieldplanner.demo")
+        pages = [("index.html", ""), ("login.html", ""), ("app.html#azi", insp), ("app.html#zona", insp), ("app.html#harta", insp), ("app.html#rapoarte", insp),
+                 ("app.html#plantatie", ferm), ("admin.html#/cereri", adm), ("admin.html#/cereri/CER-2026-001", adm), ("admin.html#/beneficiari/BEN-001", adm),
+                 ("admin.html#/utilizatori", adm), ("admin.html#/utilizatori/USR-002/activitate", adm), ("admin.html#/utilizatori/nou", adm), ("admin.html#/roluri", adm),
+                 ("admin.html#/rapoarte", adm)]
+        js = ("async () => (await axe.run(document, {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice']}, "
+              "resultTypes: ['violations']})).violations.map(v => ({id: v.id, impact: v.impact, n: v.nodes.length}))")
+        found = {}
+        for dev in ("desktop", "phone"):
+            for url, init in pages:
+                ctx, pg = w.page(dev, session=False, init=init)
+                pg.goto(w.base + url, wait_until="load")
+                pg.wait_for_timeout(1500 if url.startswith("app") else 600)
+                pg.add_script_tag(path=str(axe))
+                for v in pg.evaluate(js):
+                    f = found.setdefault(v["id"], {"impact": v["impact"], "n": 0, "views": set()})
+                    f["n"] += v["n"]; f["views"].add(f"{dev} {url}")
+                ctx.close()
+        bad = [k for k, v in found.items() if v["impact"] in ("serious", "critical")]
+        st = "FAIL" if bad else "WARN" if found else "PASS"
+        return res(st, f"{len(pages)} views × 2 devices: {sum(v['n'] for v in found.values())} violations in {len(found)} rules ({len(bad)} serious or critical)",
+                   "0 violations", "axe-core 4.10.2 in Chromium: contrast, names and labels of every control, landmarks, heading order, ARIA, "
+                   "keyboard access to scrollable tables; a skip link on every page; status colours mixed with the ink colour to reach AA in both themes.",
+                   [f"{k} ({v['impact']}): {v['n']} nodes, e.g. {sorted(v['views'])[0]}" for k, v in found.items()][:6])
+
     @check("W10", "web", "Every file the pages ask for exists (no 404, no failed request)")
     @web_or_skip
     def w2(w):
