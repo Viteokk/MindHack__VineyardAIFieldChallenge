@@ -1754,7 +1754,7 @@ function mmCsv() {
 }
 /* ============ Moldova: contur, raioane, satul zonei studiate ============ */
 let mdLayer = null, mdBounds = null;
-fetch('data/moldova.geojson?v=2').then(r => r.ok ? r.json() : null).then(fc => {
+const mdReady = fetch('data/moldova.geojson?v=2').then(r => r.ok ? r.json() : null).then(fc => {
   if (!fc) return;
   const country = fc.features.filter(f => f.properties.kind === 'country'), raions = fc.features.filter(f => f.properties.kind === 'raion'), com = fc.features.filter(f => f.properties.kind === 'commune');
   const studyRaion = raions.find(f => com.length && L.geoJSON(f, {coordsToLatLng: toLL}).getBounds().contains(L.geoJSON(com[0], {coordsToLatLng: toLL}).getBounds().getCenter()));
@@ -2522,6 +2522,40 @@ document.addEventListener('keydown', e => {
 ['#pal-veil', '#ex-veil', '#role-veil'].forEach(s => $(s).addEventListener('click', e => { if (e.target === $(s)) $(s).hidden = true; }));
 addEventListener('hashchange', () => show(location.hash.slice(1)));
 
+/* ============ intro: Moldova -> Sireți ============ */
+/* A camera of its own instead of flyTo: every frame is a real view (setView), so the country and district outlines are
+   redrawn sharp instead of a stretched bitmap, and the imagery of the flown area is downloaded and decoded while
+   Moldova is on screen, not during the flight. Any touch, drag or wheel stops it where it is. */
+async function introFlight() {
+  const target = bnds(EXT), el = map.getContainer();
+  const end = map._getBoundsCenterZoom ? map._getBoundsCenterZoom(target, fitOpts) : {center: target.getCenter(), zoom: map.getBoundsZoom(target)};
+  let stop = false;
+  const halt = () => { stop = true; };
+  ['pointerdown', 'wheel', 'keydown'].forEach(ev => el.addEventListener(ev, halt, {once: true, passive: true}));
+  // 1) Moldova on screen while the imagery of the flown area loads (at least 0.9 s, at most 2.6 s)
+  syncVillage();
+  const imgs = [...ortho.getLayers(), ...village.getLayers()].filter(l => l.getBounds && l.getBounds().intersects(target))
+    .map(l => l.getElement()).filter(Boolean);
+  const decoded = Promise.allSettled(imgs.map(i => i.decode ? i.decode() : Promise.resolve()));
+  await Promise.all([new Promise(r => setTimeout(r, 900)), Promise.race([decoded, new Promise(r => setTimeout(r, 2600))])]);
+  if (stop) return;
+  // 2) the flight: the camera slides over Sireți early and zooms in with a soft start and a soft landing
+  const c0 = map.getCenter(), z0 = map.getZoom(), z1 = end.zoom, c1 = end.center, D = 3000, t0 = performance.now();
+  const inOut = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const out = t => 1 - Math.pow(1 - t, 3);
+  await new Promise(done => {
+    const frame = now => {
+      if (stop) return done();
+      const t = Math.min(1, (now - t0) / D), k = out(Math.min(1, t * 1.35));
+      map.setView(L.latLng(c0.lat + (c1.lat - c0.lat) * k, c0.lng + (c1.lng - c0.lng) * k), z0 + (z1 - z0) * inOut(t), {animate: false});
+      t < 1 ? requestAnimationFrame(frame) : done();
+    };
+    requestAnimationFrame(frame);
+  });
+  if (!stop) map.setView(c1, z1, {animate: false});
+  ['pointerdown', 'wheel', 'keydown'].forEach(ev => el.removeEventListener(ev, halt));
+}
+
 /* ============ boot ============ */
 applyTheme(store.get('theme', 'auto'));
 $('#lang-btn').innerHTML = `${LANG.toUpperCase()}<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
@@ -2531,10 +2565,25 @@ roleBtn();
 document.addEventListener('pointerdown', e => { const p = $('#acct'); if (!p.hidden && !p.contains(e.target) && !e.target.closest('#acct-btn')) { p.hidden = true; $('#acct-btn').setAttribute('aria-expanded', 'false'); } });
 show(location.hash.slice(1) || (S.role ? ROLES[S.role].view : 'harta'));
 if (!S.role && !ROLES[location.hash.slice(1)] && !/^#([VC]\d+|zona)/i.test(location.hash)) openRole();   // shared links open straight on the object
-map.fitBounds(bnds(EXT), phone() ? {paddingTopLeft: [16, 70], paddingBottomRight: [16, innerHeight * .44 + 100]} : {paddingTopLeft: [leftPad() + 16, 76], paddingBottomRight: [76, 76]});
+const fitOpts = phone() ? {paddingTopLeft: [16, 70], paddingBottomRight: [16, innerHeight * .44 + 100]} : {paddingTopLeft: [leftPad() + 16, 76], paddingBottomRight: [76, 76]};
+const restoreZone = () => { if (!/zona=/.test(location.hash) && store.get('zone', '')) openZoneHash('zona=' + store.get('zone', '')); };   // the last chosen zone
+// entering the app: the whole of Moldova first, then a smooth flight down to the flown area of Sireți (once per session;
+// links to a zone / parcel / block open straight on it; skipped when the system asks for reduced motion)
+const INTRO = !matchMedia('(prefers-reduced-motion: reduce)').matches && !/zona=|parcel=|^#[VC]\d+/i.test(location.hash)
+  && (() => { try { return !sessionStorage.getItem('fpm.introDone'); } catch (e) { return false; } })();
+if (INTRO) await Promise.race([mdReady, new Promise(r => setTimeout(r, 2500))]);
 renderLayers(); applyLayers(); scale(); drawCustomStart();
-if (!/zona=/.test(location.hash) && store.get('zone', '')) openZoneHash('zona=' + store.get('zone', ''));   // the last chosen zone
-$('#loader').remove();
+if (INTRO && mdBounds) {
+  map.fitBounds(mdBounds, {...fitOpts, animate: false});
+  syncMd();
+  try { sessionStorage.setItem('fpm.introDone', '1'); } catch (e) {}
+  $('#loader').remove();
+  introFlight().then(restoreZone);
+} else {
+  map.fitBounds(bnds(EXT), fitOpts);
+  restoreZone();
+  $('#loader').remove();
+}
 })();
 </script>
 

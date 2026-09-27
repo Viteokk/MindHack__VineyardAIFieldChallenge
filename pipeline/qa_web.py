@@ -85,7 +85,7 @@ class Web:
             pass
         self.httpd.shutdown()
 
-    def page(self, device="desktop", lang="ro", session=True, touch=None, init=""):
+    def page(self, device="desktop", lang="ro", session=True, touch=None, init="", intro=False):
         w, h = DEVICES[device]
         ctx = self.browser.new_context(viewport={"width": w, "height": h}, device_scale_factor=1,
                                        has_touch=device != "desktop" if touch is None else touch,
@@ -94,6 +94,7 @@ class Web:
         if session:
             store.update({"fpm.session": json.dumps(SESSION), "fpm.role": json.dumps(SESSION["role"])})
         ctx.add_init_script("try{" + "".join(f"localStorage.setItem({json.dumps(k)},{json.dumps(v)});" for k, v in store.items())
+                            + ("" if intro else "sessionStorage.setItem('fpm.introDone','1');")   # the map intro only in W11
                             + "}catch(e){}" + init)
         pg = ctx.new_page()
         pg.on("pageerror", lambda e: self.errors.append(f"{pg.url.split('/')[-1][:40]}: {e}"))
@@ -369,6 +370,30 @@ def register(check, res, grade, evid: Path):
         return res(st, f"{found['n']} visible buttons on a phone: {len(found['noname'])} without a name, {len(found['small'])} smaller than 24 px",
                    "0 without a name; ≤ 3 small", "Name = visible text, aria-label or title (screen readers, tooltips).",
                    (found["noname"] + found["small"])[:6])
+
+    @check("W11", "web", "Entering the app: the whole of Moldova first, then a smooth flight to the flown area of Sireți")
+    @web_or_skip
+    def w11(w):
+        fps = ("window.__f=[];(function f(t){if(window.__f.length<2000){window.__f.push(t);requestAnimationFrame(f);}})"
+               "(performance.now());")
+        ctx, pg = w.page(intro=True, init=fps)
+        pg.goto(w.base + "app.html#inspector", wait_until="load")
+        pg.wait_for_function("() => !document.querySelector('#loader')", timeout=30000)
+        pg.wait_for_timeout(300)
+        s0 = pg.inner_text("#sb-txt")                       # the scale bar: tens of km over Moldova
+        pg.wait_for_timeout(7000)
+        s1 = pg.inner_text("#sb-txt")                       # ... metres over the flown area
+        f = pg.evaluate("window.__f")
+        ctx.close()
+        iv = sorted(b - a for a, b in zip(f, f[1:]) if b - a < 1000)
+        import statistics
+        med, p95 = (statistics.median(iv), iv[int(0.95 * (len(iv) - 1))]) if iv else (0, 0)
+        km = lambda t: float(t.split()[0]) * (1000 if "km" in t else 1)
+        ok = km(s0) >= 10000 and km(s1) <= 1000 and p95 <= 50
+        return res("PASS" if ok else "FAIL", f"scale {s0} → {s1}; frames every {med:.0f} ms (p95 {p95:.0f} ms)",
+                   "country → flown area; p95 frame ≤ 50 ms", "Once per session, after sign-in: the country and its "
+                   "districts, the imagery of the flown area preloaded, then a 3 s flight drawn sharp at every frame. "
+                   "Links to a zone, parcel or block open straight on it; reduced motion skips it; a touch stops it.")
 
     @check("W10", "web", "Every file the pages ask for exists (no 404, no failed request)")
     @web_or_skip

@@ -224,6 +224,7 @@ f.addEventListener('submit', e => {
     localStorage.setItem('fpm.session', JSON.stringify({role: owner, name: a.name, org: a.org, email: a.email, phone: a.phone, via: TAB === 'phone' ? 'telefon-demo' : 'parola-demo', at: new Date().toISOString()}));
     localStorage.setItem('fpm.role', JSON.stringify(owner));
   } catch (x) {}
+  try { sessionStorage.removeItem('fpm.introDone'); } catch (e) {}   // a new sign-in plays the map intro again
   location.href = 'app.html#' + owner;
 });
 if (/administrator|fermier/.test(location.hash)) f.role.value = 'fermier';
