@@ -8,7 +8,7 @@ global block / row IDs → measurements → two walking routes → interactive w
 
 | Deliverable | Where |
 |---|---|
-| Walking route, inspector (row gaps + waste) | [`route.geojson`](route.geojson) — one LineString, EPSG:32635, `length_m`; passes 1.5 m from the organisers' pre-test point (629663.8, 5220195.3) through a 2.7 m detour on the authorised passage (`scripts/visit_points.py`, re-validated) |
+| Walking route, inspector (row gaps + waste) | [`route.geojson`](route.geojson) — one LineString, EPSG:32635, `length_m` · optional: `python scripts/visit_points.py --point X Y` adds a short detour so the route passes within 1.5 m of a given point (e.g. the organisers' pre-test point 629663.8, 5220195.3), then re-run `pipeline.validate` |
 | Walking route, farmer (waste only) | [`route_waste.geojson`](route_waste.geojson) |
 | Measurements by `vineyard_id` / `row_id` | [`measurements.csv`](measurements.csv) |
 | Web interface | **https://viteokk.github.io/MindHack__VineyardAIFieldChallenge/** (GitHub Pages from `web/`, branch `gh-pages`) · local: `python -m http.server -d web 8000` |
