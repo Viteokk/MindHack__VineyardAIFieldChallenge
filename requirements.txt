@@ -1,12 +1,13 @@
-# Compatible ranges; exact pinned versions are in requirements.lock.txt
-# (regenerate after install: pip freeze > requirements.lock.txt)
+# Direct dependencies (compatible ranges); the exact versions of everything installed are in requirements.lock.txt
+# (regenerate after install: pip freeze > requirements.lock.txt). The Docker image installs these at the locked versions.
 numpy>=1.26,<2.3
 pillow>=10.0
 opencv-python-headless>=4.9
 shapely>=2.0
 pyproj>=3.6
-networkx>=3.2
 scipy>=1.11
-scikit-image>=0.22
 ortools>=9.10
+tifffile>=2024.1
+imagecodecs>=2024.1
+# model steps only (YOLO11 canopy veto, waste boxes, live analysis of a new tile); the classical pipeline runs without it
 ultralytics>=8.3.50

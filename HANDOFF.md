@@ -93,7 +93,7 @@ după fiecare sarcină: rulare → rezultat → commit + push.
   recall 100 % pe exemple), S3 ✓ planșa `out/preview/vine_filter_emptied.jpg` (de confirmat uman), S4 sweep dilatare/closing
   în curs (`out/s4_sweep.log`), S6 ✓ (0 rânduri duplicate, 0 blocuri tăiate de drumuri, 12 row_id sar peste un tile fără
   detecție — corect fizic), S7 ✓ `out/waste_checklist.csv` + `out/waste_checklist/README.md` (200 candidați cu miniaturi),
-  S8 Dockerfile scris dar **docker nu e instalat pe acest Mac** (de testat pe alt calculator), README cu diagramă.
+  S8 Dockerfile **testat 27 sept** (Docker Desktop 4.92 e instalat; CLI: `/Applications/Docker.app/Contents/Resources/bin/docker`): build ~1 min, 1,2 GB; în container `measurements.csv` iese identic, traseul e valid, scorul 0,844; CI GitHub Actions (`.github/workflows/docker.yml`) construiește imaginea la fiecare push. README cu diagramă.
 - PRODUCT_PLAN (P1 → P2 → P6 → P4 → P5 → P3) începe după upload-ul în Marcaj; P5 (GPX + GPS) e deja gata.
 - Navigare GPS: punctul de start se alege (nr. 1 / cea mai apropiată țintă de mine / o țintă aleasă pe hartă / „Navighează de aici” din fișa țintei); ordinea continuă ciclic după traseu.
 - **Rândurile sunt pereți (implicit din sâmbătă seara, cerința lui Victor: „în lungul rândului, nu printre”).** Sârmele

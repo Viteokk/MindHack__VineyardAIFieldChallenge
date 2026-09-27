@@ -1,5 +1,7 @@
 # VinePlan (vineyard-ai) — Vineyard AI Field Challenge (DeepTech GigaHack 2026 · Marcaj)
 
+[![docker](https://github.com/Viteokk/vineyard-ai/actions/workflows/docker.yml/badge.svg)](https://github.com/Viteokk/vineyard-ai/actions/workflows/docker.yml)
+
 End-to-end pipeline for the Sireț3 UAV orthomosaic (311 GeoTIFF tiles, 2.5 cm/px, EPSG:32635):
 AI pre-annotations (canopies, row axes, inter-row areas, attributes) → manual correction in Marcaj →
 global block / row IDs → measurements → two walking routes → interactive web map.
@@ -101,7 +103,16 @@ The pipeline is not tied to Sireț3. For another vineyard flight:
    docker compose run --rm qa                # integration tests -> QA_REPORT.md
    docker compose up web                     # web map + live API on http://localhost:8000
    ```
-   The image runs the unit tests while it is built.
+   The image (Python 3.12, CPU, ~1.2 GB without the model) installs the direct dependencies of `requirements.txt` at the
+   versions of `requirements.lock.txt`, runs the unit tests and imports every pipeline module while it is built.
+   **Tested** on 27 Sep 2026 with Docker Desktop 4.92 (Apple Silicon, arm64), and built on every push by
+   [GitHub Actions](.github/workflows/docker.yml) on a clean Linux runner (amd64). Inside the container:
+   `measurements.csv` regenerated from `out/pre_global_v5.xml` is byte-identical to the committed file,
+   `pipeline.validate` accepts `route.geojson` (1.49 % outside the passable area, start = end), `pipeline.eval` gives the
+   laptop's reference score (0.844) and the web map + live API answer.
+   With `--build-arg WITH_MODEL=1` (~3 GB, torch CPU) the released YOLO11 weights load, segment the reference tile
+   `r021_c012` (219 canopies) and the live API reports the model.
+   The QA web checks (W1–W11) need Playwright + Chromium and run on the laptop, not in the image.
 
 ## Quality assurance
 

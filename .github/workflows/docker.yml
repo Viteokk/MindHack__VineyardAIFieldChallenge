@@ -1,0 +1,49 @@
+# Public proof that the environment is reproducible: on every push the Docker image is built from scratch on a clean
+# Linux runner (amd64), runs the unit tests and imports every pipeline module while it is built, then serves the web map.
+name: docker
+
+on:
+  push:
+    branches: [main]
+    paths: ['Dockerfile', '.dockerignore', 'docker-compose.yml', 'requirements*.txt', 'config.py', 'pipeline/**', 'scripts/**',
+            'tests/**', 'registry/**', 'train/**', '.github/workflows/docker.yml']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build the image (unit tests + every pipeline module imports, inside the build)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: vineplan:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Image size and versions
+        run: |
+          docker image ls vineplan:ci --format 'vineplan:ci {{.Size}}'
+          docker run --rm vineplan:ci python -c "import sys, numpy, cv2, shapely, pyproj, scipy, ortools; print('python', sys.version.split()[0], '· numpy', numpy.__version__, '· opencv', cv2.__version__, '· shapely', shapely.__version__, '· pyproj', pyproj.__version__, '· scipy', scipy.__version__, '· ortools', ortools.__version__)"
+
+      - name: Compose file is valid
+        run: docker compose config --quiet
+
+      - name: Web map and live API answer from the container
+        run: |
+          docker run -d --name web -p 8000:8000 vineplan:ci python -m pipeline.serve --host 0.0.0.0 --port 8000
+          for i in $(seq 1 20); do curl -sf http://localhost:8000/api/status && break; sleep 1; done
+          echo
+          curl -sf -o /dev/null -w 'app.html HTTP %{http_code}\n' http://localhost:8000/app.html
+          curl -sf -o /dev/null -w 'index.html HTTP %{http_code}\n' http://localhost:8000/index.html
+          docker stop web
