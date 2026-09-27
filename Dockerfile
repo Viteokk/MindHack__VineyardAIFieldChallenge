@@ -18,7 +18,7 @@ RUN grep -v "^ultralytics" requirements.txt > /tmp/requirements.txt && pip insta
       && pip install --index-url https://download.pytorch.org/whl/cpu $(grep -iE "^(torch|torchvision)==" requirements.lock.txt) \
       && pip install -c requirements.lock.txt ultralytics \
       && mkdir -p /opt/vineplan \
-      && python -c "import urllib.request as u; u.urlretrieve('https://github.com/Viteokk/vineyard-ai/releases/download/v0.2-weights/yolo11n-seg-vineyard-waste.pt', '/opt/vineplan/yolo11n-seg-vineyard-waste.pt')"; \
+      && python -c "import urllib.request as u; u.urlretrieve('https://github.com/Viteokk/MindHack__VineyardAIFieldChallenge/releases/download/v0.2-weights/yolo11n-seg-vineyard-waste.pt', '/opt/vineplan/yolo11n-seg-vineyard-waste.pt')"; \
     fi
 COPY config.py ./
 COPY pipeline ./pipeline

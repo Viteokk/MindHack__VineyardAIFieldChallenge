@@ -1,6 +1,6 @@
-# VinePlan (vineyard-ai) — Vineyard AI Field Challenge (DeepTech GigaHack 2026 · Marcaj)
+# VinePlan (MindHack__VineyardAIFieldChallenge) — Vineyard AI Field Challenge (DeepTech GigaHack 2026 · Marcaj)
 
-[![docker](https://github.com/Viteokk/vineyard-ai/actions/workflows/docker.yml/badge.svg)](https://github.com/Viteokk/vineyard-ai/actions/workflows/docker.yml)
+[![docker](https://github.com/Viteokk/MindHack__VineyardAIFieldChallenge/actions/workflows/docker.yml/badge.svg)](https://github.com/Viteokk/MindHack__VineyardAIFieldChallenge/actions/workflows/docker.yml)
 
 End-to-end pipeline for the Sireț3 UAV orthomosaic (311 GeoTIFF tiles, 2.5 cm/px, EPSG:32635):
 AI pre-annotations (canopies, row axes, inter-row areas, attributes) → manual correction in Marcaj →
@@ -11,8 +11,8 @@ global block / row IDs → measurements → two walking routes → interactive w
 | Walking route, inspector (row gaps + waste) | [`route.geojson`](route.geojson) — one LineString, EPSG:32635, `length_m` |
 | Walking route, farmer (waste only) | [`route_waste.geojson`](route_waste.geojson) |
 | Measurements by `vineyard_id` / `row_id` | [`measurements.csv`](measurements.csv) |
-| Web interface | **https://viteokk.github.io/vineyard-ai/** (GitHub Pages from `web/`, branch `gh-pages`) · local: `python -m http.server -d web 8000` |
-| Model weights | [yolo11n-seg-vineyard-waste.pt (release v0.2-weights)](https://github.com/Viteokk/vineyard-ai/releases/tag/v0.2-weights) · earlier canopy-only [v0.1-weights](https://github.com/Viteokk/vineyard-ai/releases/tag/v0.1-weights) |
+| Web interface | **https://viteokk.github.io/MindHack__VineyardAIFieldChallenge/** (GitHub Pages from `web/`, branch `gh-pages`) · local: `python -m http.server -d web 8000` |
+| Model weights | [yolo11n-seg-vineyard-waste.pt (release v0.2-weights)](https://github.com/Viteokk/MindHack__VineyardAIFieldChallenge/releases/tag/v0.2-weights) · earlier canopy-only [v0.1-weights](https://github.com/Viteokk/MindHack__VineyardAIFieldChallenge/releases/tag/v0.1-weights) |
 | Pre-annotations uploaded to Marcaj | `out/upload_v5/*.zip` (detector v3 + window search + row continuation / row ends, CVAT for images 1.1, built by `pipeline/export_cvat.py`) — Marcaj project “Team Victor Istrati (v2)” after the organisers' one-time reset; earlier sets kept in `out/upload_v3/`, `out/upload_v4/` and `out/upload/` (v1) |
 
 ## Architecture
@@ -238,7 +238,7 @@ python scripts/row_support.py --inp out/pre_global_v3.xml && python scripts/marc
 
 How the whole solution works, the training data and the open questions: [`docs/MODEL.md`](docs/MODEL.md).
 One **YOLO11n-seg** with two classes (`vineyard`, `waste`) —
-[weights: GitHub release v0.2-weights](https://github.com/Viteokk/vineyard-ai/releases/tag/v0.2-weights):
+[weights: GitHub release v0.2-weights](https://github.com/Viteokk/MindHack__VineyardAIFieldChallenge/releases/tag/v0.2-weights):
 `train/make_multi_dataset.py` (Sireț3 crops with the official reference + pseudo-labels, DroneWaste v1.0 and UAVVaste,
 both CC BY 4.0, non-waste categories dropped) → `train/train_yolo.py --model yolo11n-seg.pt --name multi11` (15 epochs,
 2 h 51 min on the M4 Pro GPU) → `pipeline/infer_multi.py`. Held-out validation: mask mAP50 vineyard 0.717, box mAP50

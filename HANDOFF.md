@@ -85,7 +85,7 @@ după fiecare sarcină: rulare → rezultat → commit + push.
 - README, Dockerfile, `export_cvat.py --use-examples` (oprit până confirmă mentorii), release weights v0.1.
 - **De făcut pentru Marcaj:** 1) dry run cu `out/upload_test/test_r021_c012_r006_c004.zip` → raport import → Remove all;
   2) upload cele 9 ZIP-uri din `out/upload/` unul câte unul (raport la fiecare) → Files = 311; 3) PUBLISH ≤ 14:00.
-- **Repo PUBLIC + GitHub Pages LIVE: https://viteokk.github.io/vineyard-ai/** (branch `gh-pages` = conținutul `web/`;
+- **Repo PUBLIC + GitHub Pages LIVE: https://viteokk.github.io/MindHack__VineyardAIFieldChallenge/** (branch `gh-pages` = conținutul `web/`;
   după orice schimbare: `git subtree push --prefix web origin gh-pages`). Linkul e în README.
 - Web (03:00): export GPX per traseu (track + waypoints în ordinea turului, WGS84 prin proj4js, zona UTM din CRS-ul
   GeoJSON) și navigare GPS pe telefon (poziție, distanță și direcție până la următoarea țintă, „Verificat” în localStorage).
@@ -115,7 +115,7 @@ după fiecare sarcină: rulare → rezultat → commit + push.
 | Duminică 11:00–13:00 | export Marcaj → `measurements.csv` + `route.geojson` final |
 | **Duminică 15:00** | predare: link repo (public) + joburi Marcaj trimise |
 
-## Starea curentă a repo-ului (github.com/Viteokk/vineyard-ai, privat)
+## Starea curentă a repo-ului (github.com/Viteokk/MindHack__VineyardAIFieldChallenge, public)
 - `config.py` — căi (RAW = folderul părinte „VineYard project”), constante (0.025 m/px, labels, atribute).
 - `scripts/setup_data.py` — dezarhivează 311 tile-uri în `data/tiles`, rute în `data/route`, exemple în `data/examples`, `data/parts.json` (ce tile e în ce part 1..5 → 74/71/78/76/12). **Rulat, OK.**
 - `pipeline/tiles.py` — `open_tile()`, `Tile.px_to_utm()/utm_to_px()`, georef din tag-urile TIFF 33922/33550 (fără GDAL). Testat.
