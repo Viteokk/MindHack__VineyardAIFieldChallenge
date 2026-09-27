@@ -1,11 +1,11 @@
 {
  "valid": true,
- "length_m": 17321.4,
+ "length_m": 17324.1,
  "start_m": 0.0,
  "end_m": 0.0,
  "outside_m": 257.5,
  "outside_share": 0.01486,
- "canopy_m": 0.0,
+ "canopy_m": 0.1,
  "forbidden_m": 0.0,
  "row_crossings": 0,
  "targets": 855,
