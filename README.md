@@ -103,7 +103,7 @@ The pipeline is not tied to Sireț3. For another vineyard flight:
    docker compose run --rm qa                # integration tests -> QA_REPORT.md
    docker compose up web                     # web map + live API on http://localhost:8000
    ```
-   The image (Python 3.12, CPU, ~1.2 GB without the model) installs the direct dependencies of `requirements.txt` at the
+   The image (Python 3.12, CPU; without the model 0.85 GB on Linux amd64, 1.2 GB on arm64) installs the direct dependencies of `requirements.txt` at the
    versions of `requirements.lock.txt`, runs the unit tests and imports every pipeline module while it is built.
    **Tested** on 27 Sep 2026 with Docker Desktop 4.92 (Apple Silicon, arm64), and built on every push by
    [GitHub Actions](.github/workflows/docker.yml) on a clean Linux runner (amd64). Inside the container:
