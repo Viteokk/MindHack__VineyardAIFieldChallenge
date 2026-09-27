@@ -324,7 +324,7 @@ def register(check, res, grade, evid: Path):
         toast = pg.inner_text("#toast") if pg.is_visible("#toast") else ""
         nav = pg.inner_text("#nav") if pg.is_visible("#nav") else ""
         ctx.close()
-        ok = "Locația e blocată" in toast and "următoarea țintă" in nav.lower()     # the label is shown in capitals
+        ok = "Accesul la locație este blocat" in toast and "următoarea țintă" in nav.lower()     # the label is shown in capitals
         return res("PASS" if ok else "FAIL", f"message: “{toast[:60]}…”; navigation panel {'shown' if nav else 'missing'}",
                    "clear message + target-by-target navigation", "Location refused (permission denied) on a phone: the app "
                    "explains how to allow it and keeps guiding target by target without the distance.")
