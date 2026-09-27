@@ -1,6 +1,6 @@
 # VinePlan · QA report
 
-Generated 2026-09-27 07:43 · commit `ed26184` · annotations `out/marcaj_global.xml` (md5 e04adc255e) · Apple M4 Pro, 24 GB RAM, 12 cores, Darwin 27.0.0, Python 3.12.1 · 105 s
+Generated 2026-09-27 08:54 · commit `d6872bc` · annotations `out/marcaj_global.xml` (md5 e04adc255e) · Apple M4 Pro, 24 GB RAM, 12 cores, Darwin 27.0.0, Python 3.12.1 · 111 s
 
 **46 PASS · 6 WARN · 0 FAIL** out of 52 checks. PASS: meets the threshold. WARN: known limitation or close to the limit, explained below. FAIL: broken.
 
@@ -152,15 +152,15 @@ Integration tests run on the real Sireț3 data (311 tiles, the annotations sent 
 |---|---|---|---|---|
 | W1 | Pages load without JavaScript errors (landing, sign-in, app) | 0 errors on 3 pages and 5 app views | 0 | **PASS** |
 | W2 | Phone, tablet and desktop: nothing scrolls sideways, every page and app view fits | 21 page × device combinations, 0 with overflow | 0 | **PASS** |
-| W3 | Sign-in with the demo account opens the app in the account's role | login → app in 0.8 s, role inspector, first page “DATE DE TESTRegistrul viticol și cererile AIPA sunt fictive (date demonstrative); măsurătorile provin din zborul dronei.” | role = inspector | **PASS** |
-| W4 | Romanian, Russian and English: the interface translates and stays responsive | ro: “Hartă” shown, max 3 ms; ru: “Карта” shown, max 3 ms; en: “Map” shown, max 2 ms | labels translated, page answers < 1 s | **PASS** |
+| W3 | Sign-in with the demo account opens the app in the account's role | login → app in 0.9 s, role inspector, first page “DATE DE TESTRegistrul viticol și cererile AIPA sunt fictive (date demonstrative); măsurătorile provin din zborul dronei.” | role = inspector | **PASS** |
+| W4 | Romanian, Russian and English: the interface translates and stays responsive | ro: “Hartă” shown, max 5 ms; ru: “Карта” shown, max 3 ms; en: “Map” shown, max 7 ms | labels translated, page answers < 1 s | **PASS** |
 | W5 | Work zone: freehand drawing, corner editing, add and exclude a shape (mouse and touch) | freehand zone ✓, corner handles ✓, add a shape ✓, exclude a part ✓, phone: corners by touch + Gata ✓ | all steps | **PASS** |
 | W6 | Walking route computed in the browser for a chosen block | block V19 (25 gaps): route in 2.4 s, 1,79 km | computed, < 120 s | **PASS** |
 | W7 | Field navigation works when the phone refuses location | message: “Accesul la locație este blocat în browser. Permiteți accesul…”; navigation panel shown | clear message + target-by-target navigation | **PASS** |
 | W8 | Load time and data downloaded to open the map (desktop, local server) | map ready in 0.6 s, 32.7 MB in 120 files | < 8 s, < 45 MB (WARN < 15 s, < 70 MB) | **PASS** |
 | W9 | Buttons have a name and are big enough to tap on a phone | 49 visible buttons on a phone: 0 without a name, 0 smaller than 24 px | 0 without a name; ≤ 3 small | **PASS** |
 | W11 | Entering the app: the whole of Moldova first, then a smooth flight to the flown area of Sireți | scale 50 km → 200 m; frames every 8 ms (p95 17 ms) | country → flown area; p95 frame ≤ 50 ms | **PASS** |
-| W10 | Every file the pages ask for exists (no 404, no failed request) | 2067 requests, 0 failed | 0 failed | **PASS** |
+| W10 | Every file the pages ask for exists (no 404, no failed request) | 2072 requests, 0 failed | 0 failed | **PASS** |
 
 **W1** · Uncaught exceptions and console errors, desktop Chromium. Missing files are counted in W10.
 

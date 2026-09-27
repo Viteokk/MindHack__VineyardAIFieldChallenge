@@ -372,5 +372,7 @@ None in the processing pipeline. Development assisted by Claude Code.
 
 ## Licences & attribution
 
-Sireț3 imagery: CC BY 4.0 — 3DATA COLLECT / OpenAerialMap, contributors to the Open Imagery Network.
+Challenge provider: [Marcaj](https://marcaj.com) (challenge, annotation platform, annotation rules and scoring); event: Deeptech GigaHack 2026, hosted and organised by GigaHack at Tekwill, Chișinău.
+
+Sireț3 imagery: CC BY 4.0 — 3DATA COLLECT / OpenAerialMap, contributors to the Open Imagery Network. Changes: reprojected to EPSG:32635 and tiled (the supplied tiles), resampled and WebP / JPEG-compressed for the web map (`web/data`). The web pages show this credit in the landing footer and on the map (corner attribution, layers panel, legend).
 Route inputs contain information from OpenStreetMap © OpenStreetMap contributors, ODbL.
