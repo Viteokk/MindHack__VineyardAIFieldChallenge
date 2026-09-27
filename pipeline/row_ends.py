@@ -39,6 +39,7 @@ from shapely.validation import make_valid
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import config as C  # noqa: E402
 from pipeline.tiles import open_tile  # noqa: E402
+from pipeline.row_extend import exg as exg_cont  # noqa: E402
 
 RES = 0.025          # m per pixel
 STEP = 4             # px between samples along a row (0.1 m)
@@ -54,6 +55,13 @@ CLIP_TOL = 0.2       # m, margin around the outline of an inter-row's two rows
 CLIP_MIN_M2 = 1.5    # m2, smaller clips are ignored (corners where the two rows end on different tile edges)
 CANOPY_BAND = 0.45   # m, canopies within this distance of a dropped piece (and of no kept row) go with it
 PERIOD_DEFAULT = 2.6  # m
+EDGE_PX = 24         # px (0.6 m): a row end this close to the tile border lies on the tile edge
+KEEP_END = 0.30      # interior row ends: trimmed where the contrast stays below this share of the row's own (p75) ...
+C_MIN = 0.02         # ... and below this absolute contrast floor (continuous ExG)
+CORE_MIN = 0.04      # rows weaker than this overall are left as they are
+TRIM_END = 3.0       # m, shortest interior end stretch that is removed
+RUN_MIN = 2.0        # m, the kept part of a row starts / ends with at least this much continuous row pattern
+PIECE_KEEP = 0.40    # a piece left beyond a cut road keeps this share of the main piece's contrast, else it goes
 
 
 @lru_cache(maxsize=4)
@@ -233,6 +241,66 @@ def nodata_px(valid: np.ndarray, f: int = 4):
     return unary_union(polys) if polys else None
 
 
+def contrast_px(e: np.ndarray, line: LineString, period: float, win_m: float = 1.5):
+    """Along a row (px): sample distances and greenness (continuous ExG) on the axis minus on the two mid-lines,
+    smoothed over win_m (nan where there is no imagery)."""
+    s = np.arange(0.0, line.length + 1e-9, STEP)
+    p = np.array([line.interpolate(v).coords[0] for v in s])
+    u = _unit(line)
+    n = np.array([-u[1], u[0]])
+
+    def band(c0, half):
+        offs = c0 + np.arange(-half, half + 1e-9, 2.0)
+        q = p[:, None, :] + offs[None, :, None] * n[None, None, :]
+        x, y = np.round(q[..., 0]).astype(int), np.round(q[..., 1]).astype(int)
+        h, w = e.shape
+        ok = (x >= 0) & (x < w) & (y >= 0) & (y < h)
+        v = np.full(ok.shape, np.nan, np.float32)
+        v[ok] = e[y[ok], x[ok]]
+        return np.nanmean(v, axis=1)
+
+    with np.errstate(all="ignore"):
+        c = band(0.0, ON_BAND / RES) - np.nanmean(np.stack([band(-period / 2, MID_BAND / RES),
+                                                            band(period / 2, MID_BAND / RES)]), axis=0)
+        k = max(1, int(round(win_m / (STEP * RES))))
+        g = np.isfinite(c)
+        ms = lambda x: np.convolve(x, np.ones(k), "full")[(k - 1) // 2:(k - 1) // 2 + len(x)]
+        num, den = ms(np.where(g, c, 0.0)), ms(g.astype(float))
+        return s, np.where(den > 0.5 * k, num / np.maximum(den, 1), np.nan)
+
+
+def trim_interior(line: LineString, e: np.ndarray, period: float):
+    """Remove the stretch at a row end INSIDE the tile where the row pattern is gone (grass verge, scrub, yard, roof).
+    Ends on the tile edge are kept: there the vineyard carries on into the next tile (both reference tiles: every row
+    runs to the tile edge, and trimming there cut real rows). The contrast is measured against the row itself, so a
+    grassy vineyard is not trimmed for being less contrasted. Returns (line or None, metres removed)."""
+    c0, c1 = np.asarray(line.coords[0]), np.asarray(line.coords[-1])
+    edge = lambda q: min(q[0], 2048 - q[0], q[1], 2048 - q[1]) <= EDGE_PX
+    if edge(c0) and edge(c1):
+        return line, 0.0
+    s, c = contrast_px(e, line, period)
+    if np.isfinite(c).sum() < 20:
+        return line, 0.0
+    core = np.nanpercentile(c, 75)
+    if core < CORE_MIN:
+        return line, 0.0                                   # a weak row: its ends cannot be judged
+    good = np.isfinite(c) & (c >= max(C_MIN, KEEP_END * core))
+    run = int(round(RUN_MIN / (STEP * RES)))
+    runs = [(a, b) for a, b in _runs(good) if b - a >= run]
+    if not runs:
+        return line, 0.0
+    L = line.length
+    t0 = s[runs[0][0]] if not edge(c0) else 0.0
+    t1 = L - s[min(runs[-1][1], len(s) - 1)] if not edge(c1) else 0.0
+    t0 = t0 if t0 * RES >= TRIM_END else 0.0
+    t1 = t1 if t1 * RES >= TRIM_END else 0.0
+    if not t0 and not t1:
+        return line, 0.0
+    if (L - t0 - t1) * RES < MIN_PIECE:
+        return None, L * RES
+    return substring(line, t0, L - t1), (t0 + t1) * RES
+
+
 def _interval(g, origin, u):
     c = np.asarray(g.exterior.coords if g.geom_type == "Polygon" else g.coords)
     t = (c - origin) @ u
@@ -310,13 +378,35 @@ def tidy(data: dict[str, list[dict]], tiles_dir: Path, passages_utm=None, blocks
         lines = {k: LineString(objs[k]["points"]) for k in rows_i}
         period = tile_period(list(lines.values()))
         new_rows, dropped, changed = {}, [], []
+        e = exg_cont(str(p))
         for k, g in lines.items():
+            g0 = g
+            g, removed = trim_interior(g, e, period)
+            if removed:
+                st["interior row ends trimmed (grass, scrub, yard)"] += 1
+                st["m of row removed"] += removed
+                changed.append(g0)
+                if g is None:
+                    st["rows dropped: no row pattern left"] += 1
+                    dropped.append(g0)
+                    new_rows[k] = []
+                    continue
+                removed_parts = [x for x in (g0.difference(g.buffer(0.5)),) if not x.is_empty]
+                dropped += [x for rp in removed_parts for x in getattr(rp, "geoms", [rp]) if x.geom_type == "LineString"]
             pieces, cut, why = fix_row(g, veg, valid, period, pas_px, prep_p, blocks_px)
             st.update(why)
             if cut:
                 changed.append(g)
-                if len(pieces) > 1:                       # a piece beyond a road must itself be on vines
-                    ok = [q for q in pieces if on_vines(q, veg, valid, period)]
+                if len(pieces) > 1:                       # a piece beyond a road must itself be on vines, as much as its row
+                    main = max(pieces, key=lambda q: q.length)
+                    _, cm = contrast_px(e, main, period)
+                    core = np.nanpercentile(cm, 75) if np.isfinite(cm).any() else 0.0
+                    def rel_ok(q):
+                        if q is main:
+                            return True
+                        _, cq = contrast_px(e, q, period)
+                        return np.isfinite(cq).any() and np.nanmedian(cq) >= PIECE_KEEP * core
+                    ok = [q for q in pieces if on_vines(q, veg, valid, period) and rel_ok(q)]
                     st["pieces not on vines dropped"] += len(pieces) - len(ok)
                     dropped += [q for q in pieces if q not in ok]
                     pieces = ok or [max(pieces, key=lambda q: q.length)]

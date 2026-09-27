@@ -125,3 +125,57 @@ class LinkAcrossSeams(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class InteriorEnds(unittest.TestCase):
+    """Row ends inside a tile stop where the row pattern stops; ends on the tile edge are never trimmed."""
+
+    def exg(self, vines_to):
+        e = np.full((N, N), 0.02, np.float32)              # bare soil
+        for y in range(150, N - 100, 100):
+            e[y - 10:y + 10, :vines_to] = 0.25              # vine band greener than the mid-lines
+        e[:, vines_to:] = 0.20                              # beyond: uniform grass (as green on the axis as between)
+        return e
+
+    def test_interior_end_on_grass_is_trimmed(self):
+        e = self.exg(400)
+        row = LineString([(100, 250), (700, 250)])           # both ends inside the tile (the test tile is 800 px wide)
+        out, removed = R.trim_interior(row, e, PERIOD)
+        self.assertIsNotNone(out)
+        self.assertLess(out.bounds[2], 460)
+        self.assertGreater(removed, 5.0)
+
+    def test_end_on_the_tile_edge_is_kept(self):
+        e = self.exg(400)
+        row = LineString([(100, 250), (2047, 250)])          # reaches the tile edge
+        e2 = np.pad(e, ((0, 0), (0, 2048 - N)), mode="edge")
+        out, removed = R.trim_interior(row, e2, PERIOD)
+        self.assertEqual(removed, 0.0)
+
+
+class WindowSearch(unittest.TestCase):
+    """Pieces of one row found by overlapping windows are merged, and the number of windows is kept (consensus)."""
+
+    def test_pieces_of_one_row_merge_with_their_window_count(self):
+        from pipeline.window_detect import _merge
+        per = 2.6 / 0.025
+        pieces = [(LineString([(0, 100), (400, 100)]), 1), (LineString([(300, 108), (700, 108)]), 2),   # same row, 0.2 m apart
+                  (LineString([(0, 100 + per), (500, 100 + per)]), 1)]                                  # the next row, shorter
+        out = _merge(pieces, per)
+        self.assertEqual(len(out), 2)
+        long = max(out, key=lambda r: r[0].length)
+        self.assertEqual(long[1], 2)
+        self.assertGreater(long[0].length, 690)
+
+    def test_buildings_are_found_on_roofs_not_on_soil(self):
+        from pipeline.window_detect import buildings_px
+        img = np.zeros((2048, 2048, 3), np.uint8)
+        img[:] = (170, 150, 120)                           # beige soil
+        img[200:600, 200:700] = (150, 150, 152)            # a grey roof, 10 x 12.5 m
+        img[1200:1500, 1200:1600] = (190, 70, 60)          # a red-tile roof
+        g = buildings_px(img)
+        self.assertGreater(g.area * 0.025 ** 2, 150)
+        self.assertTrue(g.contains(Polygon([(250, 250), (650, 250), (650, 550)]).centroid))
+        soil = np.zeros((2048, 2048, 3), np.uint8)
+        soil[:] = (170, 150, 120)
+        self.assertTrue(buildings_px(soil).is_empty)

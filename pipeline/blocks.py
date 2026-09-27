@@ -315,6 +315,8 @@ def main() -> None:
     ap.add_argument("--tiles", default=str(C.TILES))
     ap.add_argument("--geojson", default=str(C.OUT / "blocks.geojson"))
     ap.add_argument("--no-ends", action="store_true", help="keep the detector's row ends (skip pipeline.row_ends)")
+    ap.add_argument("--no-extend", action="store_true", help="do not continue rows across tile edges (pipeline.row_extend)")
+    ap.add_argument("--no-window", action="store_true", help="skip the 12.8 m window search for small vineyards (pipeline.window_detect)")
     ap.add_argument("--outlines-only", action="store_true",
                     help="keep the annotated IDs, only write the block outlines (--geojson) for them")
     a = ap.parse_args()
@@ -324,6 +326,14 @@ def main() -> None:
         Path(a.geojson).write_text(json.dumps(fc))
         print(f"{len(fc['features'])} block outlines from the annotated IDs -> {a.geojson}")
         return
+    if not a.no_window:                                   # small vineyards the tile-wide detector misses
+        from pipeline.window_detect import add as window_add
+        data, st = window_add(data, Path(a.tiles))
+        print("window search: " + ", ".join(f"{k} {v:,.0f}" for k, v in sorted(st.items())))
+    if not a.no_extend:                                   # rows stopped on a tile edge carry on while the vines do
+        from pipeline.row_extend import extend
+        data, st = extend(data, Path(a.tiles), load_passages())
+        print("row continuation: " + ", ".join(f"{k} {v:,.0f}" for k, v in sorted(st.items())))
     if not a.no_ends:
         from pipeline.row_ends import tidy
         passages = load_passages()

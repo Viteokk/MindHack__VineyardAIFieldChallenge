@@ -8,7 +8,7 @@ Accepts Marcaj / CVAT for images 1.1 exports: ZIPs or annotations.xml files (one
 Steps:
   1. merge every annotations.xml, image names normalised to the tile file name (exports may prefix folders)
   2. report: tiles, objects per label, missing attributes (row_id / vineyard_id / row_structure / interrow_cover),
-     tiles that changed against the uploaded pre-annotations (out/pre_global_v3.xml)
+     tiles that changed against the uploaded pre-annotations (out/pre_global_v5.xml)
   3. out/marcaj_export.xml; global IDs: the IDs as annotated in Marcaj (what the jury counts), or --reblock to recompute
      them from geometry with pipeline.blocks (only if many rows lack IDs)
   4. targets -> routes (inspector, farmer) -> validation -> measurements (+ web data on a full run), timed
@@ -87,7 +87,7 @@ def report(d):
     print(f"export: {len(d)} tiles ({len(tiles - set(d))} of the 311 missing), objects {dict(lab)}")
     bad = {k: v for k, v in miss.items() if v}
     print("missing attributes: " + (", ".join(f"{k}: {v}" for k, v in bad.items()) if bad else "none"))
-    up = C.OUT / "pre_global_v3.xml"
+    up = C.OUT / "pre_global_v5.xml"
     if up.exists():
         pre = read_cvat(up)
         changed = [t for t in tiles if len(d.get(t, [])) != len(pre.get(t, []))]
