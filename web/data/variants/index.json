@@ -2,7 +2,7 @@
  "5": {
   "route": "data/variants/route_inspector_gap5.geojson",
   "targets": "data/variants/targets_inspector_gap5.geojson",
-  "length_m": 11189.7,
+  "length_m": 10766.9,
   "mode": "inspector",
   "start": [
    629504.7,
@@ -10,16 +10,16 @@
   ],
   "custom_start": false,
   "target_types": "gap,waste",
-  "targets_total": 300,
-  "targets_visited": 149,
-  "outside_share": 0.0167,
+  "targets_total": 315,
+  "targets_visited": 136,
+  "outside_share": 0.0169,
   "row_walls": true,
-  "minutes_at_4kmh": 167.8
+  "minutes_at_4kmh": 161.5
  },
  "8": {
   "route": "data/variants/route_inspector_gap8.geojson",
   "targets": "data/variants/targets_inspector_gap8.geojson",
-  "length_m": 7416.1,
+  "length_m": 8138.3,
   "mode": "inspector",
   "start": [
    629504.7,
@@ -27,16 +27,16 @@
   ],
   "custom_start": false,
   "target_types": "gap,waste",
-  "targets_total": 125,
-  "targets_visited": 55,
-  "outside_share": 0.0164,
+  "targets_total": 127,
+  "targets_visited": 62,
+  "outside_share": 0.0133,
   "row_walls": true,
-  "minutes_at_4kmh": 111.2
+  "minutes_at_4kmh": 122.1
  },
  "10": {
   "route": "data/variants/route_inspector_gap10.geojson",
   "targets": "data/variants/targets_inspector_gap10.geojson",
-  "length_m": 7529.5,
+  "length_m": 8078.3,
   "mode": "inspector",
   "start": [
    629504.7,
@@ -44,10 +44,10 @@
   ],
   "custom_start": false,
   "target_types": "gap,waste",
-  "targets_total": 79,
-  "targets_visited": 46,
-  "outside_share": 0.0165,
+  "targets_total": 82,
+  "targets_visited": 49,
+  "outside_share": 0.0151,
   "row_walls": true,
-  "minutes_at_4kmh": 112.9
+  "minutes_at_4kmh": 121.2
  }
 }

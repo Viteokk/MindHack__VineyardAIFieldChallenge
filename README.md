@@ -71,12 +71,7 @@ worth most per outside metre: (1) a gap on a row is seen from the inter-row on e
 each stop in the inter-row shared by most gaps (31 % fewer inter-rows to walk); (2) while over budget the tour is
 thinned — in bulk while far over, then by the exact outside metres each stop saves (its two legs minus the leg that
 replaces them) — and re-solved; value: waste 10, gap ≥ 5 m 3, shorter gap 1. Waste up to 25 m off the inter-rows /
-passages is a target (short walk off, paid from the budget). Inspector route on the current annotations (795 targets:
-789 gaps ≥ 3 m + 6 waste): **18.6 km, 1.48 % outside (validate.py), 0 m through canopies / forbidden zones, 0 row
-crossings, back at START, 464 targets within 2 m** (gaps ≥ 5 m: 61 %). The same rules with the nearest-side stops and
-bulk thinning gave 374 targets; the previous route (inter-rows running onto the roads, before `pipeline/row_ends.py`)
-reported 616 of 931 within 1.27 %, measured against inter-rows that crossed the road edges. 62 stops sit in
-inter-rows closed off by walls, the study-area edge or forbidden zones (reachable only across a row) and are skipped.
+passages is a target (short walk off, paid from the budget). Inspector route on the final annotations (v5, 855 targets: gaps ≥ 3 m + waste): **17.3 km, 1.49 % outside (validate.py), 0 m through canopies / forbidden zones, 0 row crossings, back at START, 440 targets within 2 m**; farmer route 0.9 km, 1.14 % outside. Stops in inter-rows closed off by walls, the study-area edge or forbidden zones (reachable only across a row) are skipped.
 
 Sunday recompute from the corrected Marcaj export (ZIP or annotations.xml; one per task or one for the project):
 `python scripts/sunday.py EXPORT.zip` — merges the files, reports missing attributes, then targets → routes →
