@@ -11,7 +11,7 @@ global block / row IDs → measurements → two walking routes → interactive w
 | Measurements by `vineyard_id` / `row_id` | [`measurements.csv`](measurements.csv) |
 | Web interface | **https://viteokk.github.io/vineyard-ai/** (GitHub Pages from `web/`, branch `gh-pages`) · local: `python -m http.server -d web 8000` |
 | Model weights | [yolo11n-seg-vineyard-waste.pt (release v0.2-weights)](https://github.com/Viteokk/vineyard-ai/releases/tag/v0.2-weights) · earlier canopy-only [v0.1-weights](https://github.com/Viteokk/vineyard-ai/releases/tag/v0.1-weights) |
-| Pre-annotations uploaded to Marcaj | `out/upload_v3/*.zip` (detector v3, CVAT for images 1.1, built by `pipeline/export_cvat.py`) — Marcaj project “Team Victor Istrati (v2)” after the organisers' one-time reset; the first upload (v1) is kept in `out/upload/` |
+| Pre-annotations uploaded to Marcaj | `out/upload_v5/*.zip` (detector v3 + window search + row continuation / row ends, CVAT for images 1.1, built by `pipeline/export_cvat.py`) — Marcaj project “Team Victor Istrati (v2)” after the organisers' one-time reset; earlier sets kept in `out/upload_v3/`, `out/upload_v4/` and `out/upload/` (v1) |
 
 ## Architecture
 
@@ -124,6 +124,18 @@ the threshold and the evidence for each check (`python -m pipeline.qa --perf`; t
   measurement consistency, EPSG:32635, the score on the two reference tiles.
 - **Performance and scalability:** seconds per tile, speed-up with the cores (tiles are independent), route cost per stop,
   web payload, measured stage timings.
+- **Web app on phone, tablet and desktop** (`pipeline/qa_web.py`, headless Chromium through Playwright, ~1 min): no
+  JavaScript errors and no missing file on any page; nothing scrolls sideways at 375 / 768 / 1440 px on the landing,
+  sign-in and every app view (screenshots in `docs/qa/web_*.png`); sign-in opens the app in its role; RO / RU / EN
+  translate the interface and the page keeps answering; a zone drawn freehand, edited, extended and cut with the mouse and
+  by touch on a phone; a walking route computed in the browser; navigation when location is refused; load time and
+  volume; every button named and tappable. `pip install playwright && playwright install chromium`; `--no-web` skips them.
+
+Before a new set of pre-annotations replaces the previous one: `python scripts/compare_versions.py OLD.xml NEW.xml`
+(reference score, the key QA checks side by side, object counts, the tiles that changed and a before / after sheet of
+the most changed ones; verdict "not worse" only if the score does not drop and no check gets worse). Reference-tile
+score by version: v1 0.817 → v3 0.844 (row direction by support, row support filter) → v4 / v5 0.844 (the later
+changes are outside the two reference tiles: roads, row ends, tile seams, young vineyards).
 
 Unit tests (fast, no data needed): `python -m unittest discover -s tests`.
 
@@ -160,6 +172,28 @@ over non-vineyard land (measured: on 123 of 194 tiles the lines carried no more 
 - **model veto** (`scripts/veto_list.py` → `scripts/model_veto.py`): tiles where the detectors disagree completely (the
   high-recall v1 classical detector draws vines, the released YOLO11 model finds no canopy) stay empty: meadow, scrub,
   ploughed fields, gardens. Very young vineyards found only by v3 (tiny plants the model misses) are kept.
+- **window search** (`pipeline/window_detect.py`, run by `pipeline.blocks` first): the detector finds one row direction
+  and spacing per 51.2 m tile, so a small vineyard (a 15 m strip of young vines, a grassy plot) in a tile that is mostly
+  meadow or scrub does not dominate the estimate and the tile kept no rows. The same detector runs on 12.8 m windows
+  (half overlapping, 10 500 windows, 4 min on 11 cores); a window row is kept only where the annotations do not
+  already explain it, and only with consensus and context: found by ≥ 2 overlapping windows (a tile's best by ≥ 3; a
+  weaker row only as the neighbour of a strong one), > 8 m from any roof or paved yard (unsaturated or red-tile
+  patches ≥ 20 m²), not along an organiser passage, ≥ 3 parallel rows per tile. Tiles emptied by the model veto are
+  not searched. Checked tile by tile on contact sheets: yards, gardens, road verges and scrub were the false rows of
+  the unfiltered search (all removed); 127 rows and 1 130 canopies added in 23 tiles (young vineyards r030_c018,
+  r031_c017, r032_c021, rows missing in V-blocks r025_c017, r033_c022, r036_c025 …); reference score unchanged (0.844).
+- **row continuation** (`pipeline/row_extend.py`, run by `pipeline.blocks` next): the detector works tile by tile, so
+  where a vineyard only fills a corner of a tile, or its inter-rows are grassy, that tile kept no rows although the rows
+  of the tile next to it run up to the shared edge and the vines carry on to the road. Every row end on a tile edge
+  with no continuing row across it is followed into the neighbouring tile along its own axis while the row pattern
+  holds (greenness on the axis minus on the mid-lines, at least 45 % of the same row's contrast over its last 10 m in
+  its own tile), stopping at the road, the no-data border or an existing row; canopies from the green pixels of the vine
+  band (not where the band is uniformly green) and inter-rows between continued neighbours come with it. One
+  continuation per axis (a gap tile continued from both sides keeps the longer). Sireț3: 384 rows, 3.1 km, 1 001
+  canopies, 133 inter-rows added; the reference tiles are untouched (score 0.844). Interior row ends (not on a tile
+  edge) are trimmed where the row pattern falls below 30 % of the row's own for ≥ 3 m (grass verge, scrub, yard,
+  roof); ends on a tile edge are never trimmed (on both reference tiles every row runs to the tile edge, and trimming
+  them cost 0.02). 44 blocks, 693 rows.
 - **row ends** (`pipeline/row_ends.py`, run by `pipeline.blocks`): the detector ends a row where the vegetation on its
   axis ends, so rows ran across tracks, poked into roads and carried on into gardens and scrub beyond them. A row is cut
   where it crosses an organiser passage **that separates two blocks** (on the bare track itself when it shows within 5 m
@@ -188,8 +222,9 @@ python -m pipeline.infer_multi --weights yolo11n-seg-vineyard-waste.pt --base ou
        --scores out/waste_model11.json --canopy model --conf 0.25 --conf-review 0.15      # model canopies + waste scores
 python scripts/veto_list.py && python scripts/model_veto.py out/baseline_all_v3.xml out/baseline_all_v3v.xml
 python scripts/add_waste.py out/baseline_all_v3v.xml out/baseline_all_v3w.xml
-python -m pipeline.blocks --inp out/baseline_all_v3w.xml --out out/pre_global_v3.xml --geojson out/blocks_v3.geojson
-python -m pipeline.export_cvat --inp out/pre_global_v3.xml --out out/upload_v3      # the 9 ZIPs uploaded to Marcaj (project v2)
+python -m pipeline.blocks --inp out/baseline_all_v3w.xml --out out/pre_global_v5.xml --geojson out/blocks_v5.geojson   # windows, continuation, row ends, IDs
+python scripts/compare_versions.py out/pre_global_v4.xml out/pre_global_v5.xml     # accept a new version only if it is not worse
+python -m pipeline.export_cvat --inp out/pre_global_v5.xml --out out/upload_v5      # the 9 ZIPs uploaded to Marcaj (project v2)
 python scripts/row_support.py --inp out/pre_global_v3.xml && python scripts/marcaj_plan_v3.py
 ```
 
@@ -237,7 +272,15 @@ visited, measurements per block / row, pipeline status. Data contract: `web/data
   0 m through canopies and forbidden zones).
 - **Parameters:** walking speed and hours per day (times and field days update at once), minimum gap to inspect
   (precomputed routes for ≥ 5 / 8 / 10 m on the static site, `scripts/build_route_variants.py`).
-- **Field use:** GPX export of each route, GPS navigation on the phone with a chosen start and checked targets.
+- **Field use:** GPX export of each route, GPS navigation on the phone with a chosen start and checked targets
+  (location refused or unavailable: a clear message and target-by-target navigation without the distance).
+- **The whole village:** the organisers' full source orthomosaic (the challenge tiles cover only the vineyards) is
+  reprojected to EPSG:32635 at 20 cm (`scripts/build_village_layer.py`, 52 WebP chunks, 7.5 MB, 12 s) and drawn under the
+  challenge mosaic; a chunk is downloaded only when it comes into view (layer “Satul Sireți”).
+- **Zone drawing:** freehand (press and drag) or corners by click, rectangle, polygon, a block or a cadastral parcel;
+  then *Editează* (drag corners, add a corner on a side, double-click deletes one), *Adaugă* (another shape) and
+  *Exclude* (a hole: a house, a road). The zone travels in the link (`#zona=poly:…|…~…`).
+- **Language:** the menu lists Română / Русский / English (RO by default).
 
 ### Environmental indicators (ISO 14001 activity data)
 `python -m pipeline.env_indicators` → `web/data/env_indicators.json`, `out/env_indicators.csv` (one row per block +

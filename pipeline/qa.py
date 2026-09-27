@@ -57,7 +57,8 @@ INP = C.OUT / "marcaj_global.xml"
 REPORT = C.ROOT / "QA_REPORT.md"
 EVID = C.ROOT / "docs" / "qa"
 LEVELS = {"boundary": "Boundaries", "confusers": "Look-alikes (shrubs, trees, meadows, tubes)", "edge": "Edge cases",
-          "rules": "Rules and consistency", "perf": "Performance and scalability"}
+          "rules": "Rules and consistency", "perf": "Performance and scalability",
+          "web": "Web app on phone, tablet and desktop (headless Chromium)"}
 CHECKS = []
 
 
@@ -606,7 +607,7 @@ def r3():
 
 @check("R4", "rules", "Upload ZIPs: 311 original tiles (byte-identical), each ZIP < 90 MB, labels as in Appendix A")
 def r4():
-    zdir = C.OUT / "upload_v3"
+    zdir = C.OUT / "upload_v5"
     zs = sorted(zdir.glob("*.zip"))
     names, big, changed, meta_bad = [], [], [], []
     orig = {p.name: p for p in C.TILES.glob("siret3_r*_c*.tif")}
@@ -814,12 +815,19 @@ def p5():
 
 
 # ================= runner and report =================
-def run_all(perf=False, images=True, only=None):
+from pipeline import qa_web  # noqa: E402
+
+qa_web.register(check, res, grade, EVID)
+
+
+def run_all(perf=False, images=True, only=None, web=True):
     if perf:
         run_perf()
     out = []
     for cid, level, title, fn in CHECKS:
         if only and cid not in only:
+            continue
+        if level == "web" and not web:
             continue
         t = time.time()
         try:
@@ -930,12 +938,13 @@ def main() -> None:
     ap.add_argument("--perf", action="store_true", help="(re)measure performance (~3 min), else use out/qa_perf.json")
     ap.add_argument("--no-images", action="store_true")
     ap.add_argument("--only", nargs="*", help="run only these check IDs")
+    ap.add_argument("--no-web", action="store_true", help="skip the web app checks (headless Chromium, ~2 min)")
     a = ap.parse_args()
     INP = Path(a.inp).resolve()
     if not data_ready():
         sys.exit(f"missing data: {INP}, {C.TILES} or route.geojson")
     t0 = time.time()
-    results = run_all(perf=a.perf, images=not a.no_images, only=a.only)
+    results = run_all(perf=a.perf, images=not a.no_images, only=a.only, web=not a.no_web)
     write_report(results, time.time() - t0)
     c = Counter(r["status"] for r in results)
     print(f"\n{c['PASS']} PASS · {c['WARN']} WARN · {c['FAIL']} FAIL -> {REPORT}  ({time.time() - t0:.0f} s)")
