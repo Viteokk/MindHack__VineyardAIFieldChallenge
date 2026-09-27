@@ -20,6 +20,7 @@
     localStorage.setItem('fpm.role', JSON.stringify(who.role));
   } catch (e) {}
   const ret = q.get('return') || 'app.html';
+  try { sessionStorage.removeItem('fpm.introDone'); } catch (e) {}
   location.replace((/^[a-z0-9_.-]+\.html$/i.test(ret) ? ret : 'app.html') + '#' + who.role);
 })();
 </script>
