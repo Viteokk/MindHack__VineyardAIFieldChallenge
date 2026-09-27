@@ -1,0 +1,5732 @@
+{
+ "about": "DATE DEMONSTRATIVE (sintetice) pentru back-office: persoane, IDNP/IDNO, telefoane, e-mailuri, beneficiari, cereri, activitate. Numele instituțiilor sunt reale (utilizatorii vizați ai platformei); restul nu.",
+ "demo": true,
+ "modules": [
+  {
+   "id": "control",
+   "name": "Control conformitate",
+   "roles": [
+    [
+     "inspector",
+     "Inspector",
+     [
+      "control:view",
+      "control:route",
+      "pv:create",
+      "target:check",
+      "cereri:view",
+      "cadastru:search"
+     ]
+    ],
+    [
+     "inspector_sef",
+     "Inspector-șef",
+     [
+      "control:view",
+      "control:assign",
+      "control:route",
+      "pv:create",
+      "pv:approve",
+      "cereri:view",
+      "cereri:assign"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "registru",
+   "name": "Registrul vitivinicol",
+   "roles": [
+    [
+     "operator_rvv",
+     "Operator registru",
+     [
+      "rvv:view",
+      "rvv:edit",
+      "rvv:export",
+      "cadastru:search"
+     ]
+    ],
+    [
+     "analist_rvv",
+     "Analist",
+     [
+      "rvv:view",
+      "rvv:export",
+      "rapoarte:view"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "subventii",
+   "name": "Subvenții AIPA",
+   "roles": [
+    [
+     "evaluator",
+     "Evaluator cereri",
+     [
+      "cereri:view",
+      "cereri:evaluate",
+      "cereri:stage",
+      "beneficiari:view"
+     ]
+    ],
+    [
+     "aprobator",
+     "Aprobator plăți",
+     [
+      "cereri:view",
+      "cereri:decide",
+      "plati:approve",
+      "beneficiari:view"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "plantatie",
+   "name": "Plantație",
+   "roles": [
+    [
+     "admin_exploatatie",
+     "Administrator exploatație",
+     [
+      "plantatie:view",
+      "plantatie:route",
+      "cereri:submit",
+      "rapoarte:own"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "rapoarte",
+   "name": "Rapoarte",
+   "roles": [
+    [
+     "analist",
+     "Analist rapoarte",
+     [
+      "rapoarte:view",
+      "rapoarte:export"
+     ]
+    ]
+   ]
+  },
+  {
+   "id": "backoffice",
+   "name": "Back-office",
+   "roles": [
+    [
+     "sysadmin",
+     "Administrator de sistem",
+     [
+      "users:manage",
+      "orgs:manage",
+      "roles:manage",
+      "beneficiari:manage",
+      "cereri:manage",
+      "audit:view"
+     ]
+    ],
+    [
+     "admin_modul",
+     "Administrator modul",
+     [
+      "users:view",
+      "roles:assign",
+      "audit:view"
+     ]
+    ]
+   ]
+  }
+ ],
+ "etape": [
+  "Depunere",
+  "Verificare administrativă",
+  "Control pe teren",
+  "Evaluare",
+  "Decizie",
+  "Plată"
+ ],
+ "organizatii": [
+  {
+   "id": "ORG-001",
+   "titlu": "MAIA",
+   "descriere": "Ministerul Agriculturii și Industriei Alimentare",
+   "parinte": null,
+   "tip": "Autoritate centrală",
+   "nume_ierarhic": "MAIA",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-02-20",
+   "demo": true
+  },
+  {
+   "id": "ORG-002",
+   "titlu": "AIPA",
+   "descriere": "Agenția de Intervenție și Plăți pentru Agricultură",
+   "parinte": "ORG-001",
+   "tip": "Agenție",
+   "nume_ierarhic": "MAIA / AIPA",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-02-17",
+   "demo": true
+  },
+  {
+   "id": "ORG-003",
+   "titlu": "ONVV",
+   "descriere": "Oficiul Național al Viei și Vinului",
+   "parinte": "ORG-001",
+   "tip": "Agenție",
+   "nume_ierarhic": "MAIA / ONVV",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-07-28",
+   "demo": true
+  },
+  {
+   "id": "ORG-004",
+   "titlu": "ONVV · Registrul vitivinicol",
+   "descriere": "Departamentul care ține Registrul vitivinicol",
+   "parinte": "ORG-003",
+   "tip": "Subdiviziune",
+   "nume_ierarhic": "MAIA / ONVV / ONVV · Registrul vitivinicol",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-08-28",
+   "demo": true
+  },
+  {
+   "id": "ORG-005",
+   "titlu": "AIPA Strășeni",
+   "descriere": "Subdiviziunea teritorială Strășeni a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Strășeni",
+   "raion": "r-nul Strășeni",
+   "localitate": "Strășeni",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-08-17",
+   "demo": true
+  },
+  {
+   "id": "ORG-006",
+   "titlu": "AIPA Ialoveni",
+   "descriere": "Subdiviziunea teritorială Ialoveni a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Ialoveni",
+   "raion": "r-nul Ialoveni",
+   "localitate": "Ialoveni",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-01-12",
+   "demo": true
+  },
+  {
+   "id": "ORG-007",
+   "titlu": "AIPA Orhei",
+   "descriere": "Subdiviziunea teritorială Orhei a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Orhei",
+   "raion": "r-nul Orhei",
+   "localitate": "Orhei",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-02-19",
+   "demo": true
+  },
+  {
+   "id": "ORG-008",
+   "titlu": "AIPA Hîncești",
+   "descriere": "Subdiviziunea teritorială Hîncești a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Hîncești",
+   "raion": "r-nul Hîncești",
+   "localitate": "Hîncești",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-02-24",
+   "demo": true
+  },
+  {
+   "id": "ORG-009",
+   "titlu": "AIPA Călărași",
+   "descriere": "Subdiviziunea teritorială Călărași a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Călărași",
+   "raion": "r-nul Călărași",
+   "localitate": "Călărași",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-01-25",
+   "demo": true
+  },
+  {
+   "id": "ORG-010",
+   "titlu": "AIPA Cahul",
+   "descriere": "Subdiviziunea teritorială Cahul a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Cahul",
+   "raion": "r-nul Cahul",
+   "localitate": "Cahul",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-06-16",
+   "demo": true
+  },
+  {
+   "id": "ORG-011",
+   "titlu": "AIPA Cimișlia",
+   "descriere": "Subdiviziunea teritorială Cimișlia a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Cimișlia",
+   "raion": "r-nul Cimișlia",
+   "localitate": "Cimișlia",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-07-18",
+   "demo": true
+  },
+  {
+   "id": "ORG-012",
+   "titlu": "AIPA Ștefan Vodă",
+   "descriere": "Subdiviziunea teritorială Ștefan Vodă a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Ștefan Vodă",
+   "raion": "r-nul Ștefan Vodă",
+   "localitate": "Ștefan Vodă",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-06-21",
+   "demo": true
+  },
+  {
+   "id": "ORG-013",
+   "titlu": "AIPA Soroca",
+   "descriere": "Subdiviziunea teritorială Soroca a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Soroca",
+   "raion": "r-nul Soroca",
+   "localitate": "Soroca",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-07-26",
+   "demo": true
+  },
+  {
+   "id": "ORG-014",
+   "titlu": "AIPA Bălți",
+   "descriere": "Subdiviziunea teritorială Bălți a AIPA",
+   "parinte": "ORG-002",
+   "tip": "Subdiviziune teritorială",
+   "nume_ierarhic": "MAIA / AIPA / AIPA Bălți",
+   "raion": "mun. Bălți",
+   "localitate": "Bălți",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-02-20",
+   "demo": true
+  },
+  {
+   "id": "ORG-015",
+   "titlu": "Primăria Sireți",
+   "descriere": "Autoritatea publică locală a comunei Sireți",
+   "parinte": null,
+   "tip": "Autoritate locală",
+   "nume_ierarhic": "Primăria Sireți",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-02-27",
+   "demo": true
+  },
+  {
+   "id": "ORG-016",
+   "titlu": "VinePlan · operator platformă",
+   "descriere": "Echipa tehnică a platformei (demo)",
+   "parinte": null,
+   "tip": "Operator platformă",
+   "nume_ierarhic": "VinePlan · operator platformă",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "statut": "Activ",
+   "creat": "2026-05-19",
+   "demo": true
+  }
+ ],
+ "utilizatori": [
+  {
+   "id": "USR-001",
+   "prenume": "Administrator de sistem",
+   "nume": "demo",
+   "idnp": "2822792343406",
+   "telefon": "+373 69 416 125",
+   "email": "backoffice@fieldplanner.demo",
+   "titlu": "Administrator de sistem",
+   "data_nasterii": "1982-12-12",
+   "sex": "M",
+   "organizatie": "ORG-016",
+   "beneficiar": null,
+   "roluri": [
+    "backoffice:sysadmin"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-06-24",
+   "demo": true
+  },
+  {
+   "id": "USR-002",
+   "prenume": "Inspector",
+   "nume": "demo",
+   "idnp": "2811528179593",
+   "telefon": "+373 69 667 610",
+   "email": "inspector@fieldplanner.demo",
+   "titlu": "Inspector principal",
+   "data_nasterii": "1981-02-14",
+   "sex": "M",
+   "organizatie": "ORG-005",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector",
+    "rapoarte:analist"
+   ],
+   "statut": "Activ",
+   "raion": "r-nul Strășeni",
+   "localitate": "Strășeni",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-09-25",
+   "demo": true
+  },
+  {
+   "id": "USR-003",
+   "prenume": "Administrator",
+   "nume": "demo",
+   "idnp": "2808377716265",
+   "telefon": "+373 66 677 590",
+   "email": "administrator@fieldplanner.demo",
+   "titlu": "Administrator exploatație",
+   "data_nasterii": "1980-09-17",
+   "sex": "F",
+   "organizatie": null,
+   "beneficiar": "BEN-001",
+   "roluri": [
+    "plantatie:admin_exploatatie"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-01-28",
+   "demo": true
+  },
+  {
+   "id": "USR-004",
+   "prenume": "Ion",
+   "nume": "Rusu",
+   "idnp": "2752978462767",
+   "telefon": "+373 60 821 635",
+   "email": "ion.rusu@exemplu.md",
+   "titlu": "Șef subdiviziune",
+   "data_nasterii": "1975-11-04",
+   "sex": "M",
+   "organizatie": "ORG-005",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector_sef",
+    "rapoarte:analist"
+   ],
+   "statut": "Activ",
+   "raion": "r-nul Strășeni",
+   "localitate": "Strășeni",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-07-25",
+   "demo": true
+  },
+  {
+   "id": "USR-005",
+   "prenume": "Elena",
+   "nume": "Ceban",
+   "idnp": "2727345808782",
+   "telefon": "+373 61 741 817",
+   "email": "elena.ceban@exemplu.md",
+   "titlu": "Specialist principal",
+   "data_nasterii": "1972-08-22",
+   "sex": "F",
+   "organizatie": "ORG-002",
+   "beneficiar": null,
+   "roluri": [
+    "subventii:evaluator"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-08-27",
+   "demo": true
+  },
+  {
+   "id": "USR-006",
+   "prenume": "Mihai",
+   "nume": "Popa",
+   "idnp": "2768531730453",
+   "telefon": "+373 64 661 918",
+   "email": "mihai.popa@exemplu.md",
+   "titlu": "Șef direcție plăți",
+   "data_nasterii": "1976-11-17",
+   "sex": "M",
+   "organizatie": "ORG-002",
+   "beneficiar": null,
+   "roluri": [
+    "subventii:aprobator",
+    "rapoarte:analist"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-08-22",
+   "demo": true
+  },
+  {
+   "id": "USR-007",
+   "prenume": "Ana",
+   "nume": "Munteanu",
+   "idnp": "2813416081829",
+   "telefon": "+373 64 109 133",
+   "email": "ana.munteanu@exemplu.md",
+   "titlu": "Specialist registru",
+   "data_nasterii": "1981-03-21",
+   "sex": "F",
+   "organizatie": "ORG-004",
+   "beneficiar": null,
+   "roluri": [
+    "registru:operator_rvv"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-08-26",
+   "demo": true
+  },
+  {
+   "id": "USR-008",
+   "prenume": "Vasile",
+   "nume": "Lungu",
+   "idnp": "2977486478187",
+   "telefon": "+373 63 366 809",
+   "email": "vasile.lungu@exemplu.md",
+   "titlu": "Consultant",
+   "data_nasterii": "1997-08-15",
+   "sex": "M",
+   "organizatie": "ORG-003",
+   "beneficiar": null,
+   "roluri": [
+    "registru:analist_rvv",
+    "rapoarte:analist"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-09-25",
+   "demo": true
+  },
+  {
+   "id": "USR-009",
+   "prenume": "Natalia",
+   "nume": "Rotaru",
+   "idnp": "2936698973996",
+   "telefon": "+373 60 951 397",
+   "email": "natalia.rotaru@exemplu.md",
+   "titlu": "Consultant principal",
+   "data_nasterii": "1993-06-15",
+   "sex": "F",
+   "organizatie": "ORG-001",
+   "beneficiar": null,
+   "roluri": [
+    "rapoarte:analist"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-02-24",
+   "demo": true
+  },
+  {
+   "id": "USR-010",
+   "prenume": "Sergiu",
+   "nume": "Cojocaru",
+   "idnp": "2908377917833",
+   "telefon": "+373 67 287 535",
+   "email": "sergiu.cojocaru@exemplu.md",
+   "titlu": "Inspector superior",
+   "data_nasterii": "1990-12-16",
+   "sex": "M",
+   "organizatie": "ORG-006",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-02-18",
+   "demo": true
+  },
+  {
+   "id": "USR-011",
+   "prenume": "Tatiana",
+   "nume": "Botnaru",
+   "idnp": "2967497422744",
+   "telefon": "+373 61 299 865",
+   "email": "tatiana.botnaru@exemplu.md",
+   "titlu": "Inspector",
+   "data_nasterii": "1996-07-05",
+   "sex": "F",
+   "organizatie": "ORG-007",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-08-10",
+   "demo": true
+  },
+  {
+   "id": "USR-012",
+   "prenume": "Andrei",
+   "nume": "Ciobanu",
+   "idnp": "2700584504869",
+   "telefon": "+373 69 659 956",
+   "email": "andrei.ciobanu@exemplu.md",
+   "titlu": "Inspector",
+   "data_nasterii": "1970-02-20",
+   "sex": "M",
+   "organizatie": "ORG-008",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-04-17",
+   "demo": true
+  },
+  {
+   "id": "USR-013",
+   "prenume": "Olga",
+   "nume": "Melnic",
+   "idnp": "2719147952316",
+   "telefon": "+373 68 374 784",
+   "email": "olga.melnic@exemplu.md",
+   "titlu": "Inspector superior",
+   "data_nasterii": "1971-11-12",
+   "sex": "F",
+   "organizatie": "ORG-010",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-03-10",
+   "demo": true
+  },
+  {
+   "id": "USR-014",
+   "prenume": "Dumitru",
+   "nume": "Sârbu",
+   "idnp": "2789716632306",
+   "telefon": "+373 67 806 837",
+   "email": "dumitru.sarbu@exemplu.md",
+   "titlu": "Inspector",
+   "data_nasterii": "1978-03-18",
+   "sex": "M",
+   "organizatie": "ORG-009",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-04-25",
+   "demo": true
+  },
+  {
+   "id": "USR-015",
+   "prenume": "Irina",
+   "nume": "Guțu",
+   "idnp": "2862742244082",
+   "telefon": "+373 68 397 186",
+   "email": "irina.gutu@exemplu.md",
+   "titlu": "Specialist în agricultură",
+   "data_nasterii": "1986-07-22",
+   "sex": "F",
+   "organizatie": "ORG-015",
+   "beneficiar": null,
+   "roluri": [
+    "rapoarte:analist"
+   ],
+   "statut": "Activ",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-03-14",
+   "demo": true
+  },
+  {
+   "id": "USR-016",
+   "prenume": "Victor",
+   "nume": "Cazacu",
+   "idnp": "2939428569647",
+   "telefon": "+373 68 521 499",
+   "email": "victor.cazacu@exemplu.md",
+   "titlu": "Administrator modul",
+   "data_nasterii": "1993-03-17",
+   "sex": "M",
+   "organizatie": "ORG-016",
+   "beneficiar": null,
+   "roluri": [
+    "backoffice:admin_modul",
+    "rapoarte:analist"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-04-22",
+   "demo": true
+  },
+  {
+   "id": "USR-017",
+   "prenume": "Maria",
+   "nume": "Vlas",
+   "idnp": "2681518059205",
+   "telefon": "+373 61 152 953",
+   "email": "maria.vlas@exemplu.md",
+   "titlu": "Inspector",
+   "data_nasterii": "1968-06-21",
+   "sex": "F",
+   "organizatie": "ORG-013",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "Inactiv",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-06-10",
+   "demo": true
+  },
+  {
+   "id": "USR-018",
+   "prenume": "Petru",
+   "nume": "Țurcanu",
+   "idnp": "2688611127328",
+   "telefon": "+373 65 799 410",
+   "email": "petru.turcanu@exemplu.md",
+   "titlu": "Inspector",
+   "data_nasterii": "1968-08-11",
+   "sex": "M",
+   "organizatie": "ORG-014",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "Blocat",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-02-25",
+   "demo": true
+  },
+  {
+   "id": "USR-019",
+   "prenume": "Ludmila",
+   "nume": "Ursu",
+   "idnp": "2987713770386",
+   "telefon": "+373 69 924 274",
+   "email": "ludmila.ursu@exemplu.md",
+   "titlu": "Specialist registru",
+   "data_nasterii": "1998-03-19",
+   "sex": "F",
+   "organizatie": "ORG-004",
+   "beneficiar": null,
+   "roluri": [
+    "registru:operator_rvv",
+    "registru:analist_rvv"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-09-16",
+   "demo": true
+  },
+  {
+   "id": "USR-020",
+   "prenume": "Nicolae",
+   "nume": "Grosu",
+   "idnp": "2819461227007",
+   "telefon": "+373 67 712 338",
+   "email": "nicolae.grosu@exemplu.md",
+   "titlu": "Specialist",
+   "data_nasterii": "1981-11-23",
+   "sex": "M",
+   "organizatie": "ORG-011",
+   "beneficiar": null,
+   "roluri": [
+    "subventii:evaluator"
+   ],
+   "statut": "Activ",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-02-27",
+   "demo": true
+  },
+  {
+   "id": "USR-021",
+   "prenume": "Cristina",
+   "nume": "Railean",
+   "idnp": "2800309910014",
+   "telefon": "+373 62 146 763",
+   "email": "cristina.railean@exemplu.md",
+   "titlu": "Inspector",
+   "data_nasterii": "1980-09-27",
+   "sex": "F",
+   "organizatie": "ORG-012",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "În așteptare",
+   "raion": "mun. Chișinău",
+   "localitate": "Chișinău",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-01-24",
+   "demo": true
+  },
+  {
+   "id": "USR-022",
+   "prenume": "Alexandru",
+   "nume": "Moraru",
+   "idnp": "2953619520085",
+   "telefon": "+373 60 232 761",
+   "email": "alexandru.moraru@exemplu.md",
+   "titlu": "Inspector",
+   "data_nasterii": "1995-09-07",
+   "sex": "M",
+   "organizatie": "ORG-005",
+   "beneficiar": null,
+   "roluri": [
+    "control:inspector"
+   ],
+   "statut": "Activ",
+   "raion": "r-nul Strășeni",
+   "localitate": "Strășeni",
+   "strada": "",
+   "nr": "",
+   "bloc": "",
+   "apartament": "",
+   "creat": "2026-09-14",
+   "demo": true
+  }
+ ],
+ "beneficiari": [
+  {
+   "id": "BEN-001",
+   "denumire": "Vie Sireți SRL",
+   "forma": "SRL",
+   "forma_completa": "Societate cu răspundere limitată",
+   "idno": "1005632804335",
+   "cod_exploatant": "DEMO-G-02",
+   "reprezentant": "Andrei Rusu",
+   "telefon": "+373 64 291 452",
+   "email": "contact@vie.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Principală",
+   "nr": "34",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 3.272,
+   "suprafata_masurata_ha": 2.463,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0001",
+     "vineyard_id": "V02",
+     "rvv_code": "RVV-DEMO-V02",
+     "soi": "Rara Neagra",
+     "an_plantare": 2004,
+     "suprafata_declarata_ha": 1.63,
+     "suprafata_masurata_ha": 1.1943,
+     "diferenta_pct": -26.7,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2004-001",
+     "ultimul_control": "2024-09-28"
+    },
+    {
+     "cad_nr": "DEMO-0002",
+     "vineyard_id": "V02",
+     "rvv_code": "RVV-DEMO-V02",
+     "soi": "Rara Neagra",
+     "an_plantare": 2004,
+     "suprafata_declarata_ha": 1.642,
+     "suprafata_masurata_ha": 1.269,
+     "diferenta_pct": -22.7,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2004-002",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2026-001"
+   ],
+   "conformitate": "neconform",
+   "statut": "Activ",
+   "inregistrat": "2025-08-23",
+   "demo": true
+  },
+  {
+   "id": "BEN-002",
+   "denumire": "Podgoria Codrului SRL",
+   "forma": "SRL",
+   "forma_completa": "Societate cu răspundere limitată",
+   "idno": "1006055014497",
+   "cod_exploatant": "DEMO-G-04",
+   "reprezentant": "Elena Moraru",
+   "telefon": "+373 68 593 555",
+   "email": "contact@podgoria.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Viilor",
+   "nr": "68",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 1.225,
+   "suprafata_masurata_ha": 1.22,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0003",
+     "vineyard_id": "V04",
+     "rvv_code": "RVV-DEMO-V04",
+     "soi": "Muscat Ottonel",
+     "an_plantare": 2024,
+     "suprafata_declarata_ha": 0.616,
+     "suprafata_masurata_ha": 0.6143,
+     "diferenta_pct": -0.3,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2024-003",
+     "ultimul_control": "2023-08-19"
+    },
+    {
+     "cad_nr": "DEMO-0004",
+     "vineyard_id": "V04",
+     "rvv_code": null,
+     "soi": "Muscat Ottonel",
+     "an_plantare": 2024,
+     "suprafata_declarata_ha": 0.609,
+     "suprafata_masurata_ha": 0.6059,
+     "diferenta_pct": -0.5,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": null,
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2024-002"
+   ],
+   "conformitate": "conform",
+   "statut": "Activ",
+   "inregistrat": "2022-02-16",
+   "demo": true
+  },
+  {
+   "id": "BEN-003",
+   "denumire": "GȚ Moraru Ion",
+   "forma": "GȚ",
+   "forma_completa": "Gospodărie țărănească (de fermier)",
+   "idno": "1003879341616",
+   "cod_exploatant": "DEMO-G-05",
+   "reprezentant": "Ion Moraru",
+   "telefon": "+373 60 460 966",
+   "email": "contact@gt.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Principală",
+   "nr": "46",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.201,
+   "suprafata_masurata_ha": 0.205,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0005",
+     "vineyard_id": "V05",
+     "rvv_code": "RVV-DEMO-V05",
+     "soi": "Rara Neagra",
+     "an_plantare": 2012,
+     "suprafata_declarata_ha": 0.201,
+     "suprafata_masurata_ha": 0.2047,
+     "diferenta_pct": 1.8,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2012-005",
+     "ultimul_control": "2024-09-19"
+    }
+   ],
+   "cereri": [
+    "CER-2026-003"
+   ],
+   "conformitate": "conform",
+   "statut": "Activ",
+   "inregistrat": "2021-02-18",
+   "demo": true
+  },
+  {
+   "id": "BEN-004",
+   "denumire": "Dealul Sireților SRL",
+   "forma": "SRL",
+   "forma_completa": "Societate cu răspundere limitată",
+   "idno": "1003386860032",
+   "cod_exploatant": "DEMO-G-09",
+   "reprezentant": "Vasile Ceban",
+   "telefon": "+373 61 900 370",
+   "email": "contact@dealul.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Bucovăț",
+   "strada": "str. Livezilor",
+   "nr": "22",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.217,
+   "suprafata_masurata_ha": 0.212,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0006",
+     "vineyard_id": "V09",
+     "rvv_code": "RVV-DEMO-V09",
+     "soi": "Aligote",
+     "an_plantare": 2018,
+     "suprafata_declarata_ha": 0.217,
+     "suprafata_masurata_ha": 0.2123,
+     "diferenta_pct": -2.2,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2018-006",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2026-004"
+   ],
+   "conformitate": "verificare",
+   "statut": "Activ",
+   "inregistrat": "2019-01-21",
+   "demo": true
+  },
+  {
+   "id": "BEN-005",
+   "denumire": "Codru-Vin SA",
+   "forma": "SA",
+   "forma_completa": "Societate pe acțiuni",
+   "idno": "1007470912414",
+   "cod_exploatant": "DEMO-G-12",
+   "reprezentant": "Tudor Guțu",
+   "telefon": "+373 64 702 957",
+   "email": "contact@codru-vin.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Viilor",
+   "nr": "38",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 1.424,
+   "suprafata_masurata_ha": 1.34,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0007",
+     "vineyard_id": "V12",
+     "rvv_code": "RVV-DEMO-V12",
+     "soi": "Merlot",
+     "an_plantare": 2025,
+     "suprafata_declarata_ha": 0.712,
+     "suprafata_masurata_ha": 0.6696,
+     "diferenta_pct": -6.0,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2025-007",
+     "ultimul_control": null
+    },
+    {
+     "cad_nr": "DEMO-0008",
+     "vineyard_id": "V12",
+     "rvv_code": "RVV-DEMO-V12",
+     "soi": "Merlot",
+     "an_plantare": 2025,
+     "suprafata_declarata_ha": 0.712,
+     "suprafata_masurata_ha": 0.6702,
+     "diferenta_pct": -5.9,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2025-008",
+     "ultimul_control": "2023-05-25"
+    }
+   ],
+   "cereri": [
+    "CER-2025-005"
+   ],
+   "conformitate": "conform",
+   "statut": "Activ",
+   "inregistrat": "2023-03-18",
+   "demo": true
+  },
+  {
+   "id": "BEN-006",
+   "denumire": "Agro-Vita Strășeni SRL",
+   "forma": "SRL",
+   "forma_completa": "Societate cu răspundere limitată",
+   "idno": "1005354540795",
+   "cod_exploatant": "DEMO-G-14",
+   "reprezentant": "Maria Rusu",
+   "telefon": "+373 64 524 115",
+   "email": "contact@agro-vita.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Viilor",
+   "nr": "13",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 1.474,
+   "suprafata_masurata_ha": 1.478,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0009",
+     "vineyard_id": "V14",
+     "rvv_code": "RVV-DEMO-V14",
+     "soi": "Viorica",
+     "an_plantare": 2024,
+     "suprafata_declarata_ha": 0.739,
+     "suprafata_masurata_ha": 0.7444,
+     "diferenta_pct": 0.7,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2024-009",
+     "ultimul_control": "2024-08-17"
+    },
+    {
+     "cad_nr": "DEMO-0010",
+     "vineyard_id": "V14",
+     "rvv_code": "RVV-DEMO-V14",
+     "soi": "Viorica",
+     "an_plantare": 2024,
+     "suprafata_declarata_ha": 0.735,
+     "suprafata_masurata_ha": 0.7335,
+     "diferenta_pct": -0.2,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2024-010",
+     "ultimul_control": "2023-06-14"
+    }
+   ],
+   "cereri": [
+    "CER-2024-006"
+   ],
+   "conformitate": "conform",
+   "statut": "Activ",
+   "inregistrat": "2021-01-19",
+   "demo": true
+  },
+  {
+   "id": "BEN-007",
+   "denumire": "GȚ Ceban Vasile",
+   "forma": "GȚ",
+   "forma_completa": "Gospodărie țărănească (de fermier)",
+   "idno": "1003642026955",
+   "cod_exploatant": "DEMO-G-16",
+   "reprezentant": "Petru Lungu",
+   "telefon": "+373 66 423 722",
+   "email": "contact@gt.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Principală",
+   "nr": "77",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 1.857,
+   "suprafata_masurata_ha": 1.732,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0011",
+     "vineyard_id": "V16",
+     "rvv_code": "RVV-DEMO-V16",
+     "soi": "Feteasca Alba",
+     "an_plantare": 2018,
+     "suprafata_declarata_ha": 1.161,
+     "suprafata_masurata_ha": 1.0556,
+     "diferenta_pct": -9.1,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2018-011",
+     "ultimul_control": "2023-08-19"
+    },
+    {
+     "cad_nr": "DEMO-0012",
+     "vineyard_id": "V16",
+     "rvv_code": "RVV-DEMO-V16",
+     "soi": "Feteasca Alba",
+     "an_plantare": 2018,
+     "suprafata_declarata_ha": 0.696,
+     "suprafata_masurata_ha": 0.6765,
+     "diferenta_pct": -2.8,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2018-012",
+     "ultimul_control": "2022-06-27"
+    }
+   ],
+   "cereri": [
+    "CER-2026-007"
+   ],
+   "conformitate": "conform",
+   "statut": "Activ",
+   "inregistrat": "2025-07-13",
+   "demo": true
+  },
+  {
+   "id": "BEN-008",
+   "denumire": "ÎI Botnaru Andrei",
+   "forma": "ÎI",
+   "forma_completa": "Întreprindere individuală",
+   "idno": "1009262366142",
+   "cod_exploatant": "DEMO-G-21",
+   "reprezentant": "Andrei Botnaru",
+   "telefon": "+373 66 398 936",
+   "email": "contact@ii.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Dolna",
+   "strada": "str. Viilor",
+   "nr": "95",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.254,
+   "suprafata_masurata_ha": 0.194,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0013",
+     "vineyard_id": "V21",
+     "rvv_code": "RVV-DEMO-V21",
+     "soi": "Merlot",
+     "an_plantare": 2025,
+     "suprafata_declarata_ha": 0.254,
+     "suprafata_masurata_ha": 0.1942,
+     "diferenta_pct": -23.5,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2025-013",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2026-008"
+   ],
+   "conformitate": "neconform",
+   "statut": "Activ",
+   "inregistrat": "2024-01-19",
+   "demo": true
+  },
+  {
+   "id": "BEN-009",
+   "denumire": "Terasa Verde SRL",
+   "forma": "SRL",
+   "forma_completa": "Societate cu răspundere limitată",
+   "idno": "1005820307225",
+   "cod_exploatant": "DEMO-G-22",
+   "reprezentant": "Ion Cojocaru",
+   "telefon": "+373 66 426 699",
+   "email": "contact@terasa.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Viilor",
+   "nr": "70",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.213,
+   "suprafata_masurata_ha": 0.206,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0014",
+     "vineyard_id": "V22",
+     "rvv_code": "RVV-DEMO-V22",
+     "soi": "Viorica",
+     "an_plantare": 2012,
+     "suprafata_declarata_ha": 0.213,
+     "suprafata_masurata_ha": 0.2065,
+     "diferenta_pct": -3.1,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2012-014",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2026-009"
+   ],
+   "conformitate": "conform",
+   "statut": "Activ",
+   "inregistrat": "2023-04-27",
+   "demo": true
+  },
+  {
+   "id": "BEN-010",
+   "denumire": "GȚ Rusu Maria",
+   "forma": "GȚ",
+   "forma_completa": "Gospodărie țărănească (de fermier)",
+   "idno": "1001508021414",
+   "cod_exploatant": "DEMO-G-32",
+   "reprezentant": "Victoria Popa",
+   "telefon": "+373 62 635 462",
+   "email": "contact@gt.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Ștefan cel Mare",
+   "nr": "83",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.186,
+   "suprafata_masurata_ha": 0.178,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0015",
+     "vineyard_id": "V32",
+     "rvv_code": "RVV-DEMO-V32",
+     "soi": "Feteasca Neagra",
+     "an_plantare": 2025,
+     "suprafata_declarata_ha": 0.186,
+     "suprafata_masurata_ha": 0.1782,
+     "diferenta_pct": null,
+     "statut": "abandoned",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2025-015",
+     "ultimul_control": "2024-07-15"
+    }
+   ],
+   "cereri": [
+    "CER-2026-010"
+   ],
+   "conformitate": "conform",
+   "statut": "Activ",
+   "inregistrat": "2022-01-23",
+   "demo": true
+  },
+  {
+   "id": "BEN-011",
+   "denumire": "Moșia Codru SRL",
+   "forma": "SRL",
+   "forma_completa": "Societate cu răspundere limitată",
+   "idno": "1006823853030",
+   "cod_exploatant": "DEMO-G-33",
+   "reprezentant": "Sergiu Munteanu",
+   "telefon": "+373 66 486 345",
+   "email": "contact@mosia.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Podgoriei",
+   "nr": "54",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.351,
+   "suprafata_masurata_ha": 0.363,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0016",
+     "vineyard_id": "V33",
+     "rvv_code": "RVV-DEMO-V33",
+     "soi": "Aligote",
+     "an_plantare": 1985,
+     "suprafata_declarata_ha": 0.351,
+     "suprafata_masurata_ha": 0.3631,
+     "diferenta_pct": 3.4,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-1985-016",
+     "ultimul_control": "2024-07-10"
+    }
+   ],
+   "cereri": [
+    "CER-2026-011"
+   ],
+   "conformitate": "verificare",
+   "statut": "Activ",
+   "inregistrat": "2021-03-15",
+   "demo": true
+  },
+  {
+   "id": "BEN-012",
+   "denumire": "GȚ Lungu Petru",
+   "forma": "GȚ",
+   "forma_completa": "Gospodărie țărănească (de fermier)",
+   "idno": "1001634295292",
+   "cod_exploatant": "DEMO-G-37",
+   "reprezentant": "Natalia Grosu",
+   "telefon": "+373 60 116 383",
+   "email": "contact@gt.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Romănești",
+   "strada": "str. Livezilor",
+   "nr": "54",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.209,
+   "suprafata_masurata_ha": 0.201,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0017",
+     "vineyard_id": "V37",
+     "rvv_code": "RVV-DEMO-V37",
+     "soi": "Rara Neagra",
+     "an_plantare": 2024,
+     "suprafata_declarata_ha": 0.209,
+     "suprafata_masurata_ha": 0.2012,
+     "diferenta_pct": -3.7,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2024-017",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2026-012"
+   ],
+   "conformitate": "verificare",
+   "statut": "Activ",
+   "inregistrat": "2022-06-14",
+   "demo": true
+  },
+  {
+   "id": "BEN-013",
+   "denumire": "Vinăria Sireți-Deal SRL",
+   "forma": "SRL",
+   "forma_completa": "Societate cu răspundere limitată",
+   "idno": "1003375040102",
+   "cod_exploatant": "DEMO-G-41",
+   "reprezentant": "Mihail Sârbu",
+   "telefon": "+373 68 939 371",
+   "email": "contact@vinaria.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Codrului",
+   "nr": "82",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.435,
+   "suprafata_masurata_ha": 0.418,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0018",
+     "vineyard_id": "V41",
+     "rvv_code": "RVV-DEMO-V41",
+     "soi": "Viorica",
+     "an_plantare": 2025,
+     "suprafata_declarata_ha": 0.435,
+     "suprafata_masurata_ha": 0.4184,
+     "diferenta_pct": -3.8,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2025-018",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2025-013"
+   ],
+   "conformitate": "neconform",
+   "statut": "Activ",
+   "inregistrat": "2023-01-10",
+   "demo": true
+  },
+  {
+   "id": "BEN-014",
+   "denumire": "GȚ Guțu Tudor",
+   "forma": "GȚ",
+   "forma_completa": "Gospodărie țărănească (de fermier)",
+   "idno": "1006337813280",
+   "cod_exploatant": "DEMO-G-42",
+   "reprezentant": "Ana Railean",
+   "telefon": "+373 60 327 795",
+   "email": "contact@gt.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Ștefan cel Mare",
+   "nr": "111",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.315,
+   "suprafata_masurata_ha": 0.312,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0019",
+     "vineyard_id": "V42",
+     "rvv_code": "RVV-DEMO-V42",
+     "soi": "Muscat Ottonel",
+     "an_plantare": 2024,
+     "suprafata_declarata_ha": 0.315,
+     "suprafata_masurata_ha": 0.3122,
+     "diferenta_pct": -0.9,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2024-019",
+     "ultimul_control": "2023-06-18"
+    }
+   ],
+   "cereri": [
+    "CER-2026-014"
+   ],
+   "conformitate": "neconform",
+   "statut": "Activ",
+   "inregistrat": "2020-07-21",
+   "demo": true
+  },
+  {
+   "id": "BEN-015",
+   "denumire": "GȚ Cojocaru Ion",
+   "forma": "GȚ",
+   "forma_completa": "Gospodărie țărănească (de fermier)",
+   "idno": "1008855719729",
+   "cod_exploatant": "DEMO-G-44",
+   "reprezentant": "Dorin Melnic",
+   "telefon": "+373 65 981 305",
+   "email": "contact@gt.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Codrului",
+   "nr": "46",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.242,
+   "suprafata_masurata_ha": 0.246,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0020",
+     "vineyard_id": "V44",
+     "rvv_code": "RVV-DEMO-V44",
+     "soi": "Feteasca Neagra",
+     "an_plantare": 1978,
+     "suprafata_declarata_ha": 0.242,
+     "suprafata_masurata_ha": 0.2465,
+     "diferenta_pct": 1.9,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-1978-020",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2026-015"
+   ],
+   "conformitate": "conform",
+   "statut": "Activ",
+   "inregistrat": "2025-08-27",
+   "demo": true
+  },
+  {
+   "id": "BEN-016",
+   "denumire": "Viile Bîcului SRL",
+   "forma": "SRL",
+   "forma_completa": "Societate cu răspundere limitată",
+   "idno": "1002340861552",
+   "cod_exploatant": "DEMO-G-45",
+   "reprezentant": "Liliana Țurcanu",
+   "telefon": "+373 62 743 520",
+   "email": "contact@viile.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Livezilor",
+   "nr": "115",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.503,
+   "suprafata_masurata_ha": 0.483,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0021",
+     "vineyard_id": "V45",
+     "rvv_code": "RVV-DEMO-V45",
+     "soi": "Pinot Noir",
+     "an_plantare": 2018,
+     "suprafata_declarata_ha": 0.259,
+     "suprafata_masurata_ha": 0.241,
+     "diferenta_pct": -6.9,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2018-021",
+     "ultimul_control": null
+    },
+    {
+     "cad_nr": "DEMO-0022",
+     "vineyard_id": "V45",
+     "rvv_code": null,
+     "soi": "Pinot Noir",
+     "an_plantare": 2018,
+     "suprafata_declarata_ha": 0.244,
+     "suprafata_masurata_ha": 0.2424,
+     "diferenta_pct": -0.7,
+     "statut": "planted",
+     "statut_detectat": "planted",
+     "igp": "IGP Codru",
+     "autorizatie": null,
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [
+    "CER-2026-016"
+   ],
+   "conformitate": "verificare",
+   "statut": "Activ",
+   "inregistrat": "2018-06-26",
+   "demo": true
+  },
+  {
+   "id": "BEN-017",
+   "denumire": "GȚ Popa Elena",
+   "forma": "GȚ",
+   "forma_completa": "Gospodărie țărănească (de fermier)",
+   "idno": "1004416072521",
+   "cod_exploatant": "DEMO-G-93",
+   "reprezentant": "Oleg Vlas",
+   "telefon": "+373 62 186 406",
+   "email": "contact@gt.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Codrului",
+   "nr": "70",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.293,
+   "suprafata_masurata_ha": 0,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0023",
+     "vineyard_id": null,
+     "rvv_code": null,
+     "soi": "Fetească Neagră",
+     "an_plantare": 2016,
+     "suprafata_declarata_ha": 0.293,
+     "suprafata_masurata_ha": 0.0,
+     "diferenta_pct": null,
+     "statut": "planted",
+     "statut_detectat": "no_vines",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2016-023",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [],
+   "conformitate": "fara_bloc",
+   "statut": "Activ",
+   "inregistrat": "2022-03-13",
+   "demo": true
+  },
+  {
+   "id": "BEN-018",
+   "denumire": "GȚ Sârbu Mihail",
+   "forma": "GȚ",
+   "forma_completa": "Gospodărie țărănească (de fermier)",
+   "idno": "1009668757732",
+   "cod_exploatant": "DEMO-G-94",
+   "reprezentant": "Diana Cazacu",
+   "telefon": "+373 63 970 969",
+   "email": "contact@gt.exemplu.md",
+   "raion": "r-nul Strășeni",
+   "localitate": "Sireți",
+   "strada": "str. Mihai Eminescu",
+   "nr": "75",
+   "bloc": "",
+   "apartament": "",
+   "suprafata_declarata_ha": 0.293,
+   "suprafata_masurata_ha": 0,
+   "parcele": [
+    {
+     "cad_nr": "DEMO-0024",
+     "vineyard_id": null,
+     "rvv_code": null,
+     "soi": "Fetească Neagră",
+     "an_plantare": 2016,
+     "suprafata_declarata_ha": 0.293,
+     "suprafata_masurata_ha": 0.0,
+     "diferenta_pct": null,
+     "statut": "planted",
+     "statut_detectat": "no_vines",
+     "igp": "IGP Codru",
+     "autorizatie": "DEMO-AUT-2016-024",
+     "ultimul_control": null
+    }
+   ],
+   "cereri": [],
+   "conformitate": "fara_bloc",
+   "statut": "Suspendat",
+   "inregistrat": "2022-01-22",
+   "demo": true
+  }
+ ],
+ "cereri": [
+  {
+   "id": "CER-2026-001",
+   "beneficiar": "BEN-001",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "depus"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V02",
+   "parcele": [
+    "DEMO-0001",
+    "DEMO-0002"
+   ],
+   "suma_ceruta_lei": 24500,
+   "suma_eligibila_lei": null,
+   "etapa": "Evaluare",
+   "decizie": null,
+   "inspector": "USR-022",
+   "rezultat_control": "neconform",
+   "conformitate_bloc": "neconform",
+   "depusa": "2026-07-18",
+   "activitate": [
+    {
+     "ts": "2026-07-18T12:29",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.147",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Andrei Rusu"
+    },
+    {
+     "ts": "2026-07-20T18:01",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-07-21T18:57",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2026-07-24T19:43",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2026-07-24T20:58",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-022"
+    },
+    {
+     "ts": "2026-07-26T01:41",
+     "user": "USR-022",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Blocul V02 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2026-07-26T08:01",
+     "user": "USR-022",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Traseu de control prin blocul V02"
+    },
+    {
+     "ts": "2026-07-28T13:07",
+     "user": "USR-022",
+     "action": "atasament",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Proces-verbal de control · bloc V02"
+    },
+    {
+     "ts": "2026-07-28T18:49",
+     "user": "USR-022",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "field": "Rezultat control",
+     "before": "—",
+     "after": "neconform"
+    },
+    {
+     "ts": "2026-07-28T20:29",
+     "user": "USR-022",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "field": "Etapa",
+     "before": "Control pe teren",
+     "after": "Evaluare"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2024-002",
+   "beneficiar": "BEN-002",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "depus"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2024,
+   "vineyard_id": "V04",
+   "parcele": [
+    "DEMO-0003",
+    "DEMO-0004"
+   ],
+   "suma_ceruta_lei": 42900,
+   "suma_eligibila_lei": 42900,
+   "etapa": "Plată",
+   "decizie": "Aprobată",
+   "inspector": "USR-002",
+   "rezultat_control": "conform",
+   "conformitate_bloc": "conform",
+   "depusa": "2024-05-24",
+   "activitate": [
+    {
+     "ts": "2024-05-24T10:38",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.240",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Elena Moraru"
+    },
+    {
+     "ts": "2024-05-26T13:12",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2024-05-27T17:52",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2024-05-30T20:21",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2024-05-30T23:26",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-002"
+    },
+    {
+     "ts": "2024-06-01T00:37",
+     "user": "USR-002",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Blocul V04 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2024-06-01T06:02",
+     "user": "USR-002",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Traseu de control prin blocul V04"
+    },
+    {
+     "ts": "2024-06-03T06:09",
+     "user": "USR-002",
+     "action": "atasament",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Proces-verbal de control · bloc V04"
+    },
+    {
+     "ts": "2024-06-03T11:22",
+     "user": "USR-002",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Rezultat control",
+     "before": "—",
+     "after": "conform"
+    },
+    {
+     "ts": "2024-06-03T16:56",
+     "user": "USR-002",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Control pe teren",
+     "after": "Evaluare"
+    },
+    {
+     "ts": "2024-06-06T21:04",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Suma eligibilă (lei)",
+     "before": "—",
+     "after": "42 900"
+    },
+    {
+     "ts": "2024-06-08T00:43",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Etapa",
+     "before": "Evaluare",
+     "after": "Decizie"
+    },
+    {
+     "ts": "2024-06-08T06:55",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Decizie",
+     "before": "—",
+     "after": "Aprobată"
+    },
+    {
+     "ts": "2024-06-13T11:22",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Etapa",
+     "before": "Decizie",
+     "after": "Plată"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-003",
+   "beneficiar": "BEN-003",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "lipsă"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V05",
+   "parcele": [
+    "DEMO-0005"
+   ],
+   "suma_ceruta_lei": 18000,
+   "suma_eligibila_lei": null,
+   "etapa": "Verificare administrativă",
+   "decizie": null,
+   "inspector": null,
+   "rezultat_control": null,
+   "conformitate_bloc": "conform",
+   "depusa": "2026-07-20",
+   "activitate": [
+    {
+     "ts": "2026-07-20T10:46",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.90",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Ion Moraru"
+    },
+    {
+     "ts": "2026-07-22T12:03",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-07-23T13:29",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-004",
+   "beneficiar": "BEN-004",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V09",
+   "parcele": [
+    "DEMO-0006"
+   ],
+   "suma_ceruta_lei": 46000,
+   "suma_eligibila_lei": null,
+   "etapa": "Control pe teren",
+   "decizie": null,
+   "inspector": "USR-002",
+   "rezultat_control": null,
+   "conformitate_bloc": "verificare",
+   "depusa": "2026-08-10",
+   "activitate": [
+    {
+     "ts": "2026-08-10T12:26",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.26",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Vasile Ceban"
+    },
+    {
+     "ts": "2026-08-12T15:03",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-08-13T16:56",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2026-08-16T21:31",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2026-08-16T22:52",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-002"
+    },
+    {
+     "ts": "2026-08-18T04:01",
+     "user": "USR-002",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Blocul V09 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2026-08-18T09:16",
+     "user": "USR-002",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Traseu de control prin blocul V09"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2025-005",
+   "beneficiar": "BEN-005",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "depus"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2025,
+   "vineyard_id": "V12",
+   "parcele": [
+    "DEMO-0007",
+    "DEMO-0008"
+   ],
+   "suma_ceruta_lei": 71200,
+   "suma_eligibila_lei": 48000,
+   "etapa": "Decizie",
+   "decizie": "Eligibilă parțial",
+   "inspector": "USR-022",
+   "rezultat_control": "conform",
+   "conformitate_bloc": "conform",
+   "depusa": "2025-04-13",
+   "activitate": [
+    {
+     "ts": "2025-04-13T11:22",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.42",
+     "ua": "Chrome 129 · Windows 11",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Tudor Guțu"
+    },
+    {
+     "ts": "2025-04-15T14:12",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2025-04-16T18:23",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2025-04-19T19:20",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2025-04-20T01:35",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-022"
+    },
+    {
+     "ts": "2025-04-21T02:15",
+     "user": "USR-022",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Blocul V12 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2025-04-21T05:33",
+     "user": "USR-022",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Traseu de control prin blocul V12"
+    },
+    {
+     "ts": "2025-04-23T07:50",
+     "user": "USR-022",
+     "action": "atasament",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Proces-verbal de control · bloc V12"
+    },
+    {
+     "ts": "2025-04-23T13:08",
+     "user": "USR-022",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "field": "Rezultat control",
+     "before": "—",
+     "after": "conform"
+    },
+    {
+     "ts": "2025-04-23T15:45",
+     "user": "USR-022",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "field": "Etapa",
+     "before": "Control pe teren",
+     "after": "Evaluare"
+    },
+    {
+     "ts": "2025-04-26T21:19",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Suma eligibilă (lei)",
+     "before": "—",
+     "after": "48 000"
+    },
+    {
+     "ts": "2025-04-27T22:22",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Etapa",
+     "before": "Evaluare",
+     "after": "Decizie"
+    },
+    {
+     "ts": "2025-04-28T01:23",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Decizie",
+     "before": "—",
+     "after": "Eligibilă parțial"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2024-006",
+   "beneficiar": "BEN-006",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "depus"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2024,
+   "vineyard_id": "V14",
+   "parcele": [
+    "DEMO-0009",
+    "DEMO-0010"
+   ],
+   "suma_ceruta_lei": 73700,
+   "suma_eligibila_lei": 51600,
+   "etapa": "Decizie",
+   "decizie": "Eligibilă parțial",
+   "inspector": "USR-002",
+   "rezultat_control": "conform",
+   "conformitate_bloc": "conform",
+   "depusa": "2024-05-12",
+   "activitate": [
+    {
+     "ts": "2024-05-12T13:17",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.242",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Maria Rusu"
+    },
+    {
+     "ts": "2024-05-14T14:21",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2024-05-15T19:08",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2024-05-18T23:36",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2024-05-19T01:45",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-002"
+    },
+    {
+     "ts": "2024-05-20T04:51",
+     "user": "USR-002",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Blocul V14 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2024-05-20T10:43",
+     "user": "USR-002",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Traseu de control prin blocul V14"
+    },
+    {
+     "ts": "2024-05-22T14:39",
+     "user": "USR-002",
+     "action": "atasament",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Proces-verbal de control · bloc V14"
+    },
+    {
+     "ts": "2024-05-22T19:41",
+     "user": "USR-002",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Rezultat control",
+     "before": "—",
+     "after": "conform"
+    },
+    {
+     "ts": "2024-05-22T22:40",
+     "user": "USR-002",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Control pe teren",
+     "after": "Evaluare"
+    },
+    {
+     "ts": "2024-05-25T23:25",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Suma eligibilă (lei)",
+     "before": "—",
+     "after": "51 600"
+    },
+    {
+     "ts": "2024-05-27T00:03",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Etapa",
+     "before": "Evaluare",
+     "after": "Decizie"
+    },
+    {
+     "ts": "2024-05-27T00:50",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Decizie",
+     "before": "—",
+     "after": "Eligibilă parțial"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-007",
+   "beneficiar": "BEN-007",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V16",
+   "parcele": [
+    "DEMO-0011",
+    "DEMO-0012"
+   ],
+   "suma_ceruta_lei": 31000,
+   "suma_eligibila_lei": null,
+   "etapa": "Control pe teren",
+   "decizie": null,
+   "inspector": "USR-022",
+   "rezultat_control": null,
+   "conformitate_bloc": "conform",
+   "depusa": "2026-06-24",
+   "activitate": [
+    {
+     "ts": "2026-06-24T11:54",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.77",
+     "ua": "Firefox 131 · Windows 10",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Petru Lungu"
+    },
+    {
+     "ts": "2026-06-26T13:52",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-06-27T15:21",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2026-06-30T18:10",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2026-06-30T21:54",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-022"
+    },
+    {
+     "ts": "2026-07-02T02:16",
+     "user": "USR-022",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Blocul V16 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2026-07-02T07:06",
+     "user": "USR-022",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Traseu de control prin blocul V16"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-008",
+   "beneficiar": "BEN-008",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "depus"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V21",
+   "parcele": [
+    "DEMO-0013"
+   ],
+   "suma_ceruta_lei": 24500,
+   "suma_eligibila_lei": null,
+   "etapa": "Evaluare",
+   "decizie": null,
+   "inspector": "USR-002",
+   "rezultat_control": "neconform",
+   "conformitate_bloc": "neconform",
+   "depusa": "2026-07-25",
+   "activitate": [
+    {
+     "ts": "2026-07-25T12:41",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.90",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Andrei Botnaru"
+    },
+    {
+     "ts": "2026-07-27T14:24",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-07-28T18:24",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2026-07-31T20:19",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2026-08-01T02:14",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-002"
+    },
+    {
+     "ts": "2026-08-02T05:15",
+     "user": "USR-002",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Blocul V21 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2026-08-02T11:46",
+     "user": "USR-002",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Traseu de control prin blocul V21"
+    },
+    {
+     "ts": "2026-08-04T14:48",
+     "user": "USR-002",
+     "action": "atasament",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Proces-verbal de control · bloc V21"
+    },
+    {
+     "ts": "2026-08-04T18:20",
+     "user": "USR-002",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Rezultat control",
+     "before": "—",
+     "after": "neconform"
+    },
+    {
+     "ts": "2026-08-04T23:25",
+     "user": "USR-002",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Control pe teren",
+     "after": "Evaluare"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-009",
+   "beneficiar": "BEN-009",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "lipsă"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V22",
+   "parcele": [
+    "DEMO-0014"
+   ],
+   "suma_ceruta_lei": 31000,
+   "suma_eligibila_lei": null,
+   "etapa": "Verificare administrativă",
+   "decizie": null,
+   "inspector": null,
+   "rezultat_control": null,
+   "conformitate_bloc": "conform",
+   "depusa": "2026-06-24",
+   "activitate": [
+    {
+     "ts": "2026-06-24T15:35",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.155",
+     "ua": "Firefox 131 · Windows 10",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Ion Cojocaru"
+    },
+    {
+     "ts": "2026-06-26T21:54",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-06-27T23:02",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-010",
+   "beneficiar": "BEN-010",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "lipsă"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V32",
+   "parcele": [
+    "DEMO-0015"
+   ],
+   "suma_ceruta_lei": 18000,
+   "suma_eligibila_lei": null,
+   "etapa": "Verificare administrativă",
+   "decizie": null,
+   "inspector": null,
+   "rezultat_control": null,
+   "conformitate_bloc": "conform",
+   "depusa": "2026-05-13",
+   "activitate": [
+    {
+     "ts": "2026-05-13T11:58",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.78",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Victoria Popa"
+    },
+    {
+     "ts": "2026-05-15T14:15",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-05-16T15:32",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-011",
+   "beneficiar": "BEN-011",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V33",
+   "parcele": [
+    "DEMO-0016"
+   ],
+   "suma_ceruta_lei": 24500,
+   "suma_eligibila_lei": null,
+   "etapa": "Control pe teren",
+   "decizie": null,
+   "inspector": "USR-022",
+   "rezultat_control": null,
+   "conformitate_bloc": "verificare",
+   "depusa": "2026-06-27",
+   "activitate": [
+    {
+     "ts": "2026-06-27T15:50",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.41",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Sergiu Munteanu"
+    },
+    {
+     "ts": "2026-06-29T18:23",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-06-30T23:20",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2026-07-04T03:17",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2026-07-04T08:44",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-022"
+    },
+    {
+     "ts": "2026-07-05T12:12",
+     "user": "USR-022",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Blocul V33 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2026-07-05T15:39",
+     "user": "USR-022",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Traseu de control prin blocul V33"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-012",
+   "beneficiar": "BEN-012",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V37",
+   "parcele": [
+    "DEMO-0017"
+   ],
+   "suma_ceruta_lei": 18000,
+   "suma_eligibila_lei": null,
+   "etapa": "Control pe teren",
+   "decizie": null,
+   "inspector": "USR-002",
+   "rezultat_control": null,
+   "conformitate_bloc": "verificare",
+   "depusa": "2026-08-20",
+   "activitate": [
+    {
+     "ts": "2026-08-20T15:00",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.114",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Natalia Grosu"
+    },
+    {
+     "ts": "2026-08-22T15:51",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-08-23T21:41",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2026-08-27T04:16",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2026-08-27T08:32",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-002"
+    },
+    {
+     "ts": "2026-08-28T14:22",
+     "user": "USR-002",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Blocul V37 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2026-08-28T19:49",
+     "user": "USR-002",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Traseu de control prin blocul V37"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2025-013",
+   "beneficiar": "BEN-013",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "depus"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2025,
+   "vineyard_id": "V41",
+   "parcele": [
+    "DEMO-0018"
+   ],
+   "suma_ceruta_lei": 21800,
+   "suma_eligibila_lei": 0,
+   "etapa": "Decizie",
+   "decizie": "Respinsă (neeligibilă)",
+   "inspector": "USR-022",
+   "rezultat_control": "neconform",
+   "conformitate_bloc": "neconform",
+   "depusa": "2025-03-15",
+   "activitate": [
+    {
+     "ts": "2025-03-15T14:56",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.205",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Mihail Sârbu"
+    },
+    {
+     "ts": "2025-03-17T19:23",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2025-03-18T21:13",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2025-03-22T00:53",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2025-03-22T03:56",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-022"
+    },
+    {
+     "ts": "2025-03-23T09:30",
+     "user": "USR-022",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Blocul V41 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2025-03-23T12:22",
+     "user": "USR-022",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Traseu de control prin blocul V41"
+    },
+    {
+     "ts": "2025-03-25T12:55",
+     "user": "USR-022",
+     "action": "atasament",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "what": "Proces-verbal de control · bloc V41"
+    },
+    {
+     "ts": "2025-03-25T16:22",
+     "user": "USR-022",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "field": "Rezultat control",
+     "before": "—",
+     "after": "neconform"
+    },
+    {
+     "ts": "2025-03-25T22:35",
+     "user": "USR-022",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.76",
+     "ua": "Chrome 129 · macOS",
+     "auth": "MPass",
+     "field": "Etapa",
+     "before": "Control pe teren",
+     "after": "Evaluare"
+    },
+    {
+     "ts": "2025-03-29T00:06",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Suma eligibilă (lei)",
+     "before": "—",
+     "after": "0"
+    },
+    {
+     "ts": "2025-03-30T00:14",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Etapa",
+     "before": "Evaluare",
+     "after": "Decizie"
+    },
+    {
+     "ts": "2025-03-30T02:33",
+     "user": "USR-006",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.101",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "field": "Decizie",
+     "before": "—",
+     "after": "Respinsă (neeligibilă)"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-014",
+   "beneficiar": "BEN-014",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "depus"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V42",
+   "parcele": [
+    "DEMO-0019"
+   ],
+   "suma_ceruta_lei": 39500,
+   "suma_eligibila_lei": null,
+   "etapa": "Evaluare",
+   "decizie": null,
+   "inspector": "USR-002",
+   "rezultat_control": "neconform",
+   "conformitate_bloc": "neconform",
+   "depusa": "2026-08-18",
+   "activitate": [
+    {
+     "ts": "2026-08-18T10:21",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.95",
+     "ua": "Chrome 129 · Android 14",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Ana Railean"
+    },
+    {
+     "ts": "2026-08-20T15:53",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-08-21T21:09",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2026-08-25T00:44",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2026-08-25T04:50",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-002"
+    },
+    {
+     "ts": "2026-08-26T09:00",
+     "user": "USR-002",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Blocul V42 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2026-08-26T11:56",
+     "user": "USR-002",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Traseu de control prin blocul V42"
+    },
+    {
+     "ts": "2026-08-28T12:05",
+     "user": "USR-002",
+     "action": "atasament",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Proces-verbal de control · bloc V42"
+    },
+    {
+     "ts": "2026-08-28T12:27",
+     "user": "USR-002",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Rezultat control",
+     "before": "—",
+     "after": "neconform"
+    },
+    {
+     "ts": "2026-08-28T18:57",
+     "user": "USR-002",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Control pe teren",
+     "after": "Evaluare"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-015",
+   "beneficiar": "BEN-015",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V44",
+   "parcele": [
+    "DEMO-0020"
+   ],
+   "suma_ceruta_lei": 21500,
+   "suma_eligibila_lei": null,
+   "etapa": "Verificare administrativă",
+   "decizie": null,
+   "inspector": null,
+   "rezultat_control": null,
+   "conformitate_bloc": "conform",
+   "depusa": "2026-08-18",
+   "activitate": [
+    {
+     "ts": "2026-08-18T12:02",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.14",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Dorin Melnic"
+    },
+    {
+     "ts": "2026-08-20T15:59",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-08-21T20:25",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    }
+   ],
+   "demo": true
+  },
+  {
+   "id": "CER-2026-016",
+   "beneficiar": "BEN-016",
+   "masura": "SP 2.5 · înființarea plantațiilor viticole",
+   "documente": [
+    [
+     "Extras din Registrul vitivinicol",
+     "depus"
+    ],
+    [
+     "Numerele cadastrale ale parcelelor",
+     "depus"
+    ],
+    [
+     "Proiectul de înființare a plantației",
+     "depus"
+    ],
+    [
+     "Certificatul de categorie biologică a materialului săditor",
+     "depus"
+    ],
+    [
+     "Certificatul de membru IGP / DOP",
+     "depus"
+    ],
+    [
+     "Actul de recepție a plantației (prindere ≥ 90 %)",
+     "în așteptare"
+    ]
+   ],
+   "masura_completa": "SP_2.5 Investiții în exploatațiile din sectorul viticol: înființarea plantațiilor (struguri pentru vin)",
+   "an": 2026,
+   "vineyard_id": "V45",
+   "parcele": [
+    "DEMO-0021",
+    "DEMO-0022"
+   ],
+   "suma_ceruta_lei": 18000,
+   "suma_eligibila_lei": null,
+   "etapa": "Control pe teren",
+   "decizie": null,
+   "inspector": "USR-002",
+   "rezultat_control": null,
+   "conformitate_bloc": "verificare",
+   "depusa": "2026-08-16",
+   "activitate": [
+    {
+     "ts": "2026-08-16T13:50",
+     "user": null,
+     "action": "creare",
+     "module": "Cereri de subvenție",
+     "stage": "Depunere",
+     "ip": "203.0.113.206",
+     "ua": "Chrome 129 · Windows 11",
+     "auth": "MPass",
+     "what": "Cerere depusă prin portal",
+     "by": "Liliana Țurcanu"
+    },
+    {
+     "ts": "2026-08-18T14:41",
+     "user": "USR-005",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Dosarul cererii"
+    },
+    {
+     "ts": "2026-08-19T16:03",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Depunere",
+     "after": "Verificare administrativă"
+    },
+    {
+     "ts": "2026-08-22T18:54",
+     "user": "USR-005",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.179",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "field": "Etapa",
+     "before": "Verificare administrativă",
+     "after": "Control pe teren"
+    },
+    {
+     "ts": "2026-08-22T20:49",
+     "user": "USR-004",
+     "action": "modificare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.197",
+     "ua": "Safari 18 · iOS 18",
+     "auth": "MPass",
+     "field": "Inspector alocat",
+     "before": "—",
+     "after": "USR-002"
+    },
+    {
+     "ts": "2026-08-24T00:49",
+     "user": "USR-002",
+     "action": "vizualizare",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Blocul V45 pe hartă (declarat vs măsurat)"
+    },
+    {
+     "ts": "2026-08-24T02:37",
+     "user": "USR-002",
+     "action": "traseu",
+     "module": "Cereri de subvenție",
+     "stage": null,
+     "ip": "198.51.100.109",
+     "ua": "Edge 129 · Windows 11",
+     "auth": "Parolă",
+     "what": "Traseu de control prin blocul V45"
+    }
+   ],
+   "demo": true
+  }
+ ],
+ "sesiuni": [
+  {
+   "ts": "2026-09-20T09:36",
+   "user": "USR-001",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.190",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T18:36",
+   "user": "USR-001",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.190",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-04T07:16",
+   "user": "USR-002",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-04T09:23",
+   "user": "USR-002",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport cereri pe etape",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-04T12:16",
+   "user": "USR-002",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-18T09:56",
+   "user": "USR-002",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-18T14:56",
+   "user": "USR-002",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-24T08:52",
+   "user": "USR-002",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-24T14:52",
+   "user": "USR-002",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-26T08:30",
+   "user": "USR-002",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-26T14:30",
+   "user": "USR-002",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-28T08:30",
+   "user": "USR-002",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-28T12:30",
+   "user": "USR-002",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-26T09:41",
+   "user": "USR-002",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-26T12:04",
+   "user": "USR-002",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Extras din registrul viticol",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-26T15:41",
+   "user": "USR-002",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.109",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-25T09:56",
+   "user": "USR-003",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.60",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-25T14:56",
+   "user": "USR-003",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.60",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-01T08:14",
+   "user": "USR-004",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-01T17:14",
+   "user": "USR-004",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-16T09:42",
+   "user": "USR-004",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-16T15:42",
+   "user": "USR-004",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-22T08:49",
+   "user": "USR-004",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-22T11:19",
+   "user": "USR-004",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Extras din registrul viticol",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-22T15:49",
+   "user": "USR-004",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-25T08:52",
+   "user": "USR-004",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-25T09:58",
+   "user": "USR-004",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport cereri pe etape",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-25T16:52",
+   "user": "USR-004",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-27T07:58",
+   "user": "USR-004",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-27T10:33",
+   "user": "USR-004",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Conformitate pe blocuri",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-27T16:58",
+   "user": "USR-004",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-18T07:48",
+   "user": "USR-004",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-18T11:48",
+   "user": "USR-004",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.197",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-08-21T07:23",
+   "user": "USR-005",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-21T15:23",
+   "user": "USR-005",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-22T07:42",
+   "user": "USR-005",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-22T09:11",
+   "user": "USR-005",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Conformitate pe blocuri",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-22T12:42",
+   "user": "USR-005",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-23T09:53",
+   "user": "USR-005",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-23T15:53",
+   "user": "USR-005",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-25T08:51",
+   "user": "USR-005",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-25T16:51",
+   "user": "USR-005",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-27T09:44",
+   "user": "USR-005",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-27T12:39",
+   "user": "USR-005",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport controale pe teren",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-08-27T18:44",
+   "user": "USR-005",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-25T07:18",
+   "user": "USR-005",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-25T16:18",
+   "user": "USR-005",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.179",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2024-06-08T09:12",
+   "user": "USR-006",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2024-06-08T10:48",
+   "user": "USR-006",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport controale pe teren",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2024-06-08T14:12",
+   "user": "USR-006",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2024-06-13T08:44",
+   "user": "USR-006",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2024-06-13T13:44",
+   "user": "USR-006",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-03-30T08:20",
+   "user": "USR-006",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-03-30T08:53",
+   "user": "USR-006",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport controale pe teren",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-03-30T17:20",
+   "user": "USR-006",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-04-27T07:36",
+   "user": "USR-006",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-04-27T14:36",
+   "user": "USR-006",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-04-28T09:11",
+   "user": "USR-006",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-04-28T11:42",
+   "user": "USR-006",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Extras din registrul viticol",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-04-28T17:11",
+   "user": "USR-006",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-18T07:39",
+   "user": "USR-006",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-18T14:39",
+   "user": "USR-006",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.101",
+   "ua": "Chrome 129 · Android 14",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T09:42",
+   "user": "USR-007",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.240",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T10:03",
+   "user": "USR-007",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport cereri pe etape",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.240",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T13:42",
+   "user": "USR-007",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.240",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-23T08:31",
+   "user": "USR-008",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.160",
+   "ua": "Firefox 131 · Windows 10",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-23T13:31",
+   "user": "USR-008",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.160",
+   "ua": "Firefox 131 · Windows 10",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-26T09:37",
+   "user": "USR-009",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.58",
+   "ua": "Chrome 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-26T10:40",
+   "user": "USR-009",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport controale pe teren",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.58",
+   "ua": "Chrome 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-26T14:37",
+   "user": "USR-009",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.58",
+   "ua": "Chrome 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-25T09:37",
+   "user": "USR-010",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.64",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-25T16:37",
+   "user": "USR-010",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.64",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-23T09:57",
+   "user": "USR-011",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.190",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-23T17:57",
+   "user": "USR-011",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.190",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-25T07:17",
+   "user": "USR-012",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.33",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-25T13:17",
+   "user": "USR-012",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.33",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-20T09:37",
+   "user": "USR-013",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.39",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T11:46",
+   "user": "USR-013",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport cereri pe etape",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.39",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T17:37",
+   "user": "USR-013",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.39",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T08:57",
+   "user": "USR-014",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.175",
+   "ua": "Firefox 131 · Windows 10",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T12:57",
+   "user": "USR-014",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.175",
+   "ua": "Firefox 131 · Windows 10",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-25T08:41",
+   "user": "USR-015",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.143",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-25T12:41",
+   "user": "USR-015",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.143",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T08:34",
+   "user": "USR-016",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.153",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-20T16:34",
+   "user": "USR-016",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.153",
+   "ua": "Edge 129 · Windows 11",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-18T09:30",
+   "user": "USR-019",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.248",
+   "ua": "Firefox 131 · Windows 10",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-18T18:30",
+   "user": "USR-019",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.248",
+   "ua": "Firefox 131 · Windows 10",
+   "auth": "Parolă"
+  },
+  {
+   "ts": "2026-09-19T09:43",
+   "user": "USR-020",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.128",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-19T13:43",
+   "user": "USR-020",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.128",
+   "ua": "Safari 18 · iOS 18",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-04-23T08:12",
+   "user": "USR-022",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-04-23T08:42",
+   "user": "USR-022",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport cereri pe etape",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2025-04-23T16:12",
+   "user": "USR-022",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-02T08:46",
+   "user": "USR-022",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-02T11:51",
+   "user": "USR-022",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Conformitate pe blocuri",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-02T16:46",
+   "user": "USR-022",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-05T08:44",
+   "user": "USR-022",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-05T10:25",
+   "user": "USR-022",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Raport controale pe teren",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-05T12:44",
+   "user": "USR-022",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-26T07:35",
+   "user": "USR-022",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-26T10:11",
+   "user": "USR-022",
+   "action": "export",
+   "module": "Rapoarte",
+   "title": "Extras din registrul viticol",
+   "what": "A exportat raportul în CSV",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-26T11:35",
+   "user": "USR-022",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-28T07:57",
+   "user": "USR-022",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-07-28T15:57",
+   "user": "USR-022",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-22T09:17",
+   "user": "USR-022",
+   "action": "conectare",
+   "module": "Autentificare",
+   "what": "Conectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  },
+  {
+   "ts": "2026-09-22T15:17",
+   "user": "USR-022",
+   "action": "deconectare",
+   "module": "Autentificare",
+   "what": "Deconectare",
+   "ip": "198.51.100.76",
+   "ua": "Chrome 129 · macOS",
+   "auth": "MPass"
+  }
+ ],
+ "permisiuni": [
+  {
+   "id": "control:view",
+   "cheie": "control:view",
+   "titlu": "Vizualizare control",
+   "descriere": "Vede blocurile, conformitatea cu registrul și cererile de verificat",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "control:route",
+   "cheie": "control:route",
+   "titlu": "Traseu de control",
+   "descriere": "Calculează traseul de control în portal",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "control:assign",
+   "cheie": "control:assign",
+   "titlu": "Alocare controale",
+   "descriere": "Împarte controalele pe teren între inspectori",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "pv:create",
+   "cheie": "pv:create",
+   "titlu": "Proces-verbal",
+   "descriere": "Întocmește procesul-verbal de control",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "pv:approve",
+   "cheie": "pv:approve",
+   "titlu": "Aprobare proces-verbal",
+   "descriere": "Aprobă procesele-verbale ale inspectorilor",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "target:check",
+   "cheie": "target:check",
+   "titlu": "Ținte verificate",
+   "descriere": "Marchează țintele verificate pe teren",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "cereri:view",
+   "cheie": "cereri:view",
+   "titlu": "Vizualizare cereri",
+   "descriere": "Vede cererile de subvenție",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "cereri:assign",
+   "cheie": "cereri:assign",
+   "titlu": "Alocare cereri",
+   "descriere": "Alocă inspectorul unei cereri",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "cereri:evaluate",
+   "cheie": "cereri:evaluate",
+   "titlu": "Evaluare cereri",
+   "descriere": "Verifică dosarul și stabilește suma eligibilă",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "cereri:stage",
+   "cheie": "cereri:stage",
+   "titlu": "Schimbare etapă",
+   "descriere": "Trece cererea la etapa următoare",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "cereri:decide",
+   "cheie": "cereri:decide",
+   "titlu": "Decizie",
+   "descriere": "Aprobă sau respinge cererea",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "cereri:submit",
+   "cheie": "cereri:submit",
+   "titlu": "Depunere cereri",
+   "descriere": "Depune cereri de subvenție prin portal",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "cereri:manage",
+   "cheie": "cereri:manage",
+   "titlu": "Administrare cereri",
+   "descriere": "Acces complet la cereri",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "plati:approve",
+   "cheie": "plati:approve",
+   "titlu": "Aprobare plăți",
+   "descriere": "Aprobă plata subvenției",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "beneficiari:view",
+   "cheie": "beneficiari:view",
+   "titlu": "Vizualizare beneficiari",
+   "descriere": "Vede exploatațiile și parcelele lor",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "beneficiari:manage",
+   "cheie": "beneficiari:manage",
+   "titlu": "Administrare beneficiari",
+   "descriere": "Adaugă și editează beneficiari",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "rvv:view",
+   "cheie": "rvv:view",
+   "titlu": "Registrul viticol",
+   "descriere": "Vede înregistrările din registrul viticol",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "rvv:edit",
+   "cheie": "rvv:edit",
+   "titlu": "Editare registru",
+   "descriere": "Modifică înregistrările din registru",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "rvv:export",
+   "cheie": "rvv:export",
+   "titlu": "Extras din registru",
+   "descriere": "Exportă extrase din registru",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "cadastru:search",
+   "cheie": "cadastru:search",
+   "titlu": "Căutare în cadastru",
+   "descriere": "Caută parcele în cadastrul național",
+   "tip": "Global",
+   "demo": true
+  },
+  {
+   "id": "plantatie:view",
+   "cheie": "plantatie:view",
+   "titlu": "Plantația",
+   "descriere": "Vede starea blocurilor proprii",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "plantatie:route",
+   "cheie": "plantatie:route",
+   "titlu": "Traseu de colectare",
+   "descriere": "Calculează traseul de colectare a deșeurilor",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "rapoarte:view",
+   "cheie": "rapoarte:view",
+   "titlu": "Rapoarte",
+   "descriere": "Vede rapoartele",
+   "tip": "Global",
+   "demo": true
+  },
+  {
+   "id": "rapoarte:export",
+   "cheie": "rapoarte:export",
+   "titlu": "Export rapoarte",
+   "descriere": "Exportă rapoartele în CSV",
+   "tip": "Global",
+   "demo": true
+  },
+  {
+   "id": "rapoarte:own",
+   "cheie": "rapoarte:own",
+   "titlu": "Rapoarte proprii",
+   "descriere": "Rapoartele propriei exploatații",
+   "tip": "Modul",
+   "demo": true
+  },
+  {
+   "id": "users:view",
+   "cheie": "users:view",
+   "titlu": "Vizualizare utilizatori",
+   "descriere": "Vede utilizatorii platformei",
+   "tip": "Global",
+   "demo": true
+  },
+  {
+   "id": "users:manage",
+   "cheie": "users:manage",
+   "titlu": "Administrare utilizatori",
+   "descriere": "Creează, editează și dezactivează utilizatori",
+   "tip": "Global",
+   "demo": true
+  },
+  {
+   "id": "orgs:manage",
+   "cheie": "orgs:manage",
+   "titlu": "Administrare organizații",
+   "descriere": "Creează și editează organizații",
+   "tip": "Global",
+   "demo": true
+  },
+  {
+   "id": "roles:manage",
+   "cheie": "roles:manage",
+   "titlu": "Administrare roluri",
+   "descriere": "Creează roluri și permisiuni",
+   "tip": "Global",
+   "demo": true
+  },
+  {
+   "id": "roles:assign",
+   "cheie": "roles:assign",
+   "titlu": "Atribuire roluri",
+   "descriere": "Atribuie roluri utilizatorilor",
+   "tip": "Global",
+   "demo": true
+  },
+  {
+   "id": "audit:view",
+   "cheie": "audit:view",
+   "titlu": "Jurnal de activitate",
+   "descriere": "Vede activitatea utilizatorilor",
+   "tip": "Global",
+   "demo": true
+  }
+ ],
+ "roluri": [
+  {
+   "id": "control:inspector",
+   "cheie": "control:inspector",
+   "titlu": "Inspector",
+   "descriere": "Controlul pe teren al plantațiilor și al cererilor de subvenție",
+   "modul": "control",
+   "mpass": true,
+   "permisiuni": [
+    "control:view",
+    "control:route",
+    "pv:create",
+    "target:check",
+    "cereri:view",
+    "cadastru:search"
+   ],
+   "demo": true
+  },
+  {
+   "id": "control:inspector_sef",
+   "cheie": "control:inspector_sef",
+   "titlu": "Inspector-șef",
+   "descriere": "Coordonează inspectorii subdiviziunii teritoriale",
+   "modul": "control",
+   "mpass": true,
+   "permisiuni": [
+    "control:view",
+    "control:assign",
+    "control:route",
+    "pv:create",
+    "pv:approve",
+    "cereri:view",
+    "cereri:assign"
+   ],
+   "demo": true
+  },
+  {
+   "id": "registru:operator_rvv",
+   "cheie": "registru:operator_rvv",
+   "titlu": "Operator registru",
+   "descriere": "Ține la zi Registrul vitivinicol",
+   "modul": "registru",
+   "mpass": true,
+   "permisiuni": [
+    "rvv:view",
+    "rvv:edit",
+    "rvv:export",
+    "cadastru:search"
+   ],
+   "demo": true
+  },
+  {
+   "id": "registru:analist_rvv",
+   "cheie": "registru:analist_rvv",
+   "titlu": "Analist",
+   "descriere": "Analizează datele registrului",
+   "modul": "registru",
+   "mpass": false,
+   "permisiuni": [
+    "rvv:view",
+    "rvv:export",
+    "rapoarte:view"
+   ],
+   "demo": true
+  },
+  {
+   "id": "subventii:evaluator",
+   "cheie": "subventii:evaluator",
+   "titlu": "Evaluator cereri",
+   "descriere": "Evaluează dosarele cererilor de subvenție",
+   "modul": "subventii",
+   "mpass": true,
+   "permisiuni": [
+    "cereri:view",
+    "cereri:evaluate",
+    "cereri:stage",
+    "beneficiari:view"
+   ],
+   "demo": true
+  },
+  {
+   "id": "subventii:aprobator",
+   "cheie": "subventii:aprobator",
+   "titlu": "Aprobator plăți",
+   "descriere": "Decide și aprobă plățile",
+   "modul": "subventii",
+   "mpass": true,
+   "permisiuni": [
+    "cereri:view",
+    "cereri:decide",
+    "plati:approve",
+    "beneficiari:view"
+   ],
+   "demo": true
+  },
+  {
+   "id": "plantatie:admin_exploatatie",
+   "cheie": "plantatie:admin_exploatatie",
+   "titlu": "Administrator exploatație",
+   "descriere": "Administrează plantația proprie și depune cereri",
+   "modul": "plantatie",
+   "mpass": false,
+   "permisiuni": [
+    "plantatie:view",
+    "plantatie:route",
+    "cereri:submit",
+    "rapoarte:own"
+   ],
+   "demo": true
+  },
+  {
+   "id": "rapoarte:analist",
+   "cheie": "rapoarte:analist",
+   "titlu": "Analist rapoarte",
+   "descriere": "Vede și exportă rapoartele",
+   "modul": "rapoarte",
+   "mpass": false,
+   "permisiuni": [
+    "rapoarte:view",
+    "rapoarte:export"
+   ],
+   "demo": true
+  },
+  {
+   "id": "backoffice:sysadmin",
+   "cheie": "backoffice:sysadmin",
+   "titlu": "Administrator de sistem",
+   "descriere": "Administrează platforma: utilizatori, organizații, roluri",
+   "modul": "backoffice",
+   "mpass": true,
+   "permisiuni": [
+    "users:manage",
+    "orgs:manage",
+    "roles:manage",
+    "beneficiari:manage",
+    "cereri:manage",
+    "audit:view"
+   ],
+   "demo": true
+  },
+  {
+   "id": "backoffice:admin_modul",
+   "cheie": "backoffice:admin_modul",
+   "titlu": "Administrator modul",
+   "descriere": "Atribuie roluri într-un modul",
+   "modul": "backoffice",
+   "mpass": true,
+   "permisiuni": [
+    "users:view",
+    "roles:assign",
+    "audit:view"
+   ],
+   "demo": true
+  }
+ ],
+ "raioane": [
+  "r-nul Anenii Noi",
+  "r-nul Basarabeasca",
+  "r-nul Briceni",
+  "r-nul Cahul",
+  "r-nul Cantemir",
+  "r-nul Călărași",
+  "r-nul Căușeni",
+  "r-nul Cimișlia",
+  "r-nul Criuleni",
+  "r-nul Dondușeni",
+  "r-nul Drochia",
+  "r-nul Dubăsari",
+  "r-nul Edineț",
+  "r-nul Fălești",
+  "r-nul Florești",
+  "r-nul Glodeni",
+  "r-nul Hîncești",
+  "r-nul Ialoveni",
+  "r-nul Leova",
+  "r-nul Nisporeni",
+  "r-nul Ocnița",
+  "r-nul Orhei",
+  "r-nul Rezina",
+  "r-nul Rîșcani",
+  "r-nul Sîngerei",
+  "r-nul Soroca",
+  "r-nul Strășeni",
+  "r-nul Șoldănești",
+  "r-nul Ștefan Vodă",
+  "r-nul Taraclia",
+  "r-nul Telenești",
+  "r-nul Ungheni",
+  "mun. Chișinău",
+  "mun. Bălți",
+  "UTA Găgăuzia",
+  "UTA din stânga Nistrului"
+ ],
+ "localitati": {
+  "r-nul Strășeni": [
+   "Strășeni",
+   "Bucovăț",
+   "Sireți",
+   "Cojușna",
+   "Codreanca",
+   "Dolna",
+   "Lozova",
+   "Micăuți",
+   "Romănești",
+   "Scoreni",
+   "Voinova",
+   "Vorniceni",
+   "Zubrești"
+  ]
+ }
+}

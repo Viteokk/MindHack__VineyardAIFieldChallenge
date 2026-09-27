@@ -33,13 +33,13 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;justify-conten
 h1{font:800 30px/1.05 'Bricolage Grotesque','Geist',sans-serif;margin:0;letter-spacing:-.02em}
 fieldset{border:0;margin:0;padding:0;min-width:0}
 legend{font-size:13px;font-weight:600;margin-bottom:8px;padding:0;color:var(--soft)}
-.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
 .role{position:relative;display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);cursor:pointer;color:var(--muted);transition:border-color .15s,background .15s}
 .role input{position:absolute;opacity:0;pointer-events:none}
 .role svg{flex-shrink:0}
 .role b{display:block;color:#fff;font-size:15px}
 .role small{font-size:12px;line-height:1.3;display:block}
-.role.insp{--rc:var(--blue-ink)}.role.admin{--rc:var(--red-ink)}
+.role.insp{--rc:var(--blue-ink)}.role.admin{--rc:var(--red-ink)}.role.sys{--rc:var(--leaf)}
 .role:has(input:checked){border-color:var(--rc);background:color-mix(in srgb,var(--rc) 12%,transparent);color:var(--rc)}
 .role:has(input:focus-visible){outline:2px solid var(--yellow);outline-offset:2px}
 .f{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:var(--soft)}
@@ -96,6 +96,9 @@ legend{font-size:13px;font-weight:600;margin-bottom:8px;padding:0;color:var(--so
         <label class="role admin"><input type="radio" name="role" value="fermier">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="10" r="2.4"/><circle cx="15" cy="10" r="2.4"/><circle cx="12" cy="14.5" r="2.4"/><circle cx="9" cy="18.5" r="2.2"/><circle cx="15" cy="18.5" r="2.2"/><path d="M12 7.5V4M12 4c2-1.5 4-1 5 0"/></svg>
           <span><b data-i="r_admin">Administrator</b><small data-i="r_admin_s">Exploatația viticolă</small></span></label>
+        <label class="role sys"><input type="radio" name="role" value="sysadmin">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M7 8h4M7 11h7"/></svg>
+          <span><b data-i="r_sys">Back-office</b><small data-i="r_sys_s">Administrare · MAIA, AIPA</small></span></label>
       </div>
     </fieldset>
     <div class="tabs" role="tablist" aria-label="Mod de autentificare"><button type="button" role="tab" data-tab="email" aria-selected="true" data-i="t_email">Email</button><button type="button" role="tab" data-tab="phone" aria-selected="false" data-i="t_phone">Telefon</button></div>
@@ -146,20 +149,21 @@ legend{font-size:13px;font-weight:600;margin-bottom:8px;padding:0;color:var(--so
 /* demo accounts only: checked in the browser, nothing is sent, the password is never stored */
 const ACCOUNTS = {
   inspector: {email: 'inspector@fieldplanner.demo', phone: '+373 69 000 101', name: 'Inspector demo', org: 'AIPA Strășeni', label: 'Inspector'},
-  fermier: {email: 'administrator@fieldplanner.demo', phone: '+373 69 000 202', name: 'Administrator demo', org: 'Vie Sireți SRL', label: 'Administrator'}};
+  fermier: {email: 'administrator@fieldplanner.demo', phone: '+373 69 000 202', name: 'Administrator demo', org: 'Vie Sireți SRL', label: 'Administrator'},
+  sysadmin: {email: 'backoffice@fieldplanner.demo', phone: '+373 69 000 303', name: 'Administrator de sistem demo', org: 'VinePlan · operator platformă', label: 'Back-office'}};
 const I18N = {
-  ru: {img_credit: 'Фон: ортофото Sireț3, 3DATA COLLECT / OpenAerialMap, CC BY 4.0', reg: 'Регистрация', t_email: 'Email', t_phone: 'Телефон', t_email2: 'Email', t_phone2: 'Телефон', phone: 'Номер телефона', phone2: 'Номер телефона', email2: 'Электронная почта', pw2: 'Пароль', rs_h: 'Сброс пароля', rs_p: 'Мы отправим ссылку для сброса на e-mail или код по SMS.', rs_send: 'Отправить', rs_code: 'Полученный код', rs_new: 'Новый пароль', rs_save: 'Сохранить пароль', rs_done: 'Пароль изменён. Можно войти.', back_login: 'Назад ко входу', back_login2: 'Назад ко входу', m_demo: 'Демо: ничего не покидает браузер.', m_demo2: 'Демо: ничего не покидает браузер.', rg_h: 'Новый аккаунт', rg_name: 'Имя и фамилия', rg_role: 'Роль', o_insp: 'Инспектор (AIPA, ONVV)', o_admin: 'Администратор (виноградарское хозяйство)', rg_send: 'Создать аккаунт', rg_done: 'Заявка на аккаунт зарегистрирована. В демо войдите с уже заполненным аккаунтом роли.', rs_sent_email: 'Мы отправили ссылку и код для сброса на {x}.', rs_sent_phone: 'Мы отправили код по SMS на {x}.', e_phone: 'Номер телефона или пароль не совпадают с демо-аккаунтом.', close: 'Закрыть', via_phone: 'телефон', back: 'Назад', h1: 'Вход', as: 'Вхожу как', r_insp: 'Инспектор', r_admin: 'Администратор', r_admin_s: 'Виноградарское хозяйство', email: 'Электронная почта', pw: 'Пароль', go: 'Войти',
+  ru: {r_sys: 'Бэк-офис', r_sys_s: 'Администрирование · MAIA, AIPA', L_sysadmin: 'Бэк-офис', img_credit: 'Фон: ортофото Sireț3, 3DATA COLLECT / OpenAerialMap, CC BY 4.0', reg: 'Регистрация', t_email: 'Email', t_phone: 'Телефон', t_email2: 'Email', t_phone2: 'Телефон', phone: 'Номер телефона', phone2: 'Номер телефона', email2: 'Электронная почта', pw2: 'Пароль', rs_h: 'Сброс пароля', rs_p: 'Мы отправим ссылку для сброса на e-mail или код по SMS.', rs_send: 'Отправить', rs_code: 'Полученный код', rs_new: 'Новый пароль', rs_save: 'Сохранить пароль', rs_done: 'Пароль изменён. Можно войти.', back_login: 'Назад ко входу', back_login2: 'Назад ко входу', m_demo: 'Демо: ничего не покидает браузер.', m_demo2: 'Демо: ничего не покидает браузер.', rg_h: 'Новый аккаунт', rg_name: 'Имя и фамилия', rg_role: 'Роль', o_insp: 'Инспектор (AIPA, ONVV)', o_admin: 'Администратор (виноградарское хозяйство)', rg_send: 'Создать аккаунт', rg_done: 'Заявка на аккаунт зарегистрирована. В демо войдите с уже заполненным аккаунтом роли.', rs_sent_email: 'Мы отправили ссылку и код для сброса на {x}.', rs_sent_phone: 'Мы отправили код по SMS на {x}.', e_phone: 'Номер телефона или пароль не совпадают с демо-аккаунтом.', close: 'Закрыть', via_phone: 'телефон', back: 'Назад', h1: 'Вход', as: 'Вхожу как', r_insp: 'Инспектор', r_admin: 'Администратор', r_admin_s: 'Виноградарское хозяйство', email: 'Электронная почта', pw: 'Пароль', go: 'Войти',
        forgot: 'Забыли пароль?', or: 'или', mpass: 'Войти через MPass', sim: 'Симуляция MPass для демо',
        note: 'Демонстрационная версия (MVP): демо-аккаунт роли уже заполнен; пароль не покидает браузер и не сохраняется. Возврат из MPass требует регистрации платформы в Агентстве электронного управления.',
        e_empty: 'Заполните электронную почту и пароль.', e_bad: 'Почта или пароль не совпадают с демо-аккаунтом.', e_role: 'У этого аккаунта нет роли «{r}». Выберите «{o}» вверху.',
        e_forgot: 'В демо нет сброса пароля. Аккаунт: {e}, пароль {p}.', show: 'Показать пароль', hide: 'Скрыть пароль', title: 'Вход · VinePlan', L_inspector: 'Инспектор', L_fermier: 'Администратор'},
-  en: {img_credit: 'Background: Sireț3 orthophoto, 3DATA COLLECT / OpenAerialMap, CC BY 4.0', reg: 'Sign up', t_email: 'Email', t_phone: 'Phone', t_email2: 'Email', t_phone2: 'Phone', phone: 'Phone number', phone2: 'Phone number', email2: 'Email', pw2: 'Password', rs_h: 'Reset your password', rs_p: 'We will send a reset link by e-mail or a code by SMS.', rs_send: 'Send', rs_code: 'Code received', rs_new: 'New password', rs_save: 'Save password', rs_done: 'Your password has been changed. You can sign in.', back_login: 'Back to sign in', back_login2: 'Back to sign in', m_demo: 'Demo: nothing leaves the browser.', m_demo2: 'Demo: nothing leaves the browser.', rg_h: 'New account', rg_name: 'Full name', rg_role: 'Role', o_insp: 'Inspector (AIPA, ONVV)', o_admin: 'Manager (vineyard holding)', rg_send: 'Create account', rg_done: 'Your account request has been registered. In the demo, sign in with the role\'s prefilled account.', rs_sent_email: 'We sent a reset link and code to {x}.', rs_sent_phone: 'We sent an SMS code to {x}.', e_phone: 'The phone number or password does not match a demo account.', close: 'Close', via_phone: 'phone', back: 'Back', h1: 'Sign in', as: 'Signing in as', r_insp: 'Inspector', r_admin: 'Administrator', r_admin_s: 'Vineyard holding', email: 'Email', pw: 'Password', go: 'Sign in',
+  en: {r_sys: 'Back-office', r_sys_s: 'Administration · MAIA, AIPA', L_sysadmin: 'Back-office', img_credit: 'Background: Sireț3 orthophoto, 3DATA COLLECT / OpenAerialMap, CC BY 4.0', reg: 'Sign up', t_email: 'Email', t_phone: 'Phone', t_email2: 'Email', t_phone2: 'Phone', phone: 'Phone number', phone2: 'Phone number', email2: 'Email', pw2: 'Password', rs_h: 'Reset your password', rs_p: 'We will send a reset link by e-mail or a code by SMS.', rs_send: 'Send', rs_code: 'Code received', rs_new: 'New password', rs_save: 'Save password', rs_done: 'Your password has been changed. You can sign in.', back_login: 'Back to sign in', back_login2: 'Back to sign in', m_demo: 'Demo: nothing leaves the browser.', m_demo2: 'Demo: nothing leaves the browser.', rg_h: 'New account', rg_name: 'Full name', rg_role: 'Role', o_insp: 'Inspector (AIPA, ONVV)', o_admin: 'Manager (vineyard holding)', rg_send: 'Create account', rg_done: 'Your account request has been registered. In the demo, sign in with the role\'s prefilled account.', rs_sent_email: 'We sent a reset link and code to {x}.', rs_sent_phone: 'We sent an SMS code to {x}.', e_phone: 'The phone number or password does not match a demo account.', close: 'Close', via_phone: 'phone', back: 'Back', h1: 'Sign in', as: 'Signing in as', r_insp: 'Inspector', r_admin: 'Administrator', r_admin_s: 'Vineyard holding', email: 'Email', pw: 'Password', go: 'Sign in',
        forgot: 'Forgot your password?', or: 'or', mpass: 'Sign in with MPass', sim: 'MPass simulation for the demo',
        note: "Demo version (MVP): the role's demo account is already filled in; the password never leaves the browser and is not stored. Returning from MPass requires registering the platform with the E-Government Agency.",
        e_empty: 'Enter your email and password.', e_bad: 'The email or password does not match a demo account.', e_role: 'This account does not have the “{r}” role. Choose “{o}” above.',
        e_forgot: 'There is no password reset in the demo. Account: {e}, password {p}.', show: 'Show password', hide: 'Hide password', title: 'Sign in · VinePlan', L_inspector: 'Inspector', L_fermier: 'Administrator'},
   ro: {rs_sent_email: 'Am trimis un link și un cod de resetare la {x}.', rs_sent_phone: 'Am trimis un cod prin SMS la {x}.', e_phone: 'Numărul de telefon sau parola nu se potrivesc cu un cont demo.', close: 'Închide', e_empty: 'Completează poșta electronică și parola.', e_bad: 'Poșta sau parola nu se potrivesc cu un cont demo.', e_role: 'Acest cont nu are rolul {r}. Alege „{o}” sus.',
-       e_forgot: 'În demo nu există resetare. Cont: {e}, parola {p}.', show: 'Arată parola', hide: 'Ascunde parola', title: 'Autentificare · VinePlan', L_inspector: 'Inspector', L_fermier: 'Administrator'}};
+       e_forgot: 'În demo nu există resetare. Cont: {e}, parola {p}.', show: 'Arată parola', hide: 'Ascunde parola', title: 'Autentificare · VinePlan', L_inspector: 'Inspector', L_fermier: 'Administrator', L_sysadmin: 'Back-office'}};
 const I18N_RO = {};
 document.querySelectorAll('[data-i]').forEach(el => { I18N_RO[el.dataset.i] = el.innerHTML; });
 let LANG = (() => { try { return JSON.parse(localStorage.getItem('fpm.lang')) || 'ro'; } catch (e) { return 'ro'; } })();
@@ -181,7 +185,7 @@ const $ = s => document.querySelector(s), f = $('#f'), err = $('#err');
 const role = () => f.role.value;
 let TAB = 'email';
 const digits = s => String(s || '').replace(/\D/g, '');
-const COLORS = {inspector: 'var(--blue-ink)', fermier: 'var(--red-ink)'};
+const COLORS = {inspector: 'var(--blue-ink)', fermier: 'var(--red-ink)', sysadmin: 'var(--leaf)'};
 const say = (m, info) => { err.textContent = m; err.classList.toggle('info', !!info); err.hidden = false; };
 function syncRole() {
   const a = ACCOUNTS[role()];
@@ -227,9 +231,10 @@ f.addEventListener('submit', e => {
     localStorage.setItem('fpm.role', JSON.stringify(owner));
   } catch (x) {}
   try { sessionStorage.removeItem('fpm.introDone'); } catch (e) {}   // a new sign-in plays the map intro again
-  location.href = 'app.html#' + owner;
+  location.href = owner === 'sysadmin' ? 'admin.html' : 'app.html#' + owner;
 });
 if (/administrator|fermier/.test(location.hash)) f.role.value = 'fermier';
+if (/backoffice|sysadmin/.test(location.hash)) f.role.value = 'sysadmin';
 applyLang(LANG);
 syncRole();
 </script>
